@@ -1,0 +1,293 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const logoSvg = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB3aWR0aD0iMTcwIgogICBoZWlnaHQ9IjE3MCIKICAgdmlld0JveD0iMjQgNTQgMTcwIDE3MCIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnOCIKICAgaW5rc2NhcGU6ZXhwb3J0LWZpbGVuYW1lPSJDOlxVc2Vyc1xza2FyYXNpZVxQaWN0dXJlc1xnMTAxOC5wbmciCiAgIGlua3NjYXBlOmV4cG9ydC14ZHBpPSI5NiIKICAgaW5rc2NhcGU6ZXhwb3J0LXlkcGk9Ijk2IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIwLjkyLjMgKDI0MDU1NDYsIDIwMTgtMDMtMTEpIgogICBzb2RpcG9kaTpkb2NuYW1lPSJsb2dvLnN2ZyI+CiAgPGRlZnMKICAgICBpZD0iZGVmczIiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJiYXNlIgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnpvb209IjAuNDk0OTc0NzUiCiAgICAgaW5rc2NhcGU6Y3g9IjUxMi4wNjc1NCIKICAgICBpbmtzY2FwZTpjeT0iMzg1LjI5Njk0IgogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJtbSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJnMTAxOCIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwMTgiCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii04IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIiAvPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTUiPgogICAgPHJkZjpSREY+CiAgICAgIDxjYzpXb3JrCiAgICAgICAgIHJkZjphYm91dD0iIj4KICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3N2Zyt4bWw8L2RjOmZvcm1hdD4KICAgICAgICA8ZGM6dHlwZQogICAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+CiAgICAgICAgPGRjOnRpdGxlPjwvZGM6dGl0bGU+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxnCiAgICAgaW5rc2NhcGU6bGFiZWw9IkNhbHF1ZSAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSI+CiAgICA8ZwogICAgICAgaWQ9Imc5MDUiPgogICAgICA8ZwogICAgICAgICBpZD0iZzkzNCI+CiAgICAgICAgPGcKICAgICAgICAgICBpZD0iZzEwMTgiCiAgICAgICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2MS40MzA3OSwtMTY1LjE3MjU3KSI+CiAgICAgICAgICA8ZwogICAgICAgICAgICAgaWQ9ImcxMDI5IgogICAgICAgICAgICAgaW5rc2NhcGU6ZXhwb3J0LXhkcGk9Ijk2IgogICAgICAgICAgICAgaW5rc2NhcGU6ZXhwb3J0LXlkcGk9Ijk2Ij4KICAgICAgICAgICAgPGNpcmNsZQogICAgICAgICAgICAgICBzdHlsZT0ib3BhY2l0eTowLjk4MDAwMDA0O2ZpbGw6I2ZmZmZmZjtmaWxsLW9wYWNpdHk6MTtmaWxsLXJ1bGU6bm9uemVybztzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6ODtzdHJva2UtbGluZWNhcDpzcXVhcmU7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1kYXNob2Zmc2V0OjA7c3Ryb2tlLW9wYWNpdHk6MTtwYWludC1vcmRlcjpmaWxsIG1hcmtlcnMgc3Ryb2tlIgogICAgICAgICAgICAgICBpZD0icGF0aDEwIgogICAgICAgICAgICAgICBjeD0iMjcwLjA5NjQ3IgogICAgICAgICAgICAgICBjeT0iMzAzLjUzOTg5IgogICAgICAgICAgICAgICByPSI4MC41ODUzOTYiIC8+CiAgICAgICAgICAgIDxnCiAgICAgICAgICAgICAgIHN0eWxlPSJzdHJva2Utd2lkdGg6NjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZSIKICAgICAgICAgICAgICAgaWQ9ImcxMDA3Ij4KICAgICAgICAgICAgICA8ZwogICAgICAgICAgICAgICAgIHN0eWxlPSJzdHJva2Utd2lkdGg6NjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZSIKICAgICAgICAgICAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNjQuMTAzNSwxNjEuNDMwOCkiCiAgICAgICAgICAgICAgICAgaWQ9Imc5OTgiPgogICAgICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICAgICAgIHN0eWxlPSJvcGFjaXR5OjAuOTgwMDAwMDQ7ZmlsbDojZmZmZmZmO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDo2O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2UtZGFzaG9mZnNldDowO3N0cm9rZS1vcGFjaXR5OjE7cGFpbnQtb3JkZXI6ZmlsbCBtYXJrZXJzIHN0cm9rZSIKICAgICAgICAgICAgICAgICAgIGlkPSJwYXRoMTAtOC0xIgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6dHlwZT0iYXJjIgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6Y3g9Ii0xMDUuNjg5ODIiCiAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpjeT0iLTEwNS44ODk4MyIKICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOnJ4PSIzNi4xNjI3MDQiCiAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpyeT0iNDYuMzE4OTQ3IgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6c3RhcnQ9IjUuMzUyNjU4MiIKICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOmVuZD0iMy4xNDE1OTI3IgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6b3Blbj0idHJ1ZSIKICAgICAgICAgICAgICAgICAgIGQ9Im0gLTg0LjA4NTgwOSwtMTQzLjAzNDYxIGEgMzYuMTYyNzA0LDQ2LjMxODk0NyAwIDAgMSAxMS4zMTQwMzEsNTYuMzIwOTE1IDM2LjE2MjcwNCw0Ni4zMTg5NDcgMCAwIDEgLTQwLjU3NzU0MiwyNi4wOTE5MDggMzYuMTYyNzA0LDQ2LjMxODk0NyAwIDAgMSAtMjguNTAzMiwtNDUuMjY4MDQzIgogICAgICAgICAgICAgICAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMCwtMSwtMSwwLDAsMCkiIC8+CiAgICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgICAgc3R5bGU9Im9wYWNpdHk6MC45ODAwMDAwNDtmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOm5vbnplcm87c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjY7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1kYXNob2Zmc2V0OjA7c3Ryb2tlLW9wYWNpdHk6MTtwYWludC1vcmRlcjpmaWxsIG1hcmtlcnMgc3Ryb2tlIgogICAgICAgICAgICAgICAgICAgaWQ9InBhdGgxMC04LTEtOCIKICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOnR5cGU9ImFyYyIKICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOmN4PSIxNzguMjcxNjQiCiAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpjeT0iMTA1Ljc5NTgxIgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6cng9IjM2LjQyOTEzOCIKICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOnJ5PSI0Ni42NjAyMDYiCiAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpzdGFydD0iNS44NDU1MTgxIgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6ZW5kPSIzLjE0MTU5MjciCiAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpvcGVuPSJ0cnVlIgogICAgICAgICAgICAgICAgICAgZD0ibSAyMTEuMjY3MDcsODYuMDE5OTE5IGEgMzYuNDI5MTM4LDQ2LjY2MDIwNiAwIDAgMSAtNi40NzU2LDUxLjc2NTg1MSAzNi40MjkxMzgsNDYuNjYwMjA2IDAgMCAxIC0zOS45NTQ2MywxMS4zODEyNCAzNi40MjkxMzgsNDYuNjYwMjA2IDAgMCAxIC0yMi45OTQzNCwtNDMuMzcxMjEiCiAgICAgICAgICAgICAgICAgICB0cmFuc2Zvcm09Im1hdHJpeCgwLDEsMSwwLDAsMCkiIC8+CiAgICAgICAgICAgICAgICA8ZwogICAgICAgICAgICAgICAgICAgc3R5bGU9InN0cm9rZS13aWR0aDo2O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lIgogICAgICAgICAgICAgICAgICAgaWQ9Imc4OTQiCiAgICAgICAgICAgICAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxODQuNDUyMzgsMjkuODYwMTE5KSI+CiAgICAgICAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOm5vZGV0eXBlcz0iY2MiCiAgICAgICAgICAgICAgICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICAgICAgICAgICAgICAgIGlkPSJwYXRoODQ3IgogICAgICAgICAgICAgICAgICAgICBkPSJNIC05Ni43Mzk5MTMsNDIuOTc3NzI1IC05OC40MzI0NjEsMTgxLjQwNjk1IgogICAgICAgICAgICAgICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDo2O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIiAvPgogICAgICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpub2RldHlwZXM9ImNjIgogICAgICAgICAgICAgICAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgICAgICAgICAgICAgICBpZD0icGF0aDg0Ny03IgogICAgICAgICAgICAgICAgICAgICBkPSJtIC00MS40MTc3NjYsNTQuMjI1NjkgLTUyLjgwMDIyMyw1Ny4xMjMzNSIKICAgICAgICAgICAgICAgICAgICAgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6NjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLW9wYWNpdHk6MSIgLz4KICAgICAgICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICAgICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgICAgICAgICAgICAgICAgaWQ9InBhdGg4NDctNy0yIgogICAgICAgICAgICAgICAgICAgICBkPSJNIC00MS45ODgzMzUsMTY4LjYzOTU5IC05NC4yMTc5ODksMTExLjM0OTA0IgogICAgICAgICAgICAgICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDo2O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIiAvPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPC9nPgogICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgICAgPC9nPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cgo=";
+
+const base = import.meta.env.BASE_URL;
+const allProjects = await getCollection('projects');
+const featured = allProjects
+    .filter(p => p.data.featured)
+    .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Skaraz Data — Stéphane Karasiewicz | Senior Data Scientist">
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+        <div class="hero-text">
+            <div class="hero-badge">Available for new projects — Freelance</div>
+            <h1>Expert Data Scientist: From <em>processing</em> to viz</h1>
+            <p class="hero-subtitle">
+                Stéphane Karasiewicz — Senior Data Scientist with 7+ years delivering ML solutions from research to production.
+                Specialized in environmental analytics, time-series modeling, and scalable pipelines.
+            </p>
+            <div class="hero-actions">
+                <a href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" class="btn-primary">Book a Free Discovery Call &rarr;</a>
+                <a href={`${base}/projects`} class="btn-secondary">See My Work</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item"><span class="stat-number">7+</span><span class="stat-label">Years of Experience</span></div>
+                <div class="stat-item"><span class="stat-number">Ph.D.</span><span class="stat-label">Marine Ecology</span></div>
+                <div class="stat-item"><span class="stat-number">6</span><span class="stat-label">Peer-Reviewed Papers</span></div>
+                <div class="stat-item"><span class="stat-number">2</span><span class="stat-label">CRAN Packages</span></div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src={`${base}/portrait.jpg`} alt="Stéphane Karasiewicz" class="hero-portrait">
+        </div>
+    </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+    <div class="trust-inner">
+        <div class="trust-label">Trusted by research & industry</div>
+        <div class="trust-items">
+            <div class="trust-item"><img src={`${base}/ifremer-logo.png`} alt="IFREMER" class="trust-logo logo-light-bg"> <strong>IFREMER</strong> — French Marine Research</div>
+            <div class="trust-item"><img src={`${base}/raincoat-logo.png`} alt="Raincoat LLC" class="trust-logo"> <strong>Raincoat LLC</strong> — Climate Risk</div>
+            <div class="trust-item">&#128230; <strong>12+ ML Projects</strong> — Delivered freelance</div>
+            <div class="trust-item">&#128202; <strong>8,000+</strong> — CRAN Downloads</div>
+        </div>
+    </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+    <div class="section-container">
+        <div class="section-label reveal">What I Do</div>
+        <h2 class="section-title reveal">Data science services that<br>move your business forward</h2>
+        <p class="section-desc reveal">I don't just build models — I deliver business outcomes. Every project starts with your goals and ends with measurable impact.</p>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">&#128202;</div>
+                <h3>Predictive Analytics & ML</h3>
+                <p>Custom ML models: churn prediction, price forecasting, anomaly detection. Full lifecycle from preprocessing to production deployment.</p>
+                <div class="service-tags"><span>XGBoost</span><span>LSTM</span><span>scikit-learn</span><span>TensorFlow</span></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">&#127757;</div>
+                <h3>Environmental & Geospatial</h3>
+                <p>Satellite data analysis, climate risk modeling, ESG reporting, and environmental monitoring. 2TB+ satellite data management experience.</p>
+                <div class="service-tags"><span>MODIS</span><span>Sentinel</span><span>NetCDF</span><span>Risk Assessment</span></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">&#128200;</div>
+                <h3>Dashboards & Visualization</h3>
+                <p>Interactive analytics dashboards with country-level maps, KPI tracking, and real-time monitoring. 5+ production dashboards delivered.</p>
+                <div class="service-tags"><span>Dash</span><span>Streamlit</span><span>Plotly</span><span>Shiny</span></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">&#9881;&#65039;</div>
+                <h3>MLOps & Data Pipelines</h3>
+                <p>End-to-end ML infrastructure: automated training, CI/CD, Docker containerization, cloud deployment, and ETL pipelines at scale.</p>
+                <div class="service-tags"><span>Docker</span><span>CI/CD</span><span>PostgreSQL</span><span>REST APIs</span></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">&#129302;</div>
+                <h3>NLP & Computer Vision</h3>
+                <p>Text classification, document extraction, image recognition using state-of-the-art transformer and CNN architectures.</p>
+                <div class="service-tags"><span>PyTorch</span><span>Transformers</span><span>CNN</span><span>LLMs</span></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">&#128300;</div>
+                <h3>Statistical Consulting & R Packages</h3>
+                <p>Advanced multivariate analysis, time-series modeling, and custom R package development. Published author on CRAN.</p>
+                <div class="service-tags"><span>PCA</span><span>Time-Series</span><span>Niche Modeling</span><span>CRAN</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+    <div class="section-container">
+        <div class="section-label reveal">Career Path</div>
+        <h2 class="section-title reveal">From research to production</h2>
+        <p class="section-desc reveal">A track record spanning marine research, freelance consulting, and industry ML engineering.</p>
+        <div class="timeline reveal">
+            <div class="tl-item current tl-merge tl-left">
+                <div class="tl-dot"></div>
+                <div class="tl-date">Present</div>
+                <div class="tl-role">Freelance Senior Data Scientist</div>
+                <div class="tl-company">Self-employed — Available for new projects</div>
+            </div>
+            <div class="tl-item tl-branch-item">
+                <svg class="tl-curve tl-curve-out" viewBox="0 0 62 80" fill="none" preserveAspectRatio="none"><path d="M 1 0 C 1 40, 61 40, 61 80" stroke="#A855F7" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+                <svg class="tl-curve tl-curve-in" viewBox="0 0 62 80" fill="none" preserveAspectRatio="none"><path d="M 61 0 C 61 40, 1 40, 1 80" stroke="#A855F7" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+                <div class="tl-main-dots">
+                    <span style="top: 5%"></span>
+                    <span style="top: 18%"></span>
+                    <span style="top: 28%"></span>
+                    <span style="top: 42%"></span>
+                    <span style="top: 58%"></span>
+                    <span style="top: 73%"></span>
+                    <span style="top: 90%"></span>
+                </div>
+                <div class="tl-mission-label"><span class="tl-role">Short Freelance Missions</span><span class="tl-company">from 2 to 30 days</span></div>
+                <div class="tl-dot"></div>
+                <div class="tl-date">Feb 2024 — Present</div>
+                <div class="tl-role">Senior Data Scientist</div>
+                <div class="tl-company"><img src={`${base}/raincoat-logo.png`} alt="Raincoat LLC" class="tl-logo" loading="lazy"> Raincoat LLC — Peril Risk Assessment</div>
+                <ul class="tl-highlights">
+                    <li>End-to-end ML pipeline for peril risk assessment</li>
+                    <li>5 interactive dashboards with country-level maps</li>
+                    <li>Automated data management for 2TB+ satellite data</li>
+                </ul>
+            </div>
+            <div class="tl-item tl-fork tl-left">
+                <div class="tl-dot"></div>
+                <div class="tl-date">Jul 2023</div>
+                <div class="tl-role">Freelance Data Scientist</div>
+                <div class="tl-company">Self-employed — 12+ ML Projects Delivered</div>
+                <ul class="tl-highlights">
+                    <li>Customer churn models (XGBoost), price forecasting (LSTM)</li>
+                    <li>Full ML lifecycle: preprocessing to deployment</li>
+                </ul>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-date">Oct 2021 — Mar 2022</div>
+                <div class="tl-role">Research Engineer</div>
+                <div class="tl-company"><img src={`${base}/ifremer-logo.png`} alt="IFREMER" class="tl-logo logo-light-bg" loading="lazy"> IFREMER, Boulogne-sur-Mer</div>
+                <ul class="tl-highlights">
+                    <li>Automated 500GB+ data extraction — saved 50h/month</li>
+                    <li>70% computation time reduction via script optimization</li>
+                    <li>Mentored 4 researchers in R and reproducible research</li>
+                </ul>
+            </div>
+            <div class="tl-item tl-left">
+                <div class="tl-dot"></div>
+                <div class="tl-date">2018 — 2021</div>
+                <div class="tl-role">Postdoctoral Researcher (&times;2)</div>
+                <div class="tl-company"><img src={`${base}/ifremer-logo.png`} alt="IFREMER" class="tl-logo logo-light-bg" loading="lazy"> IFREMER Brest & Boulogne — Satellite & Marine ML</div>
+                <ul class="tl-highlights">
+                    <li>Bloom detection algorithm on 10+ years satellite data</li>
+                    <li>50,000+ km&sup2; coastal analysis (MODIS, Sentinel)</li>
+                    <li>Published BDAlgo R package on CRAN</li>
+                    <li>4 peer-reviewed publications, 2 datasets</li>
+                </ul>
+            </div>
+            <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-date">2014 — 2017</div>
+                <div class="tl-role">Ph.D. in Marine Ecology</div>
+                <div class="tl-company">Universit&eacute; de Lille — Phytoplankton & Global Change</div>
+                <ul class="tl-highlights">
+                    <li>Novel statistical framework (WitOMI) for niche shifts</li>
+                    <li>Analyzed 20+ years monitoring data (10M+ records)</li>
+                    <li>3 first-author papers, 2 CRAN packages (subniche)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+    <div class="section-container">
+        <div class="section-label reveal">Selected Work</div>
+        <h2 class="section-title reveal">Projects with measurable outcomes</h2>
+        <p class="section-desc reveal">Real deliverables, real impact — not just notebooks.</p>
+        <div class="portfolio-grid">
+            {featured.map(p => <ProjectCard project={p} />)}
+        </div>
+        <div style="text-align: center; margin-top: 2.5rem;">
+            <a href={`${base}/projects`} class="btn-primary">See All Projects &rarr;</a>
+        </div>
+    </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+    <div class="section-container">
+        <div class="section-label reveal">Open Source & Research</div>
+        <h2 class="section-title reveal">Published, peer-reviewed, open source</h2>
+        <p class="section-desc reveal">Contributing to science and the data community through packages and publications.</p>
+        <div class="pub-grid">
+            <a href="https://cran.r-project.org/web/packages/BDAlgo/index.html" target="_blank" class="pub-card reveal">
+                <div class="pub-type">CRAN Package</div>
+                <h4>BDAlgo — Bloom Detection Algorithm</h4>
+                <p class="pub-meta">Time-series bloom detection extracting 22 phenological variables</p>
+                <div class="pub-stats"><span>3,000+ downloads</span><span>12+ citations</span></div>
+            </a>
+            <a href="https://cran.r-project.org/web/packages/subniche/index.html" target="_blank" class="pub-card reveal">
+                <div class="pub-type">CRAN Package</div>
+                <h4>subniche — Ecological Niche Modeling</h4>
+                <p class="pub-meta">Statistical package for OMI framework niche analysis</p>
+                <div class="pub-stats"><span>5,000+ downloads</span><span>15+ citations</span></div>
+            </a>
+            <a href="https://doi.org/10.3390/jmse10020174" target="_blank" class="pub-card reveal">
+                <div class="pub-type">Publication</div>
+                <h4>Environmental Impact on Harmful Species</h4>
+                <p class="pub-meta">J. Marine Science & Engineering, 2022</p>
+            </a>
+            <a href="https://doi.org/10.1016/j.hal.2020.101785" target="_blank" class="pub-card reveal">
+                <div class="pub-type">Publication</div>
+                <h4>Harmful Algae Niche Responses</h4>
+                <p class="pub-meta">Harmful Algae, 2020</p>
+            </a>
+            <a href="https://doi.org/10.1016/j.hal.2017.12.005" target="_blank" class="pub-card reveal">
+                <div class="pub-type">Publication</div>
+                <h4>Realized Niche Analysis of Phytoplankton</h4>
+                <p class="pub-meta">Harmful Algae, 2018</p>
+            </a>
+            <a href="https://doi.org/10.7717/peerj.3364" target="_blank" class="pub-card reveal">
+                <div class="pub-type">Publication</div>
+                <h4>Within Outlying Mean Indexes</h4>
+                <p class="pub-meta">PeerJ, 2017</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" style="background:var(--bg-secondary);">
+    <div class="section-container">
+        <div class="section-label reveal">How I Work</div>
+        <h2 class="section-title reveal">From question to solution</h2>
+        <div class="process-steps">
+            <div class="step reveal">
+                <div class="step-number">01</div>
+                <h3>Discovery Call</h3>
+                <p>We discuss your data, goals and constraints. Free, 30 min, no commitment.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">02</div>
+                <h3>Scoping & Proposal</h3>
+                <p>Clear approach, timeline, deliverables, and pricing — fixed or time-and-materials.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">03</div>
+                <h3>Build & Iterate</h3>
+                <p>Weekly check-ins, shared repos, transparent progress. You're never in the dark.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">04</div>
+                <h3>Deliver & Support</h3>
+                <p>Polished deliverables, documentation, and handoff support to your team.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+    <div class="cta-box reveal">
+        <h2>Let's talk about your data</h2>
+        <p>Book a free 30-minute discovery call. No pitch, no pressure — just an honest conversation about how data science can help your business.</p>
+        <a href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" class="btn-primary">Book a Discovery Call &rarr;</a>
+        <a href="mailto:skaraz.science@gmail.com" class="btn-secondary" style="margin-left: 0.8rem;">Email Me</a>
+        <div class="cta-details">
+            <span>&#128205; Boulogne-sur-Mer, France</span>
+            <span>&#127760; Working remotely worldwide</span>
+            <span>&#127467;&#127479;&#127468;&#127463; French & English native</span>
+            <span>&#9889; Response &lt; 24h</span>
+        </div>
+    </div>
+</section>
+
+</BaseLayout>

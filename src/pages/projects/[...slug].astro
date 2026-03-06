@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+    const projects = await getCollection('projects');
+    return projects.map(p => ({
+        params: { slug: p.slug },
+        props: { project: p },
+    }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={`${project.data.title} — Skaraz Data`}>
+    <section style="padding: 8rem 3rem 4rem;">
+        <div class="section-container">
+            <a href={`${base}/projects`} class="back-link">&larr; Back to Projects</a>
+            <span class="project-domain" style="position: static; display: inline-block; margin-bottom: 1rem;">{project.data.domain}</span>
+            <h1 class="section-title">{project.data.title}</h1>
+            <p class="section-desc">{project.data.description}</p>
+            <div class="tech-badges">
+                {project.data.technologies.map(t => (
+                    <div class="service-tags"><span>{t}</span></div>
+                ))}
+            </div>
+            <div class="project-actions">
+                <a href={project.data.github} class="btn-primary" target="_blank">View on GitHub &rarr;</a>
+            </div>
+            {project.data.screenshots.length > 0 && (
+                <div class="gallery-grid">
+                    {project.data.screenshots.map(shot => (
+                        <div class="gallery-item">
+                            <img src={`${base}${shot.src}`} alt={shot.alt} loading="lazy" />
+                        </div>
+                    ))}
+                </div>
+            )}
+            <div class="project-detail-content">
+                <Content />
+            </div>
+        </div>
+    </section>
+</BaseLayout>
