@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://karasiewiczstephane.github.io',
-  base: '/portfolio-site',
+  site: 'https://skarazdata.com',
   output: 'static',
 });
