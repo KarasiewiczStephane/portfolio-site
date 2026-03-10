@@ -167,7 +167,8 @@ section { padding: 6rem 3rem; }
 }
 .trust-item strong { color: var(--text-primary); }
 .trust-logo { width: 32px; height: 32px; border-radius: 4px; vertical-align: middle; }
-.logo-light-bg { background: #fff; padding: 2px; }
+.trust-logo-only { display: flex; align-items: center; }
+.trust-logo-only .trust-logo { width: auto; height: 36px; }
 
 /* SERVICES */
 .services { background: var(--bg-secondary); }
@@ -196,7 +197,7 @@ section { padding: 6rem 3rem; }
 }
 
 /* EXPERIENCE TIMELINE — centered alternating layout */
-.timeline { margin-top: 3rem; position: relative; --tl-line: 40%; }
+.timeline { margin-top: 3rem; position: relative; --tl-line: 50%; }
 .timeline::before {
     content: ''; position: absolute; left: var(--tl-line); top: 0; bottom: 0;
     width: 2px; background: linear-gradient(180deg, var(--accent), var(--border));
@@ -228,7 +229,9 @@ section { padding: 6rem 3rem; }
 .tl-date { font-size: 0.75rem; color: var(--accent); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
 .tl-role { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.15rem; }
 .tl-company { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.4rem; }
-.tl-logo { width: 28px; height: 28px; border-radius: 3px; }
+.tl-logo { width: auto; height: 24px; border-radius: 3px; }
+.tl-logo-sm { height: 16px; }
+.tl-logo-lg { height: 32px; }
 .tl-highlights { list-style: none; }
 .tl-highlights li {
     color: var(--text-muted); font-size: 0.85rem; font-weight: 300;
