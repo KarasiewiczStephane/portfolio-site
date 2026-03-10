@@ -14,6 +14,10 @@ const sorted = projects.sort((a, b) => a.data.order - b.data.order);
             <div class="section-label">All Projects</div>
             <h2 class="section-title">30 Data Science Projects</h2>
             <p class="section-desc">Spanning ML, deep learning, NLP, computer vision, data engineering, and MLOps.</p>
+            <div class="view-toggle">
+                <button class="filter-btn active" data-view="featured">Featured</button>
+                <button class="filter-btn" data-view="all">All</button>
+            </div>
             <CategoryFilter />
             <div class="portfolio-grid">
                 {sorted.map(p => <ProjectCard project={p} />)}
@@ -21,3 +25,54 @@ const sorted = projects.sort((a, b) => a.data.order - b.data.order);
         </div>
     </section>
 </BaseLayout>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const viewBtns = document.querySelectorAll('[data-view]');
+    const catBtns = document.querySelectorAll('.filter-btn:not([data-view])');
+    const cards = document.querySelectorAll('.project-card[data-category]');
+
+    const featuredSlugs = [
+        'satellite-analysis', 'demand-forecast', 'bi-dashboard',
+        'fraud-detection-system', 'iot-anomaly-detection', 'etl-orchestration'
+    ];
+
+    let currentView = 'featured';
+    let currentCategory = 'All';
+
+    function applyFilters() {
+        cards.forEach(card => {
+            const el = card as HTMLElement;
+            const href = el.getAttribute('href') || '';
+            const slug = href.split('/').filter(Boolean).pop() || '';
+            const category = card.getAttribute('data-category');
+
+            const matchesView = currentView === 'all' || featuredSlugs.includes(slug);
+            const matchesCategory = currentCategory === 'All' || category === currentCategory;
+
+            el.style.display = (matchesView && matchesCategory) ? '' : 'none';
+        });
+    }
+
+    viewBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            viewBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentView = btn.getAttribute('data-view') || 'featured';
+            applyFilters();
+        });
+    });
+
+    catBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            catBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCategory = btn.getAttribute('data-filter') || 'All';
+            applyFilters();
+        });
+    });
+
+    // Apply initial filter
+    applyFilters();
+});
+</script>

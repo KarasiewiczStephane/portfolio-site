@@ -8,7 +8,7 @@ gradient: "pv-6"
 technologies: ["LangChain", "ChromaDB", "sentence-transformers", "Anthropic API", "OpenAI API", "Streamlit"]
 github: "https://github.com/KarasiewiczStephane/rag-knowledge-assistance"
 result: "Multi-format document Q&A system"
-featured: true
+featured: false
 order: 6
 screenshots:
   - src: "/screenshots/rag-knowledge-assistance-chat.png"

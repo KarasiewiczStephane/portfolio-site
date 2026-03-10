@@ -8,7 +8,7 @@ gradient: "pv-3"
 technologies: ["TensorFlow", "Keras", "OpenCV", "albumentations", "pydicom", "Streamlit"]
 github: "https://github.com/KarasiewiczStephane/medical-image-segmantation"
 result: "ONNX-exported production model"
-featured: true
+featured: false
 order: 3
 screenshots:
   - src: "/screenshots/medical-image-segmantation-segmentation.png"

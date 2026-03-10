@@ -20,10 +20,9 @@ const featured = allProjects
     <div class="hero-content">
         <div class="hero-text">
             <div class="hero-badge">Available for new projects — Freelance</div>
-            <h1>Expert Data Scientist: From <em>processing</em> to viz</h1>
+            <h1>Turning Environmental Data into <em>Business Decisions</em></h1>
             <p class="hero-subtitle">
-                Stéphane Karasiewicz — Senior Data Scientist with 7+ years delivering ML solutions from research to production.
-                Specialized in environmental analytics, time-series modeling, and scalable pipelines.
+                Senior Data Scientist with 7+ years helping research institutes and enterprises build ML pipelines, interactive dashboards, and time-series models that ship. Specialized in climate risk, geospatial analytics, and forecasting.
             </p>
             <div class="hero-actions">
                 <a href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" class="btn-primary">Book a Free Discovery Call &rarr;</a>
@@ -61,25 +60,32 @@ const featured = allProjects
         <div class="section-label reveal">What I Do</div>
         <h2 class="section-title reveal">Data science services that<br>move your business forward</h2>
         <p class="section-desc reveal">I don't just build models — I deliver business outcomes. Every project starts with your goals and ends with measurable impact.</p>
-        <div class="services-grid">
-            <div class="service-card reveal">
-                <div class="service-icon">&#128202;</div>
-                <h3>Predictive Analytics & ML</h3>
-                <p>Custom ML models: churn prediction, price forecasting, anomaly detection. Full lifecycle from preprocessing to production deployment.</p>
-                <div class="service-tags"><span>XGBoost</span><span>LSTM</span><span>scikit-learn</span><span>TensorFlow</span></div>
-            </div>
-            <div class="service-card reveal">
+        <div class="section-label reveal" style="margin-top: 2.5rem; margin-bottom: 1rem;">Core Expertise</div>
+        <div class="services-grid services-grid-core">
+            <div class="service-card service-card-core reveal">
+                <div class="service-badge">Core Expertise</div>
                 <div class="service-icon">&#127757;</div>
-                <h3>Environmental & Geospatial</h3>
+                <h3>Environmental & Geospatial Analytics</h3>
                 <p>Satellite data analysis, climate risk modeling, ESG reporting, and environmental monitoring. 2TB+ satellite data management experience.</p>
                 <div class="service-tags"><span>MODIS</span><span>Sentinel</span><span>NetCDF</span><span>Risk Assessment</span></div>
             </div>
-            <div class="service-card reveal">
+            <div class="service-card service-card-core reveal">
+                <div class="service-badge">Core Expertise</div>
                 <div class="service-icon">&#128200;</div>
-                <h3>Dashboards & Visualization</h3>
+                <h3>Time-Series Modeling & Forecasting</h3>
+                <p>Demand forecasting, anomaly detection, and predictive analytics. Full lifecycle from preprocessing to production deployment with LSTM, XGBoost, and Prophet.</p>
+                <div class="service-tags"><span>XGBoost</span><span>LSTM</span><span>Prophet</span><span>scikit-learn</span></div>
+            </div>
+            <div class="service-card service-card-core reveal">
+                <div class="service-badge">Core Expertise</div>
+                <div class="service-icon">&#128202;</div>
+                <h3>Interactive Dashboards & BI</h3>
                 <p>Interactive analytics dashboards with country-level maps, KPI tracking, and real-time monitoring. 5+ production dashboards delivered.</p>
                 <div class="service-tags"><span>Dash</span><span>Streamlit</span><span>Plotly</span><span>Shiny</span></div>
             </div>
+        </div>
+        <div class="section-label reveal" style="margin-top: 3rem; margin-bottom: 1rem;">Also Available</div>
+        <div class="services-grid">
             <div class="service-card reveal">
                 <div class="service-icon">&#9881;&#65039;</div>
                 <h3>MLOps & Data Pipelines</h3>
@@ -87,17 +93,33 @@ const featured = allProjects
                 <div class="service-tags"><span>Docker</span><span>CI/CD</span><span>PostgreSQL</span><span>REST APIs</span></div>
             </div>
             <div class="service-card reveal">
-                <div class="service-icon">&#129302;</div>
-                <h3>NLP & Computer Vision</h3>
-                <p>Text classification, document extraction, image recognition using state-of-the-art transformer and CNN architectures.</p>
-                <div class="service-tags"><span>PyTorch</span><span>Transformers</span><span>CNN</span><span>LLMs</span></div>
-            </div>
-            <div class="service-card reveal">
                 <div class="service-icon">&#128300;</div>
                 <h3>Statistical Consulting & R Packages</h3>
                 <p>Advanced multivariate analysis, time-series modeling, and custom R package development. Published author on CRAN.</p>
                 <div class="service-tags"><span>PCA</span><span>Time-Series</span><span>Niche Modeling</span><span>CRAN</span></div>
             </div>
+            <div class="service-card reveal">
+                <div class="service-icon">&#129302;</div>
+                <h3>NLP & Computer Vision</h3>
+                <p>Text classification, document extraction, image recognition using state-of-the-art transformer and CNN architectures.</p>
+                <div class="service-tags"><span>PyTorch</span><span>Transformers</span><span>CNN</span><span>LLMs</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="techstack">
+    <div class="section-container">
+        <div class="section-label reveal">Tech Stack</div>
+        <h2 class="section-title reveal">Tools & Technologies</h2>
+        <div class="techstack-tags reveal">
+            <span>Python</span><span>R</span><span>scikit-learn</span><span>XGBoost</span>
+            <span>TensorFlow</span><span>PyTorch</span><span>Dash</span><span>Streamlit</span>
+            <span>Plotly</span><span>Shiny</span><span>Docker</span><span>PostgreSQL</span>
+            <span>NetCDF</span><span>MODIS</span><span>Sentinel</span><span>Airflow</span>
+            <span>FastAPI</span><span>Git</span><span>GitHub Actions</span><span>Pandas</span>
+            <span>NumPy</span>
         </div>
     </div>
 </section>
@@ -135,7 +157,7 @@ const featured = allProjects
                 <ul class="tl-highlights">
                     <li>ML infrastructure for peril risk assessment</li>
                     <li>Engineered end-to-end ML pipeline</li>
-                    <li>5 interactive dashboards with country-level maps</li>
+                    <li>3 interactive dashboards with country-level maps</li>
                     <li>Automated data management for 2TB+ satellite data</li>
                 </ul>
             </div>
@@ -229,6 +251,12 @@ const featured = allProjects
         <div class="portfolio-grid">
             {featured.map(p => <ProjectCard project={p} />)}
         </div>
+        <a href={`${base}projects/case-study-raincoat`} class="cs-banner reveal">
+            <div class="cs-banner-label">Featured Case Study</div>
+            <h3>Climate Risk Data Infrastructure at Raincoat LLC</h3>
+            <p>End-to-end ML pipeline, 3 interactive dashboards, and automated satellite data management for parametric insurance — serving 10+ countries.</p>
+            <span class="cs-banner-arrow">Read the full case study &rarr;</span>
+        </a>
         <div style="text-align: center; margin-top: 2.5rem;">
             <a href={`${base}projects`} class="btn-primary">See All Projects &rarr;</a>
         </div>
@@ -303,6 +331,32 @@ const featured = allProjects
     </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+    <div class="section-container">
+        <div class="section-label reveal">What Clients Say</div>
+        <h2 class="section-title reveal">Trusted by researchers & engineers</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-quote">&ldquo;His coding skills are unparalleled, producing efficient and well-documented codes. His ability to translate our needs is exemplary, and he excels in proposing innovative solutions that go beyond the initial objectives. St&eacute;phane embodies excellence and will be an invaluable asset to any organization.&rdquo;</div>
+                <div class="testimonial-author">
+                    <strong>Kelig Mah&eacute;</strong>
+                    <span>Head of Unit, Fisheries Resources — Channel & North Sea</span>
+                    <span>IFREMER</span>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-quote">&ldquo;I worked with St&eacute;phane at the beginning of my PhD, and I am still grateful — without his recommendations I would work and troubleshoot much less efficiently. He always takes time to explain, and never loses his sense of humor even after the nth error message.&rdquo;</div>
+                <div class="testimonial-author">
+                    <strong>Carolin Neven</strong>
+                    <span>Ph.D. Student</span>
+                    <span>IFREMER</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- PROCESS -->
 <section id="process" style="background:var(--bg-secondary);">
     <div class="section-container">
@@ -330,6 +384,9 @@ const featured = allProjects
                 <p>Polished deliverables, documentation, and handoff support to your team.</p>
             </div>
         </div>
+        <div class="engagement-info reveal">
+            Typical missions: 2–30 days | Daily rate: on request | Fixed-price or time-and-materials | Remote worldwide, timezone-flexible for EU & US
+        </div>
     </div>
 </section>
 
@@ -340,6 +397,7 @@ const featured = allProjects
         <p>Book a free 15-minute discovery call. No pitch, no pressure — just an honest conversation about how data science can help your business.</p>
         <a href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" class="btn-primary">Book a Discovery Call &rarr;</a>
         <a href="mailto:skaraz.science@gmail.com" class="btn-secondary" style="margin-left: 0.8rem;">Email Me</a>
+        <a href={`${base}cv-stephane-karasiewicz.pdf`} class="btn-secondary" style="margin-left: 0.8rem;" target="_blank">Download CV</a>
         <div class="cta-details">
             <span>&#128205; Boulogne-sur-Mer, France</span>
             <span>&#127760; Working remotely worldwide</span>

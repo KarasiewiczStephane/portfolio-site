@@ -8,8 +8,8 @@ gradient: "pv-1"
 technologies: ["Plotly Dash", "Dash Bootstrap Components", "DuckDB", "ReportLab", "pandas"]
 github: "https://github.com/KarasiewiczStephane/bi-dashboard"
 result: "Multi-page BI dashboard with RBAC"
-featured: false
-order: 19
+featured: true
+order: 3
 screenshots:
   - src: "/screenshots/bi-dashboard-overview.png"
     alt: "BI Dashboard - KPIs, Revenue by Region & Category"

@@ -8,7 +8,7 @@ gradient: "pv-5"
 technologies: ["LightGBM", "scikit-learn", "SHAP", "LIME", "Fairlearn", "Optuna", "FastAPI"]
 github: "https://github.com/KarasiewiczStephane/credit-risk-scoring"
 result: "Fairness-audited production model"
-featured: true
+featured: false
 order: 5
 screenshots:
   - src: "/screenshots/credit-risk-scoring-dashboard.png"

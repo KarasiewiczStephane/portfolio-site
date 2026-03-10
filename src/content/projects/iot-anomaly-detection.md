@@ -8,8 +8,8 @@ gradient: "pv-4"
 technologies: ["scikit-learn", "PyTorch", "FastAPI", "Streamlit", "Plotly", "SQLite"]
 github: "https://github.com/KarasiewiczStephane/iot-anomaly-detection"
 result: "Real-time anomaly scoring pipeline"
-featured: false
-order: 10
+featured: true
+order: 5
 screenshots:
   - src: "/screenshots/iot-anomaly-detection-realtime.png"
     alt: "IoT Anomaly Detection - Real-Time Sensor Readings"

@@ -9,7 +9,7 @@ technologies: ["PyTorch", "torchvision", "rasterio", "geopandas", "Folium", "Str
 github: "https://github.com/KarasiewiczStephane/satellite-analysis"
 result: "Multi-temporal change detection"
 featured: true
-order: 4
+order: 1
 screenshots:
   - src: "/screenshots/satellite-analysis-classification.png"
     alt: "Satellite Analysis - Image Classification & Probabilities"

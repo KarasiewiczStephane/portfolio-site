@@ -8,7 +8,7 @@ gradient: "pv-2"
 technologies: ["HuggingFace Transformers", "RoBERTa", "BERTopic", "spaCy", "Plotly Dash", "FastAPI", "DuckDB"]
 github: "https://github.com/KarasiewiczStephane/sentiment-dashboard"
 result: "Real-time multi-model NLP pipeline"
-featured: true
+featured: false
 order: 2
 screenshots:
   - src: "/screenshots/sentiment-dashboard-overview.png"

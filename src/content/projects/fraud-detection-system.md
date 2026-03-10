@@ -9,7 +9,7 @@ technologies: ["scikit-learn", "XGBoost", "SHAP", "FastAPI", "Streamlit", "SQLit
 github: "https://github.com/KarasiewiczStephane/fraud-detection-system"
 result: "Multi-page real-time dashboard"
 featured: true
-order: 1
+order: 4
 screenshots:
   - src: "/screenshots/fraud-detection-system-realtime.png"
     alt: "Fraud Detection System - Real-time Prediction Feed"

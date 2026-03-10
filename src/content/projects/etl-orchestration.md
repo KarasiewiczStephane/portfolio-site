@@ -8,8 +8,8 @@ gradient: "pv-2"
 technologies: ["Apache Airflow", "dbt-duckdb", "DuckDB", "Docker Compose"]
 github: "https://github.com/KarasiewiczStephane/etl-orchestration"
 result: "Automated ETL with data quality"
-featured: false
-order: 20
+featured: true
+order: 6
 screenshots:
   - src: "/screenshots/etl-orchestration-dashboard.png"
     alt: "Etl Orchestration - Dashboard"

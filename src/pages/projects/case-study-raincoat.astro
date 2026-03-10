@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Case Study — Raincoat LLC | Skaraz Data">
+<section class="case-study" style="padding-top: 8rem;">
+    <div class="section-container">
+
+        <!-- Back link -->
+        <a href={`${base}projects`} class="back-link">&larr; Back to Projects</a>
+
+        <!-- Header -->
+        <div class="cs-header">
+            <div class="cs-label">Case Study</div>
+            <h1 class="cs-title">Climate Risk Data Infrastructure at Raincoat LLC</h1>
+            <p class="cs-subtitle">How I contributed to Raincoat's climate data infrastructure — building an automated satellite data pipeline, a modular risk processing chain, and an interactive dashboard used by the CEO to close deals.</p>
+            <div class="cs-meta">
+                <span>Feb 2024 — Jan 2026</span>
+                <span>Senior Data Scientist</span>
+                <span>Remote — US-based client</span>
+            </div>
+        </div>
+
+        <!-- The Client -->
+        <div class="cs-section">
+            <h2>The Client</h2>
+            <p><strong>Raincoat LLC</strong> is a US-based insurtech company specializing in parametric insurance — policies that pay out automatically when predefined weather or climate thresholds are triggered. Their products cover natural catastrophe risks including floods, droughts, hurricanes, and extreme heat events across emerging markets.</p>
+            <p>I joined Raincoat's data science team as a senior data scientist, contributing to the data infrastructure and ML models powering their risk assessment engine — from raw satellite data all the way to executive-facing dashboards.</p>
+        </div>
+
+        <!-- The Challenge -->
+        <div class="cs-section">
+            <h2>The Challenge</h2>
+            <div class="cs-challenges">
+                <div class="cs-challenge-block">
+                    <h3>Massive, Heterogeneous Data</h3>
+                    <p>2TB+ of satellite imagery and climate reanalysis data from Copernicus CDS, WEkEO, and ERA5 — in NetCDF format, spanning decades, with varying spatial and temporal resolutions.</p>
+                </div>
+                <div class="cs-challenge-block">
+                    <h3>No Standardized Risk Framework</h3>
+                    <p>Each peril (flood, drought, heat, cyclone) required different variables, thresholds, and modeling approaches. The team had to build a framework that could scale one peril to new countries without rebuilding from scratch.</p>
+                </div>
+                <div class="cs-challenge-block">
+                    <h3>Decision-Makers Needed Clarity</h3>
+                    <p>Executives and underwriters needed to visualize risk at the country and regional level — not raw model outputs. The gap between "model results in a notebook" and "actionable intelligence in a dashboard" was the bottleneck.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- What I Built -->
+        <div class="cs-section">
+            <h2>What I Built</h2>
+
+            <div class="cs-built-item">
+                <h3>Automated Satellite Data Pipeline</h3>
+                <p>Designed and implemented a fully automated ingestion pipeline pulling data from Copernicus CDS and WEkEO APIs. The pipeline handles download scheduling, format conversion (NetCDF to tabular), spatial aggregation by administrative boundaries, and quality checks. Reduced manual data preparation from weeks to hours.</p>
+            </div>
+
+            <div class="cs-built-item">
+                <h3>ML Processing Chain</h3>
+                <p>Built a modular processing chain supporting multiple peril types. Each module extracts relevant climate variables, computes risk indicators (return periods, anomaly scores, threshold exceedances), and feeds standardized outputs into the risk engine. Designed for extensibility — adding a new peril or country requires configuration, not code changes.</p>
+            </div>
+
+            <div class="cs-built-item">
+                <h3>3 Interactive Dashboards</h3>
+                <p>Delivered three Plotly Dash dashboards used daily by the risk and underwriting teams:</p>
+                <ul>
+                    <li><strong>Country Risk Explorer</strong> — Interactive maps with country-level risk scores, historical event timelines, and drill-down by peril type</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- The Impact -->
+        <div class="cs-section">
+            <h2>The Impact</h2>
+            <div class="cs-impact-grid">
+                <div class="cs-impact-stat">
+                    <span class="cs-impact-number">2TB+</span>
+                    <span class="cs-impact-label">Satellite data managed</span>
+                </div>
+                <div class="cs-impact-stat">
+                    <span class="cs-impact-number">10+</span>
+                    <span class="cs-impact-label">Countries covered</span>
+                </div>
+                <div class="cs-impact-stat">
+                    <span class="cs-impact-number">3</span>
+                    <span class="cs-impact-label">Production dashboards</span>
+                </div>
+                <div class="cs-impact-stat">
+                    <span class="cs-impact-number">90%</span>
+                    <span class="cs-impact-label">Reduction in data prep time</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- How We Worked -->
+        <div class="cs-section">
+            <h2>How We Worked</h2>
+            <p>I operated as a fully embedded senior data scientist within Raincoat's remote team for nearly two years. The engagement model was time-and-materials with weekly check-ins, shared GitHub repos, and direct Slack communication with the CTO and risk team.</p>
+            <p>Work was organized in 2-week sprints with clear deliverables. I focused on the data pipeline, processing chain, and dashboards — collaborating closely with the rest of the data science and engineering teams on deployment and integration.</p>
+            <p>Timezone overlap (EU mornings / US East Coast) enabled real-time collaboration without blocking either side.</p>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="cs-section">
+            <h2>Tech Stack</h2>
+            <div class="cs-tech-tags">
+                <span>Python</span>
+                <span>Copernicus CDS</span>
+                <span>WEkEO</span>
+                <span>NetCDF</span>
+                <span>Xarray</span>
+                <span>Pandas</span>
+                <span>Plotly Dash</span>
+                <span>PostgreSQL</span>
+                <span>Docker</span>
+                <span>scikit-learn</span>
+                <span>NumPy</span>
+                <span>Git</span>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cs-cta">
+            <h2>Have a similar challenge?</h2>
+            <p>I help companies turn raw environmental and geospatial data into production-ready ML systems and dashboards. Let's talk about your project.</p>
+            <div class="cs-cta-actions">
+                <a href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" class="btn-primary">Book a Discovery Call &rarr;</a>
+                <a href="mailto:skaraz.science@gmail.com" class="btn-secondary">Email Me</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+</BaseLayout>

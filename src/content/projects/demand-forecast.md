@@ -8,8 +8,8 @@ gradient: "pv-1"
 technologies: ["Prophet", "PyTorch", "XGBoost", "Streamlit", "Plotly", "DuckDB"]
 github: "https://github.com/KarasiewiczStephane/demand-forecast"
 result: "Ensemble forecast with backtesting"
-featured: false
-order: 7
+featured: true
+order: 2
 screenshots:
   - src: "/screenshots/demand-forecast-forecast.png"
     alt: "Demand Forecast - Forecast View"
