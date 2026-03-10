@@ -10,7 +10,7 @@ const { title, description, domain, icon, gradient, result } = project.data;
 const base = import.meta.env.BASE_URL;
 ---
 
-<a href={`${base}/projects/${project.slug}`} class="project-card reveal" data-category={project.data.category}>
+<a href={`${base}projects/${project.slug}`} class="project-card reveal" data-category={project.data.category}>
     <div class="project-visual">
         <div class={`project-visual-bg ${gradient}`}>{icon}</div>
         <span class="project-domain">{domain}</span>
