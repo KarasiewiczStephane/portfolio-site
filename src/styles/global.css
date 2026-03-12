@@ -530,6 +530,8 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); }
 .testimonial-author { display: flex; flex-direction: column; gap: 0.15rem; }
 .testimonial-author strong { font-size: 0.9rem; color: var(--text-primary); }
 .testimonial-author span { font-size: 0.78rem; color: var(--text-muted); font-weight: 300; }
+.testimonial-logo { height: 24px; max-height: 24px; width: auto; align-self: flex-start; margin-top: 0.5rem; border-radius: 3px; object-fit: contain; }
+.testimonial-logo-sm { height: 16px; max-height: 16px; }
 
 /* ENGAGEMENT INFO */
 .engagement-info {
