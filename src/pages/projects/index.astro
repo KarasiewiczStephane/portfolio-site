@@ -8,7 +8,10 @@ const projects = await getCollection('projects');
 const sorted = projects.sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="Projects — Skaraz Data">
+<BaseLayout
+    title="Data Science Projects — Skaraz Data"
+    description="30 data science projects spanning ML, NLP, computer vision, geospatial analytics, and climate risk. Built by freelance data scientist Stéphane Karasiewicz."
+>
     <section class="portfolio" style="padding-top: 8rem;">
         <div class="section-container">
             <div class="section-label">All Projects</div>

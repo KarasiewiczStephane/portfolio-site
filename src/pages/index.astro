@@ -12,7 +12,38 @@ const featured = allProjects
     .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="Skaraz Data — Stéphane Karasiewicz | Senior Data Scientist">
+<BaseLayout
+    title="Skaraz Data — Stéphane Karasiewicz | Freelance Senior Data Scientist"
+    description="Freelance data scientist specializing in climate risk, geospatial analytics, and ML pipelines. 7+ years turning environmental data into business decisions."
+    ogType="website"
+    jsonLd={{
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "name": "Stéphane Karasiewicz",
+                "url": "https://skarazdata.com",
+                "image": "https://skarazdata.com/portrait.jpg",
+                "jobTitle": "Freelance Senior Data Scientist",
+                "worksFor": { "@type": "Organization", "name": "Skaraz Data" },
+                "alumniOf": { "@type": "EducationalOrganization", "name": "Université de Lille" },
+                "knowsAbout": ["Data Science", "Machine Learning", "Climate Risk", "Geospatial Analytics", "Python", "R"],
+                "sameAs": ["https://github.com/KarasiewiczStephane"]
+            },
+            {
+                "@type": "ProfessionalService",
+                "name": "Skaraz Data",
+                "url": "https://skarazdata.com",
+                "image": "https://skarazdata.com/portrait.jpg",
+                "description": "Freelance data science services: climate risk modeling, geospatial analytics, ML pipelines, interactive dashboards, and time-series forecasting.",
+                "provider": { "@type": "Person", "name": "Stéphane Karasiewicz" },
+                "areaServed": "Worldwide",
+                "serviceType": ["Data Science", "Machine Learning", "Climate Risk Analytics", "Geospatial Analysis"],
+                "address": { "@type": "PostalAddress", "addressLocality": "Boulogne-sur-Mer", "addressCountry": "FR" }
+            }
+        ]
+    }}
+>
 
 <!-- HERO -->
 <section class="hero">

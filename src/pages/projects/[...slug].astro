@@ -13,9 +13,17 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await project.render();
 const base = import.meta.env.BASE_URL;
+const ogImage = project.data.screenshots.length > 0
+    ? `https://skarazdata.com${project.data.screenshots[0].src}`
+    : "https://skarazdata.com/portrait.jpg";
 ---
 
-<BaseLayout title={`${project.data.title} — Skaraz Data`}>
+<BaseLayout
+    title={`${project.data.title} — Skaraz Data`}
+    description={`${project.data.description.slice(0, 155)}${project.data.description.length > 155 ? '…' : ''}`}
+    ogImage={ogImage}
+    ogType="article"
+>
     <section style="padding: 8rem 3rem 4rem;">
         <div class="section-container">
             <a href={`${base}projects`} class="back-link">&larr; Back to Projects</a>
