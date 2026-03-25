@@ -1,0 +1,150 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = await getCollection('blogs');
+const sorted = posts.sort((a, b) =>
+    b.data.publishedDate.getTime() - a.data.publishedDate.getTime()
+);
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+    title="Blog — Skaraz Data | Data Science & Climate Risk Insights"
+    description="Articles on data science, climate risk analytics, geospatial pipelines, and environmental data visualization by Stéphane Karasiewicz."
+>
+    <section class="blog-archive">
+        <div class="section-container">
+            <span class="section-label">Insights</span>
+            <h1 class="section-title">Blog</h1>
+            <p class="section-desc">Data-driven articles on climate risk, geospatial analytics, and data science.</p>
+
+            {sorted.length === 0 ? (
+                <div class="blog-empty">
+                    <p>Articles coming soon. Follow me on <a href="https://www.linkedin.com/in/st%C3%A9phane-karasiewicz-349330112" target="_blank">LinkedIn</a> for updates.</p>
+                </div>
+            ) : (
+                <div class="blog-grid">
+                    {sorted.map(post => {
+                        const readTime = post.data.readingTimeMinutes || Math.ceil(post.body.split(' ').length / 200);
+                        return (
+                            <a href={`${base}blog/${post.slug}`} class="blog-card reveal">
+                                <div class="blog-header">
+                                    <time datetime={post.data.publishedDate.toISOString()}>
+                                        {post.data.publishedDate.toLocaleDateString('en-US', {
+                                            year: 'numeric', month: 'short', day: 'numeric'
+                                        })}
+                                    </time>
+                                    <span class="blog-reading-time">{readTime} min read</span>
+                                </div>
+                                <h3>{post.data.title}</h3>
+                                <p>{post.data.description}</p>
+                                <div class="blog-tags">
+                                    {post.data.tags.map(tag => (
+                                        <span class="blog-tag">{tag}</span>
+                                    ))}
+                                </div>
+                            </a>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+.blog-archive { padding: 8rem 3rem 4rem; }
+
+.blog-empty {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.blog-empty a { color: var(--accent); text-decoration: none; }
+.blog-empty a:hover { text-decoration: underline; }
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.blog-card {
+    display: block;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.blog-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.blog-card:hover::before { opacity: 1; }
+
+.blog-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    margin: 0.8rem 0;
+    color: var(--text-primary);
+}
+
+.blog-card p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.blog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.blog-reading-time {
+    background: rgba(62, 207, 180, 0.1);
+    color: var(--accent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+}
+
+.blog-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.blog-tag {
+    background: rgba(62, 207, 180, 0.08);
+    color: var(--accent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+}
+
+@media (max-width: 600px) {
+    .blog-archive { padding: 6rem 1.5rem 3rem; }
+    .blog-grid { grid-template-columns: 1fr; }
+}
+</style>
