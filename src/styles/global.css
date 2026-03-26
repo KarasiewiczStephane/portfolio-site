@@ -7,7 +7,7 @@
     --accent-dark: #2BA08A;
     --text-primary: #E8ECF1;
     --text-secondary: #8B97A8;
-    --text-muted: #5A6577;
+    --text-muted: #717E90;
     --border: rgba(255,255,255,0.06);
     --border-hover: rgba(62, 207, 180, 0.3);
     --branch-purple: #A855F7;
@@ -772,4 +772,49 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); }
 }
 @media (max-width: 500px) {
     .gallery-grid { grid-template-columns: 1fr; }
+}
+
+/* VISITED LINK COLOR OVERRIDE — prevent browser default dark purple/blue.
+   Browsers restrict :visited styling for privacy, but color is allowed
+   as long as it differs from unvisited only in color value (no layout changes).
+   We force all links and visited links to use the same accent color. */
+a:visited {
+    color: inherit;
+}
+.post-content a:link,
+.post-content a:visited {
+    color: #3ECFB4 !important;
+}
+
+/* ACCESSIBILITY */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 200;
+    background: var(--accent);
+    color: var(--bg-primary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 0 0 6px 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: top 0.2s;
+}
+.skip-link:focus {
+    top: 0;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
