@@ -13,7 +13,7 @@ const featured = allProjects
 ---
 
 <BaseLayout
-    title="Skaraz Data — Stéphane Karasiewicz | Freelance Senior Data Scientist"
+    title="Freelance Data Scientist — Climate Risk & ML | Skaraz Data"
     description="Freelance data scientist specializing in climate risk, geospatial analytics, and ML pipelines. 7+ years turning environmental data into business decisions."
     ogType="website"
     jsonLd={{
@@ -28,7 +28,11 @@ const featured = allProjects
                 "worksFor": { "@type": "Organization", "name": "Skaraz Data" },
                 "alumniOf": { "@type": "EducationalOrganization", "name": "Université de Lille" },
                 "knowsAbout": ["Data Science", "Machine Learning", "Climate Risk", "Geospatial Analytics", "Python", "R"],
-                "sameAs": ["https://github.com/KarasiewiczStephane"]
+                "sameAs": [
+                    "https://github.com/KarasiewiczStephane",
+                    "https://www.linkedin.com/in/st%C3%A9phane-karasiewicz-349330112/",
+                    "https://www.researchgate.net/profile/Stephane_Karasiewicz"
+                ]
             },
             {
                 "@type": "ProfessionalService",
@@ -40,6 +44,35 @@ const featured = allProjects
                 "areaServed": "Worldwide",
                 "serviceType": ["Data Science", "Machine Learning", "Climate Risk Analytics", "Geospatial Analysis"],
                 "address": { "@type": "PostalAddress", "addressLocality": "Boulogne-sur-Mer", "addressCountry": "FR" }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What climate risk data science services do you offer?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "I build climate risk models, satellite data pipelines (Copernicus, ERA5, MODIS, Sentinel), geospatial analytics systems, and production ML infrastructure for environmental decision-making."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What is your typical project duration and pricing?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Projects typically range from 2 to 30 days with both fixed-price and time-and-materials options. Contact me for a custom quote."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Do you work remotely with international clients?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. Based in France, I work remotely with clients worldwide across climate tech, insurtech, agriculture, and environmental consulting."
+                        }
+                    }
+                ]
             }
         ]
     }}
