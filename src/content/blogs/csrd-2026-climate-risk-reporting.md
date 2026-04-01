@@ -147,4 +147,4 @@ The goal: make CSRD-grade climate risk assessment accessible to any company that
 
 ---
 
-*If you're working on CSRD compliance and need climate data infrastructure, [let's talk](https://calendly.com/skaraz_data/15-minute-meeting). I also write about climate data engineering on [LinkedIn](https://www.linkedin.com/in/st%C3%A9phane-karasiewicz-349330112).*
+*If you're working on CSRD compliance and need climate data infrastructure, [let's talk](https://calendly.com/skaraz_data/15-minute-meeting). I also write about climate data engineering on [LinkedIn](https://www.linkedin.com/in/stephane-karasiewicz).*
