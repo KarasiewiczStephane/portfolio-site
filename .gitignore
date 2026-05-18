@@ -2,3 +2,9 @@ node_modules/
 dist/
 .astro/
 .env
+
+# Notes de travail privées (docs de référence brand, audit, plans)
+/skaraz-*.md
+
+# OG image source en racine (sera déplacée dans public/og-image.png en Session 8)
+/skaraz-og-image.png
