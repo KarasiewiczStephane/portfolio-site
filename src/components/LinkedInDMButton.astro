@@ -1,0 +1,144 @@
+---
+export interface Props {
+    variant?: 'primary' | 'secondary';
+    label?: string;
+}
+
+const {
+    variant = 'primary',
+    label = '📨 Send “reality” on LinkedIn for the free Reality Check PDF',
+} = Astro.props;
+---
+
+<button
+    class:list={['btn-linkedin-dm', `btn-linkedin-dm--${variant}`]}
+    data-linkedin-dm-button
+    data-default-label={label}
+    type="button"
+>
+    <span class="btn-linkedin-dm__label">{label}</span>
+</button>
+
+<script>
+    const PROFILE_URL = 'https://www.linkedin.com/in/stephane-karasiewicz/';
+    const FEEDBACK_LABEL = '✓ Copied — paste “reality” in your DM';
+    const FEEDBACK_DURATION_MS = 2000;
+
+    const buttons = document.querySelectorAll<HTMLButtonElement>(
+        '[data-linkedin-dm-button]'
+    );
+
+    buttons.forEach((btn) => {
+        const labelEl = btn.querySelector<HTMLSpanElement>(
+            '.btn-linkedin-dm__label'
+        );
+        const defaultLabel =
+            btn.dataset.defaultLabel ?? labelEl?.textContent ?? '';
+        let resetTimer: number | undefined;
+
+        btn.addEventListener('click', () => {
+            // Fire-and-forget clipboard write so the user-gesture chain
+            // stays intact for window.open below.
+            navigator.clipboard?.writeText('reality').catch((err) => {
+                console.warn('Clipboard write failed:', err);
+            });
+
+            if (labelEl) {
+                labelEl.textContent = FEEDBACK_LABEL;
+                btn.classList.add('is-copied');
+                if (resetTimer !== undefined) {
+                    window.clearTimeout(resetTimer);
+                }
+                resetTimer = window.setTimeout(() => {
+                    labelEl.textContent = defaultLabel;
+                    btn.classList.remove('is-copied');
+                }, FEEDBACK_DURATION_MS);
+            }
+
+            window.open(PROFILE_URL, '_blank', 'noopener,noreferrer');
+        });
+    });
+</script>
+
+<style>
+    .btn-linkedin-dm {
+        --b-text: #0f1b2c;
+        --b-accent: #d85a30;
+        --b-accent-dark: #b9491f;
+        --b-border: rgba(15, 27, 44, 0.22);
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.9rem 1.5rem;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 500;
+        line-height: 1.3;
+        text-align: center;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.15s ease, background-color 0.2s ease,
+            color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-linkedin-dm:focus-visible {
+        outline: 2px solid var(--b-accent);
+        outline-offset: 3px;
+    }
+
+    .btn-linkedin-dm--primary {
+        background: var(--b-accent);
+        color: #ffffff;
+        border: 1.5px solid var(--b-accent);
+        box-shadow: 0 1px 2px rgba(216, 90, 48, 0.18);
+    }
+
+    .btn-linkedin-dm--primary:hover {
+        background: var(--b-accent-dark);
+        border-color: var(--b-accent-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(216, 90, 48, 0.24);
+    }
+
+    .btn-linkedin-dm--primary:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 2px rgba(216, 90, 48, 0.18);
+    }
+
+    .btn-linkedin-dm--secondary {
+        background: transparent;
+        color: var(--b-text);
+        border: 1.5px solid var(--b-border);
+    }
+
+    .btn-linkedin-dm--secondary:hover {
+        background: var(--b-text);
+        color: #ffffff;
+        border-color: var(--b-text);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(15, 27, 44, 0.12);
+    }
+
+    .btn-linkedin-dm--secondary:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+
+    .btn-linkedin-dm.is-copied {
+        animation: btn-linkedin-dm-pulse 0.25s ease;
+    }
+
+    @keyframes btn-linkedin-dm-pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.02);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>

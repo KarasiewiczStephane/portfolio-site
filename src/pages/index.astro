@@ -1,482 +1,926 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-
-const logoSvg = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB3aWR0aD0iMTcwIgogICBoZWlnaHQ9IjE3MCIKICAgdmlld0JveD0iMjQgNTQgMTcwIDE3MCIKICAgdmVyc2lvbj0iMS4xIgogICBpZD0ic3ZnOCIKICAgaW5rc2NhcGU6ZXhwb3J0LWZpbGVuYW1lPSJDOlxVc2Vyc1xza2FyYXNpZVxQaWN0dXJlc1xnMTAxOC5wbmciCiAgIGlua3NjYXBlOmV4cG9ydC14ZHBpPSI5NiIKICAgaW5rc2NhcGU6ZXhwb3J0LXlkcGk9Ijk2IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIwLjkyLjMgKDI0MDU1NDYsIDIwMTgtMDMtMTEpIgogICBzb2RpcG9kaTpkb2NuYW1lPSJsb2dvLnN2ZyI+CiAgPGRlZnMKICAgICBpZD0iZGVmczIiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlkPSJiYXNlIgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxLjAiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCIKICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnpvb209IjAuNDk0OTc0NzUiCiAgICAgaW5rc2NhcGU6Y3g9IjUxMi4wNjc1NCIKICAgICBpbmtzY2FwZTpjeT0iMzg1LjI5Njk0IgogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJtbSIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJnMTAxOCIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwMTgiCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii04IgogICAgIGlua3NjYXBlOndpbmRvdy15PSItOCIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIiAvPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTUiPgogICAgPHJkZjpSREY+CiAgICAgIDxjYzpXb3JrCiAgICAgICAgIHJkZjphYm91dD0iIj4KICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3N2Zyt4bWw8L2RjOmZvcm1hdD4KICAgICAgICA8ZGM6dHlwZQogICAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL3B1cmwub3JnL2RjL2RjbWl0eXBlL1N0aWxsSW1hZ2UiIC8+CiAgICAgICAgPGRjOnRpdGxlPjwvZGM6dGl0bGU+CiAgICAgIDwvY2M6V29yaz4KICAgIDwvcmRmOlJERj4KICA8L21ldGFkYXRhPgogIDxnCiAgICAgaW5rc2NhcGU6bGFiZWw9IkNhbHF1ZSAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSI+CiAgICA8ZwogICAgICAgaWQ9Imc5MDUiPgogICAgICA8ZwogICAgICAgICBpZD0iZzkzNCI+CiAgICAgICAgPGcKICAgICAgICAgICBpZD0iZzEwMTgiCiAgICAgICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2MS40MzA3OSwtMTY1LjE3MjU3KSI+CiAgICAgICAgICA8ZwogICAgICAgICAgICAgaWQ9ImcxMDI5IgogICAgICAgICAgICAgaW5rc2NhcGU6ZXhwb3J0LXhkcGk9Ijk2IgogICAgICAgICAgICAgaW5rc2NhcGU6ZXhwb3J0LXlkcGk9Ijk2Ij4KICAgICAgICAgICAgPGNpcmNsZQogICAgICAgICAgICAgICBzdHlsZT0ib3BhY2l0eTowLjk4MDAwMDA0O2ZpbGw6I2ZmZmZmZjtmaWxsLW9wYWNpdHk6MTtmaWxsLXJ1bGU6bm9uemVybztzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6ODtzdHJva2UtbGluZWNhcDpzcXVhcmU7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1kYXNob2Zmc2V0OjA7c3Ryb2tlLW9wYWNpdHk6MTtwYWludC1vcmRlcjpmaWxsIG1hcmtlcnMgc3Ryb2tlIgogICAgICAgICAgICAgICBpZD0icGF0aDEwIgogICAgICAgICAgICAgICBjeD0iMjcwLjA5NjQ3IgogICAgICAgICAgICAgICBjeT0iMzAzLjUzOTg5IgogICAgICAgICAgICAgICByPSI4MC41ODUzOTYiIC8+CiAgICAgICAgICAgIDxnCiAgICAgICAgICAgICAgIHN0eWxlPSJzdHJva2Utd2lkdGg6NjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZSIKICAgICAgICAgICAgICAgaWQ9ImcxMDA3Ij4KICAgICAgICAgICAgICA8ZwogICAgICAgICAgICAgICAgIHN0eWxlPSJzdHJva2Utd2lkdGg6NjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZSIKICAgICAgICAgICAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNjQuMTAzNSwxNjEuNDMwOCkiCiAgICAgICAgICAgICAgICAgaWQ9Imc5OTgiPgogICAgICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICAgICAgIHN0eWxlPSJvcGFjaXR5OjAuOTgwMDAwMDQ7ZmlsbDojZmZmZmZmO2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDo2O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2UtZGFzaG9mZnNldDowO3N0cm9rZS1vcGFjaXR5OjE7cGFpbnQtb3JkZXI6ZmlsbCBtYXJrZXJzIHN0cm9rZSIKICAgICAgICAgICAgICAgICAgIGlkPSJwYXRoMTAtOC0xIgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6dHlwZT0iYXJjIgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6Y3g9Ii0xMDUuNjg5ODIiCiAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpjeT0iLTEwNS44ODk4MyIKICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOnJ4PSIzNi4xNjI3MDQiCiAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpyeT0iNDYuMzE4OTQ3IgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6c3RhcnQ9IjUuMzUyNjU4MiIKICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOmVuZD0iMy4xNDE1OTI3IgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6b3Blbj0idHJ1ZSIKICAgICAgICAgICAgICAgICAgIGQ9Im0gLTg0LjA4NTgwOSwtMTQzLjAzNDYxIGEgMzYuMTYyNzA0LDQ2LjMxODk0NyAwIDAgMSAxMS4zMTQwMzEsNTYuMzIwOTE1IDM2LjE2MjcwNCw0Ni4zMTg5NDcgMCAwIDEgLTQwLjU3NzU0MiwyNi4wOTE5MDggMzYuMTYyNzA0LDQ2LjMxODk0NyAwIDAgMSAtMjguNTAzMiwtNDUuMjY4MDQzIgogICAgICAgICAgICAgICAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMCwtMSwtMSwwLDAsMCkiIC8+CiAgICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgICAgc3R5bGU9Im9wYWNpdHk6MC45ODAwMDAwNDtmaWxsOiNmZmZmZmY7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOm5vbnplcm87c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjY7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1kYXNob2Zmc2V0OjA7c3Ryb2tlLW9wYWNpdHk6MTtwYWludC1vcmRlcjpmaWxsIG1hcmtlcnMgc3Ryb2tlIgogICAgICAgICAgICAgICAgICAgaWQ9InBhdGgxMC04LTEtOCIKICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOnR5cGU9ImFyYyIKICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOmN4PSIxNzguMjcxNjQiCiAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpjeT0iMTA1Ljc5NTgxIgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6cng9IjM2LjQyOTEzOCIKICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOnJ5PSI0Ni42NjAyMDYiCiAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpzdGFydD0iNS44NDU1MTgxIgogICAgICAgICAgICAgICAgICAgc29kaXBvZGk6ZW5kPSIzLjE0MTU5MjciCiAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpvcGVuPSJ0cnVlIgogICAgICAgICAgICAgICAgICAgZD0ibSAyMTEuMjY3MDcsODYuMDE5OTE5IGEgMzYuNDI5MTM4LDQ2LjY2MDIwNiAwIDAgMSAtNi40NzU2LDUxLjc2NTg1MSAzNi40MjkxMzgsNDYuNjYwMjA2IDAgMCAxIC0zOS45NTQ2MywxMS4zODEyNCAzNi40MjkxMzgsNDYuNjYwMjA2IDAgMCAxIC0yMi45OTQzNCwtNDMuMzcxMjEiCiAgICAgICAgICAgICAgICAgICB0cmFuc2Zvcm09Im1hdHJpeCgwLDEsMSwwLDAsMCkiIC8+CiAgICAgICAgICAgICAgICA8ZwogICAgICAgICAgICAgICAgICAgc3R5bGU9InN0cm9rZS13aWR0aDo2O3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lIgogICAgICAgICAgICAgICAgICAgaWQ9Imc4OTQiCiAgICAgICAgICAgICAgICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxODQuNDUyMzgsMjkuODYwMTE5KSI+CiAgICAgICAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgICAgICAgIHNvZGlwb2RpOm5vZGV0eXBlcz0iY2MiCiAgICAgICAgICAgICAgICAgICAgIGlua3NjYXBlOmNvbm5lY3Rvci1jdXJ2YXR1cmU9IjAiCiAgICAgICAgICAgICAgICAgICAgIGlkPSJwYXRoODQ3IgogICAgICAgICAgICAgICAgICAgICBkPSJNIC05Ni43Mzk5MTMsNDIuOTc3NzI1IC05OC40MzI0NjEsMTgxLjQwNjk1IgogICAgICAgICAgICAgICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDo2O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIiAvPgogICAgICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgICAgICBzb2RpcG9kaTpub2RldHlwZXM9ImNjIgogICAgICAgICAgICAgICAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgICAgICAgICAgICAgICBpZD0icGF0aDg0Ny03IgogICAgICAgICAgICAgICAgICAgICBkPSJtIC00MS40MTc3NjYsNTQuMjI1NjkgLTUyLjgwMDIyMyw1Ny4xMjMzNSIKICAgICAgICAgICAgICAgICAgICAgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6NjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46bWl0ZXI7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLW9wYWNpdHk6MSIgLz4KICAgICAgICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICAgICAgICAgaW5rc2NhcGU6Y29ubmVjdG9yLWN1cnZhdHVyZT0iMCIKICAgICAgICAgICAgICAgICAgICAgaWQ9InBhdGg4NDctNy0yIgogICAgICAgICAgICAgICAgICAgICBkPSJNIC00MS45ODgzMzUsMTY4LjYzOTU5IC05NC4yMTc5ODksMTExLjM0OTA0IgogICAgICAgICAgICAgICAgICAgICBzdHlsZT0iZmlsbDpub25lO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDo2O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIiAvPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPC9nPgogICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgICAgPC9nPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cgo=";
+import LinkedInDMButton from '../components/LinkedInDMButton.astro';
+import TrustLogos from '../components/TrustLogos.astro';
+import OfferTier from '../components/OfferTier.astro';
+import Testimonial from '../components/Testimonial.astro';
 
 const base = import.meta.env.BASE_URL;
-const allProjects = await getCollection('projects');
-const featured = allProjects
-    .filter(p => p.data.featured)
-    .sort((a, b) => a.data.order - b.data.order);
+
+// JSON-LD aligned with the Climate Pipeline Partner positioning.
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "name": "Stéphane Karasiewicz",
+            "url": "https://skarazdata.com",
+            "image": "https://skarazdata.com/portrait.jpg",
+            "jobTitle": "Climate Pipeline Partner · Senior Data Engineer for Parametric Insurance",
+            "worksFor": { "@type": "Organization", "name": "Skaraz Data" },
+            "alumniOf": { "@type": "EducationalOrganization", "name": "Université de Lille" },
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Outreau",
+                "addressRegion": "Hauts-de-France",
+                "addressCountry": "FR"
+            },
+            "knowsAbout": [
+                "Climate Risk Modeling",
+                "Parametric Insurance",
+                "Satellite Remote Sensing",
+                "Data Engineering",
+                "Production Data Pipelines",
+                "Geospatial Analysis",
+                "Python"
+            ],
+            "sameAs": [
+                "https://www.linkedin.com/in/stephane-karasiewicz",
+                "https://github.com/KarasiewiczStephane",
+                "https://www.researchgate.net/profile/Stephane_Karasiewicz"
+            ]
+        },
+        {
+            "@type": "ProfessionalService",
+            "name": "Skaraz Data",
+            "url": "https://skarazdata.com",
+            "image": "https://skarazdata.com/portrait.jpg",
+            "description": "Senior data engineering for parametric insurance. Climate scoring pipelines: audit, build, partner. Bridging climate science and DevOps.",
+            "provider": { "@type": "Person", "name": "Stéphane Karasiewicz" },
+            "areaServed": "Worldwide",
+            "serviceType": [
+                "Climate data engineering",
+                "Parametric insurance consulting",
+                "Production data pipelines",
+                "Satellite & reanalysis data integration"
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Outreau",
+                "addressRegion": "Hauts-de-France",
+                "addressCountry": "FR"
+            }
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is a Climate Pipeline Discovery and how is it different from a regular consulting call?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "A Climate Pipeline Discovery is a fixed 2-week paid engagement (€5-7k). I audit your existing climate scoring pipeline, map risks and duplication, and deliver a 10-15 page technical note with a scoped remediation plan. It’s the entry point for clients who want to commit budget seriously and avoid a fuzzy consulting call."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do you write original climate models from scratch?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No. I work with the climate scientists already on your team. I challenge their model choices through comparative studies and I industrialize the models they ship — turning prototypes into reliable, modular production pipelines."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is there a guarantee on the code you deliver?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes — Code Quality Guarantee. Any major bug in production on code I shipped, within 30 days of handover, I fix for free. No questions. Major bug = any malfunction preventing the pipeline from producing expected outputs, or producing reproducibly incorrect outputs."
+                    }
+                }
+            ]
+        }
+    ]
+};
 ---
 
 <BaseLayout
-    title="Freelance Data Scientist — Climate Risk & ML | Skaraz Data"
-    description="Freelance data scientist specializing in climate risk, geospatial analytics, and ML pipelines. 7+ years turning environmental data into business decisions."
+    title="Skaraz Data — Climate Pipeline Partner for parametric insurance"
+    description="Senior data engineering for parametric insurance. Audit, build, partner. Bridging climate science and DevOps."
+    ogDescription="Senior data engineering for parametric insurance. Audit, build, partner."
     ogType="website"
-    jsonLd={{
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "Person",
-                "name": "Stéphane Karasiewicz",
-                "url": "https://skarazdata.com",
-                "image": "https://skarazdata.com/portrait.jpg",
-                "jobTitle": "Freelance Senior Data Scientist",
-                "worksFor": { "@type": "Organization", "name": "Skaraz Data" },
-                "alumniOf": { "@type": "EducationalOrganization", "name": "Université de Lille" },
-                "knowsAbout": ["Data Science", "Machine Learning", "Climate Risk", "Geospatial Analytics", "Python", "R"],
-                "sameAs": [
-                    "https://github.com/KarasiewiczStephane",
-                    "https://www.linkedin.com/in/stephane-karasiewicz",
-                    "https://www.researchgate.net/profile/Stephane_Karasiewicz"
-                ]
-            },
-            {
-                "@type": "ProfessionalService",
-                "name": "Skaraz Data",
-                "url": "https://skarazdata.com",
-                "image": "https://skarazdata.com/portrait.jpg",
-                "description": "Freelance data science services: climate risk modeling, geospatial analytics, ML pipelines, interactive dashboards, and time-series forecasting.",
-                "provider": { "@type": "Person", "name": "Stéphane Karasiewicz" },
-                "areaServed": "Worldwide",
-                "serviceType": ["Data Science", "Machine Learning", "Climate Risk Analytics", "Geospatial Analysis"],
-                "address": { "@type": "PostalAddress", "addressLocality": "Boulogne-sur-Mer", "addressCountry": "FR" }
-            },
-            {
-                "@type": "FAQPage",
-                "mainEntity": [
-                    {
-                        "@type": "Question",
-                        "name": "What climate risk data science services do you offer?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "I build climate risk models, satellite data pipelines (Copernicus, ERA5, MODIS, Sentinel), geospatial analytics systems, and production ML infrastructure for environmental decision-making."
-                        }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "What is your typical project duration and pricing?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "Projects typically range from 2 to 30 days with both fixed-price and time-and-materials options. Contact me for a custom quote."
-                        }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Do you work remotely with international clients?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "Yes. Based in France, I work remotely with clients worldwide across climate tech, insurtech, agriculture, and environmental consulting."
-                        }
-                    }
-                ]
-            }
-        ]
-    }}
+    jsonLd={jsonLd}
 >
+    <div class="page-light">
+    <!-- SECTION 1 — HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__inner">
+            <div class="hero__content">
+                <div class="hero__badge">Available · 2-3 new engagements per quarter</div>
+                <h1 id="hero-title">
+                    Ship your next climate peril in 8 to 16 weeks — <em>without recruiting in-house.</em>
+                </h1>
+                <p class="hero__subtitle">
+                    I’m the senior data engineer parametric insurers call when their climate scoring pipelines need to bridge climate science and DevOps — without recruiting a €120k/year hire.
+                </p>
+                <p class="hero__credibility">
+                    Ex-Raincoat · 10+ countries · 15+ years satellite &amp; reanalysis · PhD
+                </p>
+                <div class="hero__cta">
+                    <LinkedInDMButton variant="primary" />
+                    <a
+                        class="hero__cta-secondary"
+                        href="https://calendly.com/skaraz_data/15-minute-meeting"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >Book a Discovery Call <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+            <div class="hero__visual">
+                <img
+                    src={`${base}portrait.jpg`}
+                    alt="Stéphane Karasiewicz"
+                    class="hero__portrait"
+                    loading="eager"
+                    fetchpriority="high"
+                    width="320"
+                    height="320"
+                />
+            </div>
+        </div>
+    </section>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-        <div class="hero-text">
-            <div class="hero-badge">Available for new projects — Freelance</div>
-            <h1>Turning Environmental Data into <em>Business Decisions</em></h1>
-            <p class="hero-subtitle">
-                Senior Data Scientist with 7+ years helping research institutes and enterprises build ML pipelines, interactive dashboards, and time-series models that ship. Specialized in climate risk, geospatial analytics, and forecasting.
+    <!-- SECTION 2 — TRUST BAR -->
+    <TrustLogos />
+
+    <!-- SECTION 3 — PROBLEM -->
+    <section class="problem" aria-labelledby="problem-title">
+        <div class="problem__inner">
+            <h2 id="problem-title">You’ve shipped one peril. The next three are 9 months out.</h2>
+            <div class="problem__body">
+                <p>Your data scientists prototyped climate models that work. Your DevOps team runs Kubernetes for the product. <strong>Nobody in the team bridges the two</strong> — and every new peril takes 6 months instead of 6 weeks.</p>
+                <p>This is what I see in most parametric insurtechs I talk to: climate scoring pipelines built fast, then bolted together. Code duplicated between perils. Datasets that quietly change calibration in the middle of the night. New geographies that look like a new project every time, not a configuration change.</p>
+                <p>The board refuses a new full-time hire at €120k+/year for what they perceive as a punctual need. But the next three deals depend on shipping that next peril before the next renewal cycle.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4 — SOLUTION -->
+    <section class="solution" aria-labelledby="solution-title">
+        <div class="solution__inner">
+            <h2 id="solution-title">I close that gap.</h2>
+
+            <div class="solution__body">
+                <p>For the past 2 years at Raincoat, I built and operated production climate pipelines across 10+ countries — drought, heat stress, precipitation, water balance. I created pipelines from scratch, designed a modular architecture, and ran the whole thing as dev/ops at the end of my contract.</p>
+                <p>Before that: 15+ years in satellite remote sensing at IFREMER. PhD in Marine Ecology. 6 peer-reviewed publications. 2 CRAN R packages.</p>
+                <p><strong>I’m the senior who can sit between your climate scientists and your DevOps team</strong> — challenge model choices with comparative studies, ship production code that won’t wake your team at 3am, build the operational dashboards your team actually uses, and document everything so you can run new perils without me.</p>
+            </div>
+
+            <div class="solution__pillars">
+                <article class="pillar">
+                    <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M4 10a7.31 7.31 0 0 0 10 10Z"/>
+                        <path d="m9 15 3-3"/>
+                        <path d="M17 13a6 6 0 0 0-6-6"/>
+                        <path d="M21 13A10 10 0 0 0 11 3"/>
+                    </svg>
+                    <h3 class="pillar__title">Climate Science</h3>
+                    <p class="pillar__body">15+ years in satellite remote sensing. Production experience with CHIRPS, IMERG, ERA5-Land, Copernicus, MERRA-2.</p>
+                </article>
+
+                <article class="pillar">
+                    <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect width="20" height="8" x="2" y="2" rx="2" ry="2"/>
+                        <rect width="20" height="8" x="2" y="14" rx="2" ry="2"/>
+                        <line x1="6" x2="6.01" y1="6" y2="6"/>
+                        <line x1="6" x2="6.01" y1="18" y2="18"/>
+                    </svg>
+                    <h3 class="pillar__title">DevOps</h3>
+                    <p class="pillar__body">2 years operating production climate pipelines at Raincoat. Created 2 pipelines from scratch. Modular architecture proposal.</p>
+                </article>
+
+                <article class="pillar">
+                    <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                    <h3 class="pillar__title">Scientific Dialogue</h3>
+                    <p class="pillar__body">PhD in Marine Ecology. 6 peer-reviewed papers. 2 CRAN packages. I challenge model choices through comparative studies.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5 — OFFER -->
+    <section class="offer" aria-labelledby="offer-title">
+        <div class="offer__inner">
+            <h2 id="offer-title">Three ways to work together</h2>
+
+            <div class="offer__grid">
+                <OfferTier
+                    number="1"
+                    title="Climate Pipeline Discovery"
+                    price="€5-7k"
+                    duration="2 weeks"
+                    summary="Full audit of your existing pipeline, risk mapping, scoped remediation plan."
+                    bullets={[
+                        "10-15 page technical note",
+                        "Risk mapping of duplication, fragility, calibration drift",
+                        "Datasets & scientific methodology audit",
+                        "Production readiness assessment",
+                        "Scoped remediation plan with budget & timeline",
+                        "2 debrief calls",
+                    ]}
+                    ctaLabel="Book Discovery"
+                    ctaHref="https://calendly.com/skaraz_data/15-minute-meeting"
+                />
+
+                <OfferTier
+                    number="2"
+                    title="Climate Pipeline Partner"
+                    price="€25-50k"
+                    duration="8 to 16 weeks"
+                    summary="Build from scratch or refactor toward modular architecture. Integrate with existing infra. Train your team to run it without me."
+                    bullets={[
+                        "Build new pipeline or refactor existing one",
+                        "Modular architecture, multi-peril, multi-geography",
+                        "Operational dashboards",
+                        "Scientific dataset review",
+                        "Documentation & team training",
+                        "4 follow-up sessions (months 1, 3, 6, 12)",
+                    ]}
+                    ctaLabel="Talk to me"
+                    ctaHref="https://calendly.com/skaraz_data/15-minute-meeting"
+                    featured={true}
+                />
+
+                <OfferTier
+                    number="3"
+                    title="Retainer Partner"
+                    price="€2-4k/month"
+                    duration="6 to 12 months"
+                    summary="Ongoing support for evolutions, new perils, new geographies."
+                    bullets={[
+                        "2 to 4 days per month guaranteed",
+                        "Priority access for new perils & geographies",
+                        "Shared Slack with <72h response time",
+                        "Monthly strategic session (60 min)",
+                        "Quarterly architecture review",
+                        "On-demand work on next perils & geographies",
+                    ]}
+                    ctaLabel="Discuss retainer"
+                    ctaHref="https://calendly.com/skaraz_data/15-minute-meeting"
+                />
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6 — GUARANTEE -->
+    <section class="guarantee" aria-labelledby="guarantee-title">
+        <div class="guarantee__inner">
+            <h2 id="guarantee-title">Code Quality Guarantee</h2>
+            <p class="guarantee__statement">
+                Any major bug in production on code I shipped, within 30 days of handover — I fix it for free. No questions.
             </p>
-            <div class="hero-actions">
-                <a href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" class="btn-primary">Book a Free Discovery Call &rarr;</a>
-                <a href={`${base}projects`} class="btn-secondary">See My Work</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item"><span class="stat-number">7+</span><span class="stat-label">Years of Experience</span></div>
-                <div class="stat-item"><span class="stat-number">Ph.D.</span><span class="stat-label">Marine Ecology</span></div>
-                <div class="stat-item"><span class="stat-number">6</span><span class="stat-label">Peer-Reviewed Papers</span></div>
-                <div class="stat-item"><span class="stat-number">2</span><span class="stat-label">CRAN Packages</span></div>
-            </div>
+            <p class="guarantee__definition">
+                Major bug = any malfunction preventing the pipeline from producing expected outputs, or producing reproducibly incorrect outputs.
+            </p>
         </div>
-        <div class="hero-visual">
-            <img src={`${base}portrait.jpg`} alt="Stéphane Karasiewicz — Freelance Senior Data Scientist specializing in climate risk and ML" class="hero-portrait">
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- TRUST BAR -->
-<div class="trust-bar">
-    <div class="trust-inner">
-        <div class="trust-label">Trusted by research & industry</div>
-        <div class="trust-items">
-            <div class="trust-logo-only"><img src={`${base}ifremer-logo.png`} alt="IFREMER — French Institute for Ocean Science" class="trust-logo"></div>
-            <div class="trust-logo-only"><img src={`${base}raincoat-logo.png`} alt="Raincoat LLC — Climate risk technology company" class="trust-logo"></div>
-            <div class="trust-item">&#128230; <strong>12+ ML Projects</strong> — Delivered freelance</div>
-            <div class="trust-item">&#128202; <strong>8,000+</strong> — CRAN Downloads</div>
-        </div>
-    </div>
-</div>
+    <!-- SECTION 7 — TESTIMONIALS -->
+    <section class="testimonials" aria-labelledby="testimonials-title">
+        <div class="testimonials__inner">
+            <h2 id="testimonials-title">What clients say</h2>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-    <div class="section-container">
-        <div class="section-label reveal">What I Do</div>
-        <h2 class="section-title reveal">Data science services that<br>move your business forward</h2>
-        <p class="section-desc reveal">I don't just build models — I deliver business outcomes. Every project starts with your goals and ends with measurable impact.</p>
-        <div class="section-label reveal" style="margin-top: 2.5rem; margin-bottom: 1rem;">Core Expertise</div>
-        <div class="services-grid services-grid-core">
-            <div class="service-card service-card-core reveal">
-                <div class="service-badge">Core Expertise</div>
-                <div class="service-icon">&#127757;</div>
-                <h3>Environmental & Geospatial Analytics</h3>
-                <p>Satellite data analysis, climate risk modeling, ESG reporting, and environmental monitoring. 2TB+ satellite data management experience.</p>
-                <div class="service-tags"><span>MODIS</span><span>Sentinel</span><span>NetCDF</span><span>Risk Assessment</span></div>
-            </div>
-            <div class="service-card service-card-core reveal">
-                <div class="service-badge">Core Expertise</div>
-                <div class="service-icon">&#128200;</div>
-                <h3>Time-Series Modeling & Forecasting</h3>
-                <p>Demand forecasting, anomaly detection, and predictive analytics. Full lifecycle from preprocessing to production deployment with LSTM, XGBoost, and Prophet.</p>
-                <div class="service-tags"><span>XGBoost</span><span>LSTM</span><span>Prophet</span><span>scikit-learn</span></div>
-            </div>
-            <div class="service-card service-card-core reveal">
-                <div class="service-badge">Core Expertise</div>
-                <div class="service-icon">&#128202;</div>
-                <h3>Interactive Dashboards & BI</h3>
-                <p>Interactive analytics dashboards with country-level maps, KPI tracking, and real-time monitoring. 5+ production dashboards delivered.</p>
-                <div class="service-tags"><span>Dash</span><span>Streamlit</span><span>Plotly</span><span>Shiny</span></div>
-            </div>
-        </div>
-        <div class="section-label reveal" style="margin-top: 3rem; margin-bottom: 1rem;">Also Available</div>
-        <div class="services-grid">
-            <div class="service-card reveal">
-                <div class="service-icon">&#9881;&#65039;</div>
-                <h3>MLOps & Data Pipelines</h3>
-                <p>End-to-end ML infrastructure: automated training, CI/CD, Docker containerization, cloud deployment, and ETL pipelines at scale.</p>
-                <div class="service-tags"><span>Docker</span><span>CI/CD</span><span>PostgreSQL</span><span>REST APIs</span></div>
-            </div>
-            <div class="service-card reveal">
-                <div class="service-icon">&#128300;</div>
-                <h3>Statistical Consulting & R Packages</h3>
-                <p>Advanced multivariate analysis, time-series modeling, and custom R package development. Published author on CRAN.</p>
-                <div class="service-tags"><span>PCA</span><span>Time-Series</span><span>Niche Modeling</span><span>CRAN</span></div>
-            </div>
-            <div class="service-card reveal">
-                <div class="service-icon">&#129302;</div>
-                <h3>NLP & Computer Vision</h3>
-                <p>Text classification, document extraction, image recognition using state-of-the-art transformer and CNN architectures.</p>
-                <div class="service-tags"><span>PyTorch</span><span>Transformers</span><span>CNN</span><span>LLMs</span></div>
-            </div>
-        </div>
-    </div>
-</section>
+            <div class="testimonials__grid">
+                <Testimonial
+                    quote="Steph is a seriously talented engineer with a rare combination of skills. He’s just as comfortable building scientific algorithms and doing deep data analysis as he is shipping polished frontend dashboards — and he does all of it at a high level. What stood out most was how independently he operated: you could hand him a complex project and trust him to run with it, communicate clearly along the way, and deliver something that genuinely moved the needle for the company. I’d recommend him to anyone in a heartbeat."
+                    highlight="rare combination of skills"
+                    name="Jan Paral"
+                    role="Head of R&D and Co-Founder"
+                    company="Raincoat LLC"
+                    logoSrc="/raincoat-logo.png"
+                    logoAlt="Raincoat LLC — Climate risk technology"
+                    featured={true}
+                />
 
-<!-- TECH STACK -->
-<section id="techstack">
-    <div class="section-container">
-        <div class="section-label reveal">Tech Stack</div>
-        <h2 class="section-title reveal">Tools & Technologies</h2>
-        <div class="techstack-tags reveal">
-            <span>Python</span><span>R</span><span>scikit-learn</span><span>XGBoost</span>
-            <span>TensorFlow</span><span>PyTorch</span><span>Dash</span><span>Streamlit</span>
-            <span>Plotly</span><span>Shiny</span><span>Docker</span><span>PostgreSQL</span>
-            <span>NetCDF</span><span>MODIS</span><span>Sentinel</span><span>Airflow</span>
-            <span>FastAPI</span><span>Git</span><span>GitHub Actions</span><span>Pandas</span>
-            <span>NumPy</span>
-        </div>
-    </div>
-</section>
+                <Testimonial
+                    quote="His coding skills are unparalleled, producing efficient and well-documented codes. His ability to translate our needs is exemplary, and he excels in proposing innovative solutions that go beyond the initial objectives. Stéphane embodies excellence and will be an invaluable asset to any organization."
+                    name="Kelig Mahé"
+                    role="Head of Unit, Fisheries Resources — Channel & North Sea"
+                    company="IFREMER"
+                    logoSrc="/ifremer-logo.png"
+                    logoAlt="IFREMER — French Institute for Ocean Science"
+                />
 
-<!-- EXPERIENCE -->
-<section id="experience">
-    <div class="section-container">
-        <div class="section-label reveal">Career Path</div>
-        <h2 class="section-title reveal">From research to production</h2>
-        <p class="section-desc reveal">A track record spanning marine research, freelance consulting, and industry ML engineering.</p>
-        <div class="timeline reveal">
-            <div class="tl-item current tl-merge tl-left">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Present</div>
-                <div class="tl-role">Freelance Senior Data Scientist</div>
-                <div class="tl-company">Self-employed — Available for new projects</div>
+                <Testimonial
+                    quote="I worked with Stéphane at the beginning of my PhD, and I am still grateful — without his recommendations I would work and troubleshoot much less efficiently. He always takes time to explain, and never loses his sense of humor even after the nth error message."
+                    name="Carolin Neven"
+                    role="Ph.D. Student"
+                    company="IFREMER"
+                    logoSrc="/ifremer-logo.png"
+                    logoAlt="IFREMER — French Institute for Ocean Science"
+                />
             </div>
-            <div class="tl-item tl-branch-item">
-                <svg class="tl-curve tl-curve-out" viewBox="0 0 62 80" fill="none" preserveAspectRatio="none"><path d="M 1 0 C 1 40, 61 40, 61 80" stroke="#A855F7" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
-                <svg class="tl-curve tl-curve-in" viewBox="0 0 62 80" fill="none" preserveAspectRatio="none"><path d="M 61 0 C 61 40, 1 40, 1 80" stroke="#A855F7" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
-                <div class="tl-main-dots">
-                    <span style="top: 5%"></span>
-                    <span style="top: 18%"></span>
-                    <span style="top: 28%"></span>
-                    <span style="top: 42%"></span>
-                    <span style="top: 58%"></span>
-                    <span style="top: 73%"></span>
-                    <span style="top: 90%"></span>
+        </div>
+    </section>
+
+    <!-- SECTION 8 — FINAL CTA -->
+    <section class="final-cta" aria-labelledby="final-cta-title">
+        <div class="final-cta__inner">
+            <h2 id="final-cta-title">Ready to ship that next peril?</h2>
+            <p class="final-cta__intro">Two ways to start:</p>
+
+            <div class="final-cta__options">
+                <div class="final-cta__option">
+                    <h3>1. Get the free Reality Check PDF</h3>
+                    <p>5 lessons from industrializing pipelines across 10+ countries, plus the 12-point checklist I use on every mission. No call, no pitch — just useful content.</p>
+                    <LinkedInDMButton variant="primary" label="Send “reality” on LinkedIn →" />
                 </div>
-                <div class="tl-mission-label"><span class="tl-role">Short Freelance Missions</span><span class="tl-company">from 2 to 30 days</span></div>
-                <div class="tl-dot"></div>
-                <div class="tl-date">Feb 2024 — Jan 2026</div>
-                <div class="tl-role">Senior Data Scientist</div>
-                <div class="tl-company"><img src={`${base}raincoat-logo.png`} alt="Raincoat LLC — Climate risk technology" class="tl-logo tl-logo-sm" loading="lazy"> — Data Science Team</div>
-                <ul class="tl-highlights">
-                    <li>ML infrastructure for peril risk assessment</li>
-                    <li>Engineered end-to-end ML pipeline</li>
-                    <li>3 interactive dashboards with country-level maps</li>
-                    <li>Automated data management for 2TB+ satellite data</li>
-                </ul>
-            </div>
-            <div class="tl-item tl-fork tl-left">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Jul 2023 — Feb 2024</div>
-                <div class="tl-role">Freelance Data Scientist</div>
-                <div class="tl-company">Self-employed — 12+ ML Projects Delivered</div>
-                <ul class="tl-highlights">
-                    <li>Customer churn models (XGBoost), price forecasting (LSTM)</li>
-                    <li>Full ML lifecycle: preprocessing to deployment</li>
-                </ul>
-            </div>
-            <div class="tl-item">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Aug 2022 — Jul 2023</div>
-                <div class="tl-role">Data Scientist Certification</div>
-                <div class="tl-company"><img src={`${base}openclassrooms-logo.png`} alt="OpenClassrooms — Online education platform" class="tl-logo tl-logo-lg" loading="lazy"> — 400+ hour program</div>
-                <ul class="tl-highlights">
-                    <li>10 projects: regression, classification, clustering, NLP, CV</li>
-                    <li>Deployed 3 ML models via REST APIs with CI/CD</li>
-                    <li>Interactive dashboards with Streamlit and Dash</li>
-                </ul>
-            </div>
-            <div class="tl-item tl-left">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Oct 2021 — Mar 2022</div>
-                <div class="tl-role">Research Engineer</div>
-                <div class="tl-company"><img src={`${base}ifremer-logo.png`} alt="IFREMER — French Institute for Ocean Science" class="tl-logo" loading="lazy"> Boulogne-sur-Mer</div>
-                <ul class="tl-highlights">
-                    <li>Automated 500GB+ data extraction — saved 50h/month</li>
-                    <li>70% computation time reduction via script optimization</li>
-                    <li>Mentored 4 researchers in R, reproducible research</li>
-                </ul>
-            </div>
-            <div class="tl-item">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Sep 2020 — Sep 2021</div>
-                <div class="tl-role">Postdoctoral Researcher</div>
-                <div class="tl-company"><img src={`${base}ifremer-logo.png`} alt="IFREMER — French Institute for Ocean Science" class="tl-logo" loading="lazy"> Boulogne-sur-Mer</div>
-                <ul class="tl-highlights">
-                    <li>Bloom detection algorithm on 10+ years satellite data</li>
-                    <li>50,000+ km&sup2; coastal analysis (MODIS, Sentinel)</li>
-                    <li>Published BDAlgo R package on CRAN</li>
-                    <li>2 peer-reviewed publications, 1 dataset</li>
-                </ul>
-            </div>
-            <div class="tl-item tl-left">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Sep 2019 — Sep 2020</div>
-                <div class="tl-role">Freelance Data Scientist</div>
-                <div class="tl-company">Data analysis & translation</div>
-                <ul class="tl-highlights">
-                    <li>Statistical consulting and data visualization for 15+ clients</li>
-                    <li>Script optimization: 40-60% performance gains</li>
-                </ul>
-            </div>
-            <div class="tl-item">
-                <div class="tl-dot"></div>
-                <div class="tl-date">Feb 2018 — Jul 2019</div>
-                <div class="tl-role">Postdoctoral Researcher</div>
-                <div class="tl-company"><img src={`${base}ifremer-logo.png`} alt="IFREMER — French Institute for Ocean Science" class="tl-logo" loading="lazy"> Centre Brest</div>
-                <ul class="tl-highlights">
-                    <li>Analyzed 15+ years satellite data (1TB+)</li>
-                    <li>Multivariate techniques (PCA, niche modeling)</li>
-                    <li>Mentored 2 Master's students</li>
-                    <li>2 first-author papers, 1 dataset</li>
-                </ul>
-            </div>
-            <div class="tl-item tl-left">
-                <div class="tl-dot"></div>
-                <div class="tl-date">2014 — 2017</div>
-                <div class="tl-role">Ph.D. in Marine Ecology</div>
-                <div class="tl-company">Universit&eacute; de Lille — Phytoplankton & Global Change</div>
-                <ul class="tl-highlights">
-                    <li>Novel statistical framework (WitOMI) for niche shifts</li>
-                    <li>Analyzed 20+ years monitoring data (10M+ records)</li>
-                    <li>3 first-author papers, 2 CRAN packages (subniche)</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- PORTFOLIO -->
-<section class="portfolio" id="portfolio">
-    <div class="section-container">
-        <div class="section-label reveal">Selected Work</div>
-        <h2 class="section-title reveal">Projects with measurable outcomes</h2>
-        <p class="section-desc reveal">Real deliverables, real impact — not just notebooks.</p>
-        <div class="portfolio-grid">
-            {featured.map(p => <ProjectCard project={p} />)}
-        </div>
-        <a href={`${base}projects/case-study-raincoat`} class="cs-banner reveal">
-            <div class="cs-banner-label">Featured Case Study</div>
-            <h3>Climate Risk Data Infrastructure at Raincoat LLC</h3>
-            <p>End-to-end ML pipeline, 3 interactive dashboards, and automated satellite data management for parametric insurance — serving 10+ countries.</p>
-            <span class="cs-banner-arrow">Read the full case study &rarr;</span>
-        </a>
-        <div style="text-align: center; margin-top: 2.5rem;">
-            <a href={`${base}projects`} class="btn-primary">See All Projects &rarr;</a>
-        </div>
-    </div>
-</section>
-
-<!-- PUBLICATIONS -->
-<section id="publications">
-    <div class="section-container">
-        <div class="section-label reveal">Open Source & Research</div>
-        <h2 class="section-title reveal">Published, peer-reviewed, open source</h2>
-        <p class="section-desc reveal">Contributing to science and the data community through packages and publications.</p>
-        <div class="pub-grid">
-            <a href="https://cran.r-project.org/web/packages/BDAlgo/index.html" target="_blank" class="pub-card reveal">
-                <div class="pub-type">CRAN Package</div>
-                <h4>BDAlgo — Bloom Detection Algorithm</h4>
-                <p class="pub-meta">Time-series bloom detection extracting 22 phenological variables</p>
-                <div class="pub-stats"><span>3,000+ downloads</span><span>12+ citations</span></div>
-            </a>
-            <a href="https://cran.r-project.org/web/packages/subniche/index.html" target="_blank" class="pub-card reveal">
-                <div class="pub-type">CRAN Package</div>
-                <h4>subniche — Ecological Niche Modeling</h4>
-                <p class="pub-meta">Statistical package for OMI framework niche analysis</p>
-                <div class="pub-stats"><span>5,000+ downloads</span><span>15+ citations</span></div>
-            </a>
-            <a href="https://doi.org/10.3390/jmse10020174" target="_blank" class="pub-card reveal">
-                <div class="pub-type">Publication</div>
-                <h4>Environmental Impact on Harmful Species</h4>
-                <p class="pub-meta">J. Marine Science & Engineering, 2022</p>
-            </a>
-            <a href="https://doi.org/10.1016/j.hal.2020.101785" target="_blank" class="pub-card reveal">
-                <div class="pub-type">Publication</div>
-                <h4>Harmful Algae Niche Responses</h4>
-                <p class="pub-meta">Harmful Algae, 2020</p>
-            </a>
-            <a href="https://doi.org/10.1016/j.hal.2017.12.005" target="_blank" class="pub-card reveal">
-                <div class="pub-type">Publication</div>
-                <h4>Realized Niche Analysis of Phytoplankton</h4>
-                <p class="pub-meta">Harmful Algae, 2018</p>
-            </a>
-            <a href="https://doi.org/10.7717/peerj.3364" target="_blank" class="pub-card reveal">
-                <div class="pub-type">Publication</div>
-                <h4>Within Outlying Mean Indexes</h4>
-                <p class="pub-meta">PeerJ, 2017</p>
-            </a>
-            <a href="https://doi.org/10.17882/85097" target="_blank" class="pub-card reveal">
-                <div class="pub-type">Dataset</div>
-                <h4>Environmental Impact on Harmful Species</h4>
-                <p class="pub-meta">SEANOE, 2021</p>
-            </a>
-            <a href="https://doi.org/10.17882/69703" target="_blank" class="pub-card reveal">
-                <div class="pub-type">Dataset</div>
-                <h4>Harmful Algae Niche Responses</h4>
-                <p class="pub-meta">SEANOE, 2019</p>
-            </a>
-            <a href="https://doi.org/10.1016/j.hal.2021.102010" target="_blank" class="pub-card reveal">
-                <div class="pub-type">Co-author</div>
-                <h4>Harmful Algal Blooms Dynamics</h4>
-                <p class="pub-meta">Harmful Algae, 2021</p>
-            </a>
-            <a href="https://doi.org/10.1016/j.ecss.2020.107161" target="_blank" class="pub-card reveal">
-                <div class="pub-type">Co-author</div>
-                <h4>Estuarine & Coastal Shelf Science</h4>
-                <p class="pub-meta">Estuarine, Coastal and Shelf Science, 2021</p>
-            </a>
-            <a href="https://doi.org/10.1002/eco.2150" target="_blank" class="pub-card reveal">
-                <div class="pub-type">Co-author</div>
-                <h4>Ecohydrology &amp; Aquatic Ecosystems</h4>
-                <p class="pub-meta">Ecohydrology, 2019</p>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-    <div class="section-container">
-        <div class="section-label reveal">What Clients Say</div>
-        <h2 class="section-title reveal">Trusted by researchers & engineers</h2>
-        <div class="testimonials-grid">
-            <div class="testimonial-card reveal">
-                <div class="testimonial-quote">&ldquo;His coding skills are unparalleled, producing efficient and well-documented codes. His ability to translate our needs is exemplary, and he excels in proposing innovative solutions that go beyond the initial objectives. St&eacute;phane embodies excellence and will be an invaluable asset to any organization.&rdquo;</div>
-                <div class="testimonial-author">
-                    <strong>Kelig Mah&eacute;</strong>
-                    <span>Head of Unit, Fisheries Resources — Channel & North Sea</span>
-                    <img src={`${base}ifremer-logo.png`} alt="IFREMER — French Institute for Ocean Science" class="testimonial-logo" loading="lazy">
-                </div>
-            </div>
-            <div class="testimonial-card reveal">
-                <div class="testimonial-quote">&ldquo;I worked with St&eacute;phane at the beginning of my PhD, and I am still grateful — without his recommendations I would work and troubleshoot much less efficiently. He always takes time to explain, and never loses his sense of humor even after the nth error message.&rdquo;</div>
-                <div class="testimonial-author">
-                    <strong>Carolin Neven</strong>
-                    <span>Ph.D. Student</span>
-                    <img src={`${base}ifremer-logo.png`} alt="IFREMER — French Institute for Ocean Science" class="testimonial-logo" loading="lazy">
-                </div>
-            </div>
-            <div class="testimonial-card reveal">
-                <div class="testimonial-quote">&ldquo;Steph is a seriously talented engineer with a rare combination of skills. He&rsquo;s just as comfortable building scientific algorithms and doing deep data analysis as he is shipping polished frontend dashboards &mdash; and he does all of it at a high level. What stood out most was how independently he operated: you could hand him a complex project and trust him to run with it, communicate clearly along the way, and deliver something that genuinely moved the needle for the company. I&rsquo;d recommend him to anyone in a heartbeat.&rdquo;</div>
-                <div class="testimonial-author">
-                    <strong>Jan Paral</strong>
-                    <span>Head of R&amp;D and Co-Founder</span>
-                    <img src={`${base}raincoat-logo.png`} alt="Raincoat LLC — Climate risk technology" class="testimonial-logo testimonial-logo-sm" loading="lazy">
+                <div class="final-cta__option">
+                    <h3>2. Book a Discovery Call</h3>
+                    <p>15 min, free, to see if a fixed Discovery mission (€5-7k, 2 weeks) makes sense for your context.</p>
+                    <a
+                        class="final-cta__secondary"
+                        href="https://calendly.com/skaraz_data/15-minute-meeting"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >Book a Call <span aria-hidden="true">→</span></a>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- PROCESS -->
-<section id="process" style="background:var(--bg-secondary);">
-    <div class="section-container">
-        <div class="section-label reveal">How I Work</div>
-        <h2 class="section-title reveal">From question to solution</h2>
-        <div class="process-steps">
-            <div class="step reveal">
-                <div class="step-number">01</div>
-                <h3>Discovery Call</h3>
-                <p>We discuss your data, goals and constraints. Free, 15 min, no commitment.</p>
-            </div>
-            <div class="step reveal">
-                <div class="step-number">02</div>
-                <h3>Scoping & Proposal</h3>
-                <p>Clear approach, timeline, deliverables, and pricing — fixed or time-and-materials.</p>
-            </div>
-            <div class="step reveal">
-                <div class="step-number">03</div>
-                <h3>Build & Iterate</h3>
-                <p>Weekly check-ins, shared repos, transparent progress. You're never in the dark.</p>
-            </div>
-            <div class="step reveal">
-                <div class="step-number">04</div>
-                <h3>Deliver & Support</h3>
-                <p>Polished deliverables, documentation, and handoff support to your team.</p>
-            </div>
-        </div>
-        <div class="engagement-info reveal">
-            Typical missions: 2–30 days | Daily rate: on request | Fixed-price or time-and-materials | Remote worldwide, timezone-flexible for EU & US
-        </div>
-    </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section" id="contact">
-    <div class="cta-box reveal">
-        <h2>Let's talk about your data</h2>
-        <p>Book a free 15-minute discovery call. No pitch, no pressure — just an honest conversation about how data science can help your business.</p>
-        <a href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" class="btn-primary">Book a Discovery Call &rarr;</a>
-        <a href="mailto:skaraz.science@gmail.com" class="btn-secondary" style="margin-left: 0.8rem;">Email Me</a>
-        <a href={`${base}cv-stephane-karasiewicz.pdf`} class="btn-secondary" style="margin-left: 0.8rem;" target="_blank">Download CV</a>
-        <div class="cta-details">
-            <span>&#128205; Boulogne-sur-Mer, France</span>
-            <span>&#127760; Working remotely worldwide</span>
-            <span>&#127467;&#127479;&#127468;&#127463; French & English native</span>
-            <span>&#9889; Response &lt; 24h</span>
-        </div>
-    </div>
-</section>
-
+    </div><!-- /.page-light -->
 </BaseLayout>
+
+<style>
+    /* =========================================================
+       PAGE WRAPPER — interim light-theme container.
+       Will be removed in Étape 6 when global.css is rewritten.
+       ========================================================= */
+    .page-light {
+        background: #ffffff;
+        color: #0f1b2c;
+    }
+
+    /* =========================================================
+       SECTION 1 — HERO
+       ========================================================= */
+    .hero {
+        background: #ffffff;
+        /* Override interim global.css rules that still apply:
+           min-height: 100vh + display:flex + align-items:center
+           force the hero to be 1 viewport tall and vertically center its
+           content. Will be cleaned up in Étape 6 (global.css refonte). */
+        min-height: auto;
+        display: block;
+        padding: 6rem 2rem 5rem;
+        position: relative;
+    }
+
+    .hero__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    @media (min-width: 960px) {
+        .hero__inner {
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 4rem;
+        }
+    }
+
+    .hero__content {
+        min-width: 0;
+    }
+
+    .hero__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #d85a30;
+        background: rgba(216, 90, 48, 0.08);
+        border: 1px solid rgba(216, 90, 48, 0.22);
+        padding: 0.4rem 0.95rem;
+        border-radius: 100px;
+        margin-bottom: 1.75rem;
+    }
+
+    .hero__badge::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background: #d85a30;
+        border-radius: 50%;
+        animation: hero-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes hero-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(2.4rem, 5vw, 3.8rem);
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #0f1b2c;
+        margin: 0 0 1.5rem;
+    }
+
+    .hero h1 em {
+        font-style: italic;
+        color: #d85a30;
+    }
+
+    .hero__subtitle {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #4a5a70;
+        max-width: 640px;
+        margin: 0 0 1rem;
+    }
+
+    .hero__credibility {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #7a8aa0;
+        margin: 0 0 2rem;
+    }
+
+    .hero__cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        align-items: center;
+    }
+
+    .hero__cta-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.9rem 1.5rem;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 500;
+        line-height: 1.3;
+        color: #0f1b2c;
+        background: transparent;
+        border: 1.5px solid rgba(15, 27, 44, 0.22);
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.2s, color 0.2s, transform 0.15s,
+            box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .hero__cta-secondary:hover {
+        background: #0f1b2c;
+        color: #ffffff;
+        border-color: #0f1b2c;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(15, 27, 44, 0.12);
+    }
+
+    .hero__visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        isolation: isolate;
+    }
+
+    /* Soft decorative halo behind the portrait — option (c) via radial-gradient */
+    .hero__visual::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 380px;
+        height: 380px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+            circle,
+            rgba(15, 27, 44, 0.06) 0%,
+            rgba(15, 27, 44, 0) 70%
+        );
+        border-radius: 50%;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .hero__portrait {
+        width: 100%;
+        max-width: 320px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center top;
+        border: 4px solid #ffffff;
+        /* Ring coral 0.4 (option a) + drop shadow */
+        box-shadow:
+            0 0 0 1.5px rgba(216, 90, 48, 0.4),
+            0 20px 50px rgba(15, 27, 44, 0.1);
+    }
+
+    @media (max-width: 640px) {
+        .hero {
+            padding: 3.5rem 1.25rem 3.5rem;
+        }
+        .hero__portrait {
+            max-width: 220px;
+        }
+        .hero__visual::before {
+            width: 280px;
+            height: 280px;
+        }
+    }
+
+    /* =========================================================
+       SECTION 3 — PROBLEM
+       ========================================================= */
+    .problem {
+        background: #ffffff;
+        padding: 5.5rem 2rem;
+    }
+
+    .problem__inner {
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
+    .problem h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: #0f1b2c;
+        margin: 0 0 2rem;
+    }
+
+    .problem__body p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #4a5a70;
+        margin: 0 0 1.25rem;
+    }
+
+    .problem__body p:last-child {
+        margin-bottom: 0;
+    }
+
+    .problem__body strong {
+        font-weight: 600;
+        color: #0f1b2c;
+    }
+
+    @media (max-width: 640px) {
+        .problem {
+            padding: 3.5rem 1.25rem;
+        }
+        .problem__body p {
+            font-size: 1rem;
+        }
+    }
+
+    /* =========================================================
+       SECTION 4 — SOLUTION
+       ========================================================= */
+    .solution {
+        background: #f7f8fa;
+        padding: 5.5rem 2rem;
+    }
+
+    .solution__inner {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .solution h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: #0f1b2c;
+        margin: 0 0 2rem;
+    }
+
+    .solution__body {
+        max-width: 760px;
+    }
+
+    .solution__body p {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #4a5a70;
+        margin: 0 0 1.25rem;
+    }
+
+    .solution__body p:last-child {
+        margin-bottom: 0;
+    }
+
+    .solution__body strong {
+        font-weight: 600;
+        color: #0f1b2c;
+    }
+
+    .solution__pillars {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        margin-top: 3.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .solution__pillars {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .pillar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.85rem;
+    }
+
+    .pillar__icon {
+        width: 44px;
+        height: 44px;
+        color: #d85a30;
+        flex: 0 0 auto;
+    }
+
+    .pillar__title {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.35rem;
+        font-weight: 400;
+        line-height: 1.25;
+        letter-spacing: -0.005em;
+        color: #0f1b2c;
+        margin: 0;
+    }
+
+    .pillar__body {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #4a5a70;
+        margin: 0;
+    }
+
+    @media (max-width: 640px) {
+        .solution {
+            padding: 3.5rem 1.25rem;
+        }
+        .solution__body p {
+            font-size: 1rem;
+        }
+    }
+
+    /* =========================================================
+       SECTION 5 — OFFER
+       ========================================================= */
+    .offer {
+        background: #ffffff;
+        padding: 5.5rem 2rem;
+    }
+
+    .offer__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .offer h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: #0f1b2c;
+        margin: 0 0 2.5rem;
+    }
+
+    .offer__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        align-items: stretch;
+        /* Reserve room for the "Most popular" badge that overflows above the featured card */
+        padding-top: 0.75rem;
+    }
+
+    @media (min-width: 880px) {
+        .offer__grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .offer {
+            padding: 3.5rem 1.25rem;
+        }
+    }
+
+    /* =========================================================
+       SECTION 6 — GUARANTEE
+       ========================================================= */
+    .guarantee {
+        background: #f7f8fa;
+        padding: 5.5rem 2rem;
+    }
+
+    .guarantee__inner {
+        max-width: 720px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .guarantee h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: #0f1b2c;
+        margin: 0 0 1.75rem;
+    }
+
+    .guarantee__statement {
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 1.55;
+        color: #0f1b2c;
+        margin: 0 auto 1.5rem;
+        max-width: 620px;
+    }
+
+    .guarantee__definition {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: #7a8aa0;
+        margin: 0 auto;
+        max-width: 580px;
+    }
+
+    @media (max-width: 640px) {
+        .guarantee {
+            padding: 3.5rem 1.25rem;
+        }
+        .guarantee__statement {
+            font-size: 1.1rem;
+        }
+    }
+
+    /* =========================================================
+       SECTION 7 — TESTIMONIALS
+       ========================================================= */
+    .testimonials {
+        background: #ffffff;
+        padding: 5.5rem 2rem;
+    }
+
+    .testimonials__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .testimonials h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: #0f1b2c;
+        margin: 0 0 2.5rem;
+    }
+
+    .testimonials__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        align-items: stretch;
+    }
+
+    @media (min-width: 880px) {
+        .testimonials__grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .testimonials {
+            padding: 3.5rem 1.25rem;
+        }
+    }
+
+    /* =========================================================
+       SECTION 8 — FINAL CTA
+       ========================================================= */
+    .final-cta {
+        background: #042c53;
+        color: #ffffff;
+        padding: 6rem 2rem;
+    }
+
+    .final-cta__inner {
+        max-width: 960px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .final-cta h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #ffffff;
+        margin: 0 0 0.75rem;
+    }
+
+    .final-cta__intro {
+        font-size: 1.05rem;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0 0 3rem;
+    }
+
+    .final-cta__options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: left;
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+        .final-cta__options {
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+    }
+
+    .final-cta__option {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.85rem;
+    }
+
+    .final-cta__option h3 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.35rem;
+        font-weight: 400;
+        line-height: 1.25;
+        letter-spacing: -0.005em;
+        color: #ffffff;
+        margin: 0;
+    }
+
+    .final-cta__option p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.8);
+        margin: 0 0 0.5rem;
+    }
+
+    .final-cta__secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.9rem 1.5rem;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 500;
+        line-height: 1.3;
+        color: #ffffff;
+        background: transparent;
+        border: 1.5px solid rgba(255, 255, 255, 0.4);
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.2s, color 0.2s, transform 0.15s,
+            box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .final-cta__secondary:hover {
+        background: #ffffff;
+        color: #042c53;
+        border-color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(255, 255, 255, 0.12);
+    }
+
+    @media (max-width: 640px) {
+        .final-cta {
+            padding: 4rem 1.25rem;
+        }
+        .final-cta__intro {
+            margin-bottom: 2.25rem;
+        }
+    }
+</style>

@@ -1,0 +1,140 @@
+---
+// No props for now — fixed content for the homepage trust bar.
+---
+
+<section class="trust-logos" aria-label="Trusted by research and industry">
+    <p class="trust-logos__label">Trusted by research &amp; industry</p>
+
+    <div class="trust-logos__row">
+        <img
+            src="/raincoat-logo.png"
+            alt="Raincoat LLC — Climate risk technology"
+            class="trust-logos__logo"
+            loading="lazy"
+        />
+        <img
+            src="/ifremer-logo.png"
+            alt="IFREMER — French Institute for Ocean Science"
+            class="trust-logos__logo"
+            loading="lazy"
+        />
+    </div>
+
+    <ul class="trust-logos__stats">
+        <li><strong>10+</strong> countries served at Raincoat</li>
+        <li><strong>2+</strong> years operating production climate pipelines</li>
+        <li><strong>6</strong> peer-reviewed publications</li>
+    </ul>
+</section>
+
+<style>
+    .trust-logos {
+        --tl-text: #0f1b2c;
+        --tl-text-soft: #4a5a70;
+        --tl-text-muted: #7a8aa0;
+
+        padding: 3.5rem 2rem;
+        background: #f7f8fa;
+        text-align: center;
+        color: var(--tl-text);
+    }
+
+    .trust-logos__label {
+        font-size: 0.78rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--tl-text-muted);
+        margin: 0 0 1.5rem;
+    }
+
+    .trust-logos__row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 3.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .trust-logos__logo {
+        height: 56px;
+        width: auto;
+        max-width: 200px;
+        object-fit: contain;
+        opacity: 0.85;
+        transition: opacity 0.2s ease;
+    }
+
+    .trust-logos__logo:hover {
+        opacity: 1;
+    }
+
+    .trust-logos__stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem 2.25rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.92rem;
+        color: var(--tl-text-soft);
+    }
+
+    .trust-logos__stats li {
+        position: relative;
+        padding-right: 2.25rem;
+    }
+
+    .trust-logos__stats li:not(:last-child)::after {
+        content: '·';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(50%, -50%);
+        color: var(--tl-text-muted);
+        opacity: 0.6;
+        font-size: 1rem;
+    }
+
+    .trust-logos__stats li:last-child {
+        padding-right: 0;
+    }
+
+    .trust-logos__stats strong {
+        font-weight: 600;
+        color: var(--tl-text);
+        margin-right: 0.3rem;
+    }
+
+    @media (max-width: 640px) {
+        .trust-logos {
+            padding: 2.5rem 1.25rem;
+        }
+
+        .trust-logos__row {
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .trust-logos__logo {
+            height: 44px;
+        }
+
+        .trust-logos__stats {
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: center;
+        }
+
+        .trust-logos__stats li {
+            padding-right: 0;
+        }
+
+        .trust-logos__stats li:not(:last-child)::after {
+            display: none;
+        }
+    }
+</style>

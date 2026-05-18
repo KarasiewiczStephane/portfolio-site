@@ -6,6 +6,7 @@ import '../styles/global.css';
 interface Props {
     title: string;
     description?: string;
+    ogDescription?: string;
     ogImage?: string;
     ogUrl?: string;
     ogType?: string;
@@ -20,13 +21,16 @@ interface Props {
 
 const {
     title,
-    description = "Stéphane Karasiewicz — Freelance Senior Data Scientist specializing in climate risk, geospatial analytics, and ML pipelines. 7+ years experience.",
+    description = "Senior data engineering for parametric insurance. Industrializing climate scoring pipelines. Ex-Raincoat. 15+ years satellite & reanalysis.",
+    ogDescription,
     ogImage = "https://skarazdata.com/portrait.jpg",
     ogUrl = Astro.url.href,
     ogType = "website",
     jsonLd,
     articleMeta,
 } = Astro.props;
+
+const ogDesc = ogDescription ?? description;
 
 const canonicalUrl = new URL(Astro.url.pathname, "https://skarazdata.com").href;
 ---
@@ -41,7 +45,7 @@ const canonicalUrl = new URL(Astro.url.pathname, "https://skarazdata.com").href;
 
     <!-- Open Graph -->
     <meta property="og:title" content={title}>
-    <meta property="og:description" content={description}>
+    <meta property="og:description" content={ogDesc}>
     <meta property="og:image" content={ogImage}>
     <meta property="og:url" content={canonicalUrl}>
     <meta property="og:type" content={ogType}>
@@ -60,7 +64,7 @@ const canonicalUrl = new URL(Astro.url.pathname, "https://skarazdata.com").href;
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content={title}>
-    <meta name="twitter:description" content={description}>
+    <meta name="twitter:description" content={ogDesc}>
     <meta name="twitter:image" content={ogImage}>
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

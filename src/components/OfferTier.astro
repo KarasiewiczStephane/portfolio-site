@@ -1,0 +1,223 @@
+---
+export interface Props {
+    number: string;
+    title: string;
+    price: string;
+    duration: string;
+    summary: string;
+    bullets: string[];
+    ctaLabel: string;
+    ctaHref: string;
+    featured?: boolean;
+}
+
+const {
+    number,
+    title,
+    price,
+    duration,
+    summary,
+    bullets,
+    ctaLabel,
+    ctaHref,
+    featured = false,
+} = Astro.props;
+---
+
+<article class:list={['offer-tier', { 'offer-tier--featured': featured }]}>
+    {featured && <span class="offer-tier__badge">Most popular</span>}
+
+    <header class="offer-tier__header">
+        <span class="offer-tier__number" aria-hidden="true">{number}</span>
+        <h3 class="offer-tier__title">{title}</h3>
+        <p class="offer-tier__price">
+            <strong>{price}</strong>
+            <span class="offer-tier__separator" aria-hidden="true">·</span>
+            <span class="offer-tier__duration">{duration}</span>
+        </p>
+    </header>
+
+    <p class="offer-tier__summary">{summary}</p>
+
+    <ul class="offer-tier__bullets">
+        {bullets.map((b) => <li>{b}</li>)}
+    </ul>
+
+    <a class="offer-tier__cta" href={ctaHref}>
+        {ctaLabel}
+        <span aria-hidden="true">→</span>
+    </a>
+</article>
+
+<style>
+    .offer-tier {
+        --tier-border: rgba(15, 27, 44, 0.12);
+        --tier-border-hover: rgba(15, 27, 44, 0.24);
+        --tier-bg: #ffffff;
+        --tier-text: #0f1b2c;
+        --tier-text-soft: #4a5a70;
+        --tier-accent: #d85a30;
+        --tier-shadow: 0 1px 2px rgba(15, 27, 44, 0.04);
+        --tier-shadow-hover: 0 12px 32px rgba(15, 27, 44, 0.08);
+
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background: var(--tier-bg);
+        color: var(--tier-text);
+        border: 1px solid var(--tier-border);
+        border-radius: 14px;
+        padding: 2rem 1.75rem;
+        box-shadow: var(--tier-shadow);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .offer-tier:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--tier-shadow-hover);
+        border-color: var(--tier-border-hover);
+    }
+
+    .offer-tier--featured {
+        border: 2px solid var(--tier-accent);
+        padding: 2rem 1.75rem;
+        box-shadow: 0 4px 16px rgba(216, 90, 48, 0.12);
+    }
+
+    .offer-tier--featured:hover {
+        box-shadow: 0 16px 40px rgba(216, 90, 48, 0.16);
+    }
+
+    .offer-tier__badge {
+        position: absolute;
+        top: -0.7rem;
+        left: 1.5rem;
+        background: var(--tier-accent);
+        color: #ffffff;
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 0.3rem 0.75rem;
+        border-radius: 100px;
+    }
+
+    .offer-tier__header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .offer-tier__number {
+        font-family: 'DM Serif Display', serif;
+        font-size: 0.95rem;
+        color: var(--tier-text-soft);
+        letter-spacing: 0.08em;
+    }
+
+    .offer-tier__number::before {
+        content: '0';
+    }
+
+    .offer-tier__title {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.5rem;
+        line-height: 1.2;
+        font-weight: 400;
+        margin: 0;
+        letter-spacing: -0.01em;
+    }
+
+    .offer-tier__price {
+        font-size: 0.95rem;
+        color: var(--tier-text-soft);
+        margin: 0.25rem 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.5rem;
+    }
+
+    .offer-tier__price strong {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--tier-text);
+    }
+
+    .offer-tier__separator {
+        opacity: 0.5;
+    }
+
+    .offer-tier__summary {
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: var(--tier-text-soft);
+        margin: 0 0 1.25rem;
+    }
+
+    .offer-tier__bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+        flex: 1;
+    }
+
+    .offer-tier__bullets li {
+        position: relative;
+        padding-left: 1.4rem;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        color: var(--tier-text);
+    }
+
+    .offer-tier__bullets li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.55rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        border: 1.5px solid var(--tier-accent);
+        border-bottom: none;
+        border-right: none;
+        transform: rotate(135deg);
+    }
+
+    .offer-tier__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        align-self: flex-start;
+        margin-top: auto;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.92rem;
+        font-weight: 500;
+        color: var(--tier-text);
+        background: transparent;
+        border: 1.5px solid var(--tier-border-hover);
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .offer-tier__cta:hover {
+        background: var(--tier-text);
+        color: #ffffff;
+        border-color: var(--tier-text);
+    }
+
+    .offer-tier--featured .offer-tier__cta {
+        background: var(--tier-accent);
+        color: #ffffff;
+        border-color: var(--tier-accent);
+    }
+
+    .offer-tier--featured .offer-tier__cta:hover {
+        background: #b9491f;
+        border-color: #b9491f;
+    }
+</style>
