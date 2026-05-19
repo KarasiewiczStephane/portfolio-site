@@ -17,6 +17,7 @@ interface Props {
         author: string;
         tags: string[];
     };
+    hideChrome?: boolean;
 }
 
 const {
@@ -28,6 +29,7 @@ const {
     ogType = "website",
     jsonLd,
     articleMeta,
+    hideChrome = false,
 } = Astro.props;
 
 const ogDesc = ogDescription ?? description;
@@ -79,12 +81,12 @@ const canonicalUrl = new URL(Astro.url.pathname, "https://skarazdata.com").href;
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Skip to content</a>
-    <Nav />
+    {!hideChrome && <a href="#main-content" class="skip-link">Skip to content</a>}
+    {!hideChrome && <Nav />}
     <main id="main-content">
         <slot />
     </main>
-    <Footer />
+    {!hideChrome && <Footer />}
     <script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, i) => {

@@ -1,0 +1,722 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://skarazdata.com/#person",
+            "name": "Stéphane Karasiewicz",
+            "url": "https://skarazdata.com",
+            "image": "https://skarazdata.com/portrait.jpg",
+            "jobTitle": "Climate Pipeline Partner · Senior Data Engineer for Parametric Insurance",
+            "description": "I help parametric insurers ship climate scoring pipelines in 8 to 16 weeks — bridging climate science and DevOps, without recruiting in-house.",
+            "email": "skaraz.science@gmail.com",
+            "worksFor": { "@type": "Organization", "name": "Skaraz Data" },
+            "alumniOf": [
+                { "@type": "EducationalOrganization", "name": "Université de Lille" },
+                { "@type": "EducationalOrganization", "name": "Stockholm University" },
+                { "@type": "EducationalOrganization", "name": "Open University" }
+            ],
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Outreau",
+                "addressRegion": "Hauts-de-France",
+                "addressCountry": "FR"
+            },
+            "sameAs": [
+                "https://www.linkedin.com/in/stephane-karasiewicz",
+                "https://github.com/KarasiewiczStephane",
+                "https://www.researchgate.net/profile/Stephane_Karasiewicz"
+            ]
+        },
+        {
+            "@type": "CreativeWork",
+            "@id": "https://skarazdata.com/cv",
+            "name": "CV — Stéphane Karasiewicz · Climate Pipeline Partner",
+            "description": "Senior Data Engineer for Parametric Insurance. 2+ years at Raincoat LLC, 15+ years satellite remote sensing at IFREMER. PhD Marine Ecology.",
+            "url": "https://skarazdata.com/cv",
+            "inLanguage": "en",
+            "author": { "@id": "https://skarazdata.com/#person" },
+            "about": { "@id": "https://skarazdata.com/#person" }
+        }
+    ]
+};
+---
+
+<BaseLayout
+    title="CV — Stéphane Karasiewicz · Climate Pipeline Partner"
+    description="Senior Data Engineer for Parametric Insurance. 2+ years at Raincoat LLC, 15+ years satellite remote sensing at IFREMER. PhD Marine Ecology."
+    ogType="profile"
+    jsonLd={jsonLd}
+    hideChrome={true}
+>
+    <div class="cv-page">
+        <div class="cv-backlink-wrap">
+            <a class="cv-backlink" href={base}>← Back to skarazdata.com</a>
+        </div>
+
+        <article class="cv">
+            <!-- HEADER -->
+            <header class="cv-header">
+                <div class="cv-header__text">
+                    <h1 class="cv-name">Stéphane Karasiewicz</h1>
+                    <p class="cv-title">Climate Pipeline Partner · Senior Data Engineer for Parametric Insurance</p>
+                    <p class="cv-location">Outreau, France · Remote worldwide · 🇫🇷🇬🇧 native</p>
+                    <p class="cv-contact">
+                        <a href="https://skarazdata.com">skarazdata.com</a>
+                        <span class="cv-sep">·</span>
+                        <a href="https://linkedin.com/in/stephane-karasiewicz">linkedin.com/in/stephane-karasiewicz</a>
+                        <span class="cv-sep">·</span>
+                        <a href="https://github.com/KarasiewiczStephane">github.com/KarasiewiczStephane</a>
+                        <span class="cv-sep">·</span>
+                        <a href="mailto:skaraz.science@gmail.com">skaraz.science@gmail.com</a>
+                    </p>
+                </div>
+                <div class="cv-header__photo">
+                    <img
+                        src={`${base}portrait.jpg`}
+                        alt="Stéphane Karasiewicz"
+                        width="110"
+                        height="110"
+                        loading="eager"
+                    />
+                </div>
+            </header>
+
+            <!-- PITCH -->
+            <p class="cv-pitch">
+                I help parametric insurers ship climate scoring pipelines in 8 to 16 weeks — bridging climate science and DevOps, without recruiting in-house.
+            </p>
+
+            <!-- EXPERIENCE -->
+            <section class="cv-section">
+                <h2>Experience</h2>
+
+                <div class="cv-job">
+                    <div class="cv-job__head">
+                        <h3>Skaraz Data — Climate Pipeline Partner &amp; Founder</h3>
+                        <span class="cv-job__dates">Sep 2023 → Present · Remote</span>
+                    </div>
+                    <p class="cv-job__sub"><em>Senior data engineering for parametric insurance climate pipelines.</em></p>
+                    <ul class="cv-bullets">
+                        <li>Audit, build, and operate production climate scoring pipelines (drought, heat stress, precipitation, water balance)</li>
+                        <li>3-tier engagement: Discovery (€5-7k, 2 weeks) · Partner (€25-50k, 8-16 weeks) · Retainer (€2-4k/month)</li>
+                        <li>Code Quality Guarantee: any major bug in production on shipped code fixed for free within 30 days of handover</li>
+                        <li>Available: 2-3 new engagements per quarter</li>
+                    </ul>
+                </div>
+
+                <div class="cv-job">
+                    <div class="cv-job__head">
+                        <h3>Raincoat LLC — Senior Data Scientist (Freelance contract)</h3>
+                        <span class="cv-job__dates">Sep 2023 → Jan 2026 · Remote</span>
+                    </div>
+                    <p class="cv-job__sub"><em>Parametric insurtech (Seed-stage, San Juan, Puerto Rico) · Climate risk technology</em></p>
+                    <ul class="cv-bullets">
+                        <li>Built and operated end-to-end ML pipelines for <strong>4 climate perils</strong> (drought, heat stress, precipitation, water balance) across <strong>10+ countries</strong> in LatAm, SEA, and Africa</li>
+                        <li>Engineered automated data management for <strong>2 TB+ satellite &amp; reanalysis data</strong> (CHIRPS, IMERG, ERA5-Land, Copernicus, MERRA-2)</li>
+                        <li>Created <strong>2 production pipelines from scratch</strong> (heat stress + water balance); delivered a <strong>modular architecture proposal</strong> as scoped technical roadmap for next-perils scaling, transferred to the team at contract end</li>
+                        <li>Ran dev/ops solo for production pipelines at end of contract; built 5 country-level operational dashboards</li>
+                        <li>Tools: Python, xarray, GDAL, Docker, PostgreSQL, scikit-learn</li>
+                    </ul>
+                </div>
+
+                <div class="cv-job">
+                    <div class="cv-job__head">
+                        <h3>IFREMER — Marine Remote Sensing Researcher</h3>
+                        <span class="cv-job__dates">Feb 2018 → Jul 2023 · Boulogne-sur-Mer &amp; Brest, France</span>
+                    </div>
+                    <p class="cv-job__sub"><em>French National Institute for Ocean Science · 5+ years in satellite remote sensing for marine ecology</em></p>
+                    <ul class="cv-bullets">
+                        <li>Operated production R pipelines processing 500 GB+ satellite &amp; in-situ data; reduced manual effort by 50 hours/month</li>
+                        <li>Authored 2 CRAN packages (BDAlgo, subniche) with <strong>8,000+ cumulative downloads</strong> and 27+ citations</li>
+                        <li>5 peer-reviewed publications on environmental modeling using MODIS, Sentinel-2/3, and reanalysis data</li>
+                        <li>Mentored 6 researchers and Master's students on R, Git, and reproducible research</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- TECHNICAL STACK -->
+            <section class="cv-section">
+                <h2>Technical stack</h2>
+                <ul class="cv-stack">
+                    <li><strong>Climate data</strong> — CHIRPS · IMERG · ERA5-Land · Copernicus · MERRA-2 · MODIS · Sentinel</li>
+                    <li><strong>Engineering</strong> — Python (expert) · xarray · GDAL · Docker · PostgreSQL · Airflow · CI/CD</li>
+                    <li><strong>Languages</strong> — Python · R (2 CRAN packages) · SQL · Bash</li>
+                    <li><strong>Methods</strong> — Production data pipelines · Geospatial analysis · Time-series · Multivariate stats</li>
+                </ul>
+            </section>
+
+            <!-- EDUCATION -->
+            <section class="cv-section">
+                <h2>Education</h2>
+                <ul class="cv-edu">
+                    <li><strong>PhD Marine Ecology</strong> — Université de Lille, France (2014-2017) · Phytoplankton evolution — Novel WitOMI statistical framework for ecological niches</li>
+                    <li><strong>M.Sc. Marine Ecology</strong>, Stockholm University (2012-2014) · <strong>B.Sc. Ecosystem Science</strong>, Open University, England (2010-2012)</li>
+                </ul>
+            </section>
+
+            <!-- PUBLICATIONS & OPEN SOURCE -->
+            <section class="cv-section">
+                <h2>Publications &amp; Open Source</h2>
+                <p class="cv-subhead">CRAN R packages</p>
+                <ul class="cv-bullets">
+                    <li>
+                        <a href="https://cran.r-project.org/package=subniche"><strong>subniche</strong></a>
+                        — Ecological niche modeling using OMI framework · 5,000+ downloads · 15+ citations
+                    </li>
+                    <li>
+                        <a href="https://cran.r-project.org/package=BDAlgo"><strong>BDAlgo</strong></a>
+                        — Bloom detection in time-series, extracts 22 phenological variables · 3,000+ downloads · 12+ citations
+                    </li>
+                </ul>
+                <p class="cv-subhead">Featured publication</p>
+                <ul class="cv-bullets">
+                    <li>
+                        Karasiewicz S., Chapelle A., Bacher C., Soudant D. (2020). <em>Harmful algae niche responses</em>. <strong>Harmful Algae</strong>, 98:101785.
+                        <a href="https://doi.org/10.1016/j.hal.2020.101785">https://doi.org/10.1016/j.hal.2020.101785</a>
+                    </li>
+                </ul>
+                <p class="cv-note">
+                    5 additional peer-reviewed publications at
+                    <a href="https://www.researchgate.net/profile/Stephane_Karasiewicz">ResearchGate</a>.
+                </p>
+            </section>
+
+            <!-- LANGUAGES -->
+            <section class="cv-section cv-section--tight">
+                <h2>Languages</h2>
+                <p class="cv-langs">French — Native · English — Native (dual citizenship)</p>
+            </section>
+
+            <!-- AVAILABILITY -->
+            <aside class="cv-availability" aria-label="Availability">
+                <p class="cv-availability__title">Available — 2-3 new engagements per quarter</p>
+                <p class="cv-availability__body">
+                    Best contact: LinkedIn DM with “reality” for the free Climate Pipeline Reality Check PDF.
+                </p>
+            </aside>
+        </article>
+    </div>
+</BaseLayout>
+
+<style>
+    /* =========================================================
+       /cv — print-friendly resume. Palette hard-coded to mirror
+       index.astro (light/coral theme isn't in :root yet).
+       ========================================================= */
+
+    /* Light page background overriding global.css dark theme. */
+    .cv-page {
+        background: #ffffff;
+        color: #0f1b2c;
+        min-height: 100vh;
+        padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .cv-backlink-wrap {
+        max-width: 800px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .cv-backlink {
+        font-size: 0.85rem;
+        color: #4a5a70;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .cv-backlink:hover {
+        color: #d85a30;
+    }
+
+    .cv {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #ffffff;
+        color: #4a5a70;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    /* HEADER */
+    .cv-header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1.5rem;
+        align-items: flex-start;
+        padding-bottom: 1.25rem;
+        border-bottom: 1px solid rgba(15, 27, 44, 0.1);
+        margin-bottom: 1.25rem;
+    }
+
+    .cv-name {
+        font-family: 'DM Serif Display', serif;
+        font-size: 2.4rem;
+        font-weight: 400;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+        color: #042c53;
+        margin: 0 0 0.4rem;
+    }
+
+    .cv-title {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #042c53;
+        margin: 0 0 0.5rem;
+    }
+
+    .cv-location {
+        font-size: 0.82rem;
+        color: #4a5a70;
+        margin: 0 0 0.5rem;
+    }
+
+    .cv-contact {
+        font-size: 0.82rem;
+        color: #4a5a70;
+        margin: 0;
+        word-break: break-word;
+    }
+
+    .cv-contact a {
+        color: #d85a30;
+        text-decoration: none;
+    }
+
+    .cv-contact a:hover {
+        text-decoration: underline;
+    }
+
+    .cv-sep {
+        margin: 0 0.35rem;
+        color: #b0bcc8;
+    }
+
+    .cv-header__photo img {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center top;
+        border: 3px solid #ffffff;
+        box-shadow:
+            0 0 0 1.5px rgba(216, 90, 48, 0.4),
+            0 8px 20px rgba(15, 27, 44, 0.08);
+        display: block;
+    }
+
+    /* PITCH */
+    .cv-pitch {
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: #042c53;
+        font-style: italic;
+        margin: 0 0 1.5rem;
+        padding: 0;
+    }
+
+    /* SECTIONS — override global.css `section { padding: 6rem 3rem }`. */
+    .cv-section {
+        padding: 0;
+        margin: 0 0 1.25rem;
+    }
+
+    .cv-section--tight {
+        margin-bottom: 1rem;
+    }
+
+    .cv-section h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.2;
+        color: #042c53;
+        margin: 0 0 0.65rem;
+        padding-bottom: 0.2rem;
+        border-bottom: 1px solid rgba(15, 27, 44, 0.08);
+    }
+
+    /* JOBS */
+    .cv-job {
+        margin-bottom: 1rem;
+        page-break-inside: avoid;
+    }
+
+    .cv-job:last-child {
+        margin-bottom: 0;
+    }
+
+    .cv-job__head {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 0.15rem;
+    }
+
+    .cv-job__head h3 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #042c53;
+        margin: 0;
+        line-height: 1.3;
+    }
+
+    .cv-job__dates {
+        font-size: 0.78rem;
+        color: #7a8aa0;
+        white-space: nowrap;
+    }
+
+    .cv-job__sub {
+        font-size: 0.82rem;
+        color: #4a5a70;
+        margin: 0 0 0.4rem;
+    }
+
+    /* BULLETS — chevron coral */
+    .cv-bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .cv-bullets li {
+        position: relative;
+        padding-left: 1rem;
+        margin-bottom: 0.25rem;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: #4a5a70;
+    }
+
+    .cv-bullets li::before {
+        content: '›';
+        position: absolute;
+        left: 0;
+        top: -0.05em;
+        color: #d85a30;
+        font-weight: 700;
+        font-size: 1rem;
+    }
+
+    .cv-bullets li:last-child {
+        margin-bottom: 0;
+    }
+
+    .cv-bullets a {
+        color: #d85a30;
+        text-decoration: none;
+    }
+
+    .cv-bullets a:hover {
+        text-decoration: underline;
+    }
+
+    .cv-bullets strong {
+        color: #042c53;
+        font-weight: 600;
+    }
+
+    /* TECH STACK — flat compact list */
+    .cv-stack {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .cv-stack li {
+        font-size: 0.85rem;
+        line-height: 1.55;
+        color: #4a5a70;
+        margin-bottom: 0.15rem;
+    }
+
+    .cv-stack strong {
+        color: #042c53;
+        font-weight: 600;
+    }
+
+    /* EDUCATION */
+    .cv-edu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .cv-edu li {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: #4a5a70;
+        margin-bottom: 0.4rem;
+    }
+
+    .cv-edu li:last-child {
+        margin-bottom: 0;
+    }
+
+    .cv-edu strong {
+        color: #042c53;
+        font-weight: 600;
+    }
+
+    .cv-edu__sub {
+        display: block;
+        font-size: 0.78rem;
+        color: #7a8aa0;
+    }
+
+    /* PUBLICATIONS subheads */
+    .cv-subhead {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #042c53;
+        margin: 0.6rem 0 0.3rem;
+    }
+
+    .cv-subhead:first-child {
+        margin-top: 0;
+    }
+
+    .cv-note {
+        font-size: 0.78rem;
+        color: #7a8aa0;
+        font-style: italic;
+        margin: 0.5rem 0 0;
+    }
+
+    .cv-note a {
+        color: #d85a30;
+        text-decoration: none;
+    }
+
+    /* LANGUAGES */
+    .cv-langs {
+        font-size: 0.85rem;
+        color: #4a5a70;
+        margin: 0;
+    }
+
+    /* AVAILABILITY — discrete coral callout */
+    .cv-availability {
+        margin-top: 1.25rem;
+        padding: 0.85rem 1rem;
+        background: rgba(216, 90, 48, 0.06);
+        border: 1px solid rgba(216, 90, 48, 0.22);
+        border-radius: 6px;
+        page-break-inside: avoid;
+    }
+
+    .cv-availability__title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #d85a30;
+        margin: 0 0 0.25rem;
+    }
+
+    .cv-availability__body {
+        font-size: 0.82rem;
+        color: #4a5a70;
+        margin: 0;
+    }
+
+    /* Mobile screen */
+    @media (max-width: 640px) {
+        .cv-page {
+            padding: 1.5rem 1rem 3rem;
+        }
+        .cv-header {
+            grid-template-columns: 1fr;
+        }
+        .cv-header__photo {
+            order: -1;
+        }
+        .cv-name {
+            font-size: 2rem;
+        }
+        .cv-job__head {
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+    }
+
+    /* =========================================================
+       PRINT — A4, no chrome, black underlined links
+       ========================================================= */
+    @page {
+        size: A4;
+        margin: 12mm 15mm;
+    }
+
+    @media print {
+        /* Defensive: BaseLayout already hides chrome via hideChrome,
+           but kill any stray UI just in case. */
+        nav, footer, .skip-link, .cv-backlink-wrap {
+            display: none !important;
+        }
+
+        html, body {
+            background: #ffffff !important;
+            color: #0f1b2c !important;
+        }
+
+        .cv-page {
+            padding: 0 !important;
+            background: #ffffff !important;
+            min-height: 0;
+        }
+
+        .cv {
+            max-width: 100% !important;
+            margin: 0 !important;
+            font-size: 8.5pt;
+            line-height: 1.3;
+            color: #1a2433;
+        }
+
+        .cv-header {
+            padding-bottom: 4pt;
+            margin-bottom: 4pt;
+        }
+
+        .cv-name {
+            font-size: 22pt;
+            margin-bottom: 2pt;
+        }
+
+        .cv-title {
+            font-size: 9.5pt;
+            margin-bottom: 2pt;
+        }
+
+        .cv-location,
+        .cv-contact {
+            font-size: 8pt;
+            margin-bottom: 1pt;
+        }
+
+        .cv-pitch {
+            font-size: 9.5pt;
+            margin-bottom: 4pt;
+        }
+
+        .cv-section {
+            padding: 0;
+            margin-bottom: 4pt;
+        }
+
+        .cv-section h2 {
+            font-size: 11.5pt;
+            margin-bottom: 2pt;
+            padding-bottom: 1pt;
+        }
+
+        .cv-job {
+            margin-bottom: 2pt;
+        }
+
+        .cv-job__head h3 {
+            font-size: 10pt;
+        }
+
+        .cv-job__dates {
+            font-size: 8pt;
+        }
+
+        .cv-job__sub {
+            font-size: 8pt;
+            margin-bottom: 2pt;
+        }
+
+        .cv-bullets li,
+        .cv-stack li,
+        .cv-edu li {
+            font-size: 8.5pt;
+            line-height: 1.3;
+            margin-bottom: 0.5pt;
+        }
+
+        .cv-stack li {
+            margin-bottom: 0.25pt;
+        }
+
+        .cv-edu li {
+            margin-bottom: 1pt;
+        }
+
+        .cv-edu__sub {
+            font-size: 7.5pt;
+        }
+
+        .cv-subhead {
+            font-size: 8.5pt;
+            margin: 3pt 0 1pt;
+        }
+
+        .cv-note {
+            font-size: 7.5pt;
+            margin-top: 2pt;
+        }
+
+        .cv-langs {
+            font-size: 8.5pt;
+        }
+
+        .cv-header__photo img {
+            width: 75px;
+            height: 75px;
+            border-width: 2px;
+            box-shadow: 0 0 0 1.5px rgba(216, 90, 48, 0.4);
+        }
+
+        .cv-availability {
+            margin-top: 4pt;
+            padding: 4pt 7pt;
+            background: rgba(216, 90, 48, 0.06);
+            border: 1px solid rgba(216, 90, 48, 0.4);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .cv-availability__title {
+            font-size: 9.5pt;
+            margin-bottom: 1pt;
+        }
+
+        .cv-availability__body {
+            font-size: 8pt;
+        }
+
+        /* Links: black + underlined for paper readability. */
+        a {
+            color: #0f1b2c !important;
+            text-decoration: underline !important;
+        }
+
+        .cv-bullets li::before {
+            color: #d85a30 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Keep job blocks and the availability callout intact;
+           let sections flow so we don't waste page space.
+           Deliberately NOT setting page-break-after on h2/h3 — that rule
+           cascades and pushes headings + their content to the next page
+           even when there's room on the current one. */
+        .cv-job,
+        .cv-availability {
+            page-break-inside: avoid;
+        }
+    }
+</style>

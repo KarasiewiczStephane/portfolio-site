@@ -5,10 +5,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "cv:pdf": "node scripts/generate-cv-pdf.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.1",
-    "astro": "^5.18.0"
+    "astro": "^5.18.1"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0"
   }
 }
