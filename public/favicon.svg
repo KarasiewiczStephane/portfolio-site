@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="24 54 170 170" fill="none"
+     stroke-linecap="round" stroke-linejoin="round">
+    <style>
+        svg { stroke: #0B0F14; }
+        @media (prefers-color-scheme: dark) { svg { stroke: #E8ECF1; } }
+    </style>
+    <g transform="translate(-161.43079,-165.17257)">
+        <circle cx="270.09647" cy="303.53989" r="80.585396" stroke-width="8"/>
+        <g transform="translate(164.1035,161.4308)">
+            <path d="m -84.085809,-143.03461 a 36.162704,46.318947 0 0 1 11.314031,56.320915 36.162704,46.318947 0 0 1 -40.577542,26.091908 36.162704,46.318947 0 0 1 -28.5032,-45.268043"
+                  stroke-width="6" transform="matrix(0,-1,-1,0,0,0)"/>
+            <path d="m 211.26707,86.019919 a 36.429138,46.660206 0 0 1 -6.4756,51.765851 36.429138,46.660206 0 0 1 -39.95463,11.38124 36.429138,46.660206 0 0 1 -22.99434,-43.37121"
+                  stroke-width="6" transform="matrix(0,1,1,0,0,0)"/>
+            <g transform="translate(184.45238,29.860119)" stroke-width="6">
+                <path d="M -96.739913,42.977725 -98.432461,181.40695"/>
+                <path d="m -41.417766,54.22569 -52.800223,57.12335"/>
+                <path d="M -41.988335,168.63959 -94.217989,111.34904"/>
+            </g>
+        </g>
+    </g>
+</svg>
