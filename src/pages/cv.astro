@@ -57,6 +57,11 @@ const jsonLd = {
     <div class="cv-page">
         <div class="cv-backlink-wrap">
             <a class="cv-backlink" href={base}>← Back to skarazdata.com</a>
+            <a
+                class="cv-download"
+                href={`${base}cv-stephane-karasiewicz.pdf`}
+                download="Stephane-Karasiewicz-CV.pdf"
+            >Download PDF ↓</a>
         </div>
 
         <article class="cv">
@@ -221,16 +226,22 @@ const jsonLd = {
     .cv-backlink-wrap {
         max-width: 800px;
         margin: 0 auto 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
     }
 
-    .cv-backlink {
+    .cv-backlink,
+    .cv-download {
         font-size: 0.85rem;
         color: #4a5a70;
         text-decoration: none;
         transition: color 0.2s;
     }
 
-    .cv-backlink:hover {
+    .cv-backlink:hover,
+    .cv-download:hover {
         color: #d85a30;
     }
 
