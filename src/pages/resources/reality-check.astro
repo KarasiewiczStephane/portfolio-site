@@ -1,0 +1,777 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Climate Pipeline Reality Check",
+    "description": "5 lessons + 12-point checklist from parametric insurance pipelines",
+    "url": "https://skarazdata.com/resources/reality-check",
+    "inLanguage": "en",
+    "datePublished": "2026-05-20",
+    "author": {
+        "@type": "Person",
+        "name": "Stéphane Karasiewicz",
+        "url": "https://skarazdata.com"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Skaraz Data",
+        "url": "https://skarazdata.com"
+    }
+};
+---
+
+<BaseLayout
+    title="The Climate Pipeline Reality Check — Skaraz Data"
+    description="5 lessons + 12-point production readiness checklist from parametric insurance pipelines. Free guide by Stéphane Karasiewicz, Climate Pipeline Partner."
+    ogType="article"
+    articleMeta={{
+        publishedTime: "2026-05-20",
+        author: "Stéphane Karasiewicz",
+        tags: ["climate", "parametric insurance", "data pipelines", "production readiness"],
+    }}
+    jsonLd={jsonLd}
+    hideChrome={true}
+>
+    <div class="rc-page">
+        <div class="rc-backlink-wrap">
+            <a class="rc-backlink" href={base}>← Back to skarazdata.com</a>
+            <a
+                class="rc-download"
+                href={`${base}climate-pipeline-reality-check.pdf`}
+                download="Climate-Pipeline-Reality-Check.pdf"
+            >Download PDF ↓</a>
+        </div>
+
+        <article class="rc">
+
+            <!-- PAGE 1 — COVER -->
+            <section class="rc-cover">
+                <p class="rc-cover__logo">Skaraz Data</p>
+                <div class="rc-cover__center">
+                    <h1 class="rc-cover__title">The Climate Pipeline Reality Check</h1>
+                    <p class="rc-cover__subtitle">
+                        5 lessons + 12-point checklist from parametric insurance pipelines
+                    </p>
+                    <div class="rc-cover__sig">
+                        <p class="rc-cover__by">By Stéphane Karasiewicz</p>
+                        <p class="rc-cover__role">Climate Pipeline Partner · skarazdata.com</p>
+                    </div>
+                </div>
+                <p class="rc-cover__date">May 2026</p>
+            </section>
+
+            <!-- INTRO -->
+            <section class="rc-section rc-section--intro">
+                <h2>Why this PDF exists</h2>
+                <p>
+                    If you're running a parametric insurance product or a climate risk platform,
+                    your pipelines are probably in one of three states:
+                </p>
+                <ol class="rc-states">
+                    <li><strong>Working but fragile</strong> — you ship perils, but each new geography or model update is a 6-week project.</li>
+                    <li><strong>Bolted together</strong> — code duplicated between perils, datasets that quietly change calibration, dashboards that look fine until they don't.</li>
+                    <li><strong>Genuinely modular</strong> — but you only get here after 18+ months of iteration, and most teams don't.</li>
+                </ol>
+                <p>
+                    I've spent the last 2 years building production climate pipelines across drought,
+                    heat stress, precipitation, and water balance — covering 10+ countries in LatAm,
+                    SEA, and Africa. This PDF is the distillation of what I'd tell my past self.
+                </p>
+                <p class="rc-muted">
+                    No sales pitch. No call required. If you want to discuss your specific context
+                    after reading, the Discovery option is at the end.
+                </p>
+            </section>
+
+            <!-- LESSONS -->
+            <section class="rc-section rc-section--lessons-head">
+                <h2>The 5 Lessons</h2>
+            </section>
+
+            <article class="rc-lesson">
+                <h3>Lesson 1 — Ship the MVP peril before the modular architecture</h3>
+                <p><strong>The trap.</strong> You join a parametric insurtech early-stage and immediately see the need for a "real" modular architecture to scale to 10+ perils. You want to do things right. You propose a big refactor.</p>
+                <p><strong>The reality.</strong> You'll spend 3 months designing an elegant system that serves nobody. Meanwhile, the 3 deals your sales team is trying to close depend on the next peril shipping in 6 weeks.</p>
+                <p><strong>The lesson.</strong> Ship the MVP peril in "code duplication assumed" mode in 6 weeks. Then when you have 3-4 perils in production, refactor with the knowledge of their actual differences. Premature modular code is more expensive than temporary duplication.</p>
+                <aside class="rc-takeaway">
+                    <p class="rc-takeaway__label">Takeaway</p>
+                    <p class="rc-takeaway__text">Modular architecture is what you extract from 3 working pipelines, not what you design before the first.</p>
+                </aside>
+            </article>
+
+            <article class="rc-lesson">
+                <h3>Lesson 2 — Calibration drift is the silent killer</h3>
+                <p><strong>The trap.</strong> You use CHIRPS for precipitation, ERA5-Land for temperature, IMERG for near-real-time. Everything works at first deployment. You ship. You move to the next peril.</p>
+                <p><strong>The reality.</strong> 4 months later, your drought model starts under-estimating triggers in Colombia. You haven't changed anything. But ECMWF released ERA5-Land v2 with a different calibration in tropical zones. Your coefficients are now calibrated on data that no longer exists.</p>
+                <p><strong>The lesson.</strong> Pin your dataset versions explicitly (ERA5-Land v1.x.y), version your calibration pipelines, and run a monthly regression test on known historical dates. If your outputs drift, you'll know before your client does.</p>
+                <aside class="rc-takeaway">
+                    <p class="rc-takeaway__label">Takeaway</p>
+                    <p class="rc-takeaway__text">In climate pipelines, the dataset is part of the code. Version it.</p>
+                </aside>
+            </article>
+
+            <article class="rc-lesson">
+                <h3>Lesson 3 — Production is 3am on a Sunday, not a Jupyter notebook</h3>
+                <p><strong>The trap.</strong> Your data scientist has a notebook that works. The model is validated on backtest. You move it to production via a Docker container + a cron that runs a Python script every night. Done.</p>
+                <p><strong>The reality.</strong> One Wednesday at 4am, the GFS server serving satellite data is 6 hours late. Your cron runs, finds nothing, writes an empty file to S3. At 8am, the client receives their daily report: "Drought risk: 0% everywhere." Disaster.</p>
+                <p><strong>The lesson.</strong> Production climate pipelines need retry logic, data freshness checks, alerts on missing inputs, graceful degradation, and a human notified if something drifts. 80% of production code isn't the model — it's everything around the model.</p>
+                <aside class="rc-takeaway">
+                    <p class="rc-takeaway__label">Takeaway</p>
+                    <p class="rc-takeaway__text">Production is the model + everything that prevents it from waking you up at 3am.</p>
+                </aside>
+            </article>
+
+            <article class="rc-lesson">
+                <h3>Lesson 4 — Climate scientists and DevOps don't speak the same language</h3>
+                <p><strong>The trap.</strong> You have a brilliant climatologist who builds an SPEI model with remarkable precision. You have a senior DevOps who deploys microservices on Kubernetes. They're on the same team but don't understand each other.</p>
+                <p><strong>The reality.</strong> The climatologist says "just run this notebook daily." The DevOps hears "let's orchestrate it with Airflow." 3 months later, the Airflow runs but the model no longer reflects what the climatologist validated — someone "optimized" the data prep along the way.</p>
+                <p><strong>The lesson.</strong> Someone on the team must be able to challenge model choices through comparative studies <strong>AND</strong> read a Dockerfile <strong>AND</strong> debug PostgreSQL in production. If nobody bridges these worlds, every release becomes a game of broken telephone.</p>
+                <aside class="rc-takeaway">
+                    <p class="rc-takeaway__label">Takeaway</p>
+                    <p class="rc-takeaway__text">The expensive role isn't the climate scientist or the DevOps. It's the person who bridges them.</p>
+                </aside>
+            </article>
+
+            <article class="rc-lesson">
+                <h3>Lesson 5 — A new geography should be a config change, not a new project</h3>
+                <p><strong>The trap.</strong> You shipped drought in Mexico. Sales closes Chile. Someone says "easy, we duplicate the Mexico code." 4 weeks later, Chile is in production. Except it's now a parallel codebase, with its own tweaks, its own validation logic, its own bugs.</p>
+                <p><strong>The reality.</strong> When the 4th country arrives, you have 4 divergent codebases. Every bug fix must be done 4 times. Every new peril takes 4× the work. Gross margin collapses.</p>
+                <p><strong>The lesson.</strong> A "new geography" should be a new entry in a config file: geographic zone, available datasets, locally calibrated thresholds, possibly a retraining. The application code should never change between countries. If adding a country takes more than 1 day, your architecture isn't modular — it's duplicated.</p>
+                <aside class="rc-takeaway">
+                    <p class="rc-takeaway__label">Takeaway</p>
+                    <p class="rc-takeaway__text">If adding a country takes more than 1 day, you don't have a pipeline. You have N pipelines.</p>
+                </aside>
+            </article>
+
+            <!-- CHECKLIST -->
+            <section class="rc-section rc-section--checklist">
+                <h2>The 12-Point Production Readiness Checklist</h2>
+                <p>This is what I systematically verify before signing off "production-ready" on a climate pipeline. Print it. Run through it on yours.</p>
+
+                <h3 class="rc-cat">Datasets &amp; Calibration — the foundations</h3>
+                <ul class="rc-check">
+                    <li><strong>1. Dataset versions are pinned and documented.</strong> Your CHIRPS is v2.0 or v3.0? Your ERA5-Land is v1.x.y? Versions are written somewhere (config, README, code) — not just "we take the latest."</li>
+                    <li><strong>2. Calibration was done on the exact same dataset version as production.</strong> If you calibrated your drought model on ERA5-Land v1.3 and production uses v2.0, you have a latent bug. Verify alignment.</li>
+                    <li><strong>3. Monthly regression test on known historical dates.</strong> You have 3-5 historical dates (e.g., Colombia drought 2018, Hurricane Maria 2017) with expected outputs. A monthly cron replays them and alerts if drift exceeds X%.</li>
+                </ul>
+
+                <h3 class="rc-cat">Production Infrastructure — the operational layer</h3>
+                <ul class="rc-check">
+                    <li><strong>4. Source data freshness is checked before pipeline runs.</strong> Before your pipeline launches, it verifies that upstream data (CHIRPS, IMERG, etc.) is current. If not, it waits or notifies — it doesn't run on stale data.</li>
+                    <li><strong>5. Retry logic with exponential backoff for all external API calls.</strong> Copernicus / CDS / NASA can timeout. Your pipeline retries 3-5 times with backoff before giving up. And it gives up <strong>cleanly</strong> (alert, no corrupted output).</li>
+                    <li><strong>6. Failed runs alert a human within 1 hour.</strong> When the pipeline crashes at 3am, a human is notified (Slack, PagerDuty, email) before the client. Not the other way around.</li>
+                </ul>
+
+                <h3 class="rc-cat">Code Quality — the maintainability layer</h3>
+                <ul class="rc-check">
+                    <li><strong>7. New geography = config change, not code change.</strong> You can add Peru or Bangladesh by editing 1 config file. If you have to fork a codebase, your architecture isn't modular.</li>
+                    <li><strong>8. Each peril is decoupled from the others.</strong> You can re-ship drought without redeploying heat stress. No monolith where everything breaks together.</li>
+                    <li><strong>9. Deployment is reproducible from a fresh machine.</strong> A new dev can clone the repo, run <code>make deploy</code> (or equivalent), and have a prod-like environment in under 30 minutes. If it requires 3 days of setup + 5 undocumented secrets, you have a problem.</li>
+                </ul>
+
+                <h3 class="rc-cat">Output &amp; Governance — the transparency layer</h3>
+                <ul class="rc-check">
+                    <li><strong>10. Output files have embedded provenance metadata.</strong> Each output CSV/JSON/NetCDF contains: pipeline version, source dataset versions, timestamp, geo bounding box. If a client says "your March 12 output looks weird," you can trace back.</li>
+                    <li><strong>11. Operational dashboards show pipeline health, not just model outputs.</strong> Beyond the client dashboard (the drought score), you have an internal dashboard (pipeline lag, success rate, dataset freshness, compute time). You see problems before your clients do.</li>
+                    <li><strong>12. Documentation enables your client to run the pipeline without you.</strong> A new data engineer on the client team can take over by reading your docs, without calling you. Otherwise you're a single point of failure — and a commercial risk.</li>
+                </ul>
+            </section>
+
+            <!-- HOW TO USE -->
+            <section class="rc-section rc-section--howto">
+                <h2>How to use this checklist</h2>
+                <ol class="rc-howto">
+                    <li><strong>Print it.</strong> Walk through your existing pipelines, item by item.</li>
+                    <li><strong>Count your gaps.</strong> Most teams I've audited check 5-8 out of 12 boxes. Below 6 means you're shipping risk to your clients.</li>
+                    <li><strong>Prioritize by category.</strong> Don't try to fix all 12 in parallel. Pick the weakest category and run a focused 2-week sprint on it.</li>
+                    <li><strong>Repeat quarterly.</strong> Pipelines decay. Datasets change. New perils stretch old architecture. This isn't a one-time audit.</li>
+                </ol>
+            </section>
+
+            <!-- CTA -->
+            <section class="rc-section rc-section--cta">
+                <h2>What's next</h2>
+                <p>If reading this raised more questions than it answered — or if you've checked 5 boxes and you're not sure which gap to close first — that's exactly the kind of context I help with.</p>
+                <p>The <strong>Climate Pipeline Discovery</strong> is a fixed 2-week paid engagement (€5-7k). I audit your existing pipeline, map risks and duplication, and deliver a 10-15 page technical note with a scoped remediation plan. No fuzzy consulting calls — concrete output you can use immediately.</p>
+                <p class="rc-book">📅 Book a 15-min Discovery Call: <a href="https://calendly.com/skaraz_data/15-minute-meeting">calendly.com/skaraz_data/15-minute-meeting</a></p>
+                <p>Or just hit reply on the LinkedIn DM where you got this PDF — happy to chat.</p>
+            </section>
+
+            <!-- SIGNATURE -->
+            <footer class="rc-sig">
+                <p class="rc-sig__line"><em>Stéphane Karasiewicz · Outreau, France · Remote worldwide</em></p>
+                <p class="rc-sig__line">
+                    <a href="https://skarazdata.com">skarazdata.com</a>
+                    <span class="rc-sep">·</span>
+                    <a href="https://linkedin.com/in/stephane-karasiewicz">linkedin.com/in/stephane-karasiewicz</a>
+                    <span class="rc-sep">·</span>
+                    <a href="mailto:skaraz.science@gmail.com">skaraz.science@gmail.com</a>
+                </p>
+                <p class="rc-sig__note"><em>This PDF is free to share with your team. Please don't remove attribution.</em></p>
+            </footer>
+
+        </article>
+    </div>
+</BaseLayout>
+
+<style>
+    /* =========================================================
+       /resources/reality-check — generous, print-friendly guide.
+       Palette mirrors /cv (navy + coral).
+       ========================================================= */
+
+    .rc-page {
+        background: #ffffff;
+        color: #0f1b2c;
+        min-height: 100vh;
+        padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .rc-backlink-wrap {
+        max-width: 760px;
+        margin: 0 auto 1.75rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .rc-backlink,
+    .rc-download {
+        font-size: 0.9rem;
+        color: #4a5a70;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .rc-backlink:hover,
+    .rc-download:hover {
+        color: #d85a30;
+    }
+
+    .rc {
+        max-width: 760px;
+        margin: 0 auto;
+        background: #ffffff;
+        color: #4a5a70;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+
+    /* ---------- COVER ---------- */
+    .rc-cover {
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2rem 0 1rem;
+    }
+
+    .rc-cover__logo {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.25rem;
+        color: #042c53;
+        letter-spacing: 0.04em;
+        margin: 0;
+    }
+
+    .rc-cover__center {
+        text-align: center;
+        margin: auto 0;
+        padding: 2rem 0;
+    }
+
+    .rc-cover__title {
+        font-family: 'DM Serif Display', serif;
+        font-size: 3.5rem;
+        font-weight: 400;
+        line-height: 1.05;
+        letter-spacing: -0.015em;
+        color: #042c53;
+        margin: 0 0 1.5rem;
+    }
+
+    .rc-cover__subtitle {
+        font-size: 1.4rem;
+        font-weight: 300;
+        line-height: 1.4;
+        color: #4a5a70;
+        margin: 0 0 3rem;
+        max-width: 32ch;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .rc-cover__sig {
+        margin-top: 2rem;
+    }
+
+    .rc-cover__by {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.2rem;
+        color: #042c53;
+        margin: 0 0 0.2rem;
+    }
+
+    .rc-cover__role {
+        font-size: 0.95rem;
+        color: #7a8aa0;
+        margin: 0;
+    }
+
+    .rc-cover__date {
+        font-size: 0.9rem;
+        color: #7a8aa0;
+        text-align: center;
+        margin: 0;
+    }
+
+    /* ---------- SECTIONS (override global section padding) ---------- */
+    .rc-section {
+        padding: 0;
+        margin: 0 0 2.5rem;
+    }
+
+    .rc-section h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.8rem;
+        font-weight: 400;
+        line-height: 1.2;
+        color: #042c53;
+        margin: 0 0 1rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid rgba(15, 27, 44, 0.08);
+    }
+
+    .rc-section p {
+        margin: 0 0 0.9rem;
+    }
+
+    .rc-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .rc-states {
+        padding-left: 1.4rem;
+        margin: 0 0 1rem;
+    }
+
+    .rc-states li {
+        margin-bottom: 0.5rem;
+    }
+
+    .rc-states strong {
+        color: #042c53;
+    }
+
+    .rc-muted {
+        color: #7a8aa0;
+        font-style: italic;
+    }
+
+    /* ---------- LESSONS ---------- */
+    .rc-lesson {
+        margin: 0 0 2.5rem;
+        page-break-before: always;
+        page-break-inside: avoid;
+    }
+
+    .rc-lesson h3 {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.25;
+        color: #042c53;
+        margin: 0 0 1rem;
+    }
+
+    .rc-lesson p {
+        margin: 0 0 0.85rem;
+    }
+
+    .rc-lesson p strong {
+        color: #042c53;
+        font-weight: 600;
+    }
+
+    /* ---------- TAKEAWAY (bloc + label) ---------- */
+    .rc-takeaway {
+        margin: 1.25rem 0 0;
+        padding: 1rem 1.25rem 1.1rem;
+        background: #FBF1ED;
+        border-left: 4px solid #d85a30;
+        border-radius: 0 4px 4px 0;
+        page-break-inside: avoid;
+    }
+
+    .rc-takeaway__label {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #d85a30;
+        margin: 0 0 0.35rem !important;
+    }
+
+    .rc-takeaway__text {
+        font-family: 'DM Serif Display', serif;
+        font-style: italic;
+        font-size: 1.05rem;
+        line-height: 1.4;
+        color: #042c53;
+        margin: 0 !important;
+    }
+
+    /* ---------- CHECKLIST ---------- */
+    .rc-section--checklist {
+        page-break-before: always;
+    }
+
+    .rc-cat {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.15rem;
+        font-weight: 400;
+        color: #d85a30;
+        margin: 1.5rem 0 0.75rem;
+        page-break-after: avoid;
+    }
+
+    .rc-cat:first-of-type {
+        margin-top: 1rem;
+    }
+
+    .rc-check {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .rc-check li {
+        position: relative;
+        padding-left: 1.75rem;
+        margin-bottom: 0.85rem;
+        page-break-inside: avoid;
+    }
+
+    .rc-check li::before {
+        content: '☐';
+        position: absolute;
+        left: 0;
+        top: -0.05em;
+        color: #d85a30;
+        font-size: 1.25rem;
+        line-height: 1.3;
+    }
+
+    .rc-check li strong {
+        color: #042c53;
+        font-weight: 600;
+    }
+
+    .rc-check li code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.9em;
+        background: rgba(15, 27, 44, 0.06);
+        padding: 0.1em 0.35em;
+        border-radius: 3px;
+    }
+
+    /* ---------- HOW TO USE ---------- */
+    .rc-section--howto {
+        page-break-before: always;
+    }
+
+    .rc-howto {
+        padding-left: 1.4rem;
+        margin: 0;
+    }
+
+    .rc-howto li {
+        margin-bottom: 0.65rem;
+    }
+
+    .rc-howto strong {
+        color: #042c53;
+    }
+
+    /* ---------- CTA ---------- */
+    .rc-section--cta h2 {
+        color: #d85a30;
+    }
+
+    .rc-section--cta strong {
+        color: #042c53;
+    }
+
+    .rc-book {
+        font-size: 1.05rem;
+        padding: 0.85rem 1rem;
+        background: rgba(216, 90, 48, 0.06);
+        border: 1px solid rgba(216, 90, 48, 0.22);
+        border-radius: 6px;
+    }
+
+    .rc-book a {
+        color: #d85a30;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .rc-book a:hover {
+        text-decoration: underline;
+    }
+
+    /* Global links inside content */
+    .rc a {
+        color: #d85a30;
+        text-decoration: none;
+    }
+
+    .rc a:hover {
+        text-decoration: underline;
+    }
+
+    /* ---------- SIGNATURE ---------- */
+    .rc-sig {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(15, 27, 44, 0.08);
+        text-align: center;
+        font-size: 0.9rem;
+        color: #7a8aa0;
+    }
+
+    .rc-sig__line {
+        margin: 0 0 0.4rem;
+    }
+
+    .rc-sig__note {
+        margin-top: 0.75rem;
+        font-size: 0.82rem;
+    }
+
+    .rc-sep {
+        margin: 0 0.4rem;
+        color: #b0bcc8;
+    }
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 640px) {
+        .rc-page {
+            padding: 1.5rem 1rem 3rem;
+        }
+        .rc {
+            font-size: 0.95rem;
+        }
+        .rc-cover {
+            min-height: auto;
+            padding: 1rem 0;
+        }
+        .rc-cover__title {
+            font-size: 2.2rem;
+        }
+        .rc-cover__subtitle {
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+        .rc-section h2 {
+            font-size: 1.5rem;
+        }
+        .rc-lesson h3 {
+            font-size: 1.2rem;
+        }
+    }
+
+    /* =========================================================
+       PRINT — A4, generous 20mm margins
+       ========================================================= */
+    @page {
+        size: A4;
+        margin: 20mm;
+    }
+
+    @media print {
+        nav, footer, .skip-link, .rc-backlink-wrap {
+            display: none !important;
+        }
+
+        html, body {
+            background: #ffffff !important;
+            color: #0f1b2c !important;
+        }
+
+        .rc-page {
+            padding: 0 !important;
+            background: #ffffff !important;
+            min-height: 0;
+        }
+
+        .rc {
+            max-width: 100% !important;
+            margin: 0 !important;
+            font-size: 11pt;
+            line-height: 1.55;
+            color: #1a2433;
+        }
+
+        /* COVER fills the first page */
+        .rc-cover {
+            min-height: 257mm; /* A4 height (297) - 2*20mm margins */
+            page-break-after: always;
+            padding: 0;
+        }
+
+        .rc-cover__logo {
+            font-size: 13pt;
+        }
+
+        .rc-cover__title {
+            font-size: 36pt;
+            line-height: 1.05;
+            margin-bottom: 14pt;
+        }
+
+        .rc-cover__subtitle {
+            font-size: 14pt;
+            margin-bottom: 32pt;
+        }
+
+        .rc-cover__by {
+            font-size: 13pt;
+        }
+
+        .rc-cover__role,
+        .rc-cover__date {
+            font-size: 10pt;
+        }
+
+        /* SECTIONS */
+        .rc-section {
+            margin-bottom: 14pt;
+        }
+
+        .rc-section h2 {
+            font-size: 18pt;
+            margin-bottom: 8pt;
+            padding-bottom: 3pt;
+        }
+
+        .rc-section--intro,
+        .rc-section--lessons-head {
+            page-break-after: avoid;
+        }
+
+        /* LESSONS — 1 per page */
+        .rc-lesson {
+            page-break-before: always;
+            page-break-inside: avoid;
+            margin-bottom: 0;
+        }
+
+        .rc-lesson h3 {
+            font-size: 15pt;
+            margin-bottom: 10pt;
+        }
+
+        .rc-lesson p {
+            margin-bottom: 8pt;
+        }
+
+        /* TAKEAWAYS — preserve coral background in print */
+        .rc-takeaway {
+            margin-top: 12pt;
+            padding: 10pt 14pt 11pt;
+            background: #FBF1ED !important;
+            border-left: 4px solid #d85a30 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .rc-takeaway__label {
+            font-size: 8pt;
+            color: #d85a30 !important;
+            margin-bottom: 3pt !important;
+        }
+
+        .rc-takeaway__text {
+            font-size: 12pt;
+            line-height: 1.4;
+            color: #042c53 !important;
+        }
+
+        /* CHECKLIST — pack 12 items into 1 page */
+        .rc-section--checklist {
+            page-break-before: always;
+        }
+
+        .rc-section--checklist > p {
+            font-size: 10pt;
+            margin-bottom: 6pt;
+        }
+
+        .rc-cat {
+            font-size: 12pt;
+            margin: 7pt 0 3pt;
+            color: #d85a30 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .rc-cat:first-of-type {
+            margin-top: 4pt;
+        }
+
+        .rc-check li {
+            padding-left: 16pt;
+            margin-bottom: 4pt;
+            font-size: 10pt;
+            line-height: 1.35;
+        }
+
+        .rc-check li::before {
+            color: #d85a30 !important;
+            font-size: 12pt;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* HOW TO USE */
+        .rc-section--howto {
+            page-break-before: always;
+        }
+
+        /* CTA */
+        .rc-book {
+            background: #FBF1ED !important;
+            border: 1px solid rgba(216, 90, 48, 0.4) !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* SIGNATURE */
+        .rc-sig {
+            font-size: 9pt;
+            margin-top: 18pt;
+            padding-top: 10pt;
+        }
+
+        /* Links: black + underlined for paper readability */
+        a {
+            color: #0f1b2c !important;
+            text-decoration: underline !important;
+        }
+
+        /* But keep CTA book-link recognizable */
+        .rc-book a {
+            color: #d85a30 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    }
+</style>

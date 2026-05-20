@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "cv:pdf": "node scripts/generate-cv-pdf.mjs"
+    "cv:pdf": "node scripts/generate-cv-pdf.mjs",
+    "reality:pdf": "node scripts/generate-reality-check-pdf.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.1",
