@@ -1,0 +1,646 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Stéphane Karasiewicz",
+    "url": "https://skarazdata.com/about",
+    "mainEntity": {
+        "@type": "Person",
+        "name": "Stéphane Karasiewicz",
+        "jobTitle": "Climate Pipeline Partner · Senior Data Engineer for Parametric Insurance",
+        "url": "https://skarazdata.com",
+        "image": "https://skarazdata.com/portrait.jpg",
+        "sameAs": [
+            "https://www.linkedin.com/in/stephane-karasiewicz",
+            "https://github.com/KarasiewiczStephane",
+            "https://www.researchgate.net/profile/Stephane_Karasiewicz"
+        ],
+        "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "Université de Lille"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Hauts-de-France",
+            "addressCountry": "FR"
+        }
+    }
+};
+---
+
+<BaseLayout
+    title="About — Stéphane Karasiewicz · Climate Pipeline Partner | Skaraz Data"
+    description="Senior Data Engineer for Parametric Insurance. 2+ years at Raincoat LLC building climate scoring pipelines, 15+ years satellite remote sensing at IFREMER. PhD Marine Ecology."
+    ogType="profile"
+    jsonLd={jsonLd}
+>
+    <div class="about-page">
+
+        <!-- HERO -->
+        <section class="about-hero" aria-labelledby="about-title">
+            <div class="about-hero__inner">
+                <div class="about-hero__text">
+                    <h1 id="about-title">About Stéphane</h1>
+                    <p class="about-hero__subtitle">
+                        Climate Pipeline Partner · Senior Data Engineer for Parametric Insurance
+                    </p>
+                </div>
+                <div class="about-hero__visual">
+                    <img
+                        src={`${base}portrait.jpg`}
+                        alt="Stéphane Karasiewicz"
+                        class="about-hero__portrait"
+                        loading="eager"
+                        fetchpriority="high"
+                        width="240"
+                        height="240"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1 — Bridging two worlds -->
+        <section class="about-section about-section--alt" aria-labelledby="bridging-title">
+            <div class="about-prose">
+                <h2 id="bridging-title">Bridging two worlds</h2>
+                <p>
+                    I sit at an unusual intersection: 15+ years of satellite remote sensing for
+                    climate research, then a deliberate pivot into production data engineering for
+                    parametric insurance.
+                </p>
+                <p>
+                    That trajectory is the entire reason Skaraz Data exists. Most teams building
+                    climate scoring pipelines have someone who understands the climate data and
+                    someone who can ship production code — but rarely the same person. I spent a
+                    decade learning what climate datasets really say and don't say, and the last
+                    few years learning what it takes to ship them reliably at 3am on a Sunday.
+                </p>
+                <p>
+                    That's what I bring to parametric insurers: a translator between the two
+                    worlds, with hands deep in both.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 2 — How I got here -->
+        <section class="about-section" aria-labelledby="history-title">
+            <div class="about-prose">
+                <h2 id="history-title">How I got here</h2>
+
+                <article class="history-item">
+                    <h3>Marine ecology PhD, Université de Lille (2014-2017).</h3>
+                    <p>
+                        Phytoplankton dynamics under global change. Sounds niche — but the
+                        underlying skills are exactly what climate scoring needs: multivariate
+                        statistics on noisy satellite data, calibration across geographies,
+                        time-series with seasonal drift, and a stubborn discipline about
+                        validating against ground truth.
+                    </p>
+                </article>
+
+                <article class="history-item">
+                    <h3>IFREMER, Marine Remote Sensing Researcher (2018-2023).</h3>
+                    <p>
+                        5+ cumulative years working with MODIS, Sentinel-2/3, reanalysis
+                        products, and in-situ networks across the French coast and beyond. I
+                        published 5 peer-reviewed papers, shipped 2 CRAN R packages still used
+                        today (BDAlgo, subniche — 8,000+ cumulative downloads), and mentored 6
+                        researchers on reproducible workflows. I also spent years staring at the
+                        same kind of climate data that parametric insurers use today — just for
+                        different downstream purposes.
+                    </p>
+                </article>
+
+                <article class="history-item">
+                    <h3>The pivot (2023).</h3>
+                    <p>
+                        Two things happened in parallel. First, I realized I wanted to ship
+                        things people actually used more than I wanted to publish the next paper.
+                        The papers were good, but writing them was no longer the work I wanted to
+                        do daily. Second, I knew my mix of climate science background and code
+                        skills was useful to industry — I just didn't know which one. I bet on
+                        freelance, and within months I joined Raincoat. That's where I discovered
+                        parametric insurance.
+                    </p>
+                </article>
+
+                <article class="history-item">
+                    <h3>Raincoat LLC (Sep 2023 — Jan 2026).</h3>
+                    <p>
+                        I joined as a Senior Data Scientist on a freelance contract with a
+                        parametric insurtech in San Juan, Puerto Rico. Over 2+ years, I built and
+                        operated end-to-end pipelines for 4 climate perils — drought, heat
+                        stress, precipitation, water balance — across 10+ countries in LatAm,
+                        SEA, and Africa. Two of those perils (heat stress, water balance) I built
+                        from scratch. I ran the production pipelines solo as dev/ops at the end
+                        of the contract, and delivered a modular architecture roadmap as a scoped
+                        technical handoff to the team.
+                    </p>
+                </article>
+
+                <article class="history-item">
+                    <h3>Skaraz Data, Climate Pipeline Partner (Sep 2023 — Present).</h3>
+                    <p>
+                        What I do today: I help parametric insurers ship climate scoring
+                        pipelines in 8 to 16 weeks. Three tiers (Discovery, Partner, Retainer),
+                        one Code Quality Guarantee, and a small enough operation that I can stay
+                        close to the technical work — which is exactly the point.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECTION 3 — What I believe -->
+        <section class="about-section about-section--alt" aria-labelledby="beliefs-title">
+            <div class="about-prose">
+                <h2 id="beliefs-title">What I believe</h2>
+                <p class="about-beliefs__intro">Three convictions that guide how I work:</p>
+
+                <blockquote class="belief">
+                    <p class="belief__statement">
+                        Climate science without DevOps is research. Data engineering without
+                        climate science is bricolage.
+                    </p>
+                    <p class="belief__expl">
+                        The interesting work happens in the overlap. Most teams underestimate how
+                        much both sides need to bend toward each other for a real production
+                        pipeline to exist.
+                    </p>
+                </blockquote>
+
+                <blockquote class="belief">
+                    <p class="belief__statement">
+                        A pipeline that wakes the team up at 3am is a failure, however accurate
+                        the model.
+                    </p>
+                    <p class="belief__expl">
+                        Reliability eats accuracy for breakfast. A model that's 95% correct and
+                        runs every night without intervention beats a model that's 99% correct
+                        and needs babysitting.
+                    </p>
+                </blockquote>
+
+                <blockquote class="belief">
+                    <p class="belief__statement">
+                        The expensive part isn't the model — it's the bridge between scientists
+                        and ops.
+                    </p>
+                    <p class="belief__expl">
+                        Climate scientists and DevOps engineers don't speak the same language.
+                        Until someone bridges them, every release becomes a game of broken
+                        telephone. That bridge is what I rent out.
+                    </p>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- SECTION 4 — Currently -->
+        <section class="about-section" aria-labelledby="currently-title">
+            <div class="about-prose">
+                <h2 id="currently-title">Currently</h2>
+                <p class="about-currently__date">Updated May 2026</p>
+                <div class="about-currently__box">
+                    <ul class="about-currently__list">
+                        <li>
+                            <strong>Available:</strong> 2-3 new engagements per quarter
+                        </li>
+                        <li>
+                            <strong>Working on:</strong> scaling the Skaraz Data climate risk
+                            REST API (multi-hazard, freemium model) — precipitation, heat,
+                            drought, water balance, clay shrink-swell for France
+                        </li>
+                        <li>
+                            <strong>Side projects:</strong> RiseSlow (consumer habit tracker), a
+                            multi-strategy algorithmic trading bot system
+                        </li>
+                        <li>
+                            <strong>Based in:</strong> Hauts-de-France · Remote worldwide
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5 — Let's talk -->
+        <section class="about-cta" aria-labelledby="cta-title">
+            <div class="about-cta__inner">
+                <h2 id="cta-title">Let's talk</h2>
+                <p class="about-cta__intro">
+                    If you're running a parametric insurance product and your climate pipelines
+                    are slowing your roadmap down, the Climate Pipeline Discovery is the cleanest
+                    way to find out where the real gaps are. Two weeks, fixed price, written
+                    deliverable.
+                </p>
+                <div class="about-cta__buttons">
+                    <a
+                        class="about-cta__primary"
+                        href="https://calendly.com/skaraz_data/15-minute-meeting"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >Book a 15-min call <span aria-hidden="true">→</span></a>
+                    <a
+                        class="about-cta__secondary"
+                        href="https://www.linkedin.com/in/stephane-karasiewicz/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >Or DM <em>"reality"</em> on LinkedIn for the free Reality Check PDF</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</BaseLayout>
+
+<style>
+    /* =========================================================
+       /about — page wrapper
+       ========================================================= */
+    .about-page {
+        background: #ffffff;
+        color: #0f1b2c;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .about-hero {
+        background: #ffffff;
+        padding: 6rem 2rem 4.5rem;
+    }
+
+    .about-hero__inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+    }
+
+    @media (min-width: 880px) {
+        .about-hero__inner {
+            grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+            gap: 4rem;
+        }
+    }
+
+    .about-hero__text {
+        min-width: 0;
+    }
+
+    .about-hero h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(2.4rem, 5vw, 3.6rem);
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #042c53;
+        margin: 0 0 1rem;
+    }
+
+    .about-hero__subtitle {
+        font-size: 1.1rem;
+        line-height: 1.55;
+        color: #4a5a70;
+        margin: 0;
+        max-width: 560px;
+    }
+
+    .about-hero__visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        isolation: isolate;
+    }
+
+    .about-hero__visual::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        height: 300px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+            circle,
+            rgba(15, 27, 44, 0.06) 0%,
+            rgba(15, 27, 44, 0) 70%
+        );
+        border-radius: 50%;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .about-hero__portrait {
+        width: 100%;
+        max-width: 240px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center top;
+        border: 4px solid #ffffff;
+        box-shadow:
+            0 0 0 1.5px rgba(216, 90, 48, 0.4),
+            0 16px 40px rgba(15, 27, 44, 0.1);
+    }
+
+    @media (max-width: 640px) {
+        .about-hero {
+            padding: 3.5rem 1.25rem 3rem;
+        }
+        .about-hero__portrait {
+            max-width: 200px;
+        }
+        .about-hero__visual::before {
+            width: 260px;
+            height: 260px;
+        }
+    }
+
+    /* =========================================================
+       SHARED SECTIONS
+       ========================================================= */
+    .about-section {
+        background: #ffffff;
+        padding: 5.5rem 2rem;
+    }
+
+    .about-section--alt {
+        background: #f7f8fa;
+    }
+
+    .about-prose {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    .about-section h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: #042c53;
+        margin: 0 0 1.75rem;
+    }
+
+    .about-prose > p {
+        font-size: 1.05rem;
+        line-height: 1.75;
+        color: #4a5a70;
+        margin: 0 0 1.25rem;
+    }
+
+    .about-prose > p:last-child {
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 640px) {
+        .about-section {
+            padding: 3.5rem 1.25rem;
+        }
+        .about-prose > p {
+            font-size: 1rem;
+        }
+    }
+
+    /* =========================================================
+       SECTION 2 — How I got here
+       ========================================================= */
+    .history-item {
+        margin: 0 0 2rem;
+    }
+
+    .history-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .history-item h3 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 600;
+        line-height: 1.45;
+        color: #042c53;
+        margin: 0 0 0.6rem;
+    }
+
+    .history-item p {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #4a5a70;
+        margin: 0;
+    }
+
+    /* =========================================================
+       SECTION 3 — What I believe
+       ========================================================= */
+    .about-beliefs__intro {
+        font-size: 1.05rem !important;
+        line-height: 1.6 !important;
+        color: #4a5a70;
+        margin: 0 0 1.75rem !important;
+    }
+
+    .belief {
+        margin: 0 0 1.5rem;
+        padding: 1.5rem 1.5rem 1.4rem;
+        background: #FBF1ED;
+        border-left: 4px solid #d85a30;
+        border-radius: 0 6px 6px 0;
+    }
+
+    .belief:last-child {
+        margin-bottom: 0;
+    }
+
+    .belief__statement {
+        font-family: 'DM Serif Display', serif;
+        font-style: italic;
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 1.4;
+        color: #042c53;
+        margin: 0 0 0.65rem !important;
+    }
+
+    .belief__expl {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: #4a5a70;
+        margin: 0 !important;
+    }
+
+    @media (max-width: 640px) {
+        .belief {
+            padding: 1.25rem 1.25rem 1.15rem;
+        }
+        .belief__statement {
+            font-size: 1.1rem;
+        }
+        .belief__expl {
+            font-size: 0.95rem;
+        }
+    }
+
+    /* =========================================================
+       SECTION 4 — Currently
+       ========================================================= */
+    .about-currently__date {
+        font-size: 0.95rem !important;
+        font-style: italic;
+        color: #7a8aa0;
+        margin: -0.75rem 0 1.5rem !important;
+    }
+
+    .about-currently__box {
+        background: #FBF1ED;
+        border-left: 4px solid #d85a30;
+        border-radius: 0 6px 6px 0;
+        padding: 2rem 2.25rem;
+    }
+
+    .about-currently__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .about-currently__list li {
+        font-size: 1rem;
+        line-height: 1.65;
+        color: #4a5a70;
+        padding: 0.55rem 0;
+        border-bottom: 1px solid rgba(216, 90, 48, 0.14);
+    }
+
+    .about-currently__list li:first-child {
+        padding-top: 0;
+    }
+
+    .about-currently__list li:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .about-currently__list strong {
+        color: #042c53;
+        font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+        .about-currently__box {
+            padding: 1.5rem 1.4rem;
+        }
+        .about-currently__list li {
+            font-size: 0.95rem;
+        }
+    }
+
+    /* =========================================================
+       SECTION 5 — Let's talk (final CTA)
+       ========================================================= */
+    .about-cta {
+        background: #042c53;
+        color: #ffffff;
+        padding: 6rem 2rem;
+    }
+
+    .about-cta__inner {
+        max-width: 720px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .about-cta h2 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #ffffff;
+        margin: 0 0 1rem;
+    }
+
+    .about-cta__intro {
+        font-size: 1.05rem;
+        line-height: 1.65;
+        color: rgba(255, 255, 255, 0.82);
+        margin: 0 auto 2.25rem;
+        max-width: 620px;
+    }
+
+    .about-cta__buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.1rem;
+    }
+
+    .about-cta__primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.9rem 1.75rem;
+        font-family: inherit;
+        font-size: 0.98rem;
+        font-weight: 500;
+        line-height: 1.3;
+        color: #ffffff;
+        background: #d85a30;
+        border: 1.5px solid #d85a30;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.2s, border-color 0.2s, transform 0.15s,
+            box-shadow 0.2s;
+        box-shadow: 0 1px 2px rgba(216, 90, 48, 0.18);
+    }
+
+    .about-cta__primary:hover {
+        background: #b9491f;
+        border-color: #b9491f;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(216, 90, 48, 0.32);
+    }
+
+    .about-cta__primary:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 2px rgba(216, 90, 48, 0.18);
+    }
+
+    .about-cta__secondary {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        padding-bottom: 2px;
+        transition: color 0.2s, border-color 0.2s;
+    }
+
+    .about-cta__secondary em {
+        font-style: italic;
+        color: #f2b6a0;
+    }
+
+    .about-cta__secondary:hover {
+        color: #f2b6a0;
+        border-color: #d85a30;
+    }
+
+    .about-cta__secondary:hover em {
+        color: #ffffff;
+    }
+
+    @media (max-width: 640px) {
+        .about-cta {
+            padding: 4rem 1.25rem;
+        }
+        .about-cta__secondary {
+            font-size: 0.9rem;
+        }
+    }
+</style>
