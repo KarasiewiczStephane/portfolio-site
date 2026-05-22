@@ -6,7 +6,7 @@ const base = import.meta.env.BASE_URL;
 const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Climate Risk at Raincoat LLC — Case Study",
+    "headline": "Climate Risk at Raincoat LLC · Case Study",
     "description": "How I contributed to Raincoat's parametric insurance climate pipelines: data acquisition, new perils, dashboards, and a modular architecture roadmap.",
     "url": "https://skarazdata.com/projects/case-study-raincoat",
     "author": {
@@ -28,7 +28,7 @@ const jsonLd = {
 ---
 
 <BaseLayout
-    title="Case Study — Climate Risk at Raincoat LLC | Skaraz Data"
+    title="Case Study · Climate Risk at Raincoat LLC | Skaraz Data"
     description="How I contributed to Raincoat's parametric insurance climate pipelines over 2 years: data acquisition, new perils (Water Balance, Heat Stress), dashboards, and modular architecture roadmap. Embedded Senior Data Scientist."
     ogType="article"
     articleMeta={{
@@ -43,11 +43,11 @@ const jsonLd = {
         <!-- HERO -->
         <section class="cs-hero" aria-labelledby="cs-title">
             <div class="cs-hero__inner">
-                <a href={`${base}projects`} class="cs-backlink">&larr; Back to Projects</a>
+                <a href={base} class="cs-backlink">&larr; Back to skarazdata.com</a>
                 <p class="cs-hero__label">Case Study</p>
                 <h1 id="cs-title" class="cs-hero__title">Climate Risk at Raincoat LLC</h1>
                 <p class="cs-hero__subtitle">
-                    Embedded Senior Data Scientist · Feb 2024 — Jan 2026
+                    Embedded Senior Data Scientist · Feb 2024 → Jan 2026
                 </p>
             </div>
         </section>
@@ -58,7 +58,7 @@ const jsonLd = {
                 <h2 id="client-title">The Client</h2>
                 <p>
                     Raincoat LLC is a US-based insurtech building parametric insurance products
-                    for natural catastrophe risks — policies that pay out automatically when
+                    for natural catastrophe risks: policies that pay out automatically when
                     predefined climate or weather thresholds are triggered. Their products cover
                     droughts, hurricanes, earthquakes, and other perils across emerging markets
                     in LatAm, the Caribbean, and beyond.
@@ -88,7 +88,7 @@ const jsonLd = {
                     <h3>Peril ceiling.</h3>
                     <p>
                         Sales conversations kept surfacing client needs that the existing
-                        4 perils didn't cover — drought intensity, agricultural water stress,
+                        4 perils didn't cover: drought intensity, agricultural water stress,
                         heat-related risks. New perils took months to ship because the codebase
                         had been built peril by peril, with each one in its own block.
                     </p>
@@ -99,7 +99,7 @@ const jsonLd = {
                     <p>
                         The team was extending coverage from the Caribbean and Colombia toward
                         the rest of South America and into Africa. Adding a new country was
-                        already a config change — the real issue wasn't where the data came
+                        already a config change. The real issue wasn't where the data came
                         from, but how much of it the system was processing per client.
                     </p>
                 </article>
@@ -146,13 +146,13 @@ const jsonLd = {
                     <h3>New perils</h3>
                     <p>I implemented two new peril pipelines during my time.</p>
                     <p>
-                        <strong>Water Balance</strong> — Built by adapting the existing
+                        <strong>Water Balance.</strong> Built by adapting the existing
                         Precipitation pipeline. The peril required different climate variables
                         and thresholds but shared the same architectural skeleton. Shipped to
                         production with CI/CD and Docker on Kubernetes.
                     </p>
                     <p>
-                        <strong>Heat Stress</strong> — Adapted an existing climate scientist's
+                        <strong>Heat Stress.</strong> Adapted an existing climate scientist's
                         research script into a production-ready pipeline. The science was
                         solid, but the script was research-grade: single-threaded, manual data
                         inputs, no error handling. I rebuilt the data layer and model
@@ -167,7 +167,7 @@ const jsonLd = {
                         I built 3 Plotly Dash dashboards used daily by the risk and
                         underwriting teams: Precipitation, Water Balance, and Drought.
                         Dashboards weren't decorative. They were the interface between climate
-                        models and underwriting decisions — and a lot of the value the team
+                        models and underwriting decisions, and a lot of the value the team
                         delivered to clients flowed through them.
                     </p>
                 </article>
@@ -176,8 +176,8 @@ const jsonLd = {
                     <h3>Maintenance + extension</h3>
                     <p>
                         Precipitation and Drought were already in production when I joined. I
-                        maintained both throughout my 2 years — calibration checks, geographic
-                        extensions, dataset updates — and added their dashboards. Drought went
+                        maintained both throughout my 2 years (calibration checks, geographic
+                        extensions, dataset updates) and added their dashboards. Drought went
                         from early-stage at my arrival to a stable peril in production across
                         all targeted countries by the time I left.
                     </p>
@@ -199,8 +199,8 @@ const jsonLd = {
                     <p>
                         In conversations with the dev and science teams toward the end of my
                         contract, I sketched what a different architecture could look like: a
-                        shared data pool per geography — download and compute the climate data
-                        layer once, store it, refresh on schedule — wrapped in reusable
+                        shared data pool per geography (download and compute the climate data
+                        layer once, store it, refresh on schedule), wrapped in reusable
                         pipeline modules with standardized inputs and outputs. New clients in
                         covered geographies would become near-free to onboard. New perils
                         would share infrastructure instead of forking it. Storage would stop
@@ -208,7 +208,7 @@ const jsonLd = {
                         clients.
                     </p>
                     <p>
-                        I didn't implement that refactor — it would have been a multi-month
+                        I didn't implement that refactor; it would have been a multi-month
                         engagement of its own, out of scope for my contract. But the
                         conversations existed, and the team had a clearer view of where the
                         operational savings would come from.
@@ -257,7 +257,7 @@ const jsonLd = {
                 <!-- MOBILE CARDS -->
                 <div class="cs-changes-cards" aria-hidden="true">
                     <div class="cs-changes-card cs-changes-card--before">
-                        <p class="cs-changes-card__label">Before — Feb 2024</p>
+                        <p class="cs-changes-card__label">Before · Feb 2024</p>
                         <ul>
                             <li>3 perils in production (Precipitation, Hurricane Wind, Earthquake) + Drought early-stage</li>
                             <li>Dashboards I built: 0</li>
@@ -266,7 +266,7 @@ const jsonLd = {
                         </ul>
                     </div>
                     <div class="cs-changes-card cs-changes-card--after">
-                        <p class="cs-changes-card__label">After — Jan 2026</p>
+                        <p class="cs-changes-card__label">After · Jan 2026</p>
                         <ul>
                             <li>4 perils in production (+ Water Balance), Heat Stress pipeline ready</li>
                             <li>Dashboards I built: 3 (Precipitation, Water Balance, Drought)</li>
@@ -292,7 +292,7 @@ const jsonLd = {
                 <h2 id="took-title">What I Took With Me</h2>
                 <p>
                     Two years of climate pipelines for parametric insurance distilled into
-                    5 lessons — what works, what fails, and what I'd do differently next
+                    5 lessons: what works, what fails, and what I'd do differently next
                     time. I wrote them up in a free PDF: 5 lessons + 12-point production
                     readiness checklist.
                 </p>
@@ -325,8 +325,8 @@ const jsonLd = {
                 </p>
                 <p>
                     Work was organized project by project, with clear deliverables and direct
-                    communication between the dev and science teams. No fixed sprint cadence
-                    — the rhythm followed the work, not the calendar.
+                    communication between the dev and science teams. No fixed sprint cadence;
+                    the rhythm followed the work, not the calendar.
                 </p>
                 <p>
                     Timezone overlap (EU mornings / US East Coast / LatAm afternoons) enabled
@@ -367,8 +367,8 @@ const jsonLd = {
                 <p class="cs-cta__intro">
                     I help parametric insurers and climate risk platforms ship production
                     climate pipelines without recruiting in-house. If your team is hitting one
-                    of the ceilings Raincoat hit — adding geographies, adding perils, or
-                    modernizing a monolithic codebase — let's talk.
+                    of the ceilings Raincoat hit (adding geographies, adding perils, or
+                    modernizing a monolithic codebase), let's talk.
                 </p>
                 <div class="cs-cta__buttons">
                     <a
