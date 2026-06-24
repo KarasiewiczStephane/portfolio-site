@@ -7,7 +7,7 @@ import Testimonial from '../components/Testimonial.astro';
 
 const base = import.meta.env.BASE_URL;
 
-// JSON-LD aligned with the Climate Pipeline Partner positioning.
+// JSON-LD aligned with the Constellation positioning.
 const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -16,7 +16,7 @@ const jsonLd = {
             "name": "Stéphane Karasiewicz",
             "url": "https://skarazdata.com",
             "image": "https://skarazdata.com/portrait.jpg",
-            "jobTitle": "Climate Pipeline Partner · Senior Data Engineer for Parametric Insurance",
+            "jobTitle": "Senior Data Engineer for Parametric Insurance · creator of Constellation",
             "worksFor": { "@type": "Organization", "name": "Skaraz Data" },
             "alumniOf": { "@type": "EducationalOrganization", "name": "Université de Lille" },
             "address": {
@@ -44,7 +44,7 @@ const jsonLd = {
             "name": "Skaraz Data",
             "url": "https://skarazdata.com",
             "image": "https://skarazdata.com/og-image.png",
-            "description": "Senior data engineering for parametric insurance. Climate scoring pipelines: audit, build, partner. Bridging climate science and DevOps.",
+            "description": "Constellation: production climate-data pipelines for parametric insurers. A new peril is a config change, not a rewrite. Discovery, Build, Retainer. Bridging climate science and DevOps.",
             "provider": { "@type": "Person", "name": "Stéphane Karasiewicz" },
             "areaServed": "Worldwide",
             "serviceType": [
@@ -64,10 +64,10 @@ const jsonLd = {
             "mainEntity": [
                 {
                     "@type": "Question",
-                    "name": "What is a Climate Pipeline Discovery and how is it different from a regular consulting call?",
+                    "name": "What is a Constellation Discovery and how is it different from a regular consulting call?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "A Climate Pipeline Discovery is a fixed 2-week paid engagement (€5-7k). I audit your existing climate scoring pipeline, map risks and duplication, and deliver a 10-15 page technical note with a scoped remediation plan. It’s the entry point for clients who want to commit budget seriously and avoid a fuzzy consulting call."
+                        "text": "A Constellation Discovery is a fixed 2-week paid engagement (€6,000). I audit your existing climate scoring pipeline, map risks and duplication, and deliver a 10-15 page technical note with a scoped remediation plan. It’s the entry point for clients who want to commit budget seriously and avoid a fuzzy consulting call."
                     }
                 },
                 {
@@ -93,9 +93,9 @@ const jsonLd = {
 ---
 
 <BaseLayout
-    title="Skaraz Data · Climate Pipeline Partner for parametric insurance"
-    description="Senior data engineering for parametric insurance. Audit, build, partner. Bridging climate science and DevOps."
-    ogDescription="Senior data engineering for parametric insurance. Audit, build, partner."
+    title="Skaraz Data · Constellation, production climate-data pipelines for parametric insurance"
+    description="Constellation: production climate-data pipelines for parametric insurers. A new peril is a config change, not a rewrite. Discovery, Build, Retainer."
+    ogDescription="Constellation: production climate-data pipelines for parametric insurers. Discovery, Build, Retainer."
     ogType="website"
     jsonLd={jsonLd}
 >
@@ -109,7 +109,7 @@ const jsonLd = {
                     Ship your next climate peril in 8 to 16 weeks, <em>without recruiting in-house.</em>
                 </h1>
                 <p class="hero__subtitle">
-                    I’m the senior data engineer parametric insurers call when their climate scoring pipelines need to bridge climate science and DevOps, without recruiting a €120k/year hire.
+                    Constellation is my framework for production climate-data pipelines: a new peril or country is added by config, not a six-month rebuild. I’m the senior data engineer parametric insurers call to run it, without recruiting a €120k/year hire.
                 </p>
                 <p class="hero__credibility">
                     Ex-Raincoat · 10+ countries · 15+ years satellite &amp; reanalysis · PhD
@@ -160,8 +160,9 @@ const jsonLd = {
 
             <div class="solution__body">
                 <p>For nearly 2 years at Raincoat, I operated production climate pipelines across 10+ countries spanning LatAm, SEA, and Africa. I maintained drought and precipitation, built water balance from scratch to production, brought heat stress to a ready-to-deploy state, ran dev/ops solo at the end of the contract, and delivered a modular architecture roadmap for next-perils scaling.</p>
-                <p>Before that: 15+ years in satellite remote sensing at IFREMER. PhD in Marine Ecology. 6 peer-reviewed publications. 2 CRAN R packages.</p>
+                <p>Before that: 15+ years in satellite remote sensing at IFREMER. PhD in Marine Ecology. 7 peer-reviewed publications. 2 CRAN R packages.</p>
                 <p><strong>I’m the senior who can sit between your climate scientists and your DevOps team</strong>: challenge model choices with comparative studies, ship production code that won’t wake your team at 3am, build the operational dashboards your team actually uses, and document everything so you can run new perils without me.</p>
+                <p>I build this on <strong>Constellation</strong>: a framework of small, single-job modules that already know each dataset’s traps, the IMERG sub-daily smoothing, the CHIRPS calibration drift, the ERA5-Land coastal artifacts. Checks encode those failures so a bad reading stops at a gate, not in a payout. A new peril or country is a configuration change, not a new project.</p>
             </div>
 
             <div class="solution__pillars">
@@ -193,7 +194,7 @@ const jsonLd = {
                         <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
                     </svg>
                     <h3 class="pillar__title">Scientific Dialogue</h3>
-                    <p class="pillar__body">PhD in Marine Ecology. 6 peer-reviewed papers. 2 CRAN packages. I challenge model choices through comparative studies.</p>
+                    <p class="pillar__body">PhD in Marine Ecology. 7 peer-reviewed papers. 2 CRAN packages. I challenge model choices through comparative studies.</p>
                 </article>
             </div>
         </div>
@@ -207,8 +208,8 @@ const jsonLd = {
             <div class="offer__grid">
                 <OfferTier
                     number="1"
-                    title="Climate Pipeline Discovery"
-                    price="€5-7k"
+                    title="Constellation Discovery"
+                    price="€6,000"
                     duration="2 weeks"
                     summary="Full audit of your existing pipeline, risk mapping, scoped remediation plan."
                     bullets={[
@@ -225,7 +226,7 @@ const jsonLd = {
 
                 <OfferTier
                     number="2"
-                    title="Climate Pipeline Partner"
+                    title="Constellation Build"
                     price="€25-50k"
                     duration="8 to 16 weeks"
                     summary="Build from scratch or refactor toward modular architecture. Integrate with existing infra. Train your team to run it without me."
@@ -244,7 +245,7 @@ const jsonLd = {
 
                 <OfferTier
                     number="3"
-                    title="Retainer Partner"
+                    title="Constellation Retainer"
                     price="€2-4k/month"
                     duration="6 to 12 months"
                     summary="Ongoing support for evolutions, new perils, new geographies."
@@ -329,7 +330,7 @@ const jsonLd = {
 
                 <div class="final-cta__option">
                     <h3>2. Book a Discovery Call</h3>
-                    <p>15 min, free, to see if a fixed Discovery mission (€5-7k, 2 weeks) makes sense for your context.</p>
+                    <p>15 min, free, to see if a fixed Discovery mission (€6,000, 2 weeks) makes sense for your context.</p>
                     <a
                         class="final-cta__secondary"
                         href="https://calendly.com/skaraz_data/15-minute-meeting"
