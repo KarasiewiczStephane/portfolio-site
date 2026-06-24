@@ -1,38 +1,45 @@
-# Skaraz Data — Portfolio Site
+# skarazdata.com — Astro site
 
-> Personal portfolio and freelance data science practice website built with Astro 5, deployed on GitHub Pages.
+Live at [skarazdata.com](https://skarazdata.com). Climate Pipeline Partner funnel
+for Skaraz Data (Stéphane Karasiewicz · Senior Data Engineer for Parametric Insurance).
 
-**Live at:** [skarazdata.com](https://skarazdata.com)
+## Stack
 
-## Features
+- **Framework:** Astro 5 (static site generation)
+- **Hosting:** GitHub Pages, custom domain via `CNAME`
+- **CI:** `.github/workflows/deploy.yml`
+- **Styling:** plain CSS in `src/styles/global.css` — no Tailwind, no MDX, no UI framework
+- **SEO:** sitemap, robots.txt, canonical URLs, JSON-LD (Person + ProfessionalService + FAQPage + BlogPosting)
 
-- 30 project showcase pages with detailed case studies
-- Service areas: climate risk, satellite data, ML infrastructure, time-series, dashboards
-- Schema.org structured data (Person, ProfessionalService, FAQ, BlogPosting)
-- Open Graph + Twitter Card meta tags on every page
-- Blog with technical articles
-- Calendly booking integration
-- Fast static site — no JavaScript frameworks, minimal bundle
+## Live pages
 
-## Tech stack
+| Page | Route |
+|---|---|
+| Homepage — Climate Pipeline Partner | `/` |
+| About | `/about` |
+| Public CV (page + PDF download) | `/cv` |
+| Case study — Raincoat | `/projects/case-study-raincoat` |
+| Reality Check (lead magnet, page + PDF) | `/resources/reality-check` |
+| Blog | `/blog` |
 
-- **Framework:** Astro 5.18 (static site generation)
-- **Hosting:** GitHub Pages
-- **Styling:** CSS
-- **SEO:** sitemap, robots.txt, canonical URLs, rich snippets
-
-## Development
+## Develop
 
 ```bash
 npm install
-npm run dev      # Local dev server at localhost:4321
-npm run build    # Build static site to dist/
+npm run dev          # localhost:4321
+npm run build        # dist/
+npm run cv:pdf       # regenerate the CV PDF via Playwright
+npm run reality:pdf  # regenerate the Reality Check PDF via Playwright
 ```
 
-## Author
+## Source of truth for copy
 
-**Stéphane Karasiewicz** — [skarazdata.com](https://skarazdata.com) | [LinkedIn](https://www.linkedin.com/in/stephane-karasiewicz/)
+The canonical positioning + page copy lives in
+`Freelance/crm/context/positioning/`
+(`about.md`, `case-study-raincoat.md`, `reality-check.md`).
+Edit there, then port to the Astro pages.
 
-## License
+## History
 
-MIT
+The pre-refonte README and the May 2026 refonte working docs are archived under
+`Freelance/archive/refonte-2026-05/`.
