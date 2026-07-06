@@ -1,0 +1,154 @@
+[
+  {
+    "poc_id": "crop_bangladesh_full",
+    "display_name": "Bangladesh \u2014 nationwide (real MODIS NDVI + CHIRPS, dekadal)",
+    "peril": "crop_hybrid",
+    "bbox": [
+      87.771,
+      20.371,
+      92.941,
+      26.871
+    ],
+    "country_iso3": "BGD",
+    "schema": "generic",
+    "summary_metrics": {
+      "poc": "crop_bangladesh_full",
+      "peril": "crop_hybrid",
+      "display_name": "Bangladesh \u2014 nationwide rainfed kharif (real CHIRPS rain)",
+      "region": "bangladesh",
+      "ndvi_source": "modis",
+      "rainfall_source": "chirps",
+      "cadence": "dekadal",
+      "admin_level": 2,
+      "germination_months": [
+        6,
+        7
+      ],
+      "weather_months": [
+        8,
+        9,
+        10
+      ],
+      "n_events": 8,
+      "n_polygons_triggered": 8,
+      "expected_payout_fraction": 0.122625,
+      "basis_risk": {
+        "spatial": {
+          "status": "ok",
+          "metric": "aggregation_spatial_std_zunits",
+          "mean_spatial_std": 0.1869,
+          "max_spatial_std": 0.6031
+        },
+        "prediction": {
+          "status": "not_applicable",
+          "reason": "no observed yield-loss series",
+          "metrics": null
+        }
+      }
+    },
+    "stages": {
+      "admin_0": [
+        "admin_0.geojson"
+      ],
+      "admin_1": [
+        "admin_1.geojson"
+      ],
+      "admin_2": [
+        "admin_2.geojson"
+      ],
+      "aggregation": [
+        "aggregation.csv"
+      ],
+      "basis_risk": [
+        "basis_risk.json"
+      ],
+      "calibrated_thresholds": [
+        "calibrated_thresholds.json"
+      ],
+      "choropleth": [
+        "choropleth.geojson"
+      ],
+      "hazard_index": [
+        "hazard_index.nc",
+        "hazard_index.png"
+      ],
+      "intraseason": [
+        "intraseason.nc"
+      ],
+      "payouts": [
+        "payouts.csv"
+      ],
+      "preprocessed": [
+        "preprocessed.nc"
+      ],
+      "raw_hazard": [
+        "raw_hazard.nc"
+      ],
+      "raw_weather": [
+        "raw_weather.nc"
+      ],
+      "trigger_events": [
+        "trigger_events.csv"
+      ]
+    },
+    "raster": {
+      "hazard_index": {
+        "file": "hazard_index.png",
+        "bounds": [
+          [
+            87.771,
+            26.871
+          ],
+          [
+            93.021,
+            26.871
+          ],
+          [
+            93.021,
+            20.371
+          ],
+          [
+            87.771,
+            20.371
+          ]
+        ],
+        "bbox": [
+          87.771,
+          20.371,
+          93.021,
+          26.871
+        ],
+        "vmin": -2.2812142372131348,
+        "vmax": 0.998146653175354,
+        "cmap": "RdYlGn",
+        "reduction": "min",
+        "classes": [
+          {
+            "level": -2.281,
+            "color": "#a50026"
+          },
+          {
+            "level": -1.625,
+            "color": "#f46d43"
+          },
+          {
+            "level": -0.969,
+            "color": "#fee08b"
+          },
+          {
+            "level": -0.314,
+            "color": "#d9ef8b"
+          },
+          {
+            "level": 0.342,
+            "color": "#66bd63"
+          },
+          {
+            "level": 0.998,
+            "color": "#006837"
+          }
+        ]
+      }
+    }
+  }
+]

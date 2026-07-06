@@ -1,0 +1,490 @@
+{
+  "stage": "raw_weather",
+  "cmap": "Blues",
+  "vmin": 0.7701842188835144,
+  "vmax": 305.97210693359375,
+  "bounds": [
+    [
+      87.75000398978591,
+      26.84999965503812
+    ],
+    [
+      92.95000406727195,
+      26.84999965503812
+    ],
+    [
+      92.95000406727195,
+      20.34999955818057
+    ],
+    [
+      87.75000398978591,
+      20.34999955818057
+    ]
+  ],
+  "bbox": [
+    87.75000398978591,
+    20.34999955818057,
+    92.95000406727195,
+    26.84999965503812
+  ],
+  "classes": [
+    {
+      "level": 0.77,
+      "color": "#f7fbff"
+    },
+    {
+      "level": 61.811,
+      "color": "#d0e1f2"
+    },
+    {
+      "level": 122.851,
+      "color": "#94c4df"
+    },
+    {
+      "level": 183.891,
+      "color": "#4a98c9"
+    },
+    {
+      "level": 244.932,
+      "color": "#1764ab"
+    },
+    {
+      "level": 305.972,
+      "color": "#08306b"
+    }
+  ],
+  "frames": [
+    {
+      "date": "2019-01-01",
+      "file": "frames/raw_weather/2019-01-01.png"
+    },
+    {
+      "date": "2019-01-11",
+      "file": "frames/raw_weather/2019-01-11.png"
+    },
+    {
+      "date": "2019-01-21",
+      "file": "frames/raw_weather/2019-01-21.png"
+    },
+    {
+      "date": "2019-02-01",
+      "file": "frames/raw_weather/2019-02-01.png"
+    },
+    {
+      "date": "2019-02-11",
+      "file": "frames/raw_weather/2019-02-11.png"
+    },
+    {
+      "date": "2019-02-21",
+      "file": "frames/raw_weather/2019-02-21.png"
+    },
+    {
+      "date": "2019-03-01",
+      "file": "frames/raw_weather/2019-03-01.png"
+    },
+    {
+      "date": "2019-03-11",
+      "file": "frames/raw_weather/2019-03-11.png"
+    },
+    {
+      "date": "2019-03-21",
+      "file": "frames/raw_weather/2019-03-21.png"
+    },
+    {
+      "date": "2019-04-01",
+      "file": "frames/raw_weather/2019-04-01.png"
+    },
+    {
+      "date": "2019-04-11",
+      "file": "frames/raw_weather/2019-04-11.png"
+    },
+    {
+      "date": "2019-04-21",
+      "file": "frames/raw_weather/2019-04-21.png"
+    },
+    {
+      "date": "2019-05-01",
+      "file": "frames/raw_weather/2019-05-01.png"
+    },
+    {
+      "date": "2019-05-11",
+      "file": "frames/raw_weather/2019-05-11.png"
+    },
+    {
+      "date": "2019-05-21",
+      "file": "frames/raw_weather/2019-05-21.png"
+    },
+    {
+      "date": "2019-06-01",
+      "file": "frames/raw_weather/2019-06-01.png"
+    },
+    {
+      "date": "2019-06-11",
+      "file": "frames/raw_weather/2019-06-11.png"
+    },
+    {
+      "date": "2019-06-21",
+      "file": "frames/raw_weather/2019-06-21.png"
+    },
+    {
+      "date": "2019-07-01",
+      "file": "frames/raw_weather/2019-07-01.png"
+    },
+    {
+      "date": "2019-07-11",
+      "file": "frames/raw_weather/2019-07-11.png"
+    },
+    {
+      "date": "2019-07-21",
+      "file": "frames/raw_weather/2019-07-21.png"
+    },
+    {
+      "date": "2019-08-01",
+      "file": "frames/raw_weather/2019-08-01.png"
+    },
+    {
+      "date": "2019-08-11",
+      "file": "frames/raw_weather/2019-08-11.png"
+    },
+    {
+      "date": "2019-08-21",
+      "file": "frames/raw_weather/2019-08-21.png"
+    },
+    {
+      "date": "2019-09-01",
+      "file": "frames/raw_weather/2019-09-01.png"
+    },
+    {
+      "date": "2019-09-11",
+      "file": "frames/raw_weather/2019-09-11.png"
+    },
+    {
+      "date": "2019-09-21",
+      "file": "frames/raw_weather/2019-09-21.png"
+    },
+    {
+      "date": "2019-10-01",
+      "file": "frames/raw_weather/2019-10-01.png"
+    },
+    {
+      "date": "2019-10-11",
+      "file": "frames/raw_weather/2019-10-11.png"
+    },
+    {
+      "date": "2019-10-21",
+      "file": "frames/raw_weather/2019-10-21.png"
+    },
+    {
+      "date": "2019-11-01",
+      "file": "frames/raw_weather/2019-11-01.png"
+    },
+    {
+      "date": "2019-11-11",
+      "file": "frames/raw_weather/2019-11-11.png"
+    },
+    {
+      "date": "2019-11-21",
+      "file": "frames/raw_weather/2019-11-21.png"
+    },
+    {
+      "date": "2019-12-01",
+      "file": "frames/raw_weather/2019-12-01.png"
+    },
+    {
+      "date": "2019-12-11",
+      "file": "frames/raw_weather/2019-12-11.png"
+    },
+    {
+      "date": "2019-12-21",
+      "file": "frames/raw_weather/2019-12-21.png"
+    },
+    {
+      "date": "2020-01-01",
+      "file": "frames/raw_weather/2020-01-01.png"
+    },
+    {
+      "date": "2020-01-11",
+      "file": "frames/raw_weather/2020-01-11.png"
+    },
+    {
+      "date": "2020-01-21",
+      "file": "frames/raw_weather/2020-01-21.png"
+    },
+    {
+      "date": "2020-02-01",
+      "file": "frames/raw_weather/2020-02-01.png"
+    },
+    {
+      "date": "2020-02-11",
+      "file": "frames/raw_weather/2020-02-11.png"
+    },
+    {
+      "date": "2020-02-21",
+      "file": "frames/raw_weather/2020-02-21.png"
+    },
+    {
+      "date": "2020-03-01",
+      "file": "frames/raw_weather/2020-03-01.png"
+    },
+    {
+      "date": "2020-03-11",
+      "file": "frames/raw_weather/2020-03-11.png"
+    },
+    {
+      "date": "2020-03-21",
+      "file": "frames/raw_weather/2020-03-21.png"
+    },
+    {
+      "date": "2020-04-01",
+      "file": "frames/raw_weather/2020-04-01.png"
+    },
+    {
+      "date": "2020-04-11",
+      "file": "frames/raw_weather/2020-04-11.png"
+    },
+    {
+      "date": "2020-04-21",
+      "file": "frames/raw_weather/2020-04-21.png"
+    },
+    {
+      "date": "2020-05-01",
+      "file": "frames/raw_weather/2020-05-01.png"
+    },
+    {
+      "date": "2020-05-11",
+      "file": "frames/raw_weather/2020-05-11.png"
+    },
+    {
+      "date": "2020-05-21",
+      "file": "frames/raw_weather/2020-05-21.png"
+    },
+    {
+      "date": "2020-06-01",
+      "file": "frames/raw_weather/2020-06-01.png"
+    },
+    {
+      "date": "2020-06-11",
+      "file": "frames/raw_weather/2020-06-11.png"
+    },
+    {
+      "date": "2020-06-21",
+      "file": "frames/raw_weather/2020-06-21.png"
+    },
+    {
+      "date": "2020-07-01",
+      "file": "frames/raw_weather/2020-07-01.png"
+    },
+    {
+      "date": "2020-07-11",
+      "file": "frames/raw_weather/2020-07-11.png"
+    },
+    {
+      "date": "2020-07-21",
+      "file": "frames/raw_weather/2020-07-21.png"
+    },
+    {
+      "date": "2020-08-01",
+      "file": "frames/raw_weather/2020-08-01.png"
+    },
+    {
+      "date": "2020-08-11",
+      "file": "frames/raw_weather/2020-08-11.png"
+    },
+    {
+      "date": "2020-08-21",
+      "file": "frames/raw_weather/2020-08-21.png"
+    },
+    {
+      "date": "2020-09-01",
+      "file": "frames/raw_weather/2020-09-01.png"
+    },
+    {
+      "date": "2020-09-11",
+      "file": "frames/raw_weather/2020-09-11.png"
+    },
+    {
+      "date": "2020-09-21",
+      "file": "frames/raw_weather/2020-09-21.png"
+    },
+    {
+      "date": "2020-10-01",
+      "file": "frames/raw_weather/2020-10-01.png"
+    },
+    {
+      "date": "2020-10-11",
+      "file": "frames/raw_weather/2020-10-11.png"
+    },
+    {
+      "date": "2020-10-21",
+      "file": "frames/raw_weather/2020-10-21.png"
+    },
+    {
+      "date": "2020-11-01",
+      "file": "frames/raw_weather/2020-11-01.png"
+    },
+    {
+      "date": "2020-11-11",
+      "file": "frames/raw_weather/2020-11-11.png"
+    },
+    {
+      "date": "2020-11-21",
+      "file": "frames/raw_weather/2020-11-21.png"
+    },
+    {
+      "date": "2020-12-01",
+      "file": "frames/raw_weather/2020-12-01.png"
+    },
+    {
+      "date": "2020-12-11",
+      "file": "frames/raw_weather/2020-12-11.png"
+    },
+    {
+      "date": "2020-12-21",
+      "file": "frames/raw_weather/2020-12-21.png"
+    },
+    {
+      "date": "2021-01-01",
+      "file": "frames/raw_weather/2021-01-01.png"
+    },
+    {
+      "date": "2021-01-11",
+      "file": "frames/raw_weather/2021-01-11.png"
+    },
+    {
+      "date": "2021-01-21",
+      "file": "frames/raw_weather/2021-01-21.png"
+    },
+    {
+      "date": "2021-02-01",
+      "file": "frames/raw_weather/2021-02-01.png"
+    },
+    {
+      "date": "2021-02-11",
+      "file": "frames/raw_weather/2021-02-11.png"
+    },
+    {
+      "date": "2021-02-21",
+      "file": "frames/raw_weather/2021-02-21.png"
+    },
+    {
+      "date": "2021-03-01",
+      "file": "frames/raw_weather/2021-03-01.png"
+    },
+    {
+      "date": "2021-03-11",
+      "file": "frames/raw_weather/2021-03-11.png"
+    },
+    {
+      "date": "2021-03-21",
+      "file": "frames/raw_weather/2021-03-21.png"
+    },
+    {
+      "date": "2021-04-01",
+      "file": "frames/raw_weather/2021-04-01.png"
+    },
+    {
+      "date": "2021-04-11",
+      "file": "frames/raw_weather/2021-04-11.png"
+    },
+    {
+      "date": "2021-04-21",
+      "file": "frames/raw_weather/2021-04-21.png"
+    },
+    {
+      "date": "2021-05-01",
+      "file": "frames/raw_weather/2021-05-01.png"
+    },
+    {
+      "date": "2021-05-11",
+      "file": "frames/raw_weather/2021-05-11.png"
+    },
+    {
+      "date": "2021-05-21",
+      "file": "frames/raw_weather/2021-05-21.png"
+    },
+    {
+      "date": "2021-06-01",
+      "file": "frames/raw_weather/2021-06-01.png"
+    },
+    {
+      "date": "2021-06-11",
+      "file": "frames/raw_weather/2021-06-11.png"
+    },
+    {
+      "date": "2021-06-21",
+      "file": "frames/raw_weather/2021-06-21.png"
+    },
+    {
+      "date": "2021-07-01",
+      "file": "frames/raw_weather/2021-07-01.png"
+    },
+    {
+      "date": "2021-07-11",
+      "file": "frames/raw_weather/2021-07-11.png"
+    },
+    {
+      "date": "2021-07-21",
+      "file": "frames/raw_weather/2021-07-21.png"
+    },
+    {
+      "date": "2021-08-01",
+      "file": "frames/raw_weather/2021-08-01.png"
+    },
+    {
+      "date": "2021-08-11",
+      "file": "frames/raw_weather/2021-08-11.png"
+    },
+    {
+      "date": "2021-08-21",
+      "file": "frames/raw_weather/2021-08-21.png"
+    },
+    {
+      "date": "2021-09-01",
+      "file": "frames/raw_weather/2021-09-01.png"
+    },
+    {
+      "date": "2021-09-11",
+      "file": "frames/raw_weather/2021-09-11.png"
+    },
+    {
+      "date": "2021-09-21",
+      "file": "frames/raw_weather/2021-09-21.png"
+    },
+    {
+      "date": "2021-10-01",
+      "file": "frames/raw_weather/2021-10-01.png"
+    },
+    {
+      "date": "2021-10-11",
+      "file": "frames/raw_weather/2021-10-11.png"
+    },
+    {
+      "date": "2021-10-21",
+      "file": "frames/raw_weather/2021-10-21.png"
+    },
+    {
+      "date": "2021-11-01",
+      "file": "frames/raw_weather/2021-11-01.png"
+    },
+    {
+      "date": "2021-11-11",
+      "file": "frames/raw_weather/2021-11-11.png"
+    },
+    {
+      "date": "2021-11-21",
+      "file": "frames/raw_weather/2021-11-21.png"
+    },
+    {
+      "date": "2021-12-01",
+      "file": "frames/raw_weather/2021-12-01.png"
+    },
+    {
+      "date": "2021-12-11",
+      "file": "frames/raw_weather/2021-12-11.png"
+    },
+    {
+      "date": "2021-12-21",
+      "file": "frames/raw_weather/2021-12-21.png"
+    }
+  ]
+}

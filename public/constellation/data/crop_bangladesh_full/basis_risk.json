@@ -1,0 +1,13 @@
+{
+  "spatial": {
+    "status": "ok",
+    "metric": "aggregation_spatial_std_zunits",
+    "mean_spatial_std": 0.1869,
+    "max_spatial_std": 0.6031
+  },
+  "prediction": {
+    "status": "not_applicable",
+    "reason": "no observed yield-loss series",
+    "metrics": null
+  }
+}

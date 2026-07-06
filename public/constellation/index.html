@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Constellation — Parametric Index Explorer</title>
+    <link rel="preconnect" href="https://basemaps.cartocdn.com" crossorigin />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <aside id="controls" class="panel">
+      <h1>Constellation</h1>
+      <p class="sub">Parametric index POCs — each stage of the chain, per site.</p>
+      <h2>Layers</h2>
+      <div id="layerList"></div>
+      <label class="opacity">
+        Overlay opacity <span id="opacityVal">55%</span>
+        <input id="opacity" type="range" min="0" max="100" value="55" />
+      </label>
+      <div id="legend" class="legend hidden">
+        <h2>Legend</h2>
+        <div id="legendRamp"></div>
+      </div>
+    </aside>
+
+    <aside id="detail" class="panel detail hidden">
+      <button id="closeDetail" class="close" type="button">×</button>
+      <div id="detailBody"></div>
+    </aside>
+
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

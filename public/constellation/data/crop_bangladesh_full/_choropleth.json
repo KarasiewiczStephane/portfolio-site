@@ -1,0 +1,68 @@
+{
+  "years": [
+    2019,
+    2020,
+    2021
+  ],
+  "score_property": "score_{year}",
+  "scale": {
+    "unit": "1-10 crop-stress score (higher = worse)",
+    "how_it_works": "The score is derived from the standardized crop-hybrid index (a z-score vs the 2000-2018 climatology). It is not raw data: it rescales the index onto an intuitive 1-10 severity band anchored on the payout thresholds.",
+    "anchors": [
+      {
+        "score": 1,
+        "meaning": "index >= +1 z: well above normal, no stress"
+      },
+      {
+        "score": 7,
+        "meaning": "index = -1.0 z: payout trigger level"
+      },
+      {
+        "score": 10,
+        "meaning": "index <= -2.5 z: full payout, severe"
+      }
+    ]
+  },
+  "ramp": [
+    {
+      "score": 1,
+      "color": "#1a9850"
+    },
+    {
+      "score": 2,
+      "color": "#66bd63"
+    },
+    {
+      "score": 3,
+      "color": "#a6d96a"
+    },
+    {
+      "score": 4,
+      "color": "#d9ef8b"
+    },
+    {
+      "score": 5,
+      "color": "#fee08b"
+    },
+    {
+      "score": 6,
+      "color": "#fdae61"
+    },
+    {
+      "score": 7,
+      "color": "#f46d43"
+    },
+    {
+      "score": 8,
+      "color": "#d73027"
+    },
+    {
+      "score": 9,
+      "color": "#bd0026"
+    },
+    {
+      "score": 10,
+      "color": "#800026"
+    }
+  ]
+}

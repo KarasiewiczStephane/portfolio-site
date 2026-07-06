@@ -1,0 +1,70 @@
+{
+  "stage": "hazard_index",
+  "cmap": "RdYlGn",
+  "vmin": -1.3708425760269165,
+  "vmax": 1.1801729202270508,
+  "bounds": [
+    [
+      87.771,
+      26.871
+    ],
+    [
+      93.021,
+      26.871
+    ],
+    [
+      93.021,
+      20.371
+    ],
+    [
+      87.771,
+      20.371
+    ]
+  ],
+  "bbox": [
+    87.771,
+    20.371,
+    93.021,
+    26.871
+  ],
+  "classes": [
+    {
+      "level": -1.371,
+      "color": "#a50026"
+    },
+    {
+      "level": -0.861,
+      "color": "#f46d43"
+    },
+    {
+      "level": -0.35,
+      "color": "#fee08b"
+    },
+    {
+      "level": 0.16,
+      "color": "#d9ef8b"
+    },
+    {
+      "level": 0.67,
+      "color": "#66bd63"
+    },
+    {
+      "level": 1.18,
+      "color": "#006837"
+    }
+  ],
+  "frames": [
+    {
+      "date": "2019-01-01",
+      "file": "frames/hazard_index/2019-01-01.png"
+    },
+    {
+      "date": "2020-01-01",
+      "file": "frames/hazard_index/2020-01-01.png"
+    },
+    {
+      "date": "2021-01-01",
+      "file": "frames/hazard_index/2021-01-01.png"
+    }
+  ]
+}

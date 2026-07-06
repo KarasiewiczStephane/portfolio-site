@@ -1,0 +1,18 @@
+{
+  "trigger_index": -1.0,
+  "w_ndvi": 0.5,
+  "w_rain": 0.5,
+  "germination_months": [
+    6,
+    7
+  ],
+  "weather_months": [
+    8,
+    9,
+    10
+  ],
+  "aggregation_reducer": "mean",
+  "admin_level": 2,
+  "coverage_threshold": 0.2,
+  "resilience": null
+}

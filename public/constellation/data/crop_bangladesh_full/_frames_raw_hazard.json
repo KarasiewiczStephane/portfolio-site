@@ -1,0 +1,490 @@
+{
+  "stage": "raw_hazard",
+  "cmap": "YlGn",
+  "vmin": 0.26321953535079956,
+  "vmax": 0.84918212890625,
+  "bounds": [
+    [
+      87.771,
+      26.871
+    ],
+    [
+      93.021,
+      26.871
+    ],
+    [
+      93.021,
+      20.371
+    ],
+    [
+      87.771,
+      20.371
+    ]
+  ],
+  "bbox": [
+    87.771,
+    20.371,
+    93.021,
+    26.871
+  ],
+  "classes": [
+    {
+      "level": 0.263,
+      "color": "#ffffe5"
+    },
+    {
+      "level": 0.38,
+      "color": "#e5f5ac"
+    },
+    {
+      "level": 0.498,
+      "color": "#a2d88a"
+    },
+    {
+      "level": 0.615,
+      "color": "#4cb063"
+    },
+    {
+      "level": 0.732,
+      "color": "#15793e"
+    },
+    {
+      "level": 0.849,
+      "color": "#004529"
+    }
+  ],
+  "frames": [
+    {
+      "date": "2019-01-01",
+      "file": "frames/raw_hazard/2019-01-01.png"
+    },
+    {
+      "date": "2019-01-11",
+      "file": "frames/raw_hazard/2019-01-11.png"
+    },
+    {
+      "date": "2019-01-21",
+      "file": "frames/raw_hazard/2019-01-21.png"
+    },
+    {
+      "date": "2019-02-01",
+      "file": "frames/raw_hazard/2019-02-01.png"
+    },
+    {
+      "date": "2019-02-11",
+      "file": "frames/raw_hazard/2019-02-11.png"
+    },
+    {
+      "date": "2019-02-21",
+      "file": "frames/raw_hazard/2019-02-21.png"
+    },
+    {
+      "date": "2019-03-01",
+      "file": "frames/raw_hazard/2019-03-01.png"
+    },
+    {
+      "date": "2019-03-11",
+      "file": "frames/raw_hazard/2019-03-11.png"
+    },
+    {
+      "date": "2019-03-21",
+      "file": "frames/raw_hazard/2019-03-21.png"
+    },
+    {
+      "date": "2019-04-01",
+      "file": "frames/raw_hazard/2019-04-01.png"
+    },
+    {
+      "date": "2019-04-11",
+      "file": "frames/raw_hazard/2019-04-11.png"
+    },
+    {
+      "date": "2019-04-21",
+      "file": "frames/raw_hazard/2019-04-21.png"
+    },
+    {
+      "date": "2019-05-01",
+      "file": "frames/raw_hazard/2019-05-01.png"
+    },
+    {
+      "date": "2019-05-11",
+      "file": "frames/raw_hazard/2019-05-11.png"
+    },
+    {
+      "date": "2019-05-21",
+      "file": "frames/raw_hazard/2019-05-21.png"
+    },
+    {
+      "date": "2019-06-01",
+      "file": "frames/raw_hazard/2019-06-01.png"
+    },
+    {
+      "date": "2019-06-11",
+      "file": "frames/raw_hazard/2019-06-11.png"
+    },
+    {
+      "date": "2019-06-21",
+      "file": "frames/raw_hazard/2019-06-21.png"
+    },
+    {
+      "date": "2019-07-01",
+      "file": "frames/raw_hazard/2019-07-01.png"
+    },
+    {
+      "date": "2019-07-11",
+      "file": "frames/raw_hazard/2019-07-11.png"
+    },
+    {
+      "date": "2019-07-21",
+      "file": "frames/raw_hazard/2019-07-21.png"
+    },
+    {
+      "date": "2019-08-01",
+      "file": "frames/raw_hazard/2019-08-01.png"
+    },
+    {
+      "date": "2019-08-11",
+      "file": "frames/raw_hazard/2019-08-11.png"
+    },
+    {
+      "date": "2019-08-21",
+      "file": "frames/raw_hazard/2019-08-21.png"
+    },
+    {
+      "date": "2019-09-01",
+      "file": "frames/raw_hazard/2019-09-01.png"
+    },
+    {
+      "date": "2019-09-11",
+      "file": "frames/raw_hazard/2019-09-11.png"
+    },
+    {
+      "date": "2019-09-21",
+      "file": "frames/raw_hazard/2019-09-21.png"
+    },
+    {
+      "date": "2019-10-01",
+      "file": "frames/raw_hazard/2019-10-01.png"
+    },
+    {
+      "date": "2019-10-11",
+      "file": "frames/raw_hazard/2019-10-11.png"
+    },
+    {
+      "date": "2019-10-21",
+      "file": "frames/raw_hazard/2019-10-21.png"
+    },
+    {
+      "date": "2019-11-01",
+      "file": "frames/raw_hazard/2019-11-01.png"
+    },
+    {
+      "date": "2019-11-11",
+      "file": "frames/raw_hazard/2019-11-11.png"
+    },
+    {
+      "date": "2019-11-21",
+      "file": "frames/raw_hazard/2019-11-21.png"
+    },
+    {
+      "date": "2019-12-01",
+      "file": "frames/raw_hazard/2019-12-01.png"
+    },
+    {
+      "date": "2019-12-11",
+      "file": "frames/raw_hazard/2019-12-11.png"
+    },
+    {
+      "date": "2019-12-21",
+      "file": "frames/raw_hazard/2019-12-21.png"
+    },
+    {
+      "date": "2020-01-01",
+      "file": "frames/raw_hazard/2020-01-01.png"
+    },
+    {
+      "date": "2020-01-11",
+      "file": "frames/raw_hazard/2020-01-11.png"
+    },
+    {
+      "date": "2020-01-21",
+      "file": "frames/raw_hazard/2020-01-21.png"
+    },
+    {
+      "date": "2020-02-01",
+      "file": "frames/raw_hazard/2020-02-01.png"
+    },
+    {
+      "date": "2020-02-11",
+      "file": "frames/raw_hazard/2020-02-11.png"
+    },
+    {
+      "date": "2020-02-21",
+      "file": "frames/raw_hazard/2020-02-21.png"
+    },
+    {
+      "date": "2020-03-01",
+      "file": "frames/raw_hazard/2020-03-01.png"
+    },
+    {
+      "date": "2020-03-11",
+      "file": "frames/raw_hazard/2020-03-11.png"
+    },
+    {
+      "date": "2020-03-21",
+      "file": "frames/raw_hazard/2020-03-21.png"
+    },
+    {
+      "date": "2020-04-01",
+      "file": "frames/raw_hazard/2020-04-01.png"
+    },
+    {
+      "date": "2020-04-11",
+      "file": "frames/raw_hazard/2020-04-11.png"
+    },
+    {
+      "date": "2020-04-21",
+      "file": "frames/raw_hazard/2020-04-21.png"
+    },
+    {
+      "date": "2020-05-01",
+      "file": "frames/raw_hazard/2020-05-01.png"
+    },
+    {
+      "date": "2020-05-11",
+      "file": "frames/raw_hazard/2020-05-11.png"
+    },
+    {
+      "date": "2020-05-21",
+      "file": "frames/raw_hazard/2020-05-21.png"
+    },
+    {
+      "date": "2020-06-01",
+      "file": "frames/raw_hazard/2020-06-01.png"
+    },
+    {
+      "date": "2020-06-11",
+      "file": "frames/raw_hazard/2020-06-11.png"
+    },
+    {
+      "date": "2020-06-21",
+      "file": "frames/raw_hazard/2020-06-21.png"
+    },
+    {
+      "date": "2020-07-01",
+      "file": "frames/raw_hazard/2020-07-01.png"
+    },
+    {
+      "date": "2020-07-11",
+      "file": "frames/raw_hazard/2020-07-11.png"
+    },
+    {
+      "date": "2020-07-21",
+      "file": "frames/raw_hazard/2020-07-21.png"
+    },
+    {
+      "date": "2020-08-01",
+      "file": "frames/raw_hazard/2020-08-01.png"
+    },
+    {
+      "date": "2020-08-11",
+      "file": "frames/raw_hazard/2020-08-11.png"
+    },
+    {
+      "date": "2020-08-21",
+      "file": "frames/raw_hazard/2020-08-21.png"
+    },
+    {
+      "date": "2020-09-01",
+      "file": "frames/raw_hazard/2020-09-01.png"
+    },
+    {
+      "date": "2020-09-11",
+      "file": "frames/raw_hazard/2020-09-11.png"
+    },
+    {
+      "date": "2020-09-21",
+      "file": "frames/raw_hazard/2020-09-21.png"
+    },
+    {
+      "date": "2020-10-01",
+      "file": "frames/raw_hazard/2020-10-01.png"
+    },
+    {
+      "date": "2020-10-11",
+      "file": "frames/raw_hazard/2020-10-11.png"
+    },
+    {
+      "date": "2020-10-21",
+      "file": "frames/raw_hazard/2020-10-21.png"
+    },
+    {
+      "date": "2020-11-01",
+      "file": "frames/raw_hazard/2020-11-01.png"
+    },
+    {
+      "date": "2020-11-11",
+      "file": "frames/raw_hazard/2020-11-11.png"
+    },
+    {
+      "date": "2020-11-21",
+      "file": "frames/raw_hazard/2020-11-21.png"
+    },
+    {
+      "date": "2020-12-01",
+      "file": "frames/raw_hazard/2020-12-01.png"
+    },
+    {
+      "date": "2020-12-11",
+      "file": "frames/raw_hazard/2020-12-11.png"
+    },
+    {
+      "date": "2020-12-21",
+      "file": "frames/raw_hazard/2020-12-21.png"
+    },
+    {
+      "date": "2021-01-01",
+      "file": "frames/raw_hazard/2021-01-01.png"
+    },
+    {
+      "date": "2021-01-11",
+      "file": "frames/raw_hazard/2021-01-11.png"
+    },
+    {
+      "date": "2021-01-21",
+      "file": "frames/raw_hazard/2021-01-21.png"
+    },
+    {
+      "date": "2021-02-01",
+      "file": "frames/raw_hazard/2021-02-01.png"
+    },
+    {
+      "date": "2021-02-11",
+      "file": "frames/raw_hazard/2021-02-11.png"
+    },
+    {
+      "date": "2021-02-21",
+      "file": "frames/raw_hazard/2021-02-21.png"
+    },
+    {
+      "date": "2021-03-01",
+      "file": "frames/raw_hazard/2021-03-01.png"
+    },
+    {
+      "date": "2021-03-11",
+      "file": "frames/raw_hazard/2021-03-11.png"
+    },
+    {
+      "date": "2021-03-21",
+      "file": "frames/raw_hazard/2021-03-21.png"
+    },
+    {
+      "date": "2021-04-01",
+      "file": "frames/raw_hazard/2021-04-01.png"
+    },
+    {
+      "date": "2021-04-11",
+      "file": "frames/raw_hazard/2021-04-11.png"
+    },
+    {
+      "date": "2021-04-21",
+      "file": "frames/raw_hazard/2021-04-21.png"
+    },
+    {
+      "date": "2021-05-01",
+      "file": "frames/raw_hazard/2021-05-01.png"
+    },
+    {
+      "date": "2021-05-11",
+      "file": "frames/raw_hazard/2021-05-11.png"
+    },
+    {
+      "date": "2021-05-21",
+      "file": "frames/raw_hazard/2021-05-21.png"
+    },
+    {
+      "date": "2021-06-01",
+      "file": "frames/raw_hazard/2021-06-01.png"
+    },
+    {
+      "date": "2021-06-11",
+      "file": "frames/raw_hazard/2021-06-11.png"
+    },
+    {
+      "date": "2021-06-21",
+      "file": "frames/raw_hazard/2021-06-21.png"
+    },
+    {
+      "date": "2021-07-01",
+      "file": "frames/raw_hazard/2021-07-01.png"
+    },
+    {
+      "date": "2021-07-11",
+      "file": "frames/raw_hazard/2021-07-11.png"
+    },
+    {
+      "date": "2021-07-21",
+      "file": "frames/raw_hazard/2021-07-21.png"
+    },
+    {
+      "date": "2021-08-01",
+      "file": "frames/raw_hazard/2021-08-01.png"
+    },
+    {
+      "date": "2021-08-11",
+      "file": "frames/raw_hazard/2021-08-11.png"
+    },
+    {
+      "date": "2021-08-21",
+      "file": "frames/raw_hazard/2021-08-21.png"
+    },
+    {
+      "date": "2021-09-01",
+      "file": "frames/raw_hazard/2021-09-01.png"
+    },
+    {
+      "date": "2021-09-11",
+      "file": "frames/raw_hazard/2021-09-11.png"
+    },
+    {
+      "date": "2021-09-21",
+      "file": "frames/raw_hazard/2021-09-21.png"
+    },
+    {
+      "date": "2021-10-01",
+      "file": "frames/raw_hazard/2021-10-01.png"
+    },
+    {
+      "date": "2021-10-11",
+      "file": "frames/raw_hazard/2021-10-11.png"
+    },
+    {
+      "date": "2021-10-21",
+      "file": "frames/raw_hazard/2021-10-21.png"
+    },
+    {
+      "date": "2021-11-01",
+      "file": "frames/raw_hazard/2021-11-01.png"
+    },
+    {
+      "date": "2021-11-11",
+      "file": "frames/raw_hazard/2021-11-11.png"
+    },
+    {
+      "date": "2021-11-21",
+      "file": "frames/raw_hazard/2021-11-21.png"
+    },
+    {
+      "date": "2021-12-01",
+      "file": "frames/raw_hazard/2021-12-01.png"
+    },
+    {
+      "date": "2021-12-11",
+      "file": "frames/raw_hazard/2021-12-11.png"
+    },
+    {
+      "date": "2021-12-21",
+      "file": "frames/raw_hazard/2021-12-21.png"
+    }
+  ]
+}
