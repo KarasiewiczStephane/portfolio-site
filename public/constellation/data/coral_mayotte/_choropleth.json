@@ -1,0 +1,85 @@
+{
+  "years": [
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "score_property": "score_{year}",
+  "scale": {
+    "unit": "1-10 DHW heat-stress score (higher = worse)",
+    "how_it_works": "Derived from Degree Heating Weeks (NOAA Coral Reef Watch): accumulated heat stress over a rolling 12-week window, in degC-weeks. Rescaled onto a 1-10 severity band anchored on the calibrated (resilience-shifted) bleaching-alert ladder.",
+    "anchors": [
+      {
+        "score": 1,
+        "meaning": "DHW 0: no accumulated heat stress"
+      },
+      {
+        "score": 4,
+        "meaning": "DHW 2.2: bleaching watch, tier-1 payout"
+      },
+      {
+        "score": 7,
+        "meaning": "DHW 4.9: bleaching likely, tier-2"
+      },
+      {
+        "score": 10,
+        "meaning": "DHW >= 7.5: mortality likely, full payout"
+      }
+    ]
+  },
+  "ramp": [
+    {
+      "score": 1,
+      "color": "#1a9850"
+    },
+    {
+      "score": 2,
+      "color": "#66bd63"
+    },
+    {
+      "score": 3,
+      "color": "#a6d96a"
+    },
+    {
+      "score": 4,
+      "color": "#d9ef8b"
+    },
+    {
+      "score": 5,
+      "color": "#fee08b"
+    },
+    {
+      "score": 6,
+      "color": "#fdae61"
+    },
+    {
+      "score": 7,
+      "color": "#f46d43"
+    },
+    {
+      "score": 8,
+      "color": "#d73027"
+    },
+    {
+      "score": 9,
+      "color": "#bd0026"
+    },
+    {
+      "score": 10,
+      "color": "#800026"
+    }
+  ]
+}

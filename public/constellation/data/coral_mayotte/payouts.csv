@@ -1,0 +1,65 @@
+polygon,year,peak_index,tier,payout_pct,payout_eur
+Eastern barrier,2009,0.4300000071525574,0,0.0,0.0
+Eastern barrier,2010,3.9800000190734863,1,25.0,62500.0
+Eastern barrier,2011,0.0,0,0.0,0.0
+Eastern barrier,2012,0.0,0,0.0,0.0
+Eastern barrier,2013,0.46000000834465027,0,0.0,0.0
+Eastern barrier,2014,0.0,0,0.0,0.0
+Eastern barrier,2015,0.0,0,0.0,0.0
+Eastern barrier,2016,3.140000104904175,1,25.0,62500.0
+Eastern barrier,2017,0.0,0,0.0,0.0
+Eastern barrier,2018,0.1599999964237213,0,0.0,0.0
+Eastern barrier,2019,2.759999990463257,1,25.0,62500.0
+Eastern barrier,2020,0.49000000953674316,0,0.0,0.0
+Eastern barrier,2021,0.3100000023841858,0,0.0,0.0
+Eastern barrier,2022,0.0,0,0.0,0.0
+Eastern barrier,2023,0.9900000095367432,0,0.0,0.0
+Eastern barrier,2024,9.079999923706055,3,100.0,250000.0
+Northern barrier,2009,0.44999998807907104,0,0.0,0.0
+Northern barrier,2010,2.319999933242798,1,25.0,62500.0
+Northern barrier,2011,0.0,0,0.0,0.0
+Northern barrier,2012,0.0,0,0.0,0.0
+Northern barrier,2013,0.28999999165534973,0,0.0,0.0
+Northern barrier,2014,0.0,0,0.0,0.0
+Northern barrier,2015,0.0,0,0.0,0.0
+Northern barrier,2016,4.329999923706055,1,25.0,62500.0
+Northern barrier,2017,0.0,0,0.0,0.0
+Northern barrier,2018,0.17000000178813934,0,0.0,0.0
+Northern barrier,2019,1.1299999952316284,0,0.0,0.0
+Northern barrier,2020,0.30000001192092896,0,0.0,0.0
+Northern barrier,2021,0.15000000596046448,0,0.0,0.0
+Northern barrier,2022,0.0,0,0.0,0.0
+Northern barrier,2023,0.6100000143051147,0,0.0,0.0
+Northern barrier,2024,7.619999885559082,3,100.0,250000.0
+SW double barrier (Passe en S),2009,0.4399999976158142,0,0.0,0.0
+SW double barrier (Passe en S),2010,2.4600000381469727,1,25.0,62500.0
+SW double barrier (Passe en S),2011,0.0,0,0.0,0.0
+SW double barrier (Passe en S),2012,0.0,0,0.0,0.0
+SW double barrier (Passe en S),2013,0.0,0,0.0,0.0
+SW double barrier (Passe en S),2014,0.0,0,0.0,0.0
+SW double barrier (Passe en S),2015,0.0,0,0.0,0.0
+SW double barrier (Passe en S),2016,4.190000057220459,1,25.0,62500.0
+SW double barrier (Passe en S),2017,0.0,0,0.0,0.0
+SW double barrier (Passe en S),2018,0.0,0,0.0,0.0
+SW double barrier (Passe en S),2019,0.8899999856948853,0,0.0,0.0
+SW double barrier (Passe en S),2020,0.28999999165534973,0,0.0,0.0
+SW double barrier (Passe en S),2021,0.0,0,0.0,0.0
+SW double barrier (Passe en S),2022,0.0,0,0.0,0.0
+SW double barrier (Passe en S),2023,0.8399999737739563,0,0.0,0.0
+SW double barrier (Passe en S),2024,7.28000020980835,2,60.0,150000.0
+Southern barrier,2009,0.4399999976158142,0,0.0,0.0
+Southern barrier,2010,3.049999952316284,1,25.0,62500.0
+Southern barrier,2011,0.0,0,0.0,0.0
+Southern barrier,2012,0.0,0,0.0,0.0
+Southern barrier,2013,0.30000001192092896,0,0.0,0.0
+Southern barrier,2014,0.0,0,0.0,0.0
+Southern barrier,2015,0.0,0,0.0,0.0
+Southern barrier,2016,3.509999990463257,1,25.0,62500.0
+Southern barrier,2017,0.0,0,0.0,0.0
+Southern barrier,2018,0.15000000596046448,0,0.0,0.0
+Southern barrier,2019,2.869999885559082,1,25.0,62500.0
+Southern barrier,2020,0.3400000035762787,0,0.0,0.0
+Southern barrier,2021,0.14000000059604645,0,0.0,0.0
+Southern barrier,2022,0.0,0,0.0,0.0
+Southern barrier,2023,0.9700000286102295,0,0.0,0.0
+Southern barrier,2024,7.949999809265137,3,100.0,250000.0

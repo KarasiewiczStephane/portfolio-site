@@ -1,0 +1,38 @@
+{
+  "poc": "coral_mayotte",
+  "peril": "dhw",
+  "display_name": "Mayotte \u2014 barrier reef DHW (real NOAA Coral Reef Watch 5km)",
+  "region": "mayotte",
+  "sst_source": "noaa_crw",
+  "analysis_period": [
+    2009,
+    2024
+  ],
+  "limit_eur": 250000.0,
+  "total_payout_eur": 1525000.0,
+  "n_sectors_triggered": 4,
+  "basis_risk": {
+    "spatial": {
+      "status": "ok",
+      "metric": "aggregation_spatial_std_degCweeks",
+      "mean_spatial_std": 0.1606
+    },
+    "prediction": {
+      "n_years": 16,
+      "hit_rate": 1.0,
+      "false_positive_rate": 0.07692307692307693,
+      "basis_risk_gap": 0.193,
+      "years_paid": [
+        2010,
+        2016,
+        2019,
+        2024
+      ],
+      "years_damaging": [
+        2010,
+        2016,
+        2024
+      ]
+    }
+  }
+}

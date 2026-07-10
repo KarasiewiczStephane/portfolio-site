@@ -1,0 +1,898 @@
+{
+  "stage": "raw_hazard",
+  "cmap": "turbo",
+  "vmin": 25.531429290771484,
+  "vmax": 30.45571517944336,
+  "bounds": [
+    [
+      44.949998431735565,
+      -12.549999800595371
+    ],
+    [
+      45.449999279446075,
+      -12.549999800595371
+    ],
+    [
+      45.449999279446075,
+      -13.150000008669766
+    ],
+    [
+      44.949998431735565,
+      -13.150000008669766
+    ]
+  ],
+  "bbox": [
+    44.949998431735565,
+    -13.150000008669766,
+    45.449999279446075,
+    -12.549999800595371
+  ],
+  "classes": [
+    {
+      "level": 25.531,
+      "color": "#30123b"
+    },
+    {
+      "level": 26.516,
+      "color": "#3e9bfe"
+    },
+    {
+      "level": 27.501,
+      "color": "#46f884"
+    },
+    {
+      "level": 28.486,
+      "color": "#e1dd37"
+    },
+    {
+      "level": 29.471,
+      "color": "#f05b12"
+    },
+    {
+      "level": 30.456,
+      "color": "#7a0403"
+    }
+  ],
+  "frames": [
+    {
+      "date": "2010-01-01",
+      "file": "frames/raw_hazard/2010-01-01.png"
+    },
+    {
+      "date": "2010-01-08",
+      "file": "frames/raw_hazard/2010-01-08.png"
+    },
+    {
+      "date": "2010-01-15",
+      "file": "frames/raw_hazard/2010-01-15.png"
+    },
+    {
+      "date": "2010-01-22",
+      "file": "frames/raw_hazard/2010-01-22.png"
+    },
+    {
+      "date": "2010-01-29",
+      "file": "frames/raw_hazard/2010-01-29.png"
+    },
+    {
+      "date": "2010-02-05",
+      "file": "frames/raw_hazard/2010-02-05.png"
+    },
+    {
+      "date": "2010-02-12",
+      "file": "frames/raw_hazard/2010-02-12.png"
+    },
+    {
+      "date": "2010-02-19",
+      "file": "frames/raw_hazard/2010-02-19.png"
+    },
+    {
+      "date": "2010-02-26",
+      "file": "frames/raw_hazard/2010-02-26.png"
+    },
+    {
+      "date": "2010-03-05",
+      "file": "frames/raw_hazard/2010-03-05.png"
+    },
+    {
+      "date": "2010-03-12",
+      "file": "frames/raw_hazard/2010-03-12.png"
+    },
+    {
+      "date": "2010-03-19",
+      "file": "frames/raw_hazard/2010-03-19.png"
+    },
+    {
+      "date": "2010-03-26",
+      "file": "frames/raw_hazard/2010-03-26.png"
+    },
+    {
+      "date": "2010-04-02",
+      "file": "frames/raw_hazard/2010-04-02.png"
+    },
+    {
+      "date": "2010-04-09",
+      "file": "frames/raw_hazard/2010-04-09.png"
+    },
+    {
+      "date": "2010-04-16",
+      "file": "frames/raw_hazard/2010-04-16.png"
+    },
+    {
+      "date": "2010-04-23",
+      "file": "frames/raw_hazard/2010-04-23.png"
+    },
+    {
+      "date": "2010-04-30",
+      "file": "frames/raw_hazard/2010-04-30.png"
+    },
+    {
+      "date": "2010-05-07",
+      "file": "frames/raw_hazard/2010-05-07.png"
+    },
+    {
+      "date": "2010-05-14",
+      "file": "frames/raw_hazard/2010-05-14.png"
+    },
+    {
+      "date": "2010-05-21",
+      "file": "frames/raw_hazard/2010-05-21.png"
+    },
+    {
+      "date": "2010-05-28",
+      "file": "frames/raw_hazard/2010-05-28.png"
+    },
+    {
+      "date": "2010-06-04",
+      "file": "frames/raw_hazard/2010-06-04.png"
+    },
+    {
+      "date": "2010-06-11",
+      "file": "frames/raw_hazard/2010-06-11.png"
+    },
+    {
+      "date": "2010-06-18",
+      "file": "frames/raw_hazard/2010-06-18.png"
+    },
+    {
+      "date": "2010-06-25",
+      "file": "frames/raw_hazard/2010-06-25.png"
+    },
+    {
+      "date": "2010-07-02",
+      "file": "frames/raw_hazard/2010-07-02.png"
+    },
+    {
+      "date": "2010-07-09",
+      "file": "frames/raw_hazard/2010-07-09.png"
+    },
+    {
+      "date": "2010-07-16",
+      "file": "frames/raw_hazard/2010-07-16.png"
+    },
+    {
+      "date": "2010-07-23",
+      "file": "frames/raw_hazard/2010-07-23.png"
+    },
+    {
+      "date": "2010-07-30",
+      "file": "frames/raw_hazard/2010-07-30.png"
+    },
+    {
+      "date": "2010-08-06",
+      "file": "frames/raw_hazard/2010-08-06.png"
+    },
+    {
+      "date": "2010-08-13",
+      "file": "frames/raw_hazard/2010-08-13.png"
+    },
+    {
+      "date": "2010-08-20",
+      "file": "frames/raw_hazard/2010-08-20.png"
+    },
+    {
+      "date": "2010-08-27",
+      "file": "frames/raw_hazard/2010-08-27.png"
+    },
+    {
+      "date": "2010-09-03",
+      "file": "frames/raw_hazard/2010-09-03.png"
+    },
+    {
+      "date": "2010-09-10",
+      "file": "frames/raw_hazard/2010-09-10.png"
+    },
+    {
+      "date": "2010-09-17",
+      "file": "frames/raw_hazard/2010-09-17.png"
+    },
+    {
+      "date": "2010-09-24",
+      "file": "frames/raw_hazard/2010-09-24.png"
+    },
+    {
+      "date": "2010-10-01",
+      "file": "frames/raw_hazard/2010-10-01.png"
+    },
+    {
+      "date": "2010-10-08",
+      "file": "frames/raw_hazard/2010-10-08.png"
+    },
+    {
+      "date": "2010-10-15",
+      "file": "frames/raw_hazard/2010-10-15.png"
+    },
+    {
+      "date": "2010-10-22",
+      "file": "frames/raw_hazard/2010-10-22.png"
+    },
+    {
+      "date": "2010-10-29",
+      "file": "frames/raw_hazard/2010-10-29.png"
+    },
+    {
+      "date": "2010-11-05",
+      "file": "frames/raw_hazard/2010-11-05.png"
+    },
+    {
+      "date": "2010-11-12",
+      "file": "frames/raw_hazard/2010-11-12.png"
+    },
+    {
+      "date": "2010-11-19",
+      "file": "frames/raw_hazard/2010-11-19.png"
+    },
+    {
+      "date": "2010-11-26",
+      "file": "frames/raw_hazard/2010-11-26.png"
+    },
+    {
+      "date": "2010-12-03",
+      "file": "frames/raw_hazard/2010-12-03.png"
+    },
+    {
+      "date": "2010-12-10",
+      "file": "frames/raw_hazard/2010-12-10.png"
+    },
+    {
+      "date": "2010-12-17",
+      "file": "frames/raw_hazard/2010-12-17.png"
+    },
+    {
+      "date": "2010-12-24",
+      "file": "frames/raw_hazard/2010-12-24.png"
+    },
+    {
+      "date": "2010-12-31",
+      "file": "frames/raw_hazard/2010-12-31.png"
+    },
+    {
+      "date": "2016-01-01",
+      "file": "frames/raw_hazard/2016-01-01.png"
+    },
+    {
+      "date": "2016-01-08",
+      "file": "frames/raw_hazard/2016-01-08.png"
+    },
+    {
+      "date": "2016-01-15",
+      "file": "frames/raw_hazard/2016-01-15.png"
+    },
+    {
+      "date": "2016-01-22",
+      "file": "frames/raw_hazard/2016-01-22.png"
+    },
+    {
+      "date": "2016-01-29",
+      "file": "frames/raw_hazard/2016-01-29.png"
+    },
+    {
+      "date": "2016-02-05",
+      "file": "frames/raw_hazard/2016-02-05.png"
+    },
+    {
+      "date": "2016-02-12",
+      "file": "frames/raw_hazard/2016-02-12.png"
+    },
+    {
+      "date": "2016-02-19",
+      "file": "frames/raw_hazard/2016-02-19.png"
+    },
+    {
+      "date": "2016-02-26",
+      "file": "frames/raw_hazard/2016-02-26.png"
+    },
+    {
+      "date": "2016-03-04",
+      "file": "frames/raw_hazard/2016-03-04.png"
+    },
+    {
+      "date": "2016-03-11",
+      "file": "frames/raw_hazard/2016-03-11.png"
+    },
+    {
+      "date": "2016-03-18",
+      "file": "frames/raw_hazard/2016-03-18.png"
+    },
+    {
+      "date": "2016-03-25",
+      "file": "frames/raw_hazard/2016-03-25.png"
+    },
+    {
+      "date": "2016-04-01",
+      "file": "frames/raw_hazard/2016-04-01.png"
+    },
+    {
+      "date": "2016-04-08",
+      "file": "frames/raw_hazard/2016-04-08.png"
+    },
+    {
+      "date": "2016-04-15",
+      "file": "frames/raw_hazard/2016-04-15.png"
+    },
+    {
+      "date": "2016-04-22",
+      "file": "frames/raw_hazard/2016-04-22.png"
+    },
+    {
+      "date": "2016-04-29",
+      "file": "frames/raw_hazard/2016-04-29.png"
+    },
+    {
+      "date": "2016-05-06",
+      "file": "frames/raw_hazard/2016-05-06.png"
+    },
+    {
+      "date": "2016-05-13",
+      "file": "frames/raw_hazard/2016-05-13.png"
+    },
+    {
+      "date": "2016-05-20",
+      "file": "frames/raw_hazard/2016-05-20.png"
+    },
+    {
+      "date": "2016-05-27",
+      "file": "frames/raw_hazard/2016-05-27.png"
+    },
+    {
+      "date": "2016-06-03",
+      "file": "frames/raw_hazard/2016-06-03.png"
+    },
+    {
+      "date": "2016-06-10",
+      "file": "frames/raw_hazard/2016-06-10.png"
+    },
+    {
+      "date": "2016-06-17",
+      "file": "frames/raw_hazard/2016-06-17.png"
+    },
+    {
+      "date": "2016-06-24",
+      "file": "frames/raw_hazard/2016-06-24.png"
+    },
+    {
+      "date": "2016-07-01",
+      "file": "frames/raw_hazard/2016-07-01.png"
+    },
+    {
+      "date": "2016-07-08",
+      "file": "frames/raw_hazard/2016-07-08.png"
+    },
+    {
+      "date": "2016-07-15",
+      "file": "frames/raw_hazard/2016-07-15.png"
+    },
+    {
+      "date": "2016-07-22",
+      "file": "frames/raw_hazard/2016-07-22.png"
+    },
+    {
+      "date": "2016-07-29",
+      "file": "frames/raw_hazard/2016-07-29.png"
+    },
+    {
+      "date": "2016-08-05",
+      "file": "frames/raw_hazard/2016-08-05.png"
+    },
+    {
+      "date": "2016-08-12",
+      "file": "frames/raw_hazard/2016-08-12.png"
+    },
+    {
+      "date": "2016-08-19",
+      "file": "frames/raw_hazard/2016-08-19.png"
+    },
+    {
+      "date": "2016-08-26",
+      "file": "frames/raw_hazard/2016-08-26.png"
+    },
+    {
+      "date": "2016-09-02",
+      "file": "frames/raw_hazard/2016-09-02.png"
+    },
+    {
+      "date": "2016-09-09",
+      "file": "frames/raw_hazard/2016-09-09.png"
+    },
+    {
+      "date": "2016-09-16",
+      "file": "frames/raw_hazard/2016-09-16.png"
+    },
+    {
+      "date": "2016-09-23",
+      "file": "frames/raw_hazard/2016-09-23.png"
+    },
+    {
+      "date": "2016-09-30",
+      "file": "frames/raw_hazard/2016-09-30.png"
+    },
+    {
+      "date": "2016-10-07",
+      "file": "frames/raw_hazard/2016-10-07.png"
+    },
+    {
+      "date": "2016-10-14",
+      "file": "frames/raw_hazard/2016-10-14.png"
+    },
+    {
+      "date": "2016-10-21",
+      "file": "frames/raw_hazard/2016-10-21.png"
+    },
+    {
+      "date": "2016-10-28",
+      "file": "frames/raw_hazard/2016-10-28.png"
+    },
+    {
+      "date": "2016-11-04",
+      "file": "frames/raw_hazard/2016-11-04.png"
+    },
+    {
+      "date": "2016-11-11",
+      "file": "frames/raw_hazard/2016-11-11.png"
+    },
+    {
+      "date": "2016-11-18",
+      "file": "frames/raw_hazard/2016-11-18.png"
+    },
+    {
+      "date": "2016-11-25",
+      "file": "frames/raw_hazard/2016-11-25.png"
+    },
+    {
+      "date": "2016-12-02",
+      "file": "frames/raw_hazard/2016-12-02.png"
+    },
+    {
+      "date": "2016-12-09",
+      "file": "frames/raw_hazard/2016-12-09.png"
+    },
+    {
+      "date": "2016-12-16",
+      "file": "frames/raw_hazard/2016-12-16.png"
+    },
+    {
+      "date": "2016-12-23",
+      "file": "frames/raw_hazard/2016-12-23.png"
+    },
+    {
+      "date": "2016-12-30",
+      "file": "frames/raw_hazard/2016-12-30.png"
+    },
+    {
+      "date": "2019-01-04",
+      "file": "frames/raw_hazard/2019-01-04.png"
+    },
+    {
+      "date": "2019-01-11",
+      "file": "frames/raw_hazard/2019-01-11.png"
+    },
+    {
+      "date": "2019-01-18",
+      "file": "frames/raw_hazard/2019-01-18.png"
+    },
+    {
+      "date": "2019-01-25",
+      "file": "frames/raw_hazard/2019-01-25.png"
+    },
+    {
+      "date": "2019-02-01",
+      "file": "frames/raw_hazard/2019-02-01.png"
+    },
+    {
+      "date": "2019-02-08",
+      "file": "frames/raw_hazard/2019-02-08.png"
+    },
+    {
+      "date": "2019-02-15",
+      "file": "frames/raw_hazard/2019-02-15.png"
+    },
+    {
+      "date": "2019-02-22",
+      "file": "frames/raw_hazard/2019-02-22.png"
+    },
+    {
+      "date": "2019-03-01",
+      "file": "frames/raw_hazard/2019-03-01.png"
+    },
+    {
+      "date": "2019-03-08",
+      "file": "frames/raw_hazard/2019-03-08.png"
+    },
+    {
+      "date": "2019-03-15",
+      "file": "frames/raw_hazard/2019-03-15.png"
+    },
+    {
+      "date": "2019-03-22",
+      "file": "frames/raw_hazard/2019-03-22.png"
+    },
+    {
+      "date": "2019-03-29",
+      "file": "frames/raw_hazard/2019-03-29.png"
+    },
+    {
+      "date": "2019-04-05",
+      "file": "frames/raw_hazard/2019-04-05.png"
+    },
+    {
+      "date": "2019-04-12",
+      "file": "frames/raw_hazard/2019-04-12.png"
+    },
+    {
+      "date": "2019-04-19",
+      "file": "frames/raw_hazard/2019-04-19.png"
+    },
+    {
+      "date": "2019-04-26",
+      "file": "frames/raw_hazard/2019-04-26.png"
+    },
+    {
+      "date": "2019-05-03",
+      "file": "frames/raw_hazard/2019-05-03.png"
+    },
+    {
+      "date": "2019-05-10",
+      "file": "frames/raw_hazard/2019-05-10.png"
+    },
+    {
+      "date": "2019-05-17",
+      "file": "frames/raw_hazard/2019-05-17.png"
+    },
+    {
+      "date": "2019-05-24",
+      "file": "frames/raw_hazard/2019-05-24.png"
+    },
+    {
+      "date": "2019-05-31",
+      "file": "frames/raw_hazard/2019-05-31.png"
+    },
+    {
+      "date": "2019-06-07",
+      "file": "frames/raw_hazard/2019-06-07.png"
+    },
+    {
+      "date": "2019-06-14",
+      "file": "frames/raw_hazard/2019-06-14.png"
+    },
+    {
+      "date": "2019-06-21",
+      "file": "frames/raw_hazard/2019-06-21.png"
+    },
+    {
+      "date": "2019-06-28",
+      "file": "frames/raw_hazard/2019-06-28.png"
+    },
+    {
+      "date": "2019-07-05",
+      "file": "frames/raw_hazard/2019-07-05.png"
+    },
+    {
+      "date": "2019-07-12",
+      "file": "frames/raw_hazard/2019-07-12.png"
+    },
+    {
+      "date": "2019-07-19",
+      "file": "frames/raw_hazard/2019-07-19.png"
+    },
+    {
+      "date": "2019-07-26",
+      "file": "frames/raw_hazard/2019-07-26.png"
+    },
+    {
+      "date": "2019-08-02",
+      "file": "frames/raw_hazard/2019-08-02.png"
+    },
+    {
+      "date": "2019-08-09",
+      "file": "frames/raw_hazard/2019-08-09.png"
+    },
+    {
+      "date": "2019-08-16",
+      "file": "frames/raw_hazard/2019-08-16.png"
+    },
+    {
+      "date": "2019-08-23",
+      "file": "frames/raw_hazard/2019-08-23.png"
+    },
+    {
+      "date": "2019-08-30",
+      "file": "frames/raw_hazard/2019-08-30.png"
+    },
+    {
+      "date": "2019-09-06",
+      "file": "frames/raw_hazard/2019-09-06.png"
+    },
+    {
+      "date": "2019-09-13",
+      "file": "frames/raw_hazard/2019-09-13.png"
+    },
+    {
+      "date": "2019-09-20",
+      "file": "frames/raw_hazard/2019-09-20.png"
+    },
+    {
+      "date": "2019-09-27",
+      "file": "frames/raw_hazard/2019-09-27.png"
+    },
+    {
+      "date": "2019-10-04",
+      "file": "frames/raw_hazard/2019-10-04.png"
+    },
+    {
+      "date": "2019-10-11",
+      "file": "frames/raw_hazard/2019-10-11.png"
+    },
+    {
+      "date": "2019-10-18",
+      "file": "frames/raw_hazard/2019-10-18.png"
+    },
+    {
+      "date": "2019-10-25",
+      "file": "frames/raw_hazard/2019-10-25.png"
+    },
+    {
+      "date": "2019-11-01",
+      "file": "frames/raw_hazard/2019-11-01.png"
+    },
+    {
+      "date": "2019-11-08",
+      "file": "frames/raw_hazard/2019-11-08.png"
+    },
+    {
+      "date": "2019-11-15",
+      "file": "frames/raw_hazard/2019-11-15.png"
+    },
+    {
+      "date": "2019-11-22",
+      "file": "frames/raw_hazard/2019-11-22.png"
+    },
+    {
+      "date": "2019-11-29",
+      "file": "frames/raw_hazard/2019-11-29.png"
+    },
+    {
+      "date": "2019-12-06",
+      "file": "frames/raw_hazard/2019-12-06.png"
+    },
+    {
+      "date": "2019-12-13",
+      "file": "frames/raw_hazard/2019-12-13.png"
+    },
+    {
+      "date": "2019-12-20",
+      "file": "frames/raw_hazard/2019-12-20.png"
+    },
+    {
+      "date": "2019-12-27",
+      "file": "frames/raw_hazard/2019-12-27.png"
+    },
+    {
+      "date": "2024-01-05",
+      "file": "frames/raw_hazard/2024-01-05.png"
+    },
+    {
+      "date": "2024-01-12",
+      "file": "frames/raw_hazard/2024-01-12.png"
+    },
+    {
+      "date": "2024-01-19",
+      "file": "frames/raw_hazard/2024-01-19.png"
+    },
+    {
+      "date": "2024-01-26",
+      "file": "frames/raw_hazard/2024-01-26.png"
+    },
+    {
+      "date": "2024-02-02",
+      "file": "frames/raw_hazard/2024-02-02.png"
+    },
+    {
+      "date": "2024-02-09",
+      "file": "frames/raw_hazard/2024-02-09.png"
+    },
+    {
+      "date": "2024-02-16",
+      "file": "frames/raw_hazard/2024-02-16.png"
+    },
+    {
+      "date": "2024-02-23",
+      "file": "frames/raw_hazard/2024-02-23.png"
+    },
+    {
+      "date": "2024-03-01",
+      "file": "frames/raw_hazard/2024-03-01.png"
+    },
+    {
+      "date": "2024-03-08",
+      "file": "frames/raw_hazard/2024-03-08.png"
+    },
+    {
+      "date": "2024-03-15",
+      "file": "frames/raw_hazard/2024-03-15.png"
+    },
+    {
+      "date": "2024-03-22",
+      "file": "frames/raw_hazard/2024-03-22.png"
+    },
+    {
+      "date": "2024-03-29",
+      "file": "frames/raw_hazard/2024-03-29.png"
+    },
+    {
+      "date": "2024-04-05",
+      "file": "frames/raw_hazard/2024-04-05.png"
+    },
+    {
+      "date": "2024-04-12",
+      "file": "frames/raw_hazard/2024-04-12.png"
+    },
+    {
+      "date": "2024-04-19",
+      "file": "frames/raw_hazard/2024-04-19.png"
+    },
+    {
+      "date": "2024-04-26",
+      "file": "frames/raw_hazard/2024-04-26.png"
+    },
+    {
+      "date": "2024-05-03",
+      "file": "frames/raw_hazard/2024-05-03.png"
+    },
+    {
+      "date": "2024-05-10",
+      "file": "frames/raw_hazard/2024-05-10.png"
+    },
+    {
+      "date": "2024-05-17",
+      "file": "frames/raw_hazard/2024-05-17.png"
+    },
+    {
+      "date": "2024-05-24",
+      "file": "frames/raw_hazard/2024-05-24.png"
+    },
+    {
+      "date": "2024-05-31",
+      "file": "frames/raw_hazard/2024-05-31.png"
+    },
+    {
+      "date": "2024-06-07",
+      "file": "frames/raw_hazard/2024-06-07.png"
+    },
+    {
+      "date": "2024-06-14",
+      "file": "frames/raw_hazard/2024-06-14.png"
+    },
+    {
+      "date": "2024-06-21",
+      "file": "frames/raw_hazard/2024-06-21.png"
+    },
+    {
+      "date": "2024-06-28",
+      "file": "frames/raw_hazard/2024-06-28.png"
+    },
+    {
+      "date": "2024-07-05",
+      "file": "frames/raw_hazard/2024-07-05.png"
+    },
+    {
+      "date": "2024-07-12",
+      "file": "frames/raw_hazard/2024-07-12.png"
+    },
+    {
+      "date": "2024-07-19",
+      "file": "frames/raw_hazard/2024-07-19.png"
+    },
+    {
+      "date": "2024-07-26",
+      "file": "frames/raw_hazard/2024-07-26.png"
+    },
+    {
+      "date": "2024-08-02",
+      "file": "frames/raw_hazard/2024-08-02.png"
+    },
+    {
+      "date": "2024-08-09",
+      "file": "frames/raw_hazard/2024-08-09.png"
+    },
+    {
+      "date": "2024-08-16",
+      "file": "frames/raw_hazard/2024-08-16.png"
+    },
+    {
+      "date": "2024-08-23",
+      "file": "frames/raw_hazard/2024-08-23.png"
+    },
+    {
+      "date": "2024-08-30",
+      "file": "frames/raw_hazard/2024-08-30.png"
+    },
+    {
+      "date": "2024-09-06",
+      "file": "frames/raw_hazard/2024-09-06.png"
+    },
+    {
+      "date": "2024-09-13",
+      "file": "frames/raw_hazard/2024-09-13.png"
+    },
+    {
+      "date": "2024-09-20",
+      "file": "frames/raw_hazard/2024-09-20.png"
+    },
+    {
+      "date": "2024-09-27",
+      "file": "frames/raw_hazard/2024-09-27.png"
+    },
+    {
+      "date": "2024-10-04",
+      "file": "frames/raw_hazard/2024-10-04.png"
+    },
+    {
+      "date": "2024-10-11",
+      "file": "frames/raw_hazard/2024-10-11.png"
+    },
+    {
+      "date": "2024-10-18",
+      "file": "frames/raw_hazard/2024-10-18.png"
+    },
+    {
+      "date": "2024-10-25",
+      "file": "frames/raw_hazard/2024-10-25.png"
+    },
+    {
+      "date": "2024-11-01",
+      "file": "frames/raw_hazard/2024-11-01.png"
+    },
+    {
+      "date": "2024-11-08",
+      "file": "frames/raw_hazard/2024-11-08.png"
+    },
+    {
+      "date": "2024-11-15",
+      "file": "frames/raw_hazard/2024-11-15.png"
+    },
+    {
+      "date": "2024-11-22",
+      "file": "frames/raw_hazard/2024-11-22.png"
+    },
+    {
+      "date": "2024-11-29",
+      "file": "frames/raw_hazard/2024-11-29.png"
+    },
+    {
+      "date": "2024-12-06",
+      "file": "frames/raw_hazard/2024-12-06.png"
+    },
+    {
+      "date": "2024-12-13",
+      "file": "frames/raw_hazard/2024-12-13.png"
+    },
+    {
+      "date": "2024-12-20",
+      "file": "frames/raw_hazard/2024-12-20.png"
+    },
+    {
+      "date": "2024-12-27",
+      "file": "frames/raw_hazard/2024-12-27.png"
+    }
+  ]
+}

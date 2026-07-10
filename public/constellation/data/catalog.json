@@ -1,7 +1,147 @@
 [
   {
+    "poc_id": "coral_mayotte",
+    "display_name": "Mayotte \u2014 barrier reef DHW (real NOAA Coral Reef Watch 5km)",
+    "peril": "dhw",
+    "bbox": [
+      44.95,
+      -13.1,
+      45.4,
+      -12.55
+    ],
+    "country_iso3": "MYT",
+    "schema": "generic",
+    "summary_metrics": {
+      "poc": "coral_mayotte",
+      "peril": "dhw",
+      "display_name": "Mayotte \u2014 barrier reef DHW (real NOAA Coral Reef Watch 5km)",
+      "region": "mayotte",
+      "sst_source": "noaa_crw",
+      "analysis_period": [
+        2009,
+        2024
+      ],
+      "limit_eur": 250000.0,
+      "total_payout_eur": 1525000.0,
+      "n_sectors_triggered": 4,
+      "basis_risk": {
+        "spatial": {
+          "status": "ok",
+          "metric": "aggregation_spatial_std_degCweeks",
+          "mean_spatial_std": 0.1606
+        },
+        "prediction": {
+          "n_years": 16,
+          "hit_rate": 1.0,
+          "false_positive_rate": 0.07692307692307693,
+          "basis_risk_gap": 0.193,
+          "years_paid": [
+            2010,
+            2016,
+            2019,
+            2024
+          ],
+          "years_damaging": [
+            2010,
+            2016,
+            2024
+          ]
+        }
+      }
+    },
+    "stages": {
+      "aggregation": [
+        "aggregation.csv"
+      ],
+      "basis_risk": [
+        "basis_risk.json"
+      ],
+      "calibrated_thresholds": [
+        "calibrated_thresholds.json"
+      ],
+      "choropleth": [
+        "choropleth.geojson"
+      ],
+      "hazard_index": [
+        "hazard_index.nc",
+        "hazard_index.png"
+      ],
+      "intraseason": [
+        "intraseason.nc"
+      ],
+      "payouts": [
+        "payouts.csv"
+      ],
+      "raw_hazard": [
+        "raw_hazard.nc"
+      ],
+      "trigger_events": [
+        "trigger_events.csv"
+      ]
+    },
+    "raster": {
+      "hazard_index": {
+        "file": "hazard_index.png",
+        "bounds": [
+          [
+            44.949998431735565,
+            -12.549999800595371
+          ],
+          [
+            45.449999279446075,
+            -12.549999800595371
+          ],
+          [
+            45.449999279446075,
+            -13.150000008669766
+          ],
+          [
+            44.949998431735565,
+            -13.150000008669766
+          ]
+        ],
+        "bbox": [
+          44.949998431735565,
+          -13.150000008669766,
+          45.449999279446075,
+          -12.549999800595371
+        ],
+        "vmin": 2.259999990463257,
+        "vmax": 4.610000133514404,
+        "cmap": "turbo",
+        "reduction": "max",
+        "classes": [
+          {
+            "level": 2.26,
+            "color": "#30123b"
+          },
+          {
+            "level": 2.73,
+            "color": "#3e9bfe"
+          },
+          {
+            "level": 3.2,
+            "color": "#46f884"
+          },
+          {
+            "level": 3.67,
+            "color": "#e1dd37"
+          },
+          {
+            "level": 4.14,
+            "color": "#f05b12"
+          },
+          {
+            "level": 4.61,
+            "color": "#7a0403"
+          }
+        ]
+      }
+    }
+  },
+  {
     "poc_id": "crop_bangladesh_full",
-    "display_name": "Bangladesh \u2014 nationwide (real MODIS NDVI + CHIRPS, dekadal)",
+    "display_name": "Bangladesh \u2014 nationwide rainfed kharif (real CHIRPS rain)",
     "peril": "crop_hybrid",
     "bbox": [
       87.771,
@@ -31,13 +171,13 @@
       ],
       "n_events": 8,
       "n_polygons_triggered": 8,
-      "expected_payout_fraction": 0.122625,
+      "expected_payout_fraction": 0.122875,
       "basis_risk": {
         "spatial": {
           "status": "ok",
           "metric": "aggregation_spatial_std_zunits",
-          "mean_spatial_std": 0.1869,
-          "max_spatial_std": 0.6031
+          "mean_spatial_std": 0.1802,
+          "max_spatial_std": 0.6157
         },
         "prediction": {
           "status": "not_applicable",
@@ -65,8 +205,14 @@
       "calibrated_thresholds": [
         "calibrated_thresholds.json"
       ],
+      "case": [
+        "case.json"
+      ],
       "choropleth": [
         "choropleth.geojson"
+      ],
+      "district_timeseries": [
+        "district_timeseries.json"
       ],
       "hazard_index": [
         "hazard_index.nc",
@@ -118,33 +264,33 @@
           93.021,
           26.871
         ],
-        "vmin": -2.2812142372131348,
-        "vmax": 0.998146653175354,
+        "vmin": -1.8830771446228027,
+        "vmax": 0.5261573791503906,
         "cmap": "RdYlGn",
         "reduction": "min",
         "classes": [
           {
-            "level": -2.281,
+            "level": -1.883,
             "color": "#a50026"
           },
           {
-            "level": -1.625,
+            "level": -1.401,
             "color": "#f46d43"
           },
           {
-            "level": -0.969,
+            "level": -0.919,
             "color": "#fee08b"
           },
           {
-            "level": -0.314,
+            "level": -0.438,
             "color": "#d9ef8b"
           },
           {
-            "level": 0.342,
+            "level": 0.044,
             "color": "#66bd63"
           },
           {
-            "level": 0.998,
+            "level": 0.526,
             "color": "#006837"
           }
         ]

@@ -1,0 +1,890 @@
+{
+  "stage": "hazard_index",
+  "cmap": "turbo",
+  "vmin": 0.0,
+  "vmax": 7.064599990844727,
+  "bounds": [
+    [
+      44.949998431735565,
+      -12.549999800595371
+    ],
+    [
+      45.449999279446075,
+      -12.549999800595371
+    ],
+    [
+      45.449999279446075,
+      -13.150000008669766
+    ],
+    [
+      44.949998431735565,
+      -13.150000008669766
+    ]
+  ],
+  "bbox": [
+    44.949998431735565,
+    -13.150000008669766,
+    45.449999279446075,
+    -12.549999800595371
+  ],
+  "classes": [
+    {
+      "level": 0.0,
+      "color": "#30123b"
+    },
+    {
+      "level": 1.413,
+      "color": "#3e9bfe"
+    },
+    {
+      "level": 2.826,
+      "color": "#46f884"
+    },
+    {
+      "level": 4.239,
+      "color": "#e1dd37"
+    },
+    {
+      "level": 5.652,
+      "color": "#f05b12"
+    },
+    {
+      "level": 7.065,
+      "color": "#7a0403"
+    }
+  ],
+  "frames": [
+    {
+      "date": "2010-01-07",
+      "file": "frames/hazard_index/2010-01-07.png"
+    },
+    {
+      "date": "2010-01-14",
+      "file": "frames/hazard_index/2010-01-14.png"
+    },
+    {
+      "date": "2010-01-21",
+      "file": "frames/hazard_index/2010-01-21.png"
+    },
+    {
+      "date": "2010-01-28",
+      "file": "frames/hazard_index/2010-01-28.png"
+    },
+    {
+      "date": "2010-02-04",
+      "file": "frames/hazard_index/2010-02-04.png"
+    },
+    {
+      "date": "2010-02-11",
+      "file": "frames/hazard_index/2010-02-11.png"
+    },
+    {
+      "date": "2010-02-18",
+      "file": "frames/hazard_index/2010-02-18.png"
+    },
+    {
+      "date": "2010-02-25",
+      "file": "frames/hazard_index/2010-02-25.png"
+    },
+    {
+      "date": "2010-03-04",
+      "file": "frames/hazard_index/2010-03-04.png"
+    },
+    {
+      "date": "2010-03-11",
+      "file": "frames/hazard_index/2010-03-11.png"
+    },
+    {
+      "date": "2010-03-18",
+      "file": "frames/hazard_index/2010-03-18.png"
+    },
+    {
+      "date": "2010-03-25",
+      "file": "frames/hazard_index/2010-03-25.png"
+    },
+    {
+      "date": "2010-04-01",
+      "file": "frames/hazard_index/2010-04-01.png"
+    },
+    {
+      "date": "2010-04-08",
+      "file": "frames/hazard_index/2010-04-08.png"
+    },
+    {
+      "date": "2010-04-15",
+      "file": "frames/hazard_index/2010-04-15.png"
+    },
+    {
+      "date": "2010-04-22",
+      "file": "frames/hazard_index/2010-04-22.png"
+    },
+    {
+      "date": "2010-04-29",
+      "file": "frames/hazard_index/2010-04-29.png"
+    },
+    {
+      "date": "2010-05-06",
+      "file": "frames/hazard_index/2010-05-06.png"
+    },
+    {
+      "date": "2010-05-13",
+      "file": "frames/hazard_index/2010-05-13.png"
+    },
+    {
+      "date": "2010-05-20",
+      "file": "frames/hazard_index/2010-05-20.png"
+    },
+    {
+      "date": "2010-05-27",
+      "file": "frames/hazard_index/2010-05-27.png"
+    },
+    {
+      "date": "2010-06-03",
+      "file": "frames/hazard_index/2010-06-03.png"
+    },
+    {
+      "date": "2010-06-10",
+      "file": "frames/hazard_index/2010-06-10.png"
+    },
+    {
+      "date": "2010-06-17",
+      "file": "frames/hazard_index/2010-06-17.png"
+    },
+    {
+      "date": "2010-06-24",
+      "file": "frames/hazard_index/2010-06-24.png"
+    },
+    {
+      "date": "2010-07-01",
+      "file": "frames/hazard_index/2010-07-01.png"
+    },
+    {
+      "date": "2010-07-08",
+      "file": "frames/hazard_index/2010-07-08.png"
+    },
+    {
+      "date": "2010-07-15",
+      "file": "frames/hazard_index/2010-07-15.png"
+    },
+    {
+      "date": "2010-07-22",
+      "file": "frames/hazard_index/2010-07-22.png"
+    },
+    {
+      "date": "2010-07-29",
+      "file": "frames/hazard_index/2010-07-29.png"
+    },
+    {
+      "date": "2010-08-05",
+      "file": "frames/hazard_index/2010-08-05.png"
+    },
+    {
+      "date": "2010-08-12",
+      "file": "frames/hazard_index/2010-08-12.png"
+    },
+    {
+      "date": "2010-08-19",
+      "file": "frames/hazard_index/2010-08-19.png"
+    },
+    {
+      "date": "2010-08-26",
+      "file": "frames/hazard_index/2010-08-26.png"
+    },
+    {
+      "date": "2010-09-02",
+      "file": "frames/hazard_index/2010-09-02.png"
+    },
+    {
+      "date": "2010-09-09",
+      "file": "frames/hazard_index/2010-09-09.png"
+    },
+    {
+      "date": "2010-09-16",
+      "file": "frames/hazard_index/2010-09-16.png"
+    },
+    {
+      "date": "2010-09-23",
+      "file": "frames/hazard_index/2010-09-23.png"
+    },
+    {
+      "date": "2010-09-30",
+      "file": "frames/hazard_index/2010-09-30.png"
+    },
+    {
+      "date": "2010-10-07",
+      "file": "frames/hazard_index/2010-10-07.png"
+    },
+    {
+      "date": "2010-10-14",
+      "file": "frames/hazard_index/2010-10-14.png"
+    },
+    {
+      "date": "2010-10-21",
+      "file": "frames/hazard_index/2010-10-21.png"
+    },
+    {
+      "date": "2010-10-28",
+      "file": "frames/hazard_index/2010-10-28.png"
+    },
+    {
+      "date": "2010-11-04",
+      "file": "frames/hazard_index/2010-11-04.png"
+    },
+    {
+      "date": "2010-11-11",
+      "file": "frames/hazard_index/2010-11-11.png"
+    },
+    {
+      "date": "2010-11-18",
+      "file": "frames/hazard_index/2010-11-18.png"
+    },
+    {
+      "date": "2010-11-25",
+      "file": "frames/hazard_index/2010-11-25.png"
+    },
+    {
+      "date": "2010-12-02",
+      "file": "frames/hazard_index/2010-12-02.png"
+    },
+    {
+      "date": "2010-12-09",
+      "file": "frames/hazard_index/2010-12-09.png"
+    },
+    {
+      "date": "2010-12-16",
+      "file": "frames/hazard_index/2010-12-16.png"
+    },
+    {
+      "date": "2010-12-23",
+      "file": "frames/hazard_index/2010-12-23.png"
+    },
+    {
+      "date": "2010-12-30",
+      "file": "frames/hazard_index/2010-12-30.png"
+    },
+    {
+      "date": "2016-01-07",
+      "file": "frames/hazard_index/2016-01-07.png"
+    },
+    {
+      "date": "2016-01-14",
+      "file": "frames/hazard_index/2016-01-14.png"
+    },
+    {
+      "date": "2016-01-21",
+      "file": "frames/hazard_index/2016-01-21.png"
+    },
+    {
+      "date": "2016-01-28",
+      "file": "frames/hazard_index/2016-01-28.png"
+    },
+    {
+      "date": "2016-02-04",
+      "file": "frames/hazard_index/2016-02-04.png"
+    },
+    {
+      "date": "2016-02-11",
+      "file": "frames/hazard_index/2016-02-11.png"
+    },
+    {
+      "date": "2016-02-18",
+      "file": "frames/hazard_index/2016-02-18.png"
+    },
+    {
+      "date": "2016-02-25",
+      "file": "frames/hazard_index/2016-02-25.png"
+    },
+    {
+      "date": "2016-03-03",
+      "file": "frames/hazard_index/2016-03-03.png"
+    },
+    {
+      "date": "2016-03-10",
+      "file": "frames/hazard_index/2016-03-10.png"
+    },
+    {
+      "date": "2016-03-17",
+      "file": "frames/hazard_index/2016-03-17.png"
+    },
+    {
+      "date": "2016-03-24",
+      "file": "frames/hazard_index/2016-03-24.png"
+    },
+    {
+      "date": "2016-03-31",
+      "file": "frames/hazard_index/2016-03-31.png"
+    },
+    {
+      "date": "2016-04-07",
+      "file": "frames/hazard_index/2016-04-07.png"
+    },
+    {
+      "date": "2016-04-14",
+      "file": "frames/hazard_index/2016-04-14.png"
+    },
+    {
+      "date": "2016-04-21",
+      "file": "frames/hazard_index/2016-04-21.png"
+    },
+    {
+      "date": "2016-04-28",
+      "file": "frames/hazard_index/2016-04-28.png"
+    },
+    {
+      "date": "2016-05-05",
+      "file": "frames/hazard_index/2016-05-05.png"
+    },
+    {
+      "date": "2016-05-12",
+      "file": "frames/hazard_index/2016-05-12.png"
+    },
+    {
+      "date": "2016-05-19",
+      "file": "frames/hazard_index/2016-05-19.png"
+    },
+    {
+      "date": "2016-05-26",
+      "file": "frames/hazard_index/2016-05-26.png"
+    },
+    {
+      "date": "2016-06-02",
+      "file": "frames/hazard_index/2016-06-02.png"
+    },
+    {
+      "date": "2016-06-09",
+      "file": "frames/hazard_index/2016-06-09.png"
+    },
+    {
+      "date": "2016-06-16",
+      "file": "frames/hazard_index/2016-06-16.png"
+    },
+    {
+      "date": "2016-06-23",
+      "file": "frames/hazard_index/2016-06-23.png"
+    },
+    {
+      "date": "2016-06-30",
+      "file": "frames/hazard_index/2016-06-30.png"
+    },
+    {
+      "date": "2016-07-07",
+      "file": "frames/hazard_index/2016-07-07.png"
+    },
+    {
+      "date": "2016-07-14",
+      "file": "frames/hazard_index/2016-07-14.png"
+    },
+    {
+      "date": "2016-07-21",
+      "file": "frames/hazard_index/2016-07-21.png"
+    },
+    {
+      "date": "2016-07-28",
+      "file": "frames/hazard_index/2016-07-28.png"
+    },
+    {
+      "date": "2016-08-04",
+      "file": "frames/hazard_index/2016-08-04.png"
+    },
+    {
+      "date": "2016-08-11",
+      "file": "frames/hazard_index/2016-08-11.png"
+    },
+    {
+      "date": "2016-08-18",
+      "file": "frames/hazard_index/2016-08-18.png"
+    },
+    {
+      "date": "2016-08-25",
+      "file": "frames/hazard_index/2016-08-25.png"
+    },
+    {
+      "date": "2016-09-01",
+      "file": "frames/hazard_index/2016-09-01.png"
+    },
+    {
+      "date": "2016-09-08",
+      "file": "frames/hazard_index/2016-09-08.png"
+    },
+    {
+      "date": "2016-09-15",
+      "file": "frames/hazard_index/2016-09-15.png"
+    },
+    {
+      "date": "2016-09-22",
+      "file": "frames/hazard_index/2016-09-22.png"
+    },
+    {
+      "date": "2016-09-29",
+      "file": "frames/hazard_index/2016-09-29.png"
+    },
+    {
+      "date": "2016-10-06",
+      "file": "frames/hazard_index/2016-10-06.png"
+    },
+    {
+      "date": "2016-10-13",
+      "file": "frames/hazard_index/2016-10-13.png"
+    },
+    {
+      "date": "2016-10-20",
+      "file": "frames/hazard_index/2016-10-20.png"
+    },
+    {
+      "date": "2016-10-27",
+      "file": "frames/hazard_index/2016-10-27.png"
+    },
+    {
+      "date": "2016-11-03",
+      "file": "frames/hazard_index/2016-11-03.png"
+    },
+    {
+      "date": "2016-11-10",
+      "file": "frames/hazard_index/2016-11-10.png"
+    },
+    {
+      "date": "2016-11-17",
+      "file": "frames/hazard_index/2016-11-17.png"
+    },
+    {
+      "date": "2016-11-24",
+      "file": "frames/hazard_index/2016-11-24.png"
+    },
+    {
+      "date": "2016-12-01",
+      "file": "frames/hazard_index/2016-12-01.png"
+    },
+    {
+      "date": "2016-12-08",
+      "file": "frames/hazard_index/2016-12-08.png"
+    },
+    {
+      "date": "2016-12-15",
+      "file": "frames/hazard_index/2016-12-15.png"
+    },
+    {
+      "date": "2016-12-22",
+      "file": "frames/hazard_index/2016-12-22.png"
+    },
+    {
+      "date": "2016-12-29",
+      "file": "frames/hazard_index/2016-12-29.png"
+    },
+    {
+      "date": "2019-01-03",
+      "file": "frames/hazard_index/2019-01-03.png"
+    },
+    {
+      "date": "2019-01-10",
+      "file": "frames/hazard_index/2019-01-10.png"
+    },
+    {
+      "date": "2019-01-17",
+      "file": "frames/hazard_index/2019-01-17.png"
+    },
+    {
+      "date": "2019-01-24",
+      "file": "frames/hazard_index/2019-01-24.png"
+    },
+    {
+      "date": "2019-01-31",
+      "file": "frames/hazard_index/2019-01-31.png"
+    },
+    {
+      "date": "2019-02-07",
+      "file": "frames/hazard_index/2019-02-07.png"
+    },
+    {
+      "date": "2019-02-14",
+      "file": "frames/hazard_index/2019-02-14.png"
+    },
+    {
+      "date": "2019-02-21",
+      "file": "frames/hazard_index/2019-02-21.png"
+    },
+    {
+      "date": "2019-02-28",
+      "file": "frames/hazard_index/2019-02-28.png"
+    },
+    {
+      "date": "2019-03-07",
+      "file": "frames/hazard_index/2019-03-07.png"
+    },
+    {
+      "date": "2019-03-14",
+      "file": "frames/hazard_index/2019-03-14.png"
+    },
+    {
+      "date": "2019-03-21",
+      "file": "frames/hazard_index/2019-03-21.png"
+    },
+    {
+      "date": "2019-03-28",
+      "file": "frames/hazard_index/2019-03-28.png"
+    },
+    {
+      "date": "2019-04-04",
+      "file": "frames/hazard_index/2019-04-04.png"
+    },
+    {
+      "date": "2019-04-11",
+      "file": "frames/hazard_index/2019-04-11.png"
+    },
+    {
+      "date": "2019-04-18",
+      "file": "frames/hazard_index/2019-04-18.png"
+    },
+    {
+      "date": "2019-04-25",
+      "file": "frames/hazard_index/2019-04-25.png"
+    },
+    {
+      "date": "2019-05-02",
+      "file": "frames/hazard_index/2019-05-02.png"
+    },
+    {
+      "date": "2019-05-09",
+      "file": "frames/hazard_index/2019-05-09.png"
+    },
+    {
+      "date": "2019-05-16",
+      "file": "frames/hazard_index/2019-05-16.png"
+    },
+    {
+      "date": "2019-05-23",
+      "file": "frames/hazard_index/2019-05-23.png"
+    },
+    {
+      "date": "2019-05-30",
+      "file": "frames/hazard_index/2019-05-30.png"
+    },
+    {
+      "date": "2019-06-06",
+      "file": "frames/hazard_index/2019-06-06.png"
+    },
+    {
+      "date": "2019-06-13",
+      "file": "frames/hazard_index/2019-06-13.png"
+    },
+    {
+      "date": "2019-06-20",
+      "file": "frames/hazard_index/2019-06-20.png"
+    },
+    {
+      "date": "2019-06-27",
+      "file": "frames/hazard_index/2019-06-27.png"
+    },
+    {
+      "date": "2019-07-04",
+      "file": "frames/hazard_index/2019-07-04.png"
+    },
+    {
+      "date": "2019-07-11",
+      "file": "frames/hazard_index/2019-07-11.png"
+    },
+    {
+      "date": "2019-07-18",
+      "file": "frames/hazard_index/2019-07-18.png"
+    },
+    {
+      "date": "2019-07-25",
+      "file": "frames/hazard_index/2019-07-25.png"
+    },
+    {
+      "date": "2019-08-01",
+      "file": "frames/hazard_index/2019-08-01.png"
+    },
+    {
+      "date": "2019-08-08",
+      "file": "frames/hazard_index/2019-08-08.png"
+    },
+    {
+      "date": "2019-08-15",
+      "file": "frames/hazard_index/2019-08-15.png"
+    },
+    {
+      "date": "2019-08-22",
+      "file": "frames/hazard_index/2019-08-22.png"
+    },
+    {
+      "date": "2019-08-29",
+      "file": "frames/hazard_index/2019-08-29.png"
+    },
+    {
+      "date": "2019-09-05",
+      "file": "frames/hazard_index/2019-09-05.png"
+    },
+    {
+      "date": "2019-09-12",
+      "file": "frames/hazard_index/2019-09-12.png"
+    },
+    {
+      "date": "2019-09-19",
+      "file": "frames/hazard_index/2019-09-19.png"
+    },
+    {
+      "date": "2019-09-26",
+      "file": "frames/hazard_index/2019-09-26.png"
+    },
+    {
+      "date": "2019-10-03",
+      "file": "frames/hazard_index/2019-10-03.png"
+    },
+    {
+      "date": "2019-10-10",
+      "file": "frames/hazard_index/2019-10-10.png"
+    },
+    {
+      "date": "2019-10-17",
+      "file": "frames/hazard_index/2019-10-17.png"
+    },
+    {
+      "date": "2019-10-24",
+      "file": "frames/hazard_index/2019-10-24.png"
+    },
+    {
+      "date": "2019-10-31",
+      "file": "frames/hazard_index/2019-10-31.png"
+    },
+    {
+      "date": "2019-11-07",
+      "file": "frames/hazard_index/2019-11-07.png"
+    },
+    {
+      "date": "2019-11-14",
+      "file": "frames/hazard_index/2019-11-14.png"
+    },
+    {
+      "date": "2019-11-21",
+      "file": "frames/hazard_index/2019-11-21.png"
+    },
+    {
+      "date": "2019-11-28",
+      "file": "frames/hazard_index/2019-11-28.png"
+    },
+    {
+      "date": "2019-12-05",
+      "file": "frames/hazard_index/2019-12-05.png"
+    },
+    {
+      "date": "2019-12-12",
+      "file": "frames/hazard_index/2019-12-12.png"
+    },
+    {
+      "date": "2019-12-19",
+      "file": "frames/hazard_index/2019-12-19.png"
+    },
+    {
+      "date": "2019-12-26",
+      "file": "frames/hazard_index/2019-12-26.png"
+    },
+    {
+      "date": "2024-01-04",
+      "file": "frames/hazard_index/2024-01-04.png"
+    },
+    {
+      "date": "2024-01-11",
+      "file": "frames/hazard_index/2024-01-11.png"
+    },
+    {
+      "date": "2024-01-18",
+      "file": "frames/hazard_index/2024-01-18.png"
+    },
+    {
+      "date": "2024-01-25",
+      "file": "frames/hazard_index/2024-01-25.png"
+    },
+    {
+      "date": "2024-02-01",
+      "file": "frames/hazard_index/2024-02-01.png"
+    },
+    {
+      "date": "2024-02-08",
+      "file": "frames/hazard_index/2024-02-08.png"
+    },
+    {
+      "date": "2024-02-15",
+      "file": "frames/hazard_index/2024-02-15.png"
+    },
+    {
+      "date": "2024-02-22",
+      "file": "frames/hazard_index/2024-02-22.png"
+    },
+    {
+      "date": "2024-02-29",
+      "file": "frames/hazard_index/2024-02-29.png"
+    },
+    {
+      "date": "2024-03-07",
+      "file": "frames/hazard_index/2024-03-07.png"
+    },
+    {
+      "date": "2024-03-14",
+      "file": "frames/hazard_index/2024-03-14.png"
+    },
+    {
+      "date": "2024-03-21",
+      "file": "frames/hazard_index/2024-03-21.png"
+    },
+    {
+      "date": "2024-03-28",
+      "file": "frames/hazard_index/2024-03-28.png"
+    },
+    {
+      "date": "2024-04-04",
+      "file": "frames/hazard_index/2024-04-04.png"
+    },
+    {
+      "date": "2024-04-11",
+      "file": "frames/hazard_index/2024-04-11.png"
+    },
+    {
+      "date": "2024-04-18",
+      "file": "frames/hazard_index/2024-04-18.png"
+    },
+    {
+      "date": "2024-04-25",
+      "file": "frames/hazard_index/2024-04-25.png"
+    },
+    {
+      "date": "2024-05-02",
+      "file": "frames/hazard_index/2024-05-02.png"
+    },
+    {
+      "date": "2024-05-09",
+      "file": "frames/hazard_index/2024-05-09.png"
+    },
+    {
+      "date": "2024-05-16",
+      "file": "frames/hazard_index/2024-05-16.png"
+    },
+    {
+      "date": "2024-05-23",
+      "file": "frames/hazard_index/2024-05-23.png"
+    },
+    {
+      "date": "2024-05-30",
+      "file": "frames/hazard_index/2024-05-30.png"
+    },
+    {
+      "date": "2024-06-06",
+      "file": "frames/hazard_index/2024-06-06.png"
+    },
+    {
+      "date": "2024-06-13",
+      "file": "frames/hazard_index/2024-06-13.png"
+    },
+    {
+      "date": "2024-06-20",
+      "file": "frames/hazard_index/2024-06-20.png"
+    },
+    {
+      "date": "2024-06-27",
+      "file": "frames/hazard_index/2024-06-27.png"
+    },
+    {
+      "date": "2024-07-04",
+      "file": "frames/hazard_index/2024-07-04.png"
+    },
+    {
+      "date": "2024-07-11",
+      "file": "frames/hazard_index/2024-07-11.png"
+    },
+    {
+      "date": "2024-07-18",
+      "file": "frames/hazard_index/2024-07-18.png"
+    },
+    {
+      "date": "2024-07-25",
+      "file": "frames/hazard_index/2024-07-25.png"
+    },
+    {
+      "date": "2024-08-01",
+      "file": "frames/hazard_index/2024-08-01.png"
+    },
+    {
+      "date": "2024-08-08",
+      "file": "frames/hazard_index/2024-08-08.png"
+    },
+    {
+      "date": "2024-08-15",
+      "file": "frames/hazard_index/2024-08-15.png"
+    },
+    {
+      "date": "2024-08-22",
+      "file": "frames/hazard_index/2024-08-22.png"
+    },
+    {
+      "date": "2024-08-29",
+      "file": "frames/hazard_index/2024-08-29.png"
+    },
+    {
+      "date": "2024-09-05",
+      "file": "frames/hazard_index/2024-09-05.png"
+    },
+    {
+      "date": "2024-09-12",
+      "file": "frames/hazard_index/2024-09-12.png"
+    },
+    {
+      "date": "2024-09-19",
+      "file": "frames/hazard_index/2024-09-19.png"
+    },
+    {
+      "date": "2024-09-26",
+      "file": "frames/hazard_index/2024-09-26.png"
+    },
+    {
+      "date": "2024-10-03",
+      "file": "frames/hazard_index/2024-10-03.png"
+    },
+    {
+      "date": "2024-10-10",
+      "file": "frames/hazard_index/2024-10-10.png"
+    },
+    {
+      "date": "2024-10-17",
+      "file": "frames/hazard_index/2024-10-17.png"
+    },
+    {
+      "date": "2024-10-24",
+      "file": "frames/hazard_index/2024-10-24.png"
+    },
+    {
+      "date": "2024-10-31",
+      "file": "frames/hazard_index/2024-10-31.png"
+    },
+    {
+      "date": "2024-11-07",
+      "file": "frames/hazard_index/2024-11-07.png"
+    },
+    {
+      "date": "2024-11-14",
+      "file": "frames/hazard_index/2024-11-14.png"
+    },
+    {
+      "date": "2024-11-21",
+      "file": "frames/hazard_index/2024-11-21.png"
+    },
+    {
+      "date": "2024-11-28",
+      "file": "frames/hazard_index/2024-11-28.png"
+    },
+    {
+      "date": "2024-12-05",
+      "file": "frames/hazard_index/2024-12-05.png"
+    },
+    {
+      "date": "2024-12-12",
+      "file": "frames/hazard_index/2024-12-12.png"
+    },
+    {
+      "date": "2024-12-19",
+      "file": "frames/hazard_index/2024-12-19.png"
+    },
+    {
+      "date": "2024-12-26",
+      "file": "frames/hazard_index/2024-12-26.png"
+    }
+  ]
+}

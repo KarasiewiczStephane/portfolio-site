@@ -1,0 +1,28 @@
+{
+  "status": "ok",
+  "spatial": {
+    "status": "ok",
+    "metric": "aggregation_spatial_std_degCweeks",
+    "mean_spatial_std": 0.1606
+  },
+  "prediction": {
+    "status": "ok",
+    "metrics": {
+      "n_years": 16,
+      "hit_rate": 1.0,
+      "false_positive_rate": 0.07692307692307693,
+      "basis_risk_gap": 0.193,
+      "years_paid": [
+        2010,
+        2016,
+        2019,
+        2024
+      ],
+      "years_damaging": [
+        2010,
+        2016,
+        2024
+      ]
+    }
+  }
+}

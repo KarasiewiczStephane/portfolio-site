@@ -1,8 +1,8 @@
 {
   "stage": "intraseason",
   "cmap": "RdYlGn",
-  "vmin": -1.4086575508117676,
-  "vmax": 2.1734938621520996,
+  "vmin": -1.4101877212524414,
+  "vmax": 2.2017509937286377,
   "bounds": [
     [
       87.771,
@@ -29,27 +29,27 @@
   ],
   "classes": [
     {
-      "level": -1.409,
+      "level": -1.41,
       "color": "#a50026"
     },
     {
-      "level": -0.692,
+      "level": -0.688,
       "color": "#f46d43"
     },
     {
-      "level": 0.024,
+      "level": 0.035,
       "color": "#fee08b"
     },
     {
-      "level": 0.741,
+      "level": 0.757,
       "color": "#d9ef8b"
     },
     {
-      "level": 1.457,
+      "level": 1.479,
       "color": "#66bd63"
     },
     {
-      "level": 2.173,
+      "level": 2.202,
       "color": "#006837"
     }
   ],

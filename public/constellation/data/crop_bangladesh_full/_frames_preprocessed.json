@@ -1,8 +1,8 @@
 {
   "stage": "preprocessed",
   "cmap": "YlGn",
-  "vmin": 0.2733004689216614,
-  "vmax": 0.8456951975822449,
+  "vmin": 0.2727483808994293,
+  "vmax": 0.7877591252326965,
   "bounds": [
     [
       87.771,
@@ -33,23 +33,23 @@
       "color": "#ffffe5"
     },
     {
-      "level": 0.388,
+      "level": 0.376,
       "color": "#e5f5ac"
     },
     {
-      "level": 0.502,
+      "level": 0.479,
       "color": "#a2d88a"
     },
     {
-      "level": 0.617,
+      "level": 0.582,
       "color": "#4cb063"
     },
     {
-      "level": 0.731,
+      "level": 0.685,
       "color": "#15793e"
     },
     {
-      "level": 0.846,
+      "level": 0.788,
       "color": "#004529"
     }
   ],

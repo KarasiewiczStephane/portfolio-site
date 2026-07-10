@@ -1,8 +1,8 @@
 {
   "stage": "raw_hazard",
   "cmap": "YlGn",
-  "vmin": 0.26321953535079956,
-  "vmax": 0.84918212890625,
+  "vmin": 0.2622607946395874,
+  "vmax": 0.7914683222770691,
   "bounds": [
     [
       87.771,
@@ -29,27 +29,27 @@
   ],
   "classes": [
     {
-      "level": 0.263,
+      "level": 0.262,
       "color": "#ffffe5"
     },
     {
-      "level": 0.38,
+      "level": 0.368,
       "color": "#e5f5ac"
     },
     {
-      "level": 0.498,
+      "level": 0.474,
       "color": "#a2d88a"
     },
     {
-      "level": 0.615,
+      "level": 0.58,
       "color": "#4cb063"
     },
     {
-      "level": 0.732,
+      "level": 0.686,
       "color": "#15793e"
     },
     {
-      "level": 0.849,
+      "level": 0.791,
       "color": "#004529"
     }
   ],

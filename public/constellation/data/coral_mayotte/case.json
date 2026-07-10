@@ -1,0 +1,11 @@
+{
+  "title": "Mayotte barrier reef — thermal-stress bleaching (2010, 2016, 2024)",
+  "summary": "Mayotte's ~1,500 km2 double-barrier lagoon (SW Indian Ocean) bleached in the 2010, 2016 (3rd global event, strongest since 1998) and 2024 (4th global event) marine heatwaves. This POC drives a parametric bleaching trigger from NOAA Coral Reef Watch Degree Heating Weeks (DHW) over the reef, calibrates it with a reef-resilience coefficient, and backtests the payouts against observed bleaching for 2009-2024. The real DHW caught all three documented events (hit rate 1.0) with one false positive (2019); the payout-vs-severity gap (2016 was the worst-observed year but only moderate heat) is the basis risk a Discovery audit exists to quantify.",
+  "sources": [
+    {"label": "NOAA Coral Reef Watch (5km DHW / CoralTemp)", "url": "https://coralreefwatch.noaa.gov/"},
+    {"label": "2010 Mayotte bleaching (PMC6076987)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6076987/"},
+    {"label": "Obura et al. 2019 — 2016 WIO bleaching (Coral Reefs)", "url": "https://link.springer.com/article/10.1007/s00338-019-01851-3"},
+    {"label": "NOAA — 4th global bleaching event (Apr 2024)", "url": "https://www.noaa.gov/news-release/noaa-confirms-4th-global-coral-bleaching-event"},
+    {"label": "Parc naturel marin de Mayotte (OFB) — reef status", "url": "https://parc-marin-mayotte.fr/actualites/rapport-2025-sur-letat-des-recifs-coralliens-de-mayotte-post-chido"}
+  ]
+}

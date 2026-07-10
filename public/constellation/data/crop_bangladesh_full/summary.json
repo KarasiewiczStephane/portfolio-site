@@ -1,7 +1,7 @@
 {
   "poc": "crop_bangladesh_full",
   "peril": "crop_hybrid",
-  "display_name": "Bangladesh \u2014 nationwide (real MODIS NDVI + CHIRPS, dekadal)",
+  "display_name": "Bangladesh \u2014 nationwide rainfed kharif (real CHIRPS rain)",
   "region": "bangladesh",
   "ndvi_source": "modis",
   "rainfall_source": "chirps",
@@ -18,13 +18,13 @@
   ],
   "n_events": 8,
   "n_polygons_triggered": 8,
-  "expected_payout_fraction": 0.122625,
+  "expected_payout_fraction": 0.122875,
   "basis_risk": {
     "spatial": {
       "status": "ok",
       "metric": "aggregation_spatial_std_zunits",
-      "mean_spatial_std": 0.1869,
-      "max_spatial_std": 0.6031
+      "mean_spatial_std": 0.1802,
+      "max_spatial_std": 0.6157
     },
     "prediction": {
       "status": "not_applicable",

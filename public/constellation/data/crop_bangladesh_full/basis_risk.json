@@ -2,8 +2,8 @@
   "spatial": {
     "status": "ok",
     "metric": "aggregation_spatial_std_zunits",
-    "mean_spatial_std": 0.1869,
-    "max_spatial_std": 0.6031
+    "mean_spatial_std": 0.1802,
+    "max_spatial_std": 0.6157
   },
   "prediction": {
     "status": "not_applicable",

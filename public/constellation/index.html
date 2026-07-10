@@ -12,16 +12,45 @@
     <div id="map"></div>
 
     <aside id="controls" class="panel">
+      <button id="themeToggle" class="btn theme" type="button" title="Switch light / dark">☀ Light</button>
       <h1>Constellation</h1>
       <p class="sub">Parametric index POCs — each stage of the chain, per site.</p>
-      <h2>Layers</h2>
-      <div id="layerList"></div>
-      <label class="opacity">
-        Overlay opacity <span id="opacityVal">55%</span>
-        <input id="opacity" type="range" min="0" max="100" value="55" />
-      </label>
+
+      <div class="fld">
+        <span class="flbl">Layer</span>
+        <div class="row">
+          <select id="layerSelect" title="Choose which POC to explore"></select>
+          <button id="focusBtn" class="btn" type="button" title="Zoom the map to this POC's extent">Focus</button>
+        </div>
+      </div>
+
+      <button id="sourcesBtn" class="btn wide hidden" type="button"
+              title="Open the case study, data sources and how the trigger works">
+        <span>ⓘ Case study, sources &amp; method</span><span>▸</span>
+      </button>
+
+      <div id="scrubSec" class="fld hidden">
+        <span class="flbl">Date / season</span>
+        <div class="row">
+          <select id="dateSelect" title="Scrub the weekly map frames"></select>
+          <button id="seasonBtn" class="btn" type="button"
+                  title="Jump to the peak heat-stress week of the flagship season">Peak</button>
+        </div>
+        <span id="scrubHint" class="hint"></span>
+      </div>
+
+      <label class="opacity">Overlay opacity <span id="opacityVal">55%</span>
+        <input id="opacity" type="range" min="0" max="100" value="55" /></label>
+
+      <div id="scoreSec" class="fld hidden">
+        <span class="flbl">District / sector score</span>
+        <label class="toggle" title="Show the seasonal 1–10 stress score on the map">
+          <input id="scoreOn" type="checkbox" /> show 1–10 stress score · <span id="scoreYear" class="hint"></span>
+        </label>
+      </div>
+
       <div id="legend" class="legend hidden">
-        <h2>Legend</h2>
+        <h2>Legend <span id="legendUnit" class="unit"></span></h2>
         <div id="legendRamp"></div>
       </div>
     </aside>
@@ -30,6 +59,13 @@
       <button id="closeDetail" class="close" type="button">×</button>
       <div id="detailBody"></div>
     </aside>
+
+    <div id="modal" class="modal hidden">
+      <div class="modalCard">
+        <button id="modalClose" class="close" type="button">×</button>
+        <div id="modalBody"></div>
+      </div>
+    </div>
 
     <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
     <script src="./app.js"></script>

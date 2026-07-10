@@ -30,8 +30,14 @@
     "calibrated_thresholds": [
       "calibrated_thresholds.json"
     ],
+    "case": [
+      "case.json"
+    ],
     "choropleth": [
       "choropleth.geojson"
+    ],
+    "district_timeseries": [
+      "district_timeseries.json"
     ],
     "hazard_index": [
       "hazard_index.nc",
@@ -60,17 +66,19 @@
     "admin_0": "4a968739aa0304e2",
     "admin_1": "4e9081a048532966",
     "admin_2": "77302f70751fab54",
-    "aggregation": "1fa18b0d04e3d27a",
-    "basis_risk": "edd1b1b892b9859f",
+    "aggregation": "792a11c53a6399d8",
+    "basis_risk": "5e0fe0b7e4ded4ac",
     "calibrated_thresholds": "f0bb1e7347044457",
-    "choropleth": "c544cec97d7dc6e3",
-    "hazard_index": "3f09d835e1bc664a",
-    "intraseason": "46cca6789e5e333a",
-    "payouts": "7ba130e936b6e7a1",
-    "preprocessed": "3f9f894041372811",
-    "raw_hazard": "6d705c319ba5e454",
-    "raw_weather": "8c1f5687355dcf4d",
-    "trigger_events": "a7e63b13dc5c71ff"
+    "case": "230afffe6321ac57",
+    "choropleth": "7ac522a7f9542b3c",
+    "district_timeseries": "0e3d6e5b391137cd",
+    "hazard_index": "29d2bb6513fdcb73",
+    "intraseason": "9a9eae625bb497af",
+    "payouts": "7d4c4fb29596e49d",
+    "preprocessed": "1e3d876387f2b997",
+    "raw_hazard": "49c8bea0f18b9577",
+    "raw_weather": "632c5042d0a17a47",
+    "trigger_events": "77b9d48a306573d0"
   },
   "raster": {
     "hazard_index": {
@@ -99,33 +107,33 @@
         93.021,
         26.871
       ],
-      "vmin": -2.2812142372131348,
-      "vmax": 0.998146653175354,
+      "vmin": -1.8830771446228027,
+      "vmax": 0.5261573791503906,
       "cmap": "RdYlGn",
       "reduction": "min",
       "classes": [
         {
-          "level": -2.281,
+          "level": -1.883,
           "color": "#a50026"
         },
         {
-          "level": -1.625,
+          "level": -1.401,
           "color": "#f46d43"
         },
         {
-          "level": -0.969,
+          "level": -0.919,
           "color": "#fee08b"
         },
         {
-          "level": -0.314,
+          "level": -0.438,
           "color": "#d9ef8b"
         },
         {
-          "level": 0.342,
+          "level": 0.044,
           "color": "#66bd63"
         },
         {
-          "level": 0.998,
+          "level": 0.526,
           "color": "#006837"
         }
       ]
@@ -151,13 +159,13 @@
     ],
     "n_events": 8,
     "n_polygons_triggered": 8,
-    "expected_payout_fraction": 0.122625,
+    "expected_payout_fraction": 0.122875,
     "basis_risk": {
       "spatial": {
         "status": "ok",
         "metric": "aggregation_spatial_std_zunits",
-        "mean_spatial_std": 0.1869,
-        "max_spatial_std": 0.6031
+        "mean_spatial_std": 0.1802,
+        "max_spatial_std": 0.6157
       },
       "prediction": {
         "status": "not_applicable",
