@@ -9,7 +9,7 @@
     2024
   ],
   "limit_eur": 250000.0,
-  "total_payout_eur": 2175000.0,
+  "total_payout_eur": 1712500.0,
   "n_sectors_triggered": 2,
   "basis_risk": {
     "spatial": {
@@ -20,11 +20,10 @@
     "prediction": {
       "n_years": 16,
       "hit_rate": 1.0,
-      "false_positive_rate": 0.42857142857142855,
-      "basis_risk_gap": 0.229,
+      "false_positive_rate": 0.35714285714285715,
+      "basis_risk_gap": 0.202,
       "years_paid": [
         2009,
-        2011,
         2014,
         2016,
         2017,

@@ -3,17 +3,17 @@
   "rule": "multiplicative",
   "ladder": [
     {
-      "threshold": 2.25,
+      "threshold": 3.0,
       "tier": 1,
       "payout_pct": 25
     },
     {
-      "threshold": 4.875,
+      "threshold": 6.0,
       "tier": 2,
       "payout_pct": 60
     },
     {
-      "threshold": 7.5,
+      "threshold": 9.0,
       "tier": 3,
       "payout_pct": 100
     }

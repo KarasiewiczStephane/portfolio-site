@@ -10,12 +10,11 @@
     "metrics": {
       "n_years": 16,
       "hit_rate": 1.0,
-      "false_positive_rate": 0.07692307692307693,
-      "basis_risk_gap": 0.193,
+      "false_positive_rate": 0.0,
+      "basis_risk_gap": 0.191,
       "years_paid": [
         2010,
         2016,
-        2019,
         2024
       ],
       "years_damaging": [
