@@ -1,0 +1,12 @@
+{
+  "title": "La Réunion fringing reef — thermal-stress bleaching (2016, 2019)",
+  "summary": "La Réunion's west-coast fringing reefs (SW Indian Ocean, ~21°S) bleached in the 2016 Western Indian Ocean mass event (3rd global event, strongest in the region since 1998) and again in 2019, when about 41% of corals bleached at Saint-Leu. This POC drives a parametric bleaching trigger from NOAA Coral Reef Watch Degree Heating Weeks (DHW) over the reef sectors, calibrates it with a reef-resilience coefficient, and backtests the payouts against documented bleaching for 2009-2024. The real DHW caught both documented events (hit rate 1.0), but it also runs high in several years without a documented mass-bleaching (2009, 2017, 2021), so the trigger over-pays: that false-positive gap is the basis risk a Discovery audit exists to quantify. Note the 2024 4th global event, concentrated equatorward, largely spared these high-latitude reefs (DHW ~1).",
+  "sources": [
+    {"label": "NOAA Coral Reef Watch (5km DHW / CoralTemp)", "url": "https://coralreefwatch.noaa.gov/"},
+    {"label": "Coral bleaching in Réunion's reefs, SW Indian Ocean, March-April 2016", "url": "https://www.researchgate.net/publication/303818131"},
+    {"label": "Impact of the 3rd global coral bleaching event on the Western Indian Ocean", "url": "https://www.researchgate.net/publication/326416192"},
+    {"label": "GCRMN — Western Indian Ocean coral reef status", "url": "https://gcrmn.net/western-indian-ocean/"},
+    {"label": "Sénat (FR) 2019 — blanchiment du corail à La Réunion (41% at Saint-Leu)", "url": "https://www.senat.fr/questions/base/2019/qSEQ190610981.html"},
+    {"label": "Réserve Naturelle Marine de La Réunion (état des récifs)", "url": "https://ifrecor.fr/comite-la-reunion/"}
+  ]
+}

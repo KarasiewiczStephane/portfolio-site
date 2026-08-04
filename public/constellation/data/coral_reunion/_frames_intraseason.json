@@ -1,0 +1,266 @@
+{
+  "stage": "intraseason",
+  "cmap": "turbo",
+  "vmin": 0.0,
+  "vmax": 12.859999656677246,
+  "bounds": [
+    [
+      55.14999907357352,
+      -20.950000445048016
+    ],
+    [
+      55.550001689365935,
+      -20.950000445048016
+    ],
+    [
+      55.550001689365935,
+      -21.449999173482258
+    ],
+    [
+      55.14999907357352,
+      -21.449999173482258
+    ]
+  ],
+  "bbox": [
+    55.14999907357352,
+    -21.449999173482258,
+    55.550001689365935,
+    -20.950000445048016
+  ],
+  "classes": [
+    {
+      "level": 0.0,
+      "color": "#30123b"
+    },
+    {
+      "level": 2.572,
+      "color": "#3e9bfe"
+    },
+    {
+      "level": 5.144,
+      "color": "#46f884"
+    },
+    {
+      "level": 7.716,
+      "color": "#e1dd37"
+    },
+    {
+      "level": 10.288,
+      "color": "#f05b12"
+    },
+    {
+      "level": 12.86,
+      "color": "#7a0403"
+    }
+  ],
+  "frames": [
+    {
+      "date": "2019-01-03",
+      "file": "frames/intraseason/2019-01-03.png"
+    },
+    {
+      "date": "2019-01-10",
+      "file": "frames/intraseason/2019-01-10.png"
+    },
+    {
+      "date": "2019-01-17",
+      "file": "frames/intraseason/2019-01-17.png"
+    },
+    {
+      "date": "2019-01-24",
+      "file": "frames/intraseason/2019-01-24.png"
+    },
+    {
+      "date": "2019-01-31",
+      "file": "frames/intraseason/2019-01-31.png"
+    },
+    {
+      "date": "2019-02-07",
+      "file": "frames/intraseason/2019-02-07.png"
+    },
+    {
+      "date": "2019-02-14",
+      "file": "frames/intraseason/2019-02-14.png"
+    },
+    {
+      "date": "2019-02-21",
+      "file": "frames/intraseason/2019-02-21.png"
+    },
+    {
+      "date": "2019-02-28",
+      "file": "frames/intraseason/2019-02-28.png"
+    },
+    {
+      "date": "2019-03-07",
+      "file": "frames/intraseason/2019-03-07.png"
+    },
+    {
+      "date": "2019-03-14",
+      "file": "frames/intraseason/2019-03-14.png"
+    },
+    {
+      "date": "2019-03-21",
+      "file": "frames/intraseason/2019-03-21.png"
+    },
+    {
+      "date": "2019-03-28",
+      "file": "frames/intraseason/2019-03-28.png"
+    },
+    {
+      "date": "2019-04-04",
+      "file": "frames/intraseason/2019-04-04.png"
+    },
+    {
+      "date": "2019-04-11",
+      "file": "frames/intraseason/2019-04-11.png"
+    },
+    {
+      "date": "2019-04-18",
+      "file": "frames/intraseason/2019-04-18.png"
+    },
+    {
+      "date": "2019-04-25",
+      "file": "frames/intraseason/2019-04-25.png"
+    },
+    {
+      "date": "2019-05-02",
+      "file": "frames/intraseason/2019-05-02.png"
+    },
+    {
+      "date": "2019-05-09",
+      "file": "frames/intraseason/2019-05-09.png"
+    },
+    {
+      "date": "2019-05-16",
+      "file": "frames/intraseason/2019-05-16.png"
+    },
+    {
+      "date": "2019-05-23",
+      "file": "frames/intraseason/2019-05-23.png"
+    },
+    {
+      "date": "2019-05-30",
+      "file": "frames/intraseason/2019-05-30.png"
+    },
+    {
+      "date": "2019-06-06",
+      "file": "frames/intraseason/2019-06-06.png"
+    },
+    {
+      "date": "2019-06-13",
+      "file": "frames/intraseason/2019-06-13.png"
+    },
+    {
+      "date": "2019-06-20",
+      "file": "frames/intraseason/2019-06-20.png"
+    },
+    {
+      "date": "2019-06-27",
+      "file": "frames/intraseason/2019-06-27.png"
+    },
+    {
+      "date": "2019-07-04",
+      "file": "frames/intraseason/2019-07-04.png"
+    },
+    {
+      "date": "2019-07-11",
+      "file": "frames/intraseason/2019-07-11.png"
+    },
+    {
+      "date": "2019-07-18",
+      "file": "frames/intraseason/2019-07-18.png"
+    },
+    {
+      "date": "2019-07-25",
+      "file": "frames/intraseason/2019-07-25.png"
+    },
+    {
+      "date": "2019-08-01",
+      "file": "frames/intraseason/2019-08-01.png"
+    },
+    {
+      "date": "2019-08-08",
+      "file": "frames/intraseason/2019-08-08.png"
+    },
+    {
+      "date": "2019-08-15",
+      "file": "frames/intraseason/2019-08-15.png"
+    },
+    {
+      "date": "2019-08-22",
+      "file": "frames/intraseason/2019-08-22.png"
+    },
+    {
+      "date": "2019-08-29",
+      "file": "frames/intraseason/2019-08-29.png"
+    },
+    {
+      "date": "2019-09-05",
+      "file": "frames/intraseason/2019-09-05.png"
+    },
+    {
+      "date": "2019-09-12",
+      "file": "frames/intraseason/2019-09-12.png"
+    },
+    {
+      "date": "2019-09-19",
+      "file": "frames/intraseason/2019-09-19.png"
+    },
+    {
+      "date": "2019-09-26",
+      "file": "frames/intraseason/2019-09-26.png"
+    },
+    {
+      "date": "2019-10-03",
+      "file": "frames/intraseason/2019-10-03.png"
+    },
+    {
+      "date": "2019-10-10",
+      "file": "frames/intraseason/2019-10-10.png"
+    },
+    {
+      "date": "2019-10-17",
+      "file": "frames/intraseason/2019-10-17.png"
+    },
+    {
+      "date": "2019-10-24",
+      "file": "frames/intraseason/2019-10-24.png"
+    },
+    {
+      "date": "2019-10-31",
+      "file": "frames/intraseason/2019-10-31.png"
+    },
+    {
+      "date": "2019-11-07",
+      "file": "frames/intraseason/2019-11-07.png"
+    },
+    {
+      "date": "2019-11-14",
+      "file": "frames/intraseason/2019-11-14.png"
+    },
+    {
+      "date": "2019-11-21",
+      "file": "frames/intraseason/2019-11-21.png"
+    },
+    {
+      "date": "2019-11-28",
+      "file": "frames/intraseason/2019-11-28.png"
+    },
+    {
+      "date": "2019-12-05",
+      "file": "frames/intraseason/2019-12-05.png"
+    },
+    {
+      "date": "2019-12-12",
+      "file": "frames/intraseason/2019-12-12.png"
+    },
+    {
+      "date": "2019-12-19",
+      "file": "frames/intraseason/2019-12-19.png"
+    },
+    {
+      "date": "2019-12-26",
+      "file": "frames/intraseason/2019-12-26.png"
+    }
+  ]
+}

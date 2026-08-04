@@ -140,6 +140,155 @@
     }
   },
   {
+    "poc_id": "coral_reunion",
+    "display_name": "La R\u00e9union \u2014 west-coast fringing reef DHW (real NOAA Coral Reef Watch 5km)",
+    "peril": "dhw",
+    "bbox": [
+      55.15,
+      -21.42,
+      55.53,
+      -20.98
+    ],
+    "country_iso3": "REU",
+    "schema": "generic",
+    "summary_metrics": {
+      "poc": "coral_reunion",
+      "peril": "dhw",
+      "display_name": "La R\u00e9union \u2014 west-coast fringing reef DHW (real NOAA Coral Reef Watch 5km)",
+      "region": "reunion",
+      "sst_source": "noaa_crw",
+      "analysis_period": [
+        2009,
+        2024
+      ],
+      "limit_eur": 250000.0,
+      "total_payout_eur": 2175000.0,
+      "n_sectors_triggered": 2,
+      "basis_risk": {
+        "spatial": {
+          "status": "ok",
+          "metric": "aggregation_spatial_std_degCweeks",
+          "mean_spatial_std": 0.2056
+        },
+        "prediction": {
+          "n_years": 16,
+          "hit_rate": 1.0,
+          "false_positive_rate": 0.42857142857142855,
+          "basis_risk_gap": 0.229,
+          "years_paid": [
+            2009,
+            2011,
+            2014,
+            2016,
+            2017,
+            2018,
+            2019,
+            2021
+          ],
+          "years_damaging": [
+            2016,
+            2019
+          ]
+        }
+      }
+    },
+    "stages": {
+      "aggregation": [
+        "aggregation.csv"
+      ],
+      "basis_risk": [
+        "basis_risk.json"
+      ],
+      "calibrated_thresholds": [
+        "calibrated_thresholds.json"
+      ],
+      "case": [
+        "case.json"
+      ],
+      "choropleth": [
+        "choropleth.geojson"
+      ],
+      "district_timeseries": [
+        "district_timeseries.json"
+      ],
+      "hazard_index": [
+        "hazard_index.nc",
+        "hazard_index.png"
+      ],
+      "intraseason": [
+        "intraseason.nc"
+      ],
+      "payouts": [
+        "payouts.csv"
+      ],
+      "raw_hazard": [
+        "raw_hazard.nc"
+      ],
+      "trigger_events": [
+        "trigger_events.csv"
+      ]
+    },
+    "raster": {
+      "hazard_index": {
+        "file": "hazard_index.png",
+        "bounds": [
+          [
+            55.14999907357352,
+            -20.950000445048016
+          ],
+          [
+            55.550001689365935,
+            -20.950000445048016
+          ],
+          [
+            55.550001689365935,
+            -21.449999173482258
+          ],
+          [
+            55.14999907357352,
+            -21.449999173482258
+          ]
+        ],
+        "bbox": [
+          55.14999907357352,
+          -21.449999173482258,
+          55.550001689365935,
+          -20.950000445048016
+        ],
+        "vmin": 11.289999961853027,
+        "vmax": 14.050000190734863,
+        "cmap": "turbo",
+        "reduction": "max",
+        "classes": [
+          {
+            "level": 11.29,
+            "color": "#30123b"
+          },
+          {
+            "level": 11.842,
+            "color": "#3e9bfe"
+          },
+          {
+            "level": 12.394,
+            "color": "#46f884"
+          },
+          {
+            "level": 12.946,
+            "color": "#e1dd37"
+          },
+          {
+            "level": 13.498,
+            "color": "#f05b12"
+          },
+          {
+            "level": 14.05,
+            "color": "#7a0403"
+          }
+        ]
+      }
+    }
+  },
+  {
     "poc_id": "crop_bangladesh_full",
     "display_name": "Bangladesh \u2014 nationwide rainfed kharif (real CHIRPS rain)",
     "peril": "crop_hybrid",

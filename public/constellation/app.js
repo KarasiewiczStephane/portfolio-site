@@ -43,7 +43,7 @@ let _currentPoc = null;    // selected POC, for theme re-init
 
 const UNIT_BY_PERIL = { dhw: "°C-weeks (DHW)", mhw: "°C-weeks", drought: "z-score" };
 // Short dropdown labels so the selector never overflows the sidebar (full name kept as tooltip).
-const SHORT_LABEL = { coral_mayotte: "Mayotte — Coral DHW", crop_bangladesh_full: "Bangladesh — Crop stress-index" };
+const SHORT_LABEL = { coral_mayotte: "Mayotte — Coral DHW", coral_reunion: "La Réunion — Coral DHW", crop_bangladesh_full: "Bangladesh — Crop stress-index" };
 
 // Legend as class intervals (the raster classes are evenly-spaced sample points; render the
 // bands BETWEEN them, top-down, with the unit): "≥ top", "a – b", …, "< second-lowest".
@@ -398,6 +398,22 @@ function basisRiskPanel(poc, summary) {
     grid += `<div class="yr ${cls}" title="${y}: ${p ? "paid" : "no payout"}, ${dg ? "bleaching observed" : "no event"}">${String(y).slice(2)}</div>`;
   }
   const pct = (x) => (x == null ? "—" : x <= 1 ? x.toFixed(2) : x.toFixed(2));
+
+  // Narrative is DERIVED, never hardcoded. It used to be written for Mayotte (3 events, one
+  // dry-fire) and rendered verbatim under La Réunion's tiles, where the truth is 2 events and
+  // six dry-fires — i.e. the prose contradicted the false-pos tile directly above it. On a
+  // dashboard whose whole pitch is data integrity, that is the one bug you cannot ship.
+  const nEvents = dmg.size;
+  const nDry = [...paid].filter((y) => !dmg.has(y)).length;
+  const nMiss = [...dmg].filter((y) => !paid.has(y)).length;
+  const nYears = br.n_years != null ? br.n_years : y1 - y0 + 1;
+  const plural = (n, one, many) => (n === 1 ? `one ${one}` : `${n} ${many}`);
+
+  const caught = nMiss === 0
+    ? `Caught every documented bleaching year (hit rate ${pct(br.hit_rate)})`
+    : `Caught ${nEvents - nMiss} of ${nEvents} documented bleaching ${nEvents - nMiss === 1 ? "year" : "years"} (hit rate ${pct(br.hit_rate)}), ${plural(nMiss, "miss", "misses")}`;
+  const dryPhrase = nDry === 0 ? "no dry-fires" : plural(nDry, "dry-fire", "dry-fires");
+
   return `<div class="section"><h3>Backtest &amp; basis risk · ${y0}–${y1}</h3>
     <div class="tiles">
       <div class="tile good"><div class="v">${pct(br.hit_rate)}</div><div class="k">hit rate</div></div>
@@ -409,11 +425,11 @@ function basisRiskPanel(poc, summary) {
       <span><i class="tp"></i>caught</span><span><i class="fp"></i>dry-fire</span>
       <span><i class="miss"></i>miss</span><span><i class="tn"></i>quiet</span>
     </div>
-    <p class="fine">Caught every documented bleaching year (hit rate ${pct(br.hit_rate)}); one dry-fire; the
-      basis gap (${pct(br.basis_risk_gap)}) is the payout-vs-severity mismatch an audit shrinks.</p>
-    <p class="fine caveat">Caveat: metrics rest on 3 events / 16 yrs — perfect separation is achievable but overfits.
-      DHW is an imperfect severity proxy (2016 = worst bleaching yet moderate DHW → underpays). Treat as
-      directional, not calibrated.</p>
+    <p class="fine">${caught}; ${dryPhrase}; the basis gap (${pct(br.basis_risk_gap)}) is the
+      payout-vs-severity mismatch an audit shrinks.</p>
+    <p class="fine caveat">Caveat: metrics rest on ${plural(nEvents, "event", "events")} over ${nYears} yrs,
+      too few to calibrate on. DHW is an imperfect severity proxy for bleaching. Treat as directional,
+      not calibrated.</p>
     ${lossCostHtml}</div>`;
 }
 
