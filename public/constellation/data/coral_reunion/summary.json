@@ -19,8 +19,8 @@
     },
     "prediction": {
       "n_years": 16,
-      "hit_rate": 1.0,
-      "false_positive_rate": 0.35714285714285715,
+      "hit_rate": 0.8333333333333334,
+      "false_positive_rate": 0.2,
       "basis_risk_gap": 0.202,
       "years_paid": [
         2009,
@@ -32,8 +32,12 @@
         2021
       ],
       "years_damaging": [
+        2014,
+        2015,
         2016,
-        2019
+        2017,
+        2019,
+        2021
       ]
     }
   }
