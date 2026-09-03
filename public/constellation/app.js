@@ -944,6 +944,13 @@ async function wireControls(e) {
     });
   });
 
+  // Cleared unconditionally. These are assigned per POC, and when a POC has NO frames --
+  // wind's index is one peak per cell, not an animation -- the old assignments survived and
+  // still closed over the PREVIOUS POC's `poc` and `avail`, so a stray change event could
+  // repaint a frame belonging to a map nobody was looking at.
+  dateSel.onchange = null;
+  seasonBtn.onclick = null;
+  scoreOn.onchange = null;
   if (Object.keys(avail).length) {
     populateDates();
     dateSel.onchange = onScrub;
