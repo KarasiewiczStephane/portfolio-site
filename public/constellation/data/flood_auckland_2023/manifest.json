@@ -18,8 +18,14 @@
     "anomaly": [
       "anomaly.nc"
     ],
+    "backtest_years": [
+      "backtest_years.csv"
+    ],
     "basis_risk": [
       "basis_risk.json"
+    ],
+    "case": [
+      "case.json"
     ],
     "choropleth": [
       "choropleth.geojson"
@@ -51,15 +57,17 @@
     "admin_0": "dcc1b582a6167130",
     "aggregation": "ec12f158f58f6d55",
     "anomaly": "dbad6ed02d7a4b31",
+    "backtest_years": "1e63d26f2a87edc6",
     "basis_risk": "7d840686714213ce",
-    "choropleth": "2d07b347cd984836",
+    "case": "a54f8c8b672ffa31",
+    "choropleth": "f03c65090b4a978e",
     "climatology_24h": "1f02ce189b95e8dd",
     "climatology_72h": "02a1a441aae8ee10",
-    "district_timeseries": "a6b4ef656706b322",
-    "ladder_72h": "0f5b3a5502749984",
-    "payouts": "4a0f4fbc485f2b81",
+    "district_timeseries": "cdb226977ec9ecbf",
+    "ladder_72h": "600fe3a55e1b7370",
+    "payouts": "0c51273bbe98dce5",
     "raw_hazard": "50d1aa7b65913a1c",
-    "trigger_events": "c1e03de8bc5730e2"
+    "trigger_events": "b65701d518a694b3"
   },
   "raster": {},
   "summary": {
@@ -82,20 +90,21 @@
     ],
     "climatology_pool_days": 7,
     "n_hexes": 269,
-    "n_hexes_triggered": 112,
-    "total_payout_eur": 18187500.0,
+    "n_hexes_triggered": 73,
+    "total_payout_eur": 7800000.0,
     "limit_eur": 250000.0,
     "limit_basis": "per hex cell",
     "max_exposure_eur": 67250000.0,
-    "season_loss_cost_pct": 27.0,
+    "season_loss_cost_pct": 11.6,
     "season_loss_cost_note": "Share of maximum exposure paid in the analysed event. NOT a rate on line: one event is one observation.",
     "return_years": [
-      5.0,
       10.0,
-      20.0
+      25.0,
+      50.0
     ],
     "extrapolated_tiers": [
-      20.0
+      25.0,
+      50.0
     ],
     "calibration_status": "Per-cell Gumbel return levels on the anomaly index, fitted to each cell's own 15 annual maxima. Thresholds are in the index's own units and cancel IMERG's under-read only because measurement and threshold share an instrument.",
     "source_caveat": "IMERG Final lags ~3.5 months: backtest and pricing only. The Early run at ~4 h is the live path and is not what this POC runs on.",

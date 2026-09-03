@@ -13,7 +13,7 @@
     "Rainfall is the CAUSE of pluvial flooding, not the flooding itself. Drainage capacity, antecedent wetness and imperviousness all sit between the two.",
     "IMERG Final lags about 3.5 months, so this is a backtest and pricing input. The Early run at ~4 hours is the live path, and is not what this POC runs on.",
     "Payout-versus-loss is unscored. No per-location loss series exists: the Auckland property categorisation measures future risk to life rather than 2023 damage, and NHC claims cover residential land only.",
-    "The 1-in-20 tier is an extrapolation beyond a 15-year record, and is flagged as such in the artifact."
+    "The upper two tiers extrapolate beyond the 15-year record — 1-in-50 is 3.3 times it — and are flagged as such in the artifact. A 1-in-100 tier was rejected for that reason."
   ],
   "sources": [
     {

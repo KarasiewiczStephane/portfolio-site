@@ -30,19 +30,19 @@
     ],
     "payout_bands": [
       {
-        "return_years": 5.0,
-        "tier": 1,
-        "meaning": "tier 1: this cell's own 1-in-5 year level"
-      },
-      {
         "return_years": 10.0,
-        "tier": 2,
-        "meaning": "tier 2: this cell's own 1-in-10 year level"
+        "tier": 1,
+        "meaning": "tier 1: this cell's own 1-in-10 year level"
       },
       {
-        "return_years": 20.0,
+        "return_years": 25.0,
+        "tier": 2,
+        "meaning": "tier 2: this cell's own 1-in-25 year level (extrapolated beyond the record)"
+      },
+      {
+        "return_years": 50.0,
         "tier": 3,
-        "meaning": "tier 3: this cell's own 1-in-20 year level (extrapolated beyond the record)"
+        "meaning": "tier 3: this cell's own 1-in-50 year level (extrapolated beyond the record)"
       }
     ],
     "source_caveat": "IMERG satellite rainfall, backtest and pricing only. Values are a ~100 km2 cell average and read 43-56% of a rain gauge inside the same cell. Return periods are this index's own, not the atmosphere's: a 1-in-10 cell average can correspond to a far rarer point rainfall."

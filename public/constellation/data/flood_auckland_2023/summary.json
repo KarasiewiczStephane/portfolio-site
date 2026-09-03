@@ -18,20 +18,21 @@
   ],
   "climatology_pool_days": 7,
   "n_hexes": 269,
-  "n_hexes_triggered": 112,
-  "total_payout_eur": 18187500.0,
+  "n_hexes_triggered": 73,
+  "total_payout_eur": 7800000.0,
   "limit_eur": 250000.0,
   "limit_basis": "per hex cell",
   "max_exposure_eur": 67250000.0,
-  "season_loss_cost_pct": 27.0,
+  "season_loss_cost_pct": 11.6,
   "season_loss_cost_note": "Share of maximum exposure paid in the analysed event. NOT a rate on line: one event is one observation.",
   "return_years": [
-    5.0,
     10.0,
-    20.0
+    25.0,
+    50.0
   ],
   "extrapolated_tiers": [
-    20.0
+    25.0,
+    50.0
   ],
   "calibration_status": "Per-cell Gumbel return levels on the anomaly index, fitted to each cell's own 15 annual maxima. Thresholds are in the index's own units and cancel IMERG's under-read only because measurement and threshold share an instrument.",
   "source_caveat": "IMERG Final lags ~3.5 months: backtest and pricing only. The Early run at ~4 h is the live path and is not what this POC runs on.",
