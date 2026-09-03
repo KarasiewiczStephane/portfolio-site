@@ -1,0 +1,40 @@
+{
+  "title": "Auckland — the Anniversary Weekend flood, 27 January 2023",
+  "summary": "Peak 72-hour rainfall above each cell's own seasonal normal, across the largest insured weather loss in New Zealand's history.",
+  "body": [
+    "On the evening of 27 January 2023 Auckland recorded 280 mm of rain in under 24 hours and 211 mm in under six, at Albert Park. NIWA assessed it as at least a 1-in-200-year rainfall. It produced 57,205 insurance claims worth NZ$1.84 billion — the costliest weather event the country has recorded.",
+    "This is PLUVIAL flood: rain falling faster than drainage can carry it away. It is not river flooding, and the two are deliberately not mixed. Cyclone Gabrielle's Hawke's Bay flooding three weeks later was fluvial, a different hazard variable with a different index.",
+    "The hazard is IMERG satellite rainfall, chosen on evidence rather than convenience. ERA5 was tested first and ranks this event NINTH in its own year — zero of 35 Auckland cells put it first, and every one of them ranked Cyclone Gabrielle above it, inverting the loss ordering. CHIRPS cannot express a sub-daily extreme at all: its daily values are a five-day total redistributed by cloud duration. IMERG ranks the event first at every window and places its peak within an hour of the documented 5 p.m. onset.",
+    "The index is a departure from normal, not a raw depth. Each 30 km hex is compared against its OWN 72-hour normal for that day of the year, built from 15 years of record pooled over a two-week window. Thresholds are per cell too, fitted to that cell's own annual maxima — so the same rainfall is ordinary in a wet place and exceptional in a dry one."
+  ],
+  "caveats": [
+    "Return periods are this index's own, not the atmosphere's. NIWA called the rainfall 1-in-200 at a gauge; the same event is roughly 1-in-7 for a 100 km² cell average. A tier means 'the 1-in-N event for a 100 km² cell as measured by IMERG', never 'a 1-in-N rainfall'.",
+    "IMERG reads 43-56% of a rain gauge inside the same cell. The under-read cancels in the trigger only because the thresholds come from the same instrument.",
+    "Rainfall is the CAUSE of pluvial flooding, not the flooding itself. Drainage capacity, antecedent wetness and imperviousness all sit between the two.",
+    "IMERG Final lags about 3.5 months, so this is a backtest and pricing input. The Early run at ~4 hours is the live path, and is not what this POC runs on.",
+    "Payout-versus-loss is unscored. No per-location loss series exists: the Auckland property categorisation measures future risk to life rather than 2023 damage, and NHC claims cover residential land only.",
+    "The 1-in-20 tier is an extrapolation beyond a 15-year record, and is flagged as such in the artifact."
+  ],
+  "sources": [
+    {
+      "label": "NASA GPM IMERG V07 (Final, half-hourly and daily)",
+      "url": "https://gpm.nasa.gov/data/imerg"
+    },
+    {
+      "label": "ICNZ — Auckland Anniversary Weekend flooding, provisional claims",
+      "url": "https://www.icnz.org.nz/industry/aawprov/"
+    },
+    {
+      "label": "NIWA — Auckland's wettest month on record",
+      "url": "https://niwa.co.nz/news/auckland-suffers-wettest-month-history"
+    },
+    {
+      "label": "NIWA HIRDS v4 — rainfall depth-duration-frequency (cross-check only)",
+      "url": "https://niwa.co.nz/climate-and-weather/high-intensity-rainfall-design-system-hirds"
+    },
+    {
+      "label": "GloFAS-ERA5 — why river discharge cannot see this event (>1,000 km² catchments only)",
+      "url": "https://essd.copernicus.org/articles/12/2043/2020/"
+    }
+  ]
+}

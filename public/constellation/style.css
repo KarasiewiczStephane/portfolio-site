@@ -55,6 +55,13 @@ html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, Seg
 
 .legend { margin-top: 14px; }
 .legend.hidden, .detail.hidden { display: none; }
+/* ⚠ THE GENERIC RULE, missing until 2026-09-03. `.hidden` was defined only for .legend,
+   .detail and .modal, so the other ten `classList.add("hidden")` calls in app.js did
+   NOTHING: the empty DATE/SEASON box stayed on screen for the wind POC, whose index is one
+   peak per cell and has no frames, and the sources button stayed clickable on a POC with no
+   case study, opening the PREVIOUS peril's claims. !important because several of these
+   elements set their own display (flex, block) and would otherwise win. */
+.hidden, [hidden] { display: none !important; }
 .ramp-row { display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 2px 0; }
 .ramp-row .sw { width: 22px; height: 12px; border-radius: 2px; flex: none; }
 

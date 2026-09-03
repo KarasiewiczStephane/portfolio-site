@@ -688,7 +688,9 @@ async function openDetail(e) {
   // wire the sidebar Sources button -> modal
   const sBtn = document.getElementById("sourcesBtn");
   if (kase) { sBtn.classList.remove("hidden"); sBtn.onclick = () => openSourcesModal(e, kase); }
-  else sBtn.classList.add("hidden");
+  // Cleared, not just hidden: the handler closed over the PREVIOUS POC's case study, so on a
+  // POC without one the button opened another peril's claims under this peril's name.
+  else { sBtn.classList.add("hidden"); sBtn.onclick = null; }
 
   const howHtml = `<div class="section"><h3>How it works</h3><p class="how">${perilOf(e.peril).how}</p></div>`;
 
@@ -819,7 +821,11 @@ function openSourcesModal(e, kase) {
   const src = (kase.sources || []).map((s) => `<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`).join(" · ");
   // `body` and `caveats` are optional: POCs that only carry a summary render exactly as
   // before, and the ones with more to say get it rather than having it silently dropped.
-  const body = (kase.body || []).map((t) => `<p class="mbody">${t}</p>`).join("");
+  const body = // Coerced: a `body` written as one string rather than an array of paragraphs threw here,
+  // and because the throw happened mid-render the modal kept the PREVIOUS POC's content --
+  // so the flood POC presented the cyclone wind case study under its own name. A claims panel
+  // must fail visibly, never by showing someone else's claims.
+  (Array.isArray(kase.body) ? kase.body : String(kase.body || "").split(/\n{2,}/).filter(Boolean)).map((t) => `<p class="mbody">${t}</p>`).join("");
   const cav = (kase.caveats || []).length
     ? `<div class="mcav"><b>What this is not</b><ul>${kase.caveats.map((c) => `<li>${c}</li>`).join("")}</ul></div>`
     : "";
