@@ -1,0 +1,780 @@
+{
+  "stage": "raw_hazard",
+  "cmap": "Blues",
+  "vmin": 0.0,
+  "vmax": 3.8899998664855957,
+  "sub_daily": true,
+  "tz_hours": 13.0,
+  "bounds": [
+    [
+      172.5000030517578,
+      -34.400000762939456
+    ],
+    [
+      178.60000305175782,
+      -34.400000762939456
+    ],
+    [
+      178.60000305175782,
+      -39.00000076293945
+    ],
+    [
+      172.5000030517578,
+      -39.00000076293945
+    ]
+  ],
+  "bbox": [
+    172.5000030517578,
+    -39.00000076293945,
+    178.60000305175782,
+    -34.400000762939456
+  ],
+  "classes": [
+    {
+      "level": 0.0,
+      "color": "#f7fbff"
+    },
+    {
+      "level": 0.778,
+      "color": "#d0e1f2"
+    },
+    {
+      "level": 1.556,
+      "color": "#94c4df"
+    },
+    {
+      "level": 2.334,
+      "color": "#4a98c9"
+    },
+    {
+      "level": 3.112,
+      "color": "#1764ab"
+    },
+    {
+      "level": 3.89,
+      "color": "#08306b"
+    }
+  ],
+  "frames": [
+    {
+      "date": "2023-01-26T0000",
+      "label": "26 Jan 13:00",
+      "file": "frames/raw_hazard/2023-01-26T0000.png"
+    },
+    {
+      "date": "2023-01-26T0030",
+      "label": "26 Jan 13:30",
+      "file": "frames/raw_hazard/2023-01-26T0030.png"
+    },
+    {
+      "date": "2023-01-26T0100",
+      "label": "26 Jan 14:00",
+      "file": "frames/raw_hazard/2023-01-26T0100.png"
+    },
+    {
+      "date": "2023-01-26T0130",
+      "label": "26 Jan 14:30",
+      "file": "frames/raw_hazard/2023-01-26T0130.png"
+    },
+    {
+      "date": "2023-01-26T0200",
+      "label": "26 Jan 15:00",
+      "file": "frames/raw_hazard/2023-01-26T0200.png"
+    },
+    {
+      "date": "2023-01-26T0230",
+      "label": "26 Jan 15:30",
+      "file": "frames/raw_hazard/2023-01-26T0230.png"
+    },
+    {
+      "date": "2023-01-26T0300",
+      "label": "26 Jan 16:00",
+      "file": "frames/raw_hazard/2023-01-26T0300.png"
+    },
+    {
+      "date": "2023-01-26T0330",
+      "label": "26 Jan 16:30",
+      "file": "frames/raw_hazard/2023-01-26T0330.png"
+    },
+    {
+      "date": "2023-01-26T0400",
+      "label": "26 Jan 17:00",
+      "file": "frames/raw_hazard/2023-01-26T0400.png"
+    },
+    {
+      "date": "2023-01-26T0430",
+      "label": "26 Jan 17:30",
+      "file": "frames/raw_hazard/2023-01-26T0430.png"
+    },
+    {
+      "date": "2023-01-26T0500",
+      "label": "26 Jan 18:00",
+      "file": "frames/raw_hazard/2023-01-26T0500.png"
+    },
+    {
+      "date": "2023-01-26T0530",
+      "label": "26 Jan 18:30",
+      "file": "frames/raw_hazard/2023-01-26T0530.png"
+    },
+    {
+      "date": "2023-01-26T0600",
+      "label": "26 Jan 19:00",
+      "file": "frames/raw_hazard/2023-01-26T0600.png"
+    },
+    {
+      "date": "2023-01-26T0630",
+      "label": "26 Jan 19:30",
+      "file": "frames/raw_hazard/2023-01-26T0630.png"
+    },
+    {
+      "date": "2023-01-26T0700",
+      "label": "26 Jan 20:00",
+      "file": "frames/raw_hazard/2023-01-26T0700.png"
+    },
+    {
+      "date": "2023-01-26T0730",
+      "label": "26 Jan 20:30",
+      "file": "frames/raw_hazard/2023-01-26T0730.png"
+    },
+    {
+      "date": "2023-01-26T0800",
+      "label": "26 Jan 21:00",
+      "file": "frames/raw_hazard/2023-01-26T0800.png"
+    },
+    {
+      "date": "2023-01-26T0830",
+      "label": "26 Jan 21:30",
+      "file": "frames/raw_hazard/2023-01-26T0830.png"
+    },
+    {
+      "date": "2023-01-26T0900",
+      "label": "26 Jan 22:00",
+      "file": "frames/raw_hazard/2023-01-26T0900.png"
+    },
+    {
+      "date": "2023-01-26T0930",
+      "label": "26 Jan 22:30",
+      "file": "frames/raw_hazard/2023-01-26T0930.png"
+    },
+    {
+      "date": "2023-01-26T1000",
+      "label": "26 Jan 23:00",
+      "file": "frames/raw_hazard/2023-01-26T1000.png"
+    },
+    {
+      "date": "2023-01-26T1030",
+      "label": "26 Jan 23:30",
+      "file": "frames/raw_hazard/2023-01-26T1030.png"
+    },
+    {
+      "date": "2023-01-26T1100",
+      "label": "27 Jan 00:00",
+      "file": "frames/raw_hazard/2023-01-26T1100.png"
+    },
+    {
+      "date": "2023-01-26T1130",
+      "label": "27 Jan 00:30",
+      "file": "frames/raw_hazard/2023-01-26T1130.png"
+    },
+    {
+      "date": "2023-01-26T1200",
+      "label": "27 Jan 01:00",
+      "file": "frames/raw_hazard/2023-01-26T1200.png"
+    },
+    {
+      "date": "2023-01-26T1230",
+      "label": "27 Jan 01:30",
+      "file": "frames/raw_hazard/2023-01-26T1230.png"
+    },
+    {
+      "date": "2023-01-26T1300",
+      "label": "27 Jan 02:00",
+      "file": "frames/raw_hazard/2023-01-26T1300.png"
+    },
+    {
+      "date": "2023-01-26T1330",
+      "label": "27 Jan 02:30",
+      "file": "frames/raw_hazard/2023-01-26T1330.png"
+    },
+    {
+      "date": "2023-01-26T1400",
+      "label": "27 Jan 03:00",
+      "file": "frames/raw_hazard/2023-01-26T1400.png"
+    },
+    {
+      "date": "2023-01-26T1430",
+      "label": "27 Jan 03:30",
+      "file": "frames/raw_hazard/2023-01-26T1430.png"
+    },
+    {
+      "date": "2023-01-26T1500",
+      "label": "27 Jan 04:00",
+      "file": "frames/raw_hazard/2023-01-26T1500.png"
+    },
+    {
+      "date": "2023-01-26T1530",
+      "label": "27 Jan 04:30",
+      "file": "frames/raw_hazard/2023-01-26T1530.png"
+    },
+    {
+      "date": "2023-01-26T1600",
+      "label": "27 Jan 05:00",
+      "file": "frames/raw_hazard/2023-01-26T1600.png"
+    },
+    {
+      "date": "2023-01-26T1630",
+      "label": "27 Jan 05:30",
+      "file": "frames/raw_hazard/2023-01-26T1630.png"
+    },
+    {
+      "date": "2023-01-26T1700",
+      "label": "27 Jan 06:00",
+      "file": "frames/raw_hazard/2023-01-26T1700.png"
+    },
+    {
+      "date": "2023-01-26T1730",
+      "label": "27 Jan 06:30",
+      "file": "frames/raw_hazard/2023-01-26T1730.png"
+    },
+    {
+      "date": "2023-01-26T1800",
+      "label": "27 Jan 07:00",
+      "file": "frames/raw_hazard/2023-01-26T1800.png"
+    },
+    {
+      "date": "2023-01-26T1830",
+      "label": "27 Jan 07:30",
+      "file": "frames/raw_hazard/2023-01-26T1830.png"
+    },
+    {
+      "date": "2023-01-26T1900",
+      "label": "27 Jan 08:00",
+      "file": "frames/raw_hazard/2023-01-26T1900.png"
+    },
+    {
+      "date": "2023-01-26T1930",
+      "label": "27 Jan 08:30",
+      "file": "frames/raw_hazard/2023-01-26T1930.png"
+    },
+    {
+      "date": "2023-01-26T2000",
+      "label": "27 Jan 09:00",
+      "file": "frames/raw_hazard/2023-01-26T2000.png"
+    },
+    {
+      "date": "2023-01-26T2030",
+      "label": "27 Jan 09:30",
+      "file": "frames/raw_hazard/2023-01-26T2030.png"
+    },
+    {
+      "date": "2023-01-26T2100",
+      "label": "27 Jan 10:00",
+      "file": "frames/raw_hazard/2023-01-26T2100.png"
+    },
+    {
+      "date": "2023-01-26T2130",
+      "label": "27 Jan 10:30",
+      "file": "frames/raw_hazard/2023-01-26T2130.png"
+    },
+    {
+      "date": "2023-01-26T2200",
+      "label": "27 Jan 11:00",
+      "file": "frames/raw_hazard/2023-01-26T2200.png"
+    },
+    {
+      "date": "2023-01-26T2230",
+      "label": "27 Jan 11:30",
+      "file": "frames/raw_hazard/2023-01-26T2230.png"
+    },
+    {
+      "date": "2023-01-26T2300",
+      "label": "27 Jan 12:00",
+      "file": "frames/raw_hazard/2023-01-26T2300.png"
+    },
+    {
+      "date": "2023-01-26T2330",
+      "label": "27 Jan 12:30",
+      "file": "frames/raw_hazard/2023-01-26T2330.png"
+    },
+    {
+      "date": "2023-01-27T0000",
+      "label": "27 Jan 13:00",
+      "file": "frames/raw_hazard/2023-01-27T0000.png"
+    },
+    {
+      "date": "2023-01-27T0030",
+      "label": "27 Jan 13:30",
+      "file": "frames/raw_hazard/2023-01-27T0030.png"
+    },
+    {
+      "date": "2023-01-27T0100",
+      "label": "27 Jan 14:00",
+      "file": "frames/raw_hazard/2023-01-27T0100.png"
+    },
+    {
+      "date": "2023-01-27T0130",
+      "label": "27 Jan 14:30",
+      "file": "frames/raw_hazard/2023-01-27T0130.png"
+    },
+    {
+      "date": "2023-01-27T0200",
+      "label": "27 Jan 15:00",
+      "file": "frames/raw_hazard/2023-01-27T0200.png"
+    },
+    {
+      "date": "2023-01-27T0230",
+      "label": "27 Jan 15:30",
+      "file": "frames/raw_hazard/2023-01-27T0230.png"
+    },
+    {
+      "date": "2023-01-27T0300",
+      "label": "27 Jan 16:00",
+      "file": "frames/raw_hazard/2023-01-27T0300.png"
+    },
+    {
+      "date": "2023-01-27T0330",
+      "label": "27 Jan 16:30",
+      "file": "frames/raw_hazard/2023-01-27T0330.png"
+    },
+    {
+      "date": "2023-01-27T0400",
+      "label": "27 Jan 17:00",
+      "file": "frames/raw_hazard/2023-01-27T0400.png"
+    },
+    {
+      "date": "2023-01-27T0430",
+      "label": "27 Jan 17:30",
+      "file": "frames/raw_hazard/2023-01-27T0430.png"
+    },
+    {
+      "date": "2023-01-27T0500",
+      "label": "27 Jan 18:00",
+      "file": "frames/raw_hazard/2023-01-27T0500.png"
+    },
+    {
+      "date": "2023-01-27T0530",
+      "label": "27 Jan 18:30",
+      "file": "frames/raw_hazard/2023-01-27T0530.png"
+    },
+    {
+      "date": "2023-01-27T0600",
+      "label": "27 Jan 19:00",
+      "file": "frames/raw_hazard/2023-01-27T0600.png"
+    },
+    {
+      "date": "2023-01-27T0630",
+      "label": "27 Jan 19:30",
+      "file": "frames/raw_hazard/2023-01-27T0630.png"
+    },
+    {
+      "date": "2023-01-27T0700",
+      "label": "27 Jan 20:00",
+      "file": "frames/raw_hazard/2023-01-27T0700.png"
+    },
+    {
+      "date": "2023-01-27T0730",
+      "label": "27 Jan 20:30",
+      "file": "frames/raw_hazard/2023-01-27T0730.png"
+    },
+    {
+      "date": "2023-01-27T0800",
+      "label": "27 Jan 21:00",
+      "file": "frames/raw_hazard/2023-01-27T0800.png"
+    },
+    {
+      "date": "2023-01-27T0830",
+      "label": "27 Jan 21:30",
+      "file": "frames/raw_hazard/2023-01-27T0830.png"
+    },
+    {
+      "date": "2023-01-27T0900",
+      "label": "27 Jan 22:00",
+      "file": "frames/raw_hazard/2023-01-27T0900.png"
+    },
+    {
+      "date": "2023-01-27T0930",
+      "label": "27 Jan 22:30",
+      "file": "frames/raw_hazard/2023-01-27T0930.png"
+    },
+    {
+      "date": "2023-01-27T1000",
+      "label": "27 Jan 23:00",
+      "file": "frames/raw_hazard/2023-01-27T1000.png"
+    },
+    {
+      "date": "2023-01-27T1030",
+      "label": "27 Jan 23:30",
+      "file": "frames/raw_hazard/2023-01-27T1030.png"
+    },
+    {
+      "date": "2023-01-27T1100",
+      "label": "28 Jan 00:00",
+      "file": "frames/raw_hazard/2023-01-27T1100.png"
+    },
+    {
+      "date": "2023-01-27T1130",
+      "label": "28 Jan 00:30",
+      "file": "frames/raw_hazard/2023-01-27T1130.png"
+    },
+    {
+      "date": "2023-01-27T1200",
+      "label": "28 Jan 01:00",
+      "file": "frames/raw_hazard/2023-01-27T1200.png"
+    },
+    {
+      "date": "2023-01-27T1230",
+      "label": "28 Jan 01:30",
+      "file": "frames/raw_hazard/2023-01-27T1230.png"
+    },
+    {
+      "date": "2023-01-27T1300",
+      "label": "28 Jan 02:00",
+      "file": "frames/raw_hazard/2023-01-27T1300.png"
+    },
+    {
+      "date": "2023-01-27T1330",
+      "label": "28 Jan 02:30",
+      "file": "frames/raw_hazard/2023-01-27T1330.png"
+    },
+    {
+      "date": "2023-01-27T1400",
+      "label": "28 Jan 03:00",
+      "file": "frames/raw_hazard/2023-01-27T1400.png"
+    },
+    {
+      "date": "2023-01-27T1430",
+      "label": "28 Jan 03:30",
+      "file": "frames/raw_hazard/2023-01-27T1430.png"
+    },
+    {
+      "date": "2023-01-27T1500",
+      "label": "28 Jan 04:00",
+      "file": "frames/raw_hazard/2023-01-27T1500.png"
+    },
+    {
+      "date": "2023-01-27T1530",
+      "label": "28 Jan 04:30",
+      "file": "frames/raw_hazard/2023-01-27T1530.png"
+    },
+    {
+      "date": "2023-01-27T1600",
+      "label": "28 Jan 05:00",
+      "file": "frames/raw_hazard/2023-01-27T1600.png"
+    },
+    {
+      "date": "2023-01-27T1630",
+      "label": "28 Jan 05:30",
+      "file": "frames/raw_hazard/2023-01-27T1630.png"
+    },
+    {
+      "date": "2023-01-27T1700",
+      "label": "28 Jan 06:00",
+      "file": "frames/raw_hazard/2023-01-27T1700.png"
+    },
+    {
+      "date": "2023-01-27T1730",
+      "label": "28 Jan 06:30",
+      "file": "frames/raw_hazard/2023-01-27T1730.png"
+    },
+    {
+      "date": "2023-01-27T1800",
+      "label": "28 Jan 07:00",
+      "file": "frames/raw_hazard/2023-01-27T1800.png"
+    },
+    {
+      "date": "2023-01-27T1830",
+      "label": "28 Jan 07:30",
+      "file": "frames/raw_hazard/2023-01-27T1830.png"
+    },
+    {
+      "date": "2023-01-27T1900",
+      "label": "28 Jan 08:00",
+      "file": "frames/raw_hazard/2023-01-27T1900.png"
+    },
+    {
+      "date": "2023-01-27T1930",
+      "label": "28 Jan 08:30",
+      "file": "frames/raw_hazard/2023-01-27T1930.png"
+    },
+    {
+      "date": "2023-01-27T2000",
+      "label": "28 Jan 09:00",
+      "file": "frames/raw_hazard/2023-01-27T2000.png"
+    },
+    {
+      "date": "2023-01-27T2030",
+      "label": "28 Jan 09:30",
+      "file": "frames/raw_hazard/2023-01-27T2030.png"
+    },
+    {
+      "date": "2023-01-27T2100",
+      "label": "28 Jan 10:00",
+      "file": "frames/raw_hazard/2023-01-27T2100.png"
+    },
+    {
+      "date": "2023-01-27T2130",
+      "label": "28 Jan 10:30",
+      "file": "frames/raw_hazard/2023-01-27T2130.png"
+    },
+    {
+      "date": "2023-01-27T2200",
+      "label": "28 Jan 11:00",
+      "file": "frames/raw_hazard/2023-01-27T2200.png"
+    },
+    {
+      "date": "2023-01-27T2230",
+      "label": "28 Jan 11:30",
+      "file": "frames/raw_hazard/2023-01-27T2230.png"
+    },
+    {
+      "date": "2023-01-27T2300",
+      "label": "28 Jan 12:00",
+      "file": "frames/raw_hazard/2023-01-27T2300.png"
+    },
+    {
+      "date": "2023-01-27T2330",
+      "label": "28 Jan 12:30",
+      "file": "frames/raw_hazard/2023-01-27T2330.png"
+    },
+    {
+      "date": "2023-01-28T0000",
+      "label": "28 Jan 13:00",
+      "file": "frames/raw_hazard/2023-01-28T0000.png"
+    },
+    {
+      "date": "2023-01-28T0030",
+      "label": "28 Jan 13:30",
+      "file": "frames/raw_hazard/2023-01-28T0030.png"
+    },
+    {
+      "date": "2023-01-28T0100",
+      "label": "28 Jan 14:00",
+      "file": "frames/raw_hazard/2023-01-28T0100.png"
+    },
+    {
+      "date": "2023-01-28T0130",
+      "label": "28 Jan 14:30",
+      "file": "frames/raw_hazard/2023-01-28T0130.png"
+    },
+    {
+      "date": "2023-01-28T0200",
+      "label": "28 Jan 15:00",
+      "file": "frames/raw_hazard/2023-01-28T0200.png"
+    },
+    {
+      "date": "2023-01-28T0230",
+      "label": "28 Jan 15:30",
+      "file": "frames/raw_hazard/2023-01-28T0230.png"
+    },
+    {
+      "date": "2023-01-28T0300",
+      "label": "28 Jan 16:00",
+      "file": "frames/raw_hazard/2023-01-28T0300.png"
+    },
+    {
+      "date": "2023-01-28T0330",
+      "label": "28 Jan 16:30",
+      "file": "frames/raw_hazard/2023-01-28T0330.png"
+    },
+    {
+      "date": "2023-01-28T0400",
+      "label": "28 Jan 17:00",
+      "file": "frames/raw_hazard/2023-01-28T0400.png"
+    },
+    {
+      "date": "2023-01-28T0430",
+      "label": "28 Jan 17:30",
+      "file": "frames/raw_hazard/2023-01-28T0430.png"
+    },
+    {
+      "date": "2023-01-28T0500",
+      "label": "28 Jan 18:00",
+      "file": "frames/raw_hazard/2023-01-28T0500.png"
+    },
+    {
+      "date": "2023-01-28T0530",
+      "label": "28 Jan 18:30",
+      "file": "frames/raw_hazard/2023-01-28T0530.png"
+    },
+    {
+      "date": "2023-01-28T0600",
+      "label": "28 Jan 19:00",
+      "file": "frames/raw_hazard/2023-01-28T0600.png"
+    },
+    {
+      "date": "2023-01-28T0630",
+      "label": "28 Jan 19:30",
+      "file": "frames/raw_hazard/2023-01-28T0630.png"
+    },
+    {
+      "date": "2023-01-28T0700",
+      "label": "28 Jan 20:00",
+      "file": "frames/raw_hazard/2023-01-28T0700.png"
+    },
+    {
+      "date": "2023-01-28T0730",
+      "label": "28 Jan 20:30",
+      "file": "frames/raw_hazard/2023-01-28T0730.png"
+    },
+    {
+      "date": "2023-01-28T0800",
+      "label": "28 Jan 21:00",
+      "file": "frames/raw_hazard/2023-01-28T0800.png"
+    },
+    {
+      "date": "2023-01-28T0830",
+      "label": "28 Jan 21:30",
+      "file": "frames/raw_hazard/2023-01-28T0830.png"
+    },
+    {
+      "date": "2023-01-28T0900",
+      "label": "28 Jan 22:00",
+      "file": "frames/raw_hazard/2023-01-28T0900.png"
+    },
+    {
+      "date": "2023-01-28T0930",
+      "label": "28 Jan 22:30",
+      "file": "frames/raw_hazard/2023-01-28T0930.png"
+    },
+    {
+      "date": "2023-01-28T1000",
+      "label": "28 Jan 23:00",
+      "file": "frames/raw_hazard/2023-01-28T1000.png"
+    },
+    {
+      "date": "2023-01-28T1030",
+      "label": "28 Jan 23:30",
+      "file": "frames/raw_hazard/2023-01-28T1030.png"
+    },
+    {
+      "date": "2023-01-28T1100",
+      "label": "29 Jan 00:00",
+      "file": "frames/raw_hazard/2023-01-28T1100.png"
+    },
+    {
+      "date": "2023-01-28T1130",
+      "label": "29 Jan 00:30",
+      "file": "frames/raw_hazard/2023-01-28T1130.png"
+    },
+    {
+      "date": "2023-01-28T1200",
+      "label": "29 Jan 01:00",
+      "file": "frames/raw_hazard/2023-01-28T1200.png"
+    },
+    {
+      "date": "2023-01-28T1230",
+      "label": "29 Jan 01:30",
+      "file": "frames/raw_hazard/2023-01-28T1230.png"
+    },
+    {
+      "date": "2023-01-28T1300",
+      "label": "29 Jan 02:00",
+      "file": "frames/raw_hazard/2023-01-28T1300.png"
+    },
+    {
+      "date": "2023-01-28T1330",
+      "label": "29 Jan 02:30",
+      "file": "frames/raw_hazard/2023-01-28T1330.png"
+    },
+    {
+      "date": "2023-01-28T1400",
+      "label": "29 Jan 03:00",
+      "file": "frames/raw_hazard/2023-01-28T1400.png"
+    },
+    {
+      "date": "2023-01-28T1430",
+      "label": "29 Jan 03:30",
+      "file": "frames/raw_hazard/2023-01-28T1430.png"
+    },
+    {
+      "date": "2023-01-28T1500",
+      "label": "29 Jan 04:00",
+      "file": "frames/raw_hazard/2023-01-28T1500.png"
+    },
+    {
+      "date": "2023-01-28T1530",
+      "label": "29 Jan 04:30",
+      "file": "frames/raw_hazard/2023-01-28T1530.png"
+    },
+    {
+      "date": "2023-01-28T1600",
+      "label": "29 Jan 05:00",
+      "file": "frames/raw_hazard/2023-01-28T1600.png"
+    },
+    {
+      "date": "2023-01-28T1630",
+      "label": "29 Jan 05:30",
+      "file": "frames/raw_hazard/2023-01-28T1630.png"
+    },
+    {
+      "date": "2023-01-28T1700",
+      "label": "29 Jan 06:00",
+      "file": "frames/raw_hazard/2023-01-28T1700.png"
+    },
+    {
+      "date": "2023-01-28T1730",
+      "label": "29 Jan 06:30",
+      "file": "frames/raw_hazard/2023-01-28T1730.png"
+    },
+    {
+      "date": "2023-01-28T1800",
+      "label": "29 Jan 07:00",
+      "file": "frames/raw_hazard/2023-01-28T1800.png"
+    },
+    {
+      "date": "2023-01-28T1830",
+      "label": "29 Jan 07:30",
+      "file": "frames/raw_hazard/2023-01-28T1830.png"
+    },
+    {
+      "date": "2023-01-28T1900",
+      "label": "29 Jan 08:00",
+      "file": "frames/raw_hazard/2023-01-28T1900.png"
+    },
+    {
+      "date": "2023-01-28T1930",
+      "label": "29 Jan 08:30",
+      "file": "frames/raw_hazard/2023-01-28T1930.png"
+    },
+    {
+      "date": "2023-01-28T2000",
+      "label": "29 Jan 09:00",
+      "file": "frames/raw_hazard/2023-01-28T2000.png"
+    },
+    {
+      "date": "2023-01-28T2030",
+      "label": "29 Jan 09:30",
+      "file": "frames/raw_hazard/2023-01-28T2030.png"
+    },
+    {
+      "date": "2023-01-28T2100",
+      "label": "29 Jan 10:00",
+      "file": "frames/raw_hazard/2023-01-28T2100.png"
+    },
+    {
+      "date": "2023-01-28T2130",
+      "label": "29 Jan 10:30",
+      "file": "frames/raw_hazard/2023-01-28T2130.png"
+    },
+    {
+      "date": "2023-01-28T2200",
+      "label": "29 Jan 11:00",
+      "file": "frames/raw_hazard/2023-01-28T2200.png"
+    },
+    {
+      "date": "2023-01-28T2230",
+      "label": "29 Jan 11:30",
+      "file": "frames/raw_hazard/2023-01-28T2230.png"
+    },
+    {
+      "date": "2023-01-28T2300",
+      "label": "29 Jan 12:00",
+      "file": "frames/raw_hazard/2023-01-28T2300.png"
+    },
+    {
+      "date": "2023-01-28T2330",
+      "label": "29 Jan 12:30",
+      "file": "frames/raw_hazard/2023-01-28T2330.png"
+    }
+  ]
+}

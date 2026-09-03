@@ -1,0 +1,82 @@
+{
+  "years": [
+    2023
+  ],
+  "score_property": "depth_{year}",
+  "scale": {
+    "unit": "72-hour rainfall depth (mm, higher = worse)",
+    "how_it_works": "Colour is the highest 72-hour rainfall total that cell saw during the analysed event. The payout tier is NOT the colour: each cell is compared against its own history, so the same depth is ordinary in a wet place and exceptional in a dry one. Click a cell to see which tier it reached and why.",
+    "anchors": [
+      {
+        "threshold": 50.0,
+        "meaning": "50 \u2013 100 mm"
+      },
+      {
+        "threshold": 100.0,
+        "meaning": "100 \u2013 150 mm"
+      },
+      {
+        "threshold": 150.0,
+        "meaning": "150 \u2013 200 mm"
+      },
+      {
+        "threshold": 200.0,
+        "meaning": "200 \u2013 250 mm"
+      },
+      {
+        "threshold": 250.0,
+        "meaning": "250 mm and above"
+      }
+    ],
+    "payout_bands": [
+      {
+        "return_years": 5.0,
+        "tier": 1,
+        "meaning": "tier 1: this cell's own 1-in-5 year level"
+      },
+      {
+        "return_years": 10.0,
+        "tier": 2,
+        "meaning": "tier 2: this cell's own 1-in-10 year level"
+      },
+      {
+        "return_years": 20.0,
+        "tier": 3,
+        "meaning": "tier 3: this cell's own 1-in-20 year level (extrapolated beyond the record)"
+      }
+    ],
+    "source_caveat": "IMERG satellite rainfall, backtest and pricing only. Values are a ~100 km2 cell average and read 43-56% of a rain gauge inside the same cell. Return periods are this index's own, not the atmosphere's: a 1-in-10 cell average can correspond to a far rarer point rainfall."
+  },
+  "ramp": [
+    {
+      "threshold": 25.0,
+      "label": "under 50 mm",
+      "color": "#deebf7"
+    },
+    {
+      "threshold": 50.0,
+      "label": "50 \u2013 100 mm",
+      "color": "#9ecae1"
+    },
+    {
+      "threshold": 100.0,
+      "label": "100 \u2013 150 mm",
+      "color": "#4a7dff"
+    },
+    {
+      "threshold": 150.0,
+      "label": "150 \u2013 200 mm",
+      "color": "#2255cc"
+    },
+    {
+      "threshold": 200.0,
+      "label": "200 \u2013 250 mm",
+      "color": "#16307a"
+    },
+    {
+      "threshold": 250.0,
+      "label": "250 mm and above",
+      "color": "#0b1a4d"
+    }
+  ]
+}

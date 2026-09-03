@@ -1,0 +1,33 @@
+{
+  "title": "New Zealand cyclone wind — the 2023 season",
+  "summary": "Peak 10 m gust per hex cell across Cyclones Hale and Gabrielle. New Zealand sees one or two landfalling cyclones a year. In 2023 it saw exactly two: Hale in January, which passed within 48 km of the coast, and Gabrielle in February, which caused the country's costliest weather disaster in decades. Both windows are analysed here.",
+  "body": [
+    "The index is the highest 10 m gust each hex cell recorded during those events. Cells are 30 km across and clipped to the coastline — the payout question is about wind over land, so an ocean cell reading 200 km/h is a picture of the sea, not a claim.",
+    "This POC was originally scoped on a parametric windfield: cyclone best-track points driving a Holland vortex, the method used in production for Caribbean hurricane microinsurance. That does not survive contact with the New Zealand record. Gabrielle carries no intensity and no radius-of-maximum-wind at any of the 30 track points across its approach, and only three points in twenty-six years within 300 km of the coast carry both. The cause is institutional, not a data gap: the agencies that publish radius-of-maximum-wind have no responsibility for New Zealand, and the agency that does has never published the field. No alternative feed fixes that, so the hazard is reanalysis instead.",
+    "What the map is not: a priced product. The ladder shown is the Australian/NZ tropical cyclone category scale, which is correct as a legend and wrong as a payout trigger — 63 km/h is a genuine Category 1 boundary and also ordinary New Zealand weather, so tier 1 fires on most of the country most years. Calibrating it is a pricing decision."
+  ],
+  "caveats": [
+    "ERA5 is a backtest and pricing input. Final ERA5 runs 2-3 months behind and ERA5T about 5 days, so a live product would trigger on station gusts, never on this.",
+    "Values are 28 km grid-cell averages. Exposed sites read higher: Auckland airport recorded 88.9 km/h during Gabrielle while exposed capes recorded 150-159 km/h.",
+    "Peak over the season's analysed cyclone events, not an annual maximum. A winter storm can out-blow a cyclone here.",
+    "No observed New Zealand cyclone loss series exists, so payout-versus-loss is recorded as not applicable rather than estimated."
+  ],
+  "sources": [
+    {
+      "label": "ERA5 hourly single levels (10 m wind gust)",
+      "url": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels"
+    },
+    {
+      "label": "IBTrACS — storm track archive (NOAA NCEI)",
+      "url": "https://www.ncei.noaa.gov/products/international-best-track-archive"
+    },
+    {
+      "label": "geoBoundaries — New Zealand ADM0",
+      "url": "https://www.geoboundaries.org/"
+    },
+    {
+      "label": "Australian/NZ tropical cyclone category scale (BoM)",
+      "url": "http://www.bom.gov.au/cyclone/tropical-cyclone-knowledge-centre/understanding/categories/"
+    }
+  ]
+}

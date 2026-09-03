@@ -1,0 +1,21 @@
+{
+  "spatial": {
+    "status": "ok",
+    "metric": "aggregation_spatial_std_kmh",
+    "mean_spatial_std": 5.18,
+    "max_spatial_std": 14.1
+  },
+  "prediction": {
+    "status": "not_applicable",
+    "reason": "no observed NZ cyclone loss series exists; not fabricated",
+    "metrics": null
+  },
+  "hazard": {
+    "status": "measured",
+    "metric": "model_to_station_gap_kmh",
+    "n_stations": 3,
+    "mean_gap_kmh": 10.03,
+    "max_gap_kmh": 13.7,
+    "note": "Modelled ERA5 cell gust minus measured aerodrome gust. Conflates model error with exposure difference; aerodromes are a floor on the regional peak."
+  }
+}

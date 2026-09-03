@@ -1,0 +1,58 @@
+{
+  "poc": "flood_auckland_2023",
+  "peril": "pluvial_flood",
+  "display_name": "Auckland \u2014 pluvial flood, January 2023",
+  "region": "nz_upper",
+  "hazard_source": "imerg_v07b",
+  "event_days": [
+    "2023-01-26",
+    "2023-01-27",
+    "2023-01-28"
+  ],
+  "hex_cell_km": 10.0,
+  "trigger_window_hours": 72.0,
+  "index": "anomaly: accumulation minus the cell's own day-of-year normal",
+  "climatology_period": [
+    2008,
+    2022
+  ],
+  "climatology_pool_days": 7,
+  "n_hexes": 269,
+  "n_hexes_triggered": 112,
+  "total_payout_eur": 18187500.0,
+  "limit_eur": 250000.0,
+  "limit_basis": "per hex cell",
+  "max_exposure_eur": 67250000.0,
+  "season_loss_cost_pct": 27.0,
+  "season_loss_cost_note": "Share of maximum exposure paid in the analysed event. NOT a rate on line: one event is one observation.",
+  "return_years": [
+    5.0,
+    10.0,
+    20.0
+  ],
+  "extrapolated_tiers": [
+    20.0
+  ],
+  "calibration_status": "Per-cell Gumbel return levels on the anomaly index, fitted to each cell's own 15 annual maxima. Thresholds are in the index's own units and cancel IMERG's under-read only because measurement and threshold share an instrument.",
+  "source_caveat": "IMERG Final lags ~3.5 months: backtest and pricing only. The Early run at ~4 h is the live path and is not what this POC runs on.",
+  "index_caveat": "Pluvial flood only - rain outpacing drainage, not rivers leaving channels. Values are ~100 km2 cell averages reading 43-56% of a gauge in the same cell.",
+  "return_period_caveat": "Return periods are this index's own. NIWA assessed the 27 January 2023 rainfall as at least 1-in-200 at a gauge; the same event is roughly 1-in-7 for a 100 km2 cell average. A tier is 'the 1-in-N event for a 100 km2 cell as measured by IMERG', never 'a 1-in-N rainfall'.",
+  "basis_risk": {
+    "spatial": {
+      "status": "ok",
+      "metric": "aggregation_spatial_std_mm",
+      "mean_spatial_std": 5.25
+    },
+    "prediction": {
+      "status": "not_applicable",
+      "reason": "event-level insured losses are published for this flood, but no per-location loss series is wired; not fabricated",
+      "metrics": null
+    },
+    "hazard": {
+      "status": "not_measured",
+      "metric": "model_to_gauge_gap_mm",
+      "reason": "Auckland Council operates 60+ telemetered gauges; archive access is not yet arranged, so the gap is quoted from the 2026-09-01 probe rather than measured per cell",
+      "probe_note": "IMERG read 43% of the gauge at 6 h and 56% at 24 h at Albert Park"
+    }
+  }
+}

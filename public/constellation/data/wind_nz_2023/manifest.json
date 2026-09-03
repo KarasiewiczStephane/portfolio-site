@@ -1,0 +1,178 @@
+{
+  "poc": "wind_nz_2023",
+  "peril": "cyclone_wind",
+  "geometry": {
+    "type": "FeatureCollection",
+    "features": []
+  },
+  "stages": {
+    "admin_0": [
+      "admin_0.geojson"
+    ],
+    "aggregation": [
+      "aggregation.csv"
+    ],
+    "basis_risk": [
+      "basis_risk.json"
+    ],
+    "calibrated_thresholds": [
+      "calibrated_thresholds.json"
+    ],
+    "case": [
+      "case.json"
+    ],
+    "choropleth": [
+      "choropleth.geojson"
+    ],
+    "district_timeseries": [
+      "district_timeseries.json"
+    ],
+    "hazard_index": [
+      "hazard_index.nc",
+      "hazard_index.png"
+    ],
+    "payouts": [
+      "payouts.csv"
+    ],
+    "raw_hazard": [
+      "raw_hazard.nc"
+    ],
+    "stations": [
+      "stations.geojson"
+    ],
+    "tracks": [
+      "tracks.geojson"
+    ],
+    "trigger_events": [
+      "trigger_events.csv"
+    ]
+  },
+  "content_hashes": {
+    "admin_0": "dcc1b582a6167130",
+    "aggregation": "52cb2bdebe93229a",
+    "basis_risk": "61939b30b2862d9c",
+    "calibrated_thresholds": "6326a1cce76a0467",
+    "case": "32cafaebf2967924",
+    "choropleth": "24139622ea7a60d3",
+    "district_timeseries": "318304d9f02b903b",
+    "hazard_index": "cf2881d14e210ec4",
+    "payouts": "625a5c56df681168",
+    "raw_hazard": "2d430b3768c38e3f",
+    "stations": "68b599dd44c4bf74",
+    "tracks": "59b15a3f9ca4f2d7",
+    "trigger_events": "41076525c290859e"
+  },
+  "raster": {
+    "hazard_index": {
+      "file": "hazard_index.png",
+      "bounds": [
+        [
+          164.875,
+          -32.875
+        ],
+        [
+          180.125,
+          -32.875
+        ],
+        [
+          180.125,
+          -48.125
+        ],
+        [
+          164.875,
+          -48.125
+        ]
+      ],
+      "bbox": [
+        164.875,
+        -48.125,
+        180.125,
+        -32.875
+      ],
+      "vmin": 31.04193878173828,
+      "vmax": 130.87640380859375,
+      "cmap": "turbo",
+      "reduction": "mean",
+      "classes": [
+        {
+          "level": 31.042,
+          "color": "#30123b"
+        },
+        {
+          "level": 51.009,
+          "color": "#3e9bfe"
+        },
+        {
+          "level": 70.976,
+          "color": "#46f884"
+        },
+        {
+          "level": 90.943,
+          "color": "#e1dd37"
+        },
+        {
+          "level": 110.91,
+          "color": "#f05b12"
+        },
+        {
+          "level": 130.876,
+          "color": "#7a0403"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "poc": "wind_nz_2023",
+    "peril": "cyclone_wind",
+    "display_name": "New Zealand cyclone wind \u2014 2023 season",
+    "region": "nz",
+    "hazard_source": "era5_fg10",
+    "event_days": [
+      "2023-01-08",
+      "2023-01-09",
+      "2023-01-10",
+      "2023-01-11",
+      "2023-01-12",
+      "2023-02-11",
+      "2023-02-12",
+      "2023-02-13",
+      "2023-02-14",
+      "2023-02-15"
+    ],
+    "hex_cell_km": 30.0,
+    "n_hexes": 112,
+    "n_hexes_triggered": 24,
+    "total_payout_eur": 2550000.0,
+    "limit_eur": 250000.0,
+    "limit_basis": "per hex cell",
+    "max_exposure_eur": 28000000.0,
+    "season_loss_cost_pct": 9.1,
+    "season_loss_cost_note": "Share of maximum exposure paid out in the 2023 season. NOT a rate on line: one season is one observation, and 2023 was exceptional. No frequency estimate exists for this POC.",
+    "calibration_status": "Calibrated on the gridded index (2026-09-01). Attachment 110 km/h is a damage-onset threshold; the second tier at 125 is separated by 15 km/h, wider than the maximum measured model-to-station gap (13.7), so the two tiers are distinguishable by weather rather than by model error. Two tiers only: the index ceilings at 130.9, leaving 20.9 km/h above attachment, and a third tier would need boundaries finer than the hazard's own error. Thresholds are calibrated on THIS index and are not point-gust damage thresholds; a station-triggered live product needs its own calibration. Frequency is still one season, so the cost below is not a premium.",
+    "source_caveat": "ERA5 reanalysis: backtest and pricing only. A live product would trigger on station gusts (MetService AWS), never on this.",
+    "index_caveat": "Peak gust during the season's analysed cyclone events, NOT an annual maximum. 28 km grid cells, so exposed sites read higher than shown.",
+    "index_ceiling_kmh": 130.9,
+    "index_ceiling_note": "Highest value the gridded index reaches anywhere in the analysed season. Point observations exceed it (MetService recorded 159.3 km/h at Channel Island in Gabrielle vs 131 here): a 28 km cell cannot resolve a headland. Any payout threshold above this ceiling can never trigger.",
+    "basis_risk": {
+      "spatial": {
+        "status": "ok",
+        "metric": "aggregation_spatial_std_kmh",
+        "mean_spatial_std": 5.18,
+        "max_spatial_std": 14.1
+      },
+      "prediction": {
+        "status": "not_applicable",
+        "reason": "no observed NZ cyclone loss series exists; not fabricated",
+        "metrics": null
+      },
+      "hazard": {
+        "status": "measured",
+        "metric": "model_to_station_gap_kmh",
+        "n_stations": 3,
+        "mean_gap_kmh": 10.03,
+        "max_gap_kmh": 13.7,
+        "note": "Modelled ERA5 cell gust minus measured aerodrome gust. Conflates model error with exposure difference; aerodromes are a floor on the regional peak."
+      }
+    }
+  }
+}

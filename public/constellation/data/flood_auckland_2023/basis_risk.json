@@ -1,0 +1,18 @@
+{
+  "spatial": {
+    "status": "ok",
+    "metric": "aggregation_spatial_std_mm",
+    "mean_spatial_std": 5.25
+  },
+  "prediction": {
+    "status": "not_applicable",
+    "reason": "event-level insured losses are published for this flood, but no per-location loss series is wired; not fabricated",
+    "metrics": null
+  },
+  "hazard": {
+    "status": "not_measured",
+    "metric": "model_to_gauge_gap_mm",
+    "reason": "Auckland Council operates 60+ telemetered gauges; archive access is not yet arranged, so the gap is quoted from the 2026-09-01 probe rather than measured per cell",
+    "probe_note": "IMERG read 43% of the gauge at 6 h and 56% at 24 h at Albert Park"
+  }
+}

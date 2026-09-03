@@ -447,5 +447,286 @@
         ]
       }
     }
+  },
+  {
+    "poc_id": "flood_auckland_2023",
+    "display_name": "Auckland \u2014 pluvial flood, January 2023",
+    "peril": "pluvial_flood",
+    "bbox": [
+      172.5,
+      -39.0,
+      178.6,
+      -34.4
+    ],
+    "country_iso3": "NZL",
+    "schema": "generic",
+    "summary_metrics": {
+      "poc": "flood_auckland_2023",
+      "peril": "pluvial_flood",
+      "display_name": "Auckland \u2014 pluvial flood, January 2023",
+      "region": "nz_upper",
+      "hazard_source": "imerg_v07b",
+      "event_days": [
+        "2023-01-26",
+        "2023-01-27",
+        "2023-01-28"
+      ],
+      "hex_cell_km": 10.0,
+      "trigger_window_hours": 72.0,
+      "index": "anomaly: accumulation minus the cell's own day-of-year normal",
+      "climatology_period": [
+        2008,
+        2022
+      ],
+      "climatology_pool_days": 7,
+      "n_hexes": 269,
+      "n_hexes_triggered": 112,
+      "total_payout_eur": 18187500.0,
+      "limit_eur": 250000.0,
+      "limit_basis": "per hex cell",
+      "max_exposure_eur": 67250000.0,
+      "season_loss_cost_pct": 27.0,
+      "season_loss_cost_note": "Share of maximum exposure paid in the analysed event. NOT a rate on line: one event is one observation.",
+      "return_years": [
+        5.0,
+        10.0,
+        20.0
+      ],
+      "extrapolated_tiers": [
+        20.0
+      ],
+      "calibration_status": "Per-cell Gumbel return levels on the anomaly index, fitted to each cell's own 15 annual maxima. Thresholds are in the index's own units and cancel IMERG's under-read only because measurement and threshold share an instrument.",
+      "source_caveat": "IMERG Final lags ~3.5 months: backtest and pricing only. The Early run at ~4 h is the live path and is not what this POC runs on.",
+      "index_caveat": "Pluvial flood only - rain outpacing drainage, not rivers leaving channels. Values are ~100 km2 cell averages reading 43-56% of a gauge in the same cell.",
+      "return_period_caveat": "Return periods are this index's own. NIWA assessed the 27 January 2023 rainfall as at least 1-in-200 at a gauge; the same event is roughly 1-in-7 for a 100 km2 cell average. A tier is 'the 1-in-N event for a 100 km2 cell as measured by IMERG', never 'a 1-in-N rainfall'.",
+      "basis_risk": {
+        "spatial": {
+          "status": "ok",
+          "metric": "aggregation_spatial_std_mm",
+          "mean_spatial_std": 5.25
+        },
+        "prediction": {
+          "status": "not_applicable",
+          "reason": "event-level insured losses are published for this flood, but no per-location loss series is wired; not fabricated",
+          "metrics": null
+        },
+        "hazard": {
+          "status": "not_measured",
+          "metric": "model_to_gauge_gap_mm",
+          "reason": "Auckland Council operates 60+ telemetered gauges; archive access is not yet arranged, so the gap is quoted from the 2026-09-01 probe rather than measured per cell",
+          "probe_note": "IMERG read 43% of the gauge at 6 h and 56% at 24 h at Albert Park"
+        }
+      }
+    },
+    "stages": {
+      "accumulation": [
+        "accumulation.nc"
+      ],
+      "admin_0": [
+        "admin_0.geojson"
+      ],
+      "aggregation": [
+        "aggregation.csv"
+      ],
+      "anomaly": [
+        "anomaly.nc"
+      ],
+      "basis_risk": [
+        "basis_risk.json"
+      ],
+      "choropleth": [
+        "choropleth.geojson"
+      ],
+      "climatology_24h": [
+        "climatology_24h.nc"
+      ],
+      "climatology_72h": [
+        "climatology_72h.nc"
+      ],
+      "district_timeseries": [
+        "district_timeseries.json"
+      ],
+      "ladder_72h": [
+        "ladder_72h.nc"
+      ],
+      "payouts": [
+        "payouts.csv"
+      ],
+      "raw_hazard": [
+        "raw_hazard.nc"
+      ],
+      "trigger_events": [
+        "trigger_events.csv"
+      ]
+    },
+    "raster": {}
+  },
+  {
+    "poc_id": "wind_nz_2023",
+    "display_name": "New Zealand cyclone wind \u2014 2023 season",
+    "peril": "cyclone_wind",
+    "bbox": [
+      165.0,
+      -48.0,
+      180.0,
+      -33.0
+    ],
+    "country_iso3": "NZL",
+    "schema": "generic",
+    "summary_metrics": {
+      "poc": "wind_nz_2023",
+      "peril": "cyclone_wind",
+      "display_name": "New Zealand cyclone wind \u2014 2023 season",
+      "region": "nz",
+      "hazard_source": "era5_fg10",
+      "event_days": [
+        "2023-01-08",
+        "2023-01-09",
+        "2023-01-10",
+        "2023-01-11",
+        "2023-01-12",
+        "2023-02-11",
+        "2023-02-12",
+        "2023-02-13",
+        "2023-02-14",
+        "2023-02-15"
+      ],
+      "hex_cell_km": 30.0,
+      "n_hexes": 112,
+      "n_hexes_triggered": 24,
+      "total_payout_eur": 2550000.0,
+      "limit_eur": 250000.0,
+      "limit_basis": "per hex cell",
+      "max_exposure_eur": 28000000.0,
+      "season_loss_cost_pct": 9.1,
+      "season_loss_cost_note": "Share of maximum exposure paid out in the 2023 season. NOT a rate on line: one season is one observation, and 2023 was exceptional. No frequency estimate exists for this POC.",
+      "calibration_status": "Calibrated on the gridded index (2026-09-01). Attachment 110 km/h is a damage-onset threshold; the second tier at 125 is separated by 15 km/h, wider than the maximum measured model-to-station gap (13.7), so the two tiers are distinguishable by weather rather than by model error. Two tiers only: the index ceilings at 130.9, leaving 20.9 km/h above attachment, and a third tier would need boundaries finer than the hazard's own error. Thresholds are calibrated on THIS index and are not point-gust damage thresholds; a station-triggered live product needs its own calibration. Frequency is still one season, so the cost below is not a premium.",
+      "source_caveat": "ERA5 reanalysis: backtest and pricing only. A live product would trigger on station gusts (MetService AWS), never on this.",
+      "index_caveat": "Peak gust during the season's analysed cyclone events, NOT an annual maximum. 28 km grid cells, so exposed sites read higher than shown.",
+      "index_ceiling_kmh": 130.9,
+      "index_ceiling_note": "Highest value the gridded index reaches anywhere in the analysed season. Point observations exceed it (MetService recorded 159.3 km/h at Channel Island in Gabrielle vs 131 here): a 28 km cell cannot resolve a headland. Any payout threshold above this ceiling can never trigger.",
+      "basis_risk": {
+        "spatial": {
+          "status": "ok",
+          "metric": "aggregation_spatial_std_kmh",
+          "mean_spatial_std": 5.18,
+          "max_spatial_std": 14.1
+        },
+        "prediction": {
+          "status": "not_applicable",
+          "reason": "no observed NZ cyclone loss series exists; not fabricated",
+          "metrics": null
+        },
+        "hazard": {
+          "status": "measured",
+          "metric": "model_to_station_gap_kmh",
+          "n_stations": 3,
+          "mean_gap_kmh": 10.03,
+          "max_gap_kmh": 13.7,
+          "note": "Modelled ERA5 cell gust minus measured aerodrome gust. Conflates model error with exposure difference; aerodromes are a floor on the regional peak."
+        }
+      }
+    },
+    "stages": {
+      "admin_0": [
+        "admin_0.geojson"
+      ],
+      "aggregation": [
+        "aggregation.csv"
+      ],
+      "basis_risk": [
+        "basis_risk.json"
+      ],
+      "calibrated_thresholds": [
+        "calibrated_thresholds.json"
+      ],
+      "case": [
+        "case.json"
+      ],
+      "choropleth": [
+        "choropleth.geojson"
+      ],
+      "district_timeseries": [
+        "district_timeseries.json"
+      ],
+      "hazard_index": [
+        "hazard_index.nc",
+        "hazard_index.png"
+      ],
+      "payouts": [
+        "payouts.csv"
+      ],
+      "raw_hazard": [
+        "raw_hazard.nc"
+      ],
+      "stations": [
+        "stations.geojson"
+      ],
+      "tracks": [
+        "tracks.geojson"
+      ],
+      "trigger_events": [
+        "trigger_events.csv"
+      ]
+    },
+    "raster": {
+      "hazard_index": {
+        "file": "hazard_index.png",
+        "bounds": [
+          [
+            164.875,
+            -32.875
+          ],
+          [
+            180.125,
+            -32.875
+          ],
+          [
+            180.125,
+            -48.125
+          ],
+          [
+            164.875,
+            -48.125
+          ]
+        ],
+        "bbox": [
+          164.875,
+          -48.125,
+          180.125,
+          -32.875
+        ],
+        "vmin": 31.04193878173828,
+        "vmax": 130.87640380859375,
+        "cmap": "turbo",
+        "reduction": "mean",
+        "classes": [
+          {
+            "level": 31.042,
+            "color": "#30123b"
+          },
+          {
+            "level": 51.009,
+            "color": "#3e9bfe"
+          },
+          {
+            "level": 70.976,
+            "color": "#46f884"
+          },
+          {
+            "level": 90.943,
+            "color": "#e1dd37"
+          },
+          {
+            "level": 110.91,
+            "color": "#f05b12"
+          },
+          {
+            "level": 130.876,
+            "color": "#7a0403"
+          }
+        ]
+      }
+    }
   }
 ]

@@ -1,0 +1,295 @@
+{
+  "stage": "climatology",
+  "cmap": "Greys",
+  "vmin": 3.8279266460234918,
+  "vmax": 12.226230487566937,
+  "sub_daily": false,
+  "tz_hours": 0.0,
+  "bounds": [
+    [
+      172.5000030517578,
+      -34.400000000000006
+    ],
+    [
+      178.60000305175782,
+      -34.400000000000006
+    ],
+    [
+      178.60000305175782,
+      -39.0
+    ],
+    [
+      172.5000030517578,
+      -39.0
+    ]
+  ],
+  "bbox": [
+    172.5000030517578,
+    -39.0,
+    178.60000305175782,
+    -34.400000000000006
+  ],
+  "classes": [
+    {
+      "level": 3.828,
+      "color": "#ffffff"
+    },
+    {
+      "level": 5.508,
+      "color": "#e2e2e2"
+    },
+    {
+      "level": 7.187,
+      "color": "#b5b5b5"
+    },
+    {
+      "level": 8.867,
+      "color": "#7a7a7a"
+    },
+    {
+      "level": 10.547,
+      "color": "#404040"
+    },
+    {
+      "level": 12.226,
+      "color": "#000000"
+    }
+  ],
+  "frames": [
+    {
+      "date": "2023-01-05",
+      "label": "2023-01-05",
+      "file": "frames/climatology/2023-01-05.png"
+    },
+    {
+      "date": "2023-01-06",
+      "label": "2023-01-06",
+      "file": "frames/climatology/2023-01-06.png"
+    },
+    {
+      "date": "2023-01-07",
+      "label": "2023-01-07",
+      "file": "frames/climatology/2023-01-07.png"
+    },
+    {
+      "date": "2023-01-08",
+      "label": "2023-01-08",
+      "file": "frames/climatology/2023-01-08.png"
+    },
+    {
+      "date": "2023-01-09",
+      "label": "2023-01-09",
+      "file": "frames/climatology/2023-01-09.png"
+    },
+    {
+      "date": "2023-01-10",
+      "label": "2023-01-10",
+      "file": "frames/climatology/2023-01-10.png"
+    },
+    {
+      "date": "2023-01-11",
+      "label": "2023-01-11",
+      "file": "frames/climatology/2023-01-11.png"
+    },
+    {
+      "date": "2023-01-12",
+      "label": "2023-01-12",
+      "file": "frames/climatology/2023-01-12.png"
+    },
+    {
+      "date": "2023-01-13",
+      "label": "2023-01-13",
+      "file": "frames/climatology/2023-01-13.png"
+    },
+    {
+      "date": "2023-01-14",
+      "label": "2023-01-14",
+      "file": "frames/climatology/2023-01-14.png"
+    },
+    {
+      "date": "2023-01-15",
+      "label": "2023-01-15",
+      "file": "frames/climatology/2023-01-15.png"
+    },
+    {
+      "date": "2023-01-16",
+      "label": "2023-01-16",
+      "file": "frames/climatology/2023-01-16.png"
+    },
+    {
+      "date": "2023-01-17",
+      "label": "2023-01-17",
+      "file": "frames/climatology/2023-01-17.png"
+    },
+    {
+      "date": "2023-01-18",
+      "label": "2023-01-18",
+      "file": "frames/climatology/2023-01-18.png"
+    },
+    {
+      "date": "2023-01-19",
+      "label": "2023-01-19",
+      "file": "frames/climatology/2023-01-19.png"
+    },
+    {
+      "date": "2023-01-20",
+      "label": "2023-01-20",
+      "file": "frames/climatology/2023-01-20.png"
+    },
+    {
+      "date": "2023-01-21",
+      "label": "2023-01-21",
+      "file": "frames/climatology/2023-01-21.png"
+    },
+    {
+      "date": "2023-01-22",
+      "label": "2023-01-22",
+      "file": "frames/climatology/2023-01-22.png"
+    },
+    {
+      "date": "2023-01-23",
+      "label": "2023-01-23",
+      "file": "frames/climatology/2023-01-23.png"
+    },
+    {
+      "date": "2023-01-24",
+      "label": "2023-01-24",
+      "file": "frames/climatology/2023-01-24.png"
+    },
+    {
+      "date": "2023-01-25",
+      "label": "2023-01-25",
+      "file": "frames/climatology/2023-01-25.png"
+    },
+    {
+      "date": "2023-01-26",
+      "label": "2023-01-26",
+      "file": "frames/climatology/2023-01-26.png"
+    },
+    {
+      "date": "2023-01-27",
+      "label": "2023-01-27",
+      "file": "frames/climatology/2023-01-27.png"
+    },
+    {
+      "date": "2023-01-28",
+      "label": "2023-01-28",
+      "file": "frames/climatology/2023-01-28.png"
+    },
+    {
+      "date": "2023-01-29",
+      "label": "2023-01-29",
+      "file": "frames/climatology/2023-01-29.png"
+    },
+    {
+      "date": "2023-01-30",
+      "label": "2023-01-30",
+      "file": "frames/climatology/2023-01-30.png"
+    },
+    {
+      "date": "2023-01-31",
+      "label": "2023-01-31",
+      "file": "frames/climatology/2023-01-31.png"
+    },
+    {
+      "date": "2023-02-01",
+      "label": "2023-02-01",
+      "file": "frames/climatology/2023-02-01.png"
+    },
+    {
+      "date": "2023-02-02",
+      "label": "2023-02-02",
+      "file": "frames/climatology/2023-02-02.png"
+    },
+    {
+      "date": "2023-02-03",
+      "label": "2023-02-03",
+      "file": "frames/climatology/2023-02-03.png"
+    },
+    {
+      "date": "2023-02-04",
+      "label": "2023-02-04",
+      "file": "frames/climatology/2023-02-04.png"
+    },
+    {
+      "date": "2023-02-05",
+      "label": "2023-02-05",
+      "file": "frames/climatology/2023-02-05.png"
+    },
+    {
+      "date": "2023-02-06",
+      "label": "2023-02-06",
+      "file": "frames/climatology/2023-02-06.png"
+    },
+    {
+      "date": "2023-02-07",
+      "label": "2023-02-07",
+      "file": "frames/climatology/2023-02-07.png"
+    },
+    {
+      "date": "2023-02-08",
+      "label": "2023-02-08",
+      "file": "frames/climatology/2023-02-08.png"
+    },
+    {
+      "date": "2023-02-09",
+      "label": "2023-02-09",
+      "file": "frames/climatology/2023-02-09.png"
+    },
+    {
+      "date": "2023-02-10",
+      "label": "2023-02-10",
+      "file": "frames/climatology/2023-02-10.png"
+    },
+    {
+      "date": "2023-02-11",
+      "label": "2023-02-11",
+      "file": "frames/climatology/2023-02-11.png"
+    },
+    {
+      "date": "2023-02-12",
+      "label": "2023-02-12",
+      "file": "frames/climatology/2023-02-12.png"
+    },
+    {
+      "date": "2023-02-13",
+      "label": "2023-02-13",
+      "file": "frames/climatology/2023-02-13.png"
+    },
+    {
+      "date": "2023-02-14",
+      "label": "2023-02-14",
+      "file": "frames/climatology/2023-02-14.png"
+    },
+    {
+      "date": "2023-02-15",
+      "label": "2023-02-15",
+      "file": "frames/climatology/2023-02-15.png"
+    },
+    {
+      "date": "2023-02-16",
+      "label": "2023-02-16",
+      "file": "frames/climatology/2023-02-16.png"
+    },
+    {
+      "date": "2023-02-17",
+      "label": "2023-02-17",
+      "file": "frames/climatology/2023-02-17.png"
+    },
+    {
+      "date": "2023-02-18",
+      "label": "2023-02-18",
+      "file": "frames/climatology/2023-02-18.png"
+    },
+    {
+      "date": "2023-02-19",
+      "label": "2023-02-19",
+      "file": "frames/climatology/2023-02-19.png"
+    },
+    {
+      "date": "2023-02-20",
+      "label": "2023-02-20",
+      "file": "frames/climatology/2023-02-20.png"
+    }
+  ]
+}

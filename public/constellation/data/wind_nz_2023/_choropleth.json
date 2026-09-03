@@ -1,0 +1,77 @@
+{
+  "years": [
+    2023
+  ],
+  "score_property": "gust_{year}",
+  "scale": {
+    "unit": "10 m wind gust (km/h, higher = worse)",
+    "how_it_works": "Colour is the Australian/NZ tropical cyclone category of the highest gust recorded in that cell over the analysed events. The payout tiers are set separately and are marked on the legend: colour shows the meteorology, the marks show where money changes hands.",
+    "anchors": [
+      {
+        "threshold": 63.0,
+        "meaning": "Cat 1 (63 km/h and above)"
+      },
+      {
+        "threshold": 89.0,
+        "meaning": "Cat 2 (89 km/h and above)"
+      },
+      {
+        "threshold": 118.0,
+        "meaning": "Cat 3 (118 km/h and above)"
+      },
+      {
+        "threshold": 160.0,
+        "meaning": "Cat 4 (160 km/h and above)"
+      },
+      {
+        "threshold": 200.0,
+        "meaning": "Cat 5 (200 km/h and above)"
+      }
+    ],
+    "payout_bands": [
+      {
+        "threshold": 110.0,
+        "tier": 1,
+        "payout_pct": 40
+      },
+      {
+        "threshold": 125.0,
+        "tier": 2,
+        "payout_pct": 100
+      }
+    ],
+    "source_caveat": "ERA5 reanalysis, backtest and pricing only. Values are a 28 km grid average, so exposed sites read higher than shown."
+  },
+  "ramp": [
+    {
+      "threshold": 0.0,
+      "label": "below Cat 1",
+      "color": "#4575b4"
+    },
+    {
+      "threshold": 63.0,
+      "label": "Cat 1",
+      "color": "#91bfdb"
+    },
+    {
+      "threshold": 89.0,
+      "label": "Cat 2",
+      "color": "#fee090"
+    },
+    {
+      "threshold": 118.0,
+      "label": "Cat 3",
+      "color": "#fc8d59"
+    },
+    {
+      "threshold": 160.0,
+      "label": "Cat 4",
+      "color": "#d73027"
+    },
+    {
+      "threshold": 200.0,
+      "label": "Cat 5",
+      "color": "#7f0000"
+    }
+  ]
+}

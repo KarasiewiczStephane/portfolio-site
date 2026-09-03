@@ -169,9 +169,26 @@ select { background:var(--inset); color:var(--text); border:1px solid var(--bord
 /* sources modal */
 .modal { position:absolute; inset:0; z-index:6; background:var(--inset)bb; display:flex; align-items:center; justify-content:center; }
 .modal.hidden { display:none; }
-.modalCard { position:relative; width:min(440px,92%); background:var(--panel); color:var(--text); border:1px solid var(--accent); border-radius:12px; padding:20px 22px; box-shadow:0 8px 40px #000a; }
+.modalCard { position:relative; width:min(460px,92%); max-height:min(82vh,780px); display:flex; flex-direction:column;
+  background:var(--panel); color:var(--text); border:1px solid var(--accent); border-radius:12px; padding:20px 22px; box-shadow:0 8px 40px #000a; }
 .modalCard h3 { margin:0 0 8px; font-size:15px; }
 .modalCard .close { position:absolute; top:8px; right:12px; }
 .msum { font-size:12px; color:var(--muted); line-height:1.55; margin:6px 0; }
 .msrc { font-size:11px; margin-top:12px; color:var(--muted); }
 .msrc a { color:var(--accent); }
+
+/* Case-study modal: optional body paragraphs and a caveats block. POCs that carry only a
+   `summary` are unaffected — these selectors simply have nothing to match.
+   The card is height-capped and the BODY scrolls: the NZ case study is four paragraphs and
+   four caveats, which grew the card past the viewport and covered the map with no way to
+   reach the bottom. */
+#modalBody { overflow-y:auto; overscroll-behavior:contain; padding-right:6px; }
+#modalBody .mbody { margin:9px 0 0; font-size:12px; line-height:1.6; color:var(--text); }
+#modalBody .mcav { margin:14px 0 0; padding:10px 12px; border-left:3px solid #b5714f;
+  background:#b5714f18; border-radius:4px; }
+#modalBody .mcav b { display:block; font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:#d08a63; margin-bottom:5px; }
+#modalBody .mcav ul { margin:0; padding-left:16px; }
+#modalBody .mcav li { margin:4px 0; font-size:11.5px; line-height:1.55; color:var(--muted); }
+/* threshold suffix on a physical-unit legend (e.g. "Cat 2  ≥ 89") */
+.ramp-row .rlvl { color:var(--muted); font-variant-numeric:tabular-nums; margin-left:4px; }

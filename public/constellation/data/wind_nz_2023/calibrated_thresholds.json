@@ -1,0 +1,16 @@
+{
+  "coefficient": 1.0,
+  "rule": "multiplicative",
+  "ladder": [
+    {
+      "threshold": 110.0,
+      "tier": 1,
+      "payout_pct": 40
+    },
+    {
+      "threshold": 125.0,
+      "tier": 2,
+      "payout_pct": 100
+    }
+  ]
+}
