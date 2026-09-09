@@ -22,6 +22,9 @@ const {
     ctaHref,
     featured = false,
 } = Astro.props;
+
+// One event per tier, so the dashboard shows WHICH tier people reach for.
+const ctaEvent = `offer-cta-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
 ---
 
 <article class:list={['offer-tier', { 'offer-tier--featured': featured }]}>
@@ -43,7 +46,7 @@ const {
         {bullets.map((b) => <li>{b}</li>)}
     </ul>
 
-    <a class="offer-tier__cta" href={ctaHref}>
+    <a class="offer-tier__cta" href={ctaHref} data-umami-event={ctaEvent}>
         {ctaLabel}
         <span aria-hidden="true">→</span>
     </a>

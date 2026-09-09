@@ -1,0 +1,12 @@
+---
+// Umami analytics. Cookieless, self-hosted, no consent banner needed.
+// Inert until BOTH env vars are set, so local dev and preview builds never
+// send data and the build never breaks if analytics is not configured.
+//   PUBLIC_UMAMI_URL  e.g. https://analytics.skarazdata.com
+//   PUBLIC_UMAMI_ID   the website ID from the umami dashboard
+const url = import.meta.env.PUBLIC_UMAMI_URL;
+const id = import.meta.env.PUBLIC_UMAMI_ID;
+const enabled = Boolean(url && id);
+const src = enabled ? new URL('/script.js', url).href : undefined;
+---
+{enabled && <script defer src={src} data-website-id={id}></script>}
