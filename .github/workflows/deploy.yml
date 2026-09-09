@@ -25,6 +25,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          # Repository variables (Settings > Secrets and variables > Actions > Variables).
+          # Not secrets: both values end up in the public HTML. With either unset the
+          # site builds with no tracking at all, which is the safe default.
+          PUBLIC_UMAMI_URL: ${{ vars.PUBLIC_UMAMI_URL }}
+          PUBLIC_UMAMI_ID: ${{ vars.PUBLIC_UMAMI_ID }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/

@@ -1,6 +1,7 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -79,6 +80,8 @@ const canonicalUrl = new URL(Astro.url.pathname, "https://skarazdata.com").href;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <Analytics />
 </head>
 <body>
     {!hideChrome && <a href="#main-content" class="skip-link">Skip to content</a>}
