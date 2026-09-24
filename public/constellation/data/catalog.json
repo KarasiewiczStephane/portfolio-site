@@ -1,7 +1,7 @@
 [
   {
     "poc_id": "coral_mayotte",
-    "display_name": "Mayotte \u2014 barrier reef DHW (real NOAA Coral Reef Watch 5km)",
+    "display_name": "Mayotte — barrier reef DHW (real NOAA Coral Reef Watch 5km)",
     "peril": "dhw",
     "bbox": [
       44.95,
@@ -14,7 +14,7 @@
     "summary_metrics": {
       "poc": "coral_mayotte",
       "peril": "dhw",
-      "display_name": "Mayotte \u2014 barrier reef DHW (real NOAA Coral Reef Watch 5km)",
+      "display_name": "Mayotte — barrier reef DHW (real NOAA Coral Reef Watch 5km)",
       "region": "mayotte",
       "sst_source": "noaa_crw",
       "analysis_period": [
@@ -140,7 +140,7 @@
   },
   {
     "poc_id": "coral_reunion",
-    "display_name": "La R\u00e9union \u2014 west-coast fringing reef DHW (real NOAA Coral Reef Watch 5km)",
+    "display_name": "La Réunion — west-coast fringing reef DHW (real NOAA Coral Reef Watch 5km)",
     "peril": "dhw",
     "bbox": [
       55.15,
@@ -153,7 +153,7 @@
     "summary_metrics": {
       "poc": "coral_reunion",
       "peril": "dhw",
-      "display_name": "La R\u00e9union \u2014 west-coast fringing reef DHW (real NOAA Coral Reef Watch 5km)",
+      "display_name": "La Réunion — west-coast fringing reef DHW (real NOAA Coral Reef Watch 5km)",
       "region": "reunion",
       "sst_source": "noaa_crw",
       "analysis_period": [
@@ -292,7 +292,7 @@
   },
   {
     "poc_id": "crop_bangladesh_full",
-    "display_name": "Bangladesh \u2014 nationwide rainfed kharif (real CHIRPS rain)",
+    "display_name": "Bangladesh — nationwide rainfed kharif (real CHIRPS rain)",
     "peril": "crop_hybrid",
     "bbox": [
       87.771,
@@ -305,7 +305,7 @@
     "summary_metrics": {
       "poc": "crop_bangladesh_full",
       "peril": "crop_hybrid",
-      "display_name": "Bangladesh \u2014 nationwide rainfed kharif (real CHIRPS rain)",
+      "display_name": "Bangladesh — nationwide rainfed kharif (real CHIRPS rain)",
       "region": "bangladesh",
       "ndvi_source": "modis",
       "rainfall_source": "chirps",
@@ -450,7 +450,7 @@
   },
   {
     "poc_id": "flood_auckland_2023",
-    "display_name": "Auckland \u2014 pluvial flood, January 2023",
+    "display_name": "Auckland — pluvial flood, January 2023",
     "peril": "pluvial_flood",
     "bbox": [
       172.5,
@@ -463,7 +463,7 @@
     "summary_metrics": {
       "poc": "flood_auckland_2023",
       "peril": "pluvial_flood",
-      "display_name": "Auckland \u2014 pluvial flood, January 2023",
+      "display_name": "Auckland — pluvial flood, January 2023",
       "region": "nz_upper",
       "hazard_source": "imerg_v07b",
       "event_days": [
@@ -570,7 +570,7 @@
   },
   {
     "poc_id": "wind_nz_2023",
-    "display_name": "New Zealand cyclone wind \u2014 2023 season",
+    "display_name": "New Zealand cyclone wind — 2023 season",
     "peril": "cyclone_wind",
     "bbox": [
       165.0,
@@ -583,7 +583,7 @@
     "summary_metrics": {
       "poc": "wind_nz_2023",
       "peril": "cyclone_wind",
-      "display_name": "New Zealand cyclone wind \u2014 2023 season",
+      "display_name": "New Zealand cyclone wind — 2023 season",
       "region": "nz",
       "hazard_source": "era5_fg10",
       "event_days": [
@@ -621,7 +621,7 @@
         },
         "prediction": {
           "status": "not_applicable",
-          "reason": "no observed NZ cyclone loss series exists; not fabricated",
+          "reason": "no per-cell NZ cyclone loss series exists; event-level insured losses are published nationally but cannot score a per-cell payout; not fabricated",
           "metrics": null
         },
         "hazard": {

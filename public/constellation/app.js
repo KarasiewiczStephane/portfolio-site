@@ -141,7 +141,7 @@ const WIND = {
   seasonRow: (s) => `peak gust <b>${s.peak_gust}</b> km/h → tier ${s.tier}, payout <b>${Math.round(s.payout_fraction * 100)}%</b>`,
   chartExplain: () => `The line is the hourly gust trace over the analysed event days; where the peak crosses a
        threshold the cell pays that tier. Values are 28 km grid averages, so exposed sites read higher.`,
-  backtestNote: "no observed New Zealand cyclone loss series exists, so payout-versus-loss cannot be scored",
+  backtestNote: "no per-cell New Zealand cyclone loss series exists, so payout-versus-loss cannot be scored",
   severityCaveat: "A grid-averaged peak gust is an imperfect severity proxy for wind damage.",
 };
 

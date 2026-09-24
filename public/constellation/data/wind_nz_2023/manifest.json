@@ -18,9 +18,6 @@
     "calibrated_thresholds": [
       "calibrated_thresholds.json"
     ],
-    "case": [
-      "case.json"
-    ],
     "choropleth": [
       "choropleth.geojson"
     ],
@@ -50,11 +47,10 @@
   "content_hashes": {
     "admin_0": "dcc1b582a6167130",
     "aggregation": "52cb2bdebe93229a",
-    "basis_risk": "61939b30b2862d9c",
+    "basis_risk": "462b2aed18e4e229",
     "calibrated_thresholds": "6326a1cce76a0467",
-    "case": "32cafaebf2967924",
-    "choropleth": "24139622ea7a60d3",
-    "district_timeseries": "318304d9f02b903b",
+    "choropleth": "1b8fce32284b07e8",
+    "district_timeseries": "5fe7a369784d56fe",
     "hazard_index": "cf2881d14e210ec4",
     "payouts": "625a5c56df681168",
     "raw_hazard": "2d430b3768c38e3f",
@@ -162,7 +158,7 @@
       },
       "prediction": {
         "status": "not_applicable",
-        "reason": "no observed NZ cyclone loss series exists; not fabricated",
+        "reason": "no per-cell NZ cyclone loss series exists; event-level insured losses are published nationally but cannot score a per-cell payout; not fabricated",
         "metrics": null
       },
       "hazard": {

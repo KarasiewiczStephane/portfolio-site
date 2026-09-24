@@ -39,7 +39,7 @@
     },
     "prediction": {
       "status": "not_applicable",
-      "reason": "no observed NZ cyclone loss series exists; not fabricated",
+      "reason": "no per-cell NZ cyclone loss series exists; event-level insured losses are published nationally but cannot score a per-cell payout; not fabricated",
       "metrics": null
     },
     "hazard": {

@@ -5,27 +5,27 @@
   "score_property": "gust_{year}",
   "scale": {
     "unit": "10 m wind gust (km/h, higher = worse)",
-    "how_it_works": "Colour is the Australian/NZ tropical cyclone category of the highest gust recorded in that cell over the analysed events. The payout tiers are set separately and are marked on the legend: colour shows the meteorology, the marks show where money changes hands.",
+    "how_it_works": "Colour is the peak 10 m gust band in that cell over the analysed events. The 63 / 89 / 118 / 160 / 200 km/h steps are the Australian/NZ cyclone category boundaries, which are defined on MEAN wind, not on gusts, so a band here is a gust band and not a cyclone category. The payout tiers are set separately and are marked on the legend: colour shows the meteorology, the marks show where money changes hands.",
     "anchors": [
       {
         "threshold": 63.0,
-        "meaning": "Cat 1 (63 km/h and above)"
+        "meaning": "peak gust 63 to 89 km/h"
       },
       {
         "threshold": 89.0,
-        "meaning": "Cat 2 (89 km/h and above)"
+        "meaning": "peak gust 89 to 118 km/h"
       },
       {
         "threshold": 118.0,
-        "meaning": "Cat 3 (118 km/h and above)"
+        "meaning": "peak gust 118 to 160 km/h"
       },
       {
         "threshold": 160.0,
-        "meaning": "Cat 4 (160 km/h and above)"
+        "meaning": "peak gust 160 to 200 km/h"
       },
       {
         "threshold": 200.0,
-        "meaning": "Cat 5 (200 km/h and above)"
+        "meaning": "peak gust 200 km/h and above"
       }
     ],
     "payout_bands": [
@@ -45,32 +45,32 @@
   "ramp": [
     {
       "threshold": 0.0,
-      "label": "below Cat 1",
+      "label": "under 63 km/h",
       "color": "#4575b4"
     },
     {
       "threshold": 63.0,
-      "label": "Cat 1",
+      "label": "63 to 89 km/h",
       "color": "#91bfdb"
     },
     {
       "threshold": 89.0,
-      "label": "Cat 2",
+      "label": "89 to 118 km/h",
       "color": "#fee090"
     },
     {
       "threshold": 118.0,
-      "label": "Cat 3",
+      "label": "118 to 160 km/h",
       "color": "#fc8d59"
     },
     {
       "threshold": 160.0,
-      "label": "Cat 4",
+      "label": "160 to 200 km/h",
       "color": "#d73027"
     },
     {
       "threshold": 200.0,
-      "label": "Cat 5",
+      "label": "200 km/h and above",
       "color": "#7f0000"
     }
   ]
