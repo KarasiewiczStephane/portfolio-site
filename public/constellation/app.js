@@ -134,9 +134,9 @@ const WIND = {
   flow: `<div class="fstep in map" data-stage="raw_hazard">ERA5 hourly 10 m gust (0.25°, WEkEO)</div>
     <div class="farrow">peak over the analysed cyclone events</div>
     <div class="fstep map" data-stage="hazard_index">Peak gust per cell</div>
-    <div class="farrow">aggregate to hex cells clipped to land (≥20% area rule)</div>
+    <div class="farrow">aggregate to hex cells kept if their centre is on land (≥20% pixel rule)</div>
     <div class="fstep map" data-role="score">Hex gust + hourly trace</div>
-    <div class="farrow">absolute km/h thresholds (TC category scale)</div>
+    <div class="farrow">absolute km/h thresholds (calibrated ladder)</div>
     <div class="fstep">Trigger → Payout</div>`,
   seasonRow: (s) => `peak gust <b>${s.peak_gust}</b> km/h → tier ${s.tier}, payout <b>${Math.round(s.payout_fraction * 100)}%</b>`,
   chartExplain: () => `The line is the hourly gust trace over the analysed event days; where the peak crosses a
@@ -173,7 +173,7 @@ const FLOOD = {
     <div class="fstep map" data-stage="accumulation">Rainfall depth per cell</div>
     <div class="farrow">against this location's day-of-year normal</div>
     <div class="frow"><span class="fstep map" data-stage="climatology">Climatology</span><span class="fstep map" data-stage="anomaly">Anomaly</span></div>
-    <div class="farrow">aggregate to hex cells clipped to land (≥20% area rule)</div>
+    <div class="farrow">aggregate to hex cells kept if their centre is on land (≥20% pixel rule)</div>
     <div class="fstep map" data-role="score">Hex depth + the excess over normal</div>
     <div class="farrow">thresholds from the site's own return periods</div>
     <div class="fstep">Trigger → Payout</div>`,
@@ -362,9 +362,9 @@ async function loadTracks(poc) {
             <div class="pexplain">Closest approach to the coast <b>${p.closest_land_km} km</b>.
             ${reported
               ? `Peak 10-minute wind on track <b>${p.peak_wind_kmh} km/h</b>.`
-              : `<b>No agency published an intensity for this storm inside the box.</b> The
-                 track carries positions only, which is exactly why the payout index is a
-                 reanalysis gust field rather than a parametric windfield fitted to the track.`}
+              : `<b>No 10-minute intensity was published for this storm inside the box.</b> That
+                 is exactly why the payout index is a reanalysis gust field rather than a
+                 parametric windfield fitted to the track.`}
             </div></div>`)
           .addTo(map);
       });
