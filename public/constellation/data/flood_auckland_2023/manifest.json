@@ -59,7 +59,7 @@
     "anomaly": "dbad6ed02d7a4b31",
     "backtest_years": "1e63d26f2a87edc6",
     "basis_risk": "7d840686714213ce",
-    "case": "a54f8c8b672ffa31",
+    "case": "cecf9a624e07429f",
     "choropleth": "f03c65090b4a978e",
     "climatology_24h": "1f02ce189b95e8dd",
     "climatology_72h": "02a1a441aae8ee10",
@@ -109,7 +109,7 @@
     "calibration_status": "Per-cell Gumbel return levels on the anomaly index, fitted to each cell's own 15 annual maxima. Thresholds are in the index's own units and cancel IMERG's under-read only because measurement and threshold share an instrument.",
     "source_caveat": "IMERG Final lags ~3.5 months: backtest and pricing only. The Early run at ~4 h is the live path and is not what this POC runs on.",
     "index_caveat": "Pluvial flood only - rain outpacing drainage, not rivers leaving channels. Values are ~100 km2 cell averages reading 43-56% of a gauge in the same cell.",
-    "return_period_caveat": "Return periods are this index's own. NIWA assessed the 27 January 2023 rainfall as at least 1-in-200 at a gauge; the same event is roughly 1-in-7 for a 100 km2 cell average. A tier is 'the 1-in-N event for a 100 km2 cell as measured by IMERG', never 'a 1-in-N rainfall'.",
+    "return_period_caveat": "Return periods are this index's own. NIWA assessed the 27 January 2023 rainfall as at least 1-in-200 at a gauge; the same event is roughly 1-in-7 for the 100 km2 grid cell over that gauge. A tier is 'the 1-in-N event for a 100 km2 cell as measured by IMERG', never 'a 1-in-N rainfall'.",
     "basis_risk": {
       "spatial": {
         "status": "ok",
