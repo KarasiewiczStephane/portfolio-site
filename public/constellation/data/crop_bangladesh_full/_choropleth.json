@@ -7,7 +7,7 @@
   "score_property": "score_{year}",
   "scale": {
     "unit": "1-10 crop-stress score (higher = worse)",
-    "how_it_works": "The score is derived from the standardized crop-hybrid index (a z-score vs the 2000-2018 climatology). It is not raw data: it rescales the index onto an intuitive 1-10 severity band anchored on the payout thresholds.",
+    "how_it_works": "The score is derived from the standardized crop-hybrid index (a z-score vs the 2011-2020 climatology). It is not raw data: it rescales the index onto an intuitive 1-10 severity band anchored on the payout thresholds.",
     "anchors": [
       {
         "score": 1,

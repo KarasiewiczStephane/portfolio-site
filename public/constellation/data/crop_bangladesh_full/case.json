@@ -1,8 +1,14 @@
 {
-  "title": "2021 Aman-season drought — Barind Tract / Rajshahi",
-  "summary": "Northwest Bangladesh's Barind Tract had its peak extreme-drought year in 2021, with monsoon rainfall about 18% below normal in Rajshahi, stressing rainfed Aman rice at its reproductive stage. This POC scores that stress from a rainfall-deficit + NDVI-germination index.",
+  "title": "2021 Aman-season drought, Barind Tract / Rajshahi (design case)",
+  "summary": "Northwest Bangladesh's Barind Tract had its peak extreme-drought year in 2021, with monsoon rainfall about 18% below normal in Rajshahi, stressing rainfed Aman rice at its reproductive stage. This proof of concept was designed around that event, but the published run does not trigger on it: Rajshahi scores +0.18 z in 2021, above the -1.0 trigger. The triggers of the 2019-2021 run are in the northeast in 2021 and in the southwest in 2020. Known limits: 0.25 degree grid, no cropland mask, no yield series.",
   "sources": [
-    {"label": "Islam et al. 2024 — Barind Tract drought (NDVI/VHI)", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11620109/"},
-    {"label": "The Business Standard 2021 — Drought puts Aman rice at risk", "url": "https://www.tbsnews.net/bangladesh/drought-puts-aman-rice-production-risk-672278"}
+    {
+      "label": "Islam et al. 2024 — Barind Tract drought (NDVI/VHI)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11620109/"
+    },
+    {
+      "label": "The Business Standard 2021 — Drought puts Aman rice at risk",
+      "url": "https://www.tbsnews.net/bangladesh/drought-puts-aman-rice-production-risk-672278"
+    }
   ]
 }
