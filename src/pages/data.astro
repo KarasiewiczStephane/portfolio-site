@@ -1,0 +1,50 @@
+---
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/site/PageHead.astro';
+
+const sources = [
+    { n: 'NOAA Coral Reef Watch', v: 'Degree Heating Weeks, sea surface temperature', r: '5 km, daily', u: 'Coral bleaching, marine heatwave' },
+    { n: 'NASA IMERG', v: 'Satellite rainfall', r: '0.1°, half-hourly', u: 'Pluvial flood, extreme rain' },
+    { n: 'CHIRPS', v: 'Rainfall, station-blended', r: '0.05°, daily', u: 'Drought, crop, excess rain' },
+    { n: 'ERA5 / ERA5-Land', v: 'Reanalysis: wind gust, temperature, soil moisture', r: '9 to 31 km, hourly', u: 'Wind, heat, water balance' },
+    { n: 'MODIS / Sentinel', v: 'Vegetation (NDVI), burned area, SAR flood extent', r: '10 m to 1 km', u: 'Crop, wildfire, flood' },
+    { n: 'Copernicus CDS / WEkEO', v: 'Climate and land services', r: 'varies', u: 'Context layers, fallbacks' },
+];
+---
+
+<Site
+    title="Climate and satellite data for parametric triggers · Skaraz Data"
+    description="Curated satellite and reanalysis series behind a parametric index, kept current and checked. Sold with a calculation or pipeline contract."
+>
+    <PageHead
+        label="Service · data · EUR 2,000 to 4,000 / month"
+        title="The series behind your index, kept current and checked."
+        lede="Curated satellite and reanalysis data, cut to your cells and districts, refreshed on schedule, with every known defect handled. Sold alongside a calculation or pipeline contract."
+    />
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Sources I work with</p>
+                <h2>Public, documented and licensed for this use.</h2>
+                <p class="lede">These are the sources behind the showcase. Commercial data is possible when its licence allows use in a payout calculation.</p>
+            </div>
+            <div class="table-wrap reveal">
+                <table class="data">
+                    <thead><tr><th>Source</th><th>Variable</th><th>Resolution</th><th>Typical peril</th></tr></thead>
+                    <tbody>{sources.map(s => <tr><td><strong>{s.n}</strong></td><td>{s.v}</td><td class="num">{s.r}</td><td>{s.u}</td></tr>)}</tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="grid cols-3">
+                <div class="card reveal" style="--i:0"><p class="label label--trigger">Cut to your geometry</p><h3>Cells, districts or sites</h3><p class="muted small">Aggregated to the units your policy pays on, with the spatial spread reported alongside.</p></div>
+                <div class="card reveal" style="--i:1"><p class="label label--trigger">Checked on arrival</p><h3>Gaps, units, latency</h3><p class="muted small">Each refresh is checked before it reaches your index, and every file is hashed.</p></div>
+                <div class="card reveal" style="--i:2"><p class="label label--trigger">Honest about limits</p><h3>Known biases written down</h3><p class="muted small">For example, IMERG reads 43 to 56% of a rain gauge in the same Auckland cell. That goes in the documentation, not in a footnote.</p></div>
+            </div>
+        </div>
+    </section>
+</Site>

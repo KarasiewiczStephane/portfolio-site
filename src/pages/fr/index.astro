@@ -1,0 +1,169 @@
+---
+import Site from '../../layouts/Site.astro';
+import TriggerChart from '../../components/site/TriggerChart.astro';
+import PipelineFlow from '../../components/site/PipelineFlow.astro';
+import Audience from '../../components/site/Audience.astro';
+import PocCard from '../../components/site/PocCard.astro';
+import { getPocs } from '../../lib/pocs';
+
+const pocs = getPocs();
+const hero = pocs[0];
+
+const services = [
+    { n: '01', t: 'Audit de déclencheur', d: 'Un second avis avant de signer ou de renouveler : backtest, risque de base, revue des sources, et vérification que le code suit la police.', href: '/trigger-audit', p: '6 000 € prix fixe · 2 semaines' },
+    { n: '02', t: 'Agent de calcul', d: 'Je calcule l’indice à partir des données nommées, je le compare au déclencheur, j’émets le rapport de paiement et je garde la piste d’audit.', href: '/fr/agent-de-calcul', p: 'à partir de 6 000 € / an' },
+    { n: '03', t: 'Pipelines', d: 'La même mécanique construite pour votre équipe : hébergée par moi, ou intégrée chez vous et transmise avec tests, documentation et procédures.', href: '/pipelines', p: '25 000 à 50 000 € · 8 à 16 semaines' },
+    { n: '04', t: 'Données climat', d: 'Séries satellite et réanalyses derrière votre indice, tenues à jour et contrôlées. Vendues avec un contrat de calcul ou de pipeline.', href: '/data', p: '2 000 à 4 000 € / mois' },
+];
+---
+
+<Site
+    title="Skaraz Data · Agent de calcul indépendant pour l’assurance paramétrique"
+    description="Je calcule, vérifie et documente l’indice derrière les paiements d’assurance paramétrique, à partir de données satellite et climat. Indépendant : aucun produit à vendre, aucun risque porté."
+    lang="fr"
+    alt="/"
+>
+    <section class="hero panel on-panel">
+        <div class="wrap">
+            <div class="hero-top">
+                <div class="hero-copy">
+                    <p class="label label--trigger">Agent de calcul indépendant · assurance paramétrique</p>
+                    <h1>Le chiffre qui décide du paiement, calculé par quelqu’un qui n’a rien à y gagner.</h1>
+                </div>
+                <div class="hero-side">
+                    <p class="lede">Je calcule, vérifie et documente l’indice derrière les paiements paramétriques, à partir de données satellite et climat. Je ne porte aucun risque et ne vends aucun produit d’assurance : le calcul est la seule chose dont je réponds.</p>
+                    <div class="ctas">
+                        <a class="btn" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer">Réserver un appel de 15 min <span class="arrow" aria-hidden="true">→</span></a>
+                        <a class="btn btn--ghost" href="/showcase">Voir les calculs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-chart">
+                <div class="spec">
+                    <div><span class="label">Indice</span><span>Degree Heating Weeks</span></div>
+                    <div><span class="label">Source</span><span>NOAA Coral Reef Watch, 5 km</span></div>
+                    <div><span class="label">Lieu</span><span>Saint-Leu, La Réunion</span></div>
+                    <div><span class="label">Backtest</span><span class="num">2009 à 2024</span></div>
+                </div>
+                <TriggerChart series={hero.series} variant="panel" height={300} showCaption={false} lang="fr" />
+                <p class="poc-note small">Saint-Leu, La Réunion. Degree Heating Weeks hebdomadaires, 2009 à 2024. Barème 3,4 / 6,8 / 10,2 °C-semaines, paiement 25 / 60 / 100 %. Preuve de concept sur données publiques. <a href={`/showcase/${hero.slug}`}>Lire le rapport complet (en anglais) →</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Pour qui</p>
+                <h2>Choisissez votre place.</h2>
+            </div>
+            <div class="reveal"><Audience lang="fr" /></div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Quatre services, une seule mécanique</p>
+                <h2>Du second avis au calcul de chaque saison.</h2>
+                <p class="lede">La plupart des clients commencent par un audit. Le même pipeline contrôlé devient ensuite le calcul, le service hébergé ou la livraison chez vous.</p>
+            </div>
+            <ol class="ladder grid cols-4">
+                {services.map((s, i) => (
+                    <li class="reveal" style={`--i:${i}`}>
+                        <a class="rung" href={s.href}>
+                            <span class="num rn">{s.n}</span>
+                            <h3>{s.t}</h3>
+                            <p>{s.d}</p>
+                            <span class="price num">{s.p}</span>
+                        </a>
+                    </li>
+                ))}
+            </ol>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Démonstrations</p>
+                <h2>Cinq calculs sur données publiques, limites comprises.</h2>
+                <p class="lede">Chacun parcourt toute la chaîne : données, contrôles, indice, déclencheur, paiement, piste d’audit. Ce sont des preuves de concept, pas des produits en service. Rapports détaillés en anglais.</p>
+            </div>
+            <div class="grid cols-3">
+                {pocs.map((p, i) => <div class="reveal cell" style={`--i:${i}`}><PocCard poc={p} lang="fr" /></div>)}
+            </div>
+        </div>
+    </section>
+
+    <section class="section panel on-panel">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--trigger">Méthode</p>
+                <h2>Six étapes, toujours les mêmes, toutes écrites.</h2>
+                <p class="lede" style="color:var(--panel-muted)">Un calcul que personne ne peut relancer n’est pas indépendant. La méthode est publiée.</p>
+            </div>
+            <PipelineFlow lang="fr" variant="panel" />
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Références</p>
+                <h2>Deux ans dans les pipelines de production d’un assureur paramétrique.</h2>
+                <p class="lede">Chez Raincoat, de février 2024 à janvier 2026, j’ai tenu la couche de données satellite et de réanalyse de tous les périls sauf le vent cyclonique.</p>
+            </div>
+            <div class="grid cols-4">
+                <div class="metric reveal" style="--i:0"><span class="value">4</span><span class="note">périls en production à mon départ, contre 3 à mon arrivée</span></div>
+                <div class="metric reveal" style="--i:1"><span class="value">3</span><span class="note">tableaux de bord utilisés chaque jour par les équipes risque et souscription</span></div>
+                <div class="metric reveal" style="--i:2"><span class="value">10+</span><span class="note">pays couverts, des Caraïbes à l’Amérique du Sud et quatre pays d’Afrique</span></div>
+                <div class="metric reveal" style="--i:3"><span class="value">15+</span><span class="note">années de télédétection satellite, 7 publications scientifiques</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta panel on-panel">
+        <div class="wrap cta-row">
+            <div>
+                <h2>Un déclencheur à faire vérifier ?</h2>
+                <p class="lede" style="color:var(--panel-muted)">Quinze minutes suffisent pour savoir si un audit en vaut la peine. Si ce n’est pas le cas, je vous le dirai.</p>
+            </div>
+            <div class="ctas">
+                <a class="btn" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer">Réserver un appel <span class="arrow" aria-hidden="true">→</span></a>
+                <a class="btn btn--ghost" href="mailto:skaraz.science@gmail.com">M’écrire</a>
+            </div>
+        </div>
+    </section>
+</Site>
+
+<style>
+    .hero { padding-block: clamp(48px, 7vw, 96px) clamp(40px, 5vw, 64px); }
+    .hero-top { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: end; }
+    .hero-copy, .hero-side { display: grid; gap: 22px; }
+    .hero h1 { font-size: clamp(2.125rem, 1.1rem + 3.4vw, 3.625rem); max-width: 20ch; }
+    .hero .lede { color: var(--panel-muted); }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-chart { margin-top: clamp(40px, 6vw, 72px); padding: clamp(18px, 2.5vw, 28px); border: 1px solid var(--panel-line); border-radius: 10px; background: var(--panel-2); display: grid; gap: 18px; }
+    .spec { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--panel-line); }
+    .spec > div { display: grid; gap: 4px; min-width: 0; font-size: 0.9375rem; }
+    .poc-note { color: var(--panel-muted); }
+    .poc-note a { color: var(--panel-index); }
+    @media (max-width: 900px) { .hero-top { grid-template-columns: minmax(0, 1fr); } .spec { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    :global(.js) .hero-copy > *, :global(.js) .hero-side > * { animation: rise 700ms var(--ease-out) both; }
+    :global(.js) .hero-chart { animation: rise 800ms var(--ease-out) 260ms both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { :global(.js) .hero-copy > *, :global(.js) .hero-side > *, :global(.js) .hero-chart { animation: none; } }
+    .ladder { list-style: none; padding: 0; margin: 0; }
+    .ladder li { display: flex; }
+    .rung { display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; width: 100%; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--ink); text-decoration: none; transition: border-color 200ms ease, transform 160ms var(--ease-out); }
+    .rung:active { transform: scale(0.99); }
+    @media (hover: hover) and (pointer: fine) { .rung:hover { border-color: var(--ink); } }
+    .rn { font-size: 0.8125rem; color: var(--index); font-weight: 600; }
+    .rung p { color: var(--muted); font-size: 0.9375rem; }
+    .price { padding-top: 14px; border-top: 1px dashed var(--line-strong); font-size: 0.8125rem; font-weight: 500; }
+    .cell { display: grid; }
+    .cta { padding-block: clamp(56px, 8vw, 96px); }
+    .cta-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 32px; }
+    .cta-row > div:first-child { display: grid; gap: 14px; }
+</style>

@@ -1,0 +1,65 @@
+---
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/site/PageHead.astro';
+import PipelineFlow from '../components/site/PipelineFlow.astro';
+---
+
+<Site
+    title="Climate data pipelines for parametric insurance · Skaraz Data"
+    description="Trigger and index pipelines built for parametric insurers: hosted by me, or built inside your stack and handed over with tests, docs and runbook."
+>
+    <PageHead
+        label="Service · pipelines · EUR 25,000 to 50,000"
+        title="Your trigger pipeline, hosted by me or built inside your team."
+        lede="The machinery behind every calculation on this site, built for your perils and your countries. You choose where it runs and who owns it."
+    />
+
+    <section class="section">
+        <div class="wrap">
+            <div class="grid cols-2">
+                <div class="card opt reveal" style="--i:0">
+                    <p class="label label--trigger">Option A · hosted</p>
+                    <h3>I run it, you receive the outputs.</h3>
+                    <p class="muted">Scheduled pulls, checks, index and payout tables delivered on your cadence. Pairs with the calculation agent role and the data retainer.</p>
+                </div>
+                <div class="card opt reveal" style="--i:1">
+                    <p class="label label--trigger">Option B · handed over</p>
+                    <h3>I build it in your stack, your team owns it.</h3>
+                    <p class="muted">Code in your repository, tests, documentation and a runbook. I stay on call for the first season if you want.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">What gets built</p>
+                <h2>Single-job modules with checks between every step.</h2>
+                <p class="lede">Each module does one job and checks its inputs before it runs. Known dataset defects are caught where they enter, not after a payout.</p>
+            </div>
+            <PipelineFlow />
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Where this comes from</p>
+                <h2>Two years of production pipelines at a parametric insurtech.</h2>
+                <p class="lede">At Raincoat I owned the satellite and reanalysis acquisition layer (CHIRPS, ERA5-Land, IMERG, Copernicus CDS, WEkEO), shipped the Water Balance peril to production on Kubernetes, and built the Heat Stress pipeline.</p>
+            </div>
+            <div class="grid cols-3">
+                <div class="metric reveal" style="--i:0"><span class="value num">8 to 16</span><span class="note">weeks for a build, scoped in the first call</span></div>
+                <div class="metric reveal" style="--i:1"><span class="value num">30 days</span><span class="note">guarantee on shipped code</span></div>
+                <div class="metric reveal" style="--i:2"><span class="value">FR · EN</span><span class="note">documentation in either language</span></div>
+            </div>
+            <p class="more"><a class="link" href="/projects/case-study-raincoat">Read the Raincoat case study <span class="arrow" aria-hidden="true">→</span></a></p>
+        </div>
+    </section>
+</Site>
+
+<style>
+    .opt { display: grid; gap: 12px; align-content: start; }
+    .more { margin-top: 32px; }
+</style>

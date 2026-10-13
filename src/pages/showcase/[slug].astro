@@ -1,0 +1,161 @@
+---
+// Calculation report template. One page per proof of concept, generated from its data files.
+import Site from '../../layouts/Site.astro';
+import TriggerChart from '../../components/site/TriggerChart.astro';
+import { getPocs, type Poc } from '../../lib/pocs';
+
+export function getStaticPaths() {
+    return getPocs().map(poc => ({ params: { slug: poc.slug }, props: { poc } }));
+}
+const { poc } = Astro.props as { poc: Poc };
+const all = getPocs();
+const i = all.findIndex(p => p.slug === poc.slug);
+const next = all[(i + 1) % all.length];
+const ref = `SKD-POC-${String(i + 1).padStart(2, '0')}`;
+const ladder = [...poc.series.tiers];
+---
+
+<Site
+    title={`${poc.title} · calculation report · Skaraz Data`}
+    description={`${poc.caseTitle}. Proof of concept by an independent calculation agent: ${poc.source}, ${poc.period}.`}
+>
+    <section class="rh panel on-panel">
+        <div class="wrap">
+            <a class="back" href="/showcase">← All calculations</a>
+            <div class="rh-grid">
+                <div class="rh-copy">
+                    <p class="label label--trigger">Calculation report · proof of concept · <span class="num">{ref}</span></p>
+                    <h1>{poc.caseTitle}</h1>
+                </div>
+                <dl class="fields rh-fields">
+                    <dt>Peril</dt><dd>{poc.perilLabel}</dd>
+                    <dt>Source</dt><dd>{poc.source}</dd>
+                    <dt>Period</dt><dd>{poc.period}</dd>
+                    <dt>Backtest</dt><dd>{poc.backtest.status === 'scored' ? 'Scored against documented events' : 'Not scored against losses'}</dd>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="grid cols-4 metrics">
+                {poc.metrics.map((m, k) => (
+                    <div class="metric reveal" style={`--i:${k}`}><span class="label">{m.label}</span><span class="value">{m.value}</span>{m.note && <span class="note">{m.note}</span>}</div>
+                ))}
+            </div>
+            <div class="chartbox reveal">
+                <TriggerChart series={poc.series} height={360} />
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap body">
+            <div class="main prose">
+                <p class="label label--index">Context</p>
+                <p class="lead">{poc.summary}</p>
+                {poc.body.map(par => <p>{par}</p>)}
+            </div>
+            <aside class="side">
+                <div class="card">
+                    <p class="label label--trigger">Payout ladder</p>
+                    <table class="ladder">
+                        <thead><tr><th>Tier</th><th>Index {poc.series.direction === 'above' ? '≥' : '≤'}</th><th>Pays</th></tr></thead>
+                        <tbody>{ladder.map((t, k) => <tr><td>{t.label ?? `T${k + 1}`}</td><td class="num">{t.threshold} <span class="muted">{poc.series.unit}</span></td><td class="num">{t.payout ? `${t.payout}%` : 'graded'}</td></tr>)}</tbody>
+                    </table>
+                </div>
+                <div class:list={['card', 'bt', poc.backtest.status]}>
+                    <p class="label">{poc.backtest.status === 'scored' ? 'Backtest' : 'Not scored, on purpose'}</p>
+                    <p>{poc.backtest.text}</p>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    {poc.caveats.length > 0 && (
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <p class="label label--index">Where the method stops</p>
+                    <h2>Limits of this calculation.</h2>
+                </div>
+                <ol class="cav">
+                    {poc.caveats.map((c, k) => <li class="reveal" style={`--i:${k}`}><span class="num">{String(k + 1).padStart(2, '0')}</span><p>{c}</p></li>)}
+                </ol>
+            </div>
+        </section>
+    )}
+
+    <section class:list={['section', { 'section--tint': poc.caveats.length > 0 }]}>
+        <div class="wrap src-grid">
+            <div>
+                <p class="label label--index">Sources</p>
+                <ul class="src">{poc.sources.map(s => <li><a href={s.url} target="_blank" rel="noopener">{s.label}</a></li>)}</ul>
+            </div>
+            <div class="nextbox">
+                <p class="label">Next calculation</p>
+                <a class="next" href={`/showcase/${next.slug}`}><span>{next.place}</span><span class="muted small">{next.perilLabel}</span><span class="arrow" aria-hidden="true">→</span></a>
+                <a class="link" href="/constellation/">Explore this one on the live map <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta panel on-panel">
+        <div class="wrap cta-row">
+            <h2>Want this run on your own trigger?</h2>
+            <div class="ctas">
+                <a class="btn" href="/trigger-audit">Trigger audit, EUR 6,000 <span class="arrow" aria-hidden="true">→</span></a>
+                <a class="btn btn--ghost" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer">Book a call</a>
+            </div>
+        </div>
+    </section>
+</Site>
+
+<style>
+    .rh { padding-block: 40px clamp(48px, 6vw, 80px); }
+    .back { display: inline-block; margin-bottom: 36px; color: var(--panel-muted); text-decoration: none; font-size: 0.875rem; }
+    @media (hover: hover) and (pointer: fine) { .back:hover { color: var(--panel-fg); } }
+    .rh-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: end; }
+    .rh-copy { display: grid; gap: 18px; }
+    .rh h1 { font-size: clamp(1.875rem, 1.1rem + 2.6vw, 3rem); }
+    .rh-fields { border-top-color: var(--panel-line); }
+    .rh-fields dt, .rh-fields dd { border-bottom-color: var(--panel-line); }
+    .rh-fields dt { color: var(--panel-muted); }
+    .rh-fields dd { color: var(--panel-fg); }
+    @media (max-width: 900px) { .rh-grid { grid-template-columns: minmax(0, 1fr); } }
+
+    .metrics { margin-bottom: clamp(36px, 5vw, 56px); }
+    .chartbox { padding: clamp(16px, 2.4vw, 28px); border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+
+    .body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
+    .lead { font-size: var(--step-1); color: var(--ink); line-height: 1.55; }
+    .side { display: grid; gap: 16px; position: sticky; top: 88px; }
+    @media (max-width: 900px) { .body { grid-template-columns: minmax(0, 1fr); } .side { position: static; } }
+    .ladder { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.9375rem; }
+    .ladder th { text-align: left; font: 500 0.6875rem/1.3 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .ladder td { padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .ladder tr:last-child td { border-bottom: 0; }
+    .bt { display: grid; gap: 10px; }
+    .bt.not_scored { border-style: dashed; }
+
+    .cav { list-style: none; margin: 0; padding: 0; display: grid; }
+    .cav li { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 16px; padding-block: 18px; border-top: 1px solid var(--line); }
+    .cav li > span { color: var(--trigger); font-weight: 600; font-size: 0.875rem; padding-top: 2px; }
+    .cav p { max-width: 75ch; color: var(--ink-2); }
+
+    .src-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 48px; }
+    .src { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+    .src a { color: var(--ink-2); overflow-wrap: anywhere; }
+    .nextbox { display: grid; gap: 14px; align-content: start; }
+    .next { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); text-decoration: none; color: var(--ink); transition: border-color 200ms ease; }
+    .next > span:first-child { font: 700 var(--step-2)/1.2 var(--display); }
+    .next .small { grid-column: 1; }
+    .next .arrow { grid-row: 1 / span 2; grid-column: 2; align-self: center; color: var(--index); font-size: 1.25rem; transition: transform 200ms var(--ease-out); }
+    @media (hover: hover) and (pointer: fine) { .next:hover { border-color: var(--ink); } .next:hover .arrow { transform: translateX(4px); } }
+    @media (max-width: 760px) { .src-grid { grid-template-columns: minmax(0, 1fr); } }
+
+    .cta { padding-block: clamp(48px, 7vw, 80px); }
+    .cta-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+</style>

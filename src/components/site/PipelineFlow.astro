@@ -1,0 +1,81 @@
+---
+// The calculation, as six steps. A real sequence, so the numbering carries meaning.
+// On first view each step lights in turn, then everything rests visible.
+interface Props { lang?: 'en' | 'fr'; variant?: 'paper' | 'panel' }
+const { lang = 'en', variant = 'paper' } = Astro.props;
+const steps = lang === 'fr'
+    ? [
+        { t: 'Données', d: 'Sources nommées dans le contrat (NOAA, ERA5, IMERG, CHIRPS, Sentinel). Collecte planifiée, source de secours écrite à l’avance.' },
+        { t: 'Contrôles', d: 'Chaque entrée vérifiée : couverture, unités, trous, défauts connus du jeu de données. Chaque fichier est haché.' },
+        { t: 'Indice', d: 'L’indice exactement comme la police le définit. Le même code pour le backtest et pour le calcul réel.' },
+        { t: 'Déclencheur', d: 'Comparaison au barème, cellule par cellule ou district par district.' },
+        { t: 'Paiement', d: 'Rapport de paiement : valeur, palier, montant et données utilisées, pour chaque cellule.' },
+        { t: 'Piste d’audit', d: 'Chaque chiffre relié aux empreintes des entrées et à la version du code. Relancer donne le même résultat.' },
+    ]
+    : [
+        { t: 'Data in', d: 'Sources named in the contract (NOAA, ERA5, IMERG, CHIRPS, Sentinel). Pulled on schedule, with the fallback source agreed in advance.' },
+        { t: 'Checks', d: 'Every input checked for coverage, units, gaps and known dataset defects. Every file hashed.' },
+        { t: 'Index', d: 'The index exactly as the policy wording defines it. The same code runs the backtest and the live calculation.' },
+        { t: 'Trigger', d: 'Tested against the payout ladder, cell by cell or district by district.' },
+        { t: 'Payout', d: 'A payout report for each cell: value, tier, amount and the data used.' },
+        { t: 'Audit trail', d: 'Every figure traced to input hashes and code version. A rerun gives the same answer.' },
+    ];
+---
+
+<ol class:list={['flow', `flow--${variant}`]} data-flow>
+    {steps.map((s, i) => (
+        <li class="step" style={`--i:${i}`}>
+            <div class="head">
+                <span class="n num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="rail" aria-hidden="true"><span class="pulse"></span></span>
+            </div>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+        </li>
+    ))}
+</ol>
+
+<style>
+    .flow {
+        --f-fg: var(--ink); --f-muted: var(--muted); --f-line: var(--line-strong); --f-on: var(--index); --f-bg: var(--paper);
+        list-style: none; margin: 0; padding: 0;
+        display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0;
+    }
+    .flow--panel { --f-fg: var(--panel-fg); --f-muted: var(--panel-muted); --f-line: var(--panel-line); --f-on: var(--panel-index); --f-bg: var(--panel); }
+    .step { display: grid; gap: 10px; align-content: start; padding-right: 18px; min-width: 0; }
+    .head { display: flex; align-items: center; gap: 10px; }
+    .n {
+        display: inline-grid; place-items: center; flex: none;
+        width: 34px; height: 34px; border-radius: 50%;
+        border: 1.5px solid var(--f-on); color: var(--f-on); background: var(--f-bg);
+        font-size: 0.75rem; font-weight: 600;
+    }
+    .rail { position: relative; flex: 1; height: 1.5px; background: var(--f-line); overflow: hidden; }
+    .step:last-child .rail { visibility: hidden; }
+    .pulse { position: absolute; inset: 0; background: var(--f-on); transform: scaleX(1); transform-origin: left; }
+    h3 { font-size: 1.0625rem; color: var(--f-fg); }
+    p { font-size: 0.875rem; line-height: 1.55; color: var(--f-muted); }
+
+    :global(.js) .flow .n { border-color: var(--f-line); color: var(--f-muted); transition: border-color 300ms ease, color 300ms ease, background-color 300ms ease; transition-delay: calc(var(--i) * 260ms); }
+    :global(.js) .flow .pulse { transform: scaleX(0); transition: transform 360ms var(--ease-in-out); transition-delay: calc(var(--i) * 260ms + 120ms); }
+    :global(.js) .flow.is-on .n { border-color: var(--f-on); color: var(--f-on); }
+    :global(.js) .flow.is-on .step:last-child .n { background: var(--f-on); color: var(--f-bg); }
+    :global(.js) .flow.is-on .pulse { transform: scaleX(1); }
+    @media (prefers-reduced-motion: reduce) {
+        :global(.js) .flow .n, :global(.js) .flow .pulse { transition-delay: 0ms; transition-duration: 150ms; }
+    }
+
+    @media (max-width: 980px) {
+        .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+        .rail { display: none; }
+    }
+    @media (max-width: 520px) { .flow { grid-template-columns: minmax(0, 1fr); } }
+</style>
+
+<script>
+    const flows = document.querySelectorAll('[data-flow]');
+    const io = new IntersectionObserver((entries) => {
+        for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-on'); io.unobserve(e.target); }
+    }, { threshold: 0.3 });
+    flows.forEach(f => io.observe(f));
+</script>

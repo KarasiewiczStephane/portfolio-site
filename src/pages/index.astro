@@ -1,927 +1,301 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import LinkedInDMButton from '../components/LinkedInDMButton.astro';
-import TrustLogos from '../components/TrustLogos.astro';
-import OfferTier from '../components/OfferTier.astro';
-import Testimonial from '../components/Testimonial.astro';
+import Site from '../layouts/Site.astro';
+import TriggerChart from '../components/site/TriggerChart.astro';
+import PipelineFlow from '../components/site/PipelineFlow.astro';
+import Audience from '../components/site/Audience.astro';
+import PocCard from '../components/site/PocCard.astro';
+import { getPocs } from '../lib/pocs';
 
-const base = import.meta.env.BASE_URL;
+const pocs = getPocs();
+const hero = pocs[0]; // La Réunion, Saint-Leu
 
-// JSON-LD aligned with the Constellation positioning.
 const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
+    '@context': 'https://schema.org',
+    '@graph': [
         {
-            "@type": "Person",
-            "name": "Stéphane Karasiewicz",
-            "url": "https://skarazdata.com",
-            "image": "https://skarazdata.com/portrait.jpg",
-            "jobTitle": "Senior Data Engineer for Parametric Insurance · creator of Constellation",
-            "worksFor": { "@type": "Organization", "name": "Skaraz Data" },
-            "alumniOf": { "@type": "EducationalOrganization", "name": "Université de Lille" },
-            "address": {
-                "@type": "PostalAddress",
-                "addressRegion": "Hauts-de-France",
-                "addressCountry": "FR"
-            },
-            "knowsAbout": [
-                "Climate Risk Modeling",
-                "Parametric Insurance",
-                "Satellite Remote Sensing",
-                "Data Engineering",
-                "Production Data Pipelines",
-                "Geospatial Analysis",
-                "Python"
-            ],
-            "sameAs": [
-                "https://www.linkedin.com/in/stephane-karasiewicz",
-                "https://github.com/KarasiewiczStephane",
-                "https://www.researchgate.net/profile/Stephane_Karasiewicz"
-            ]
+            '@type': 'ProfessionalService',
+            name: 'Skaraz Data',
+            url: 'https://skarazdata.com',
+            description: 'Independent calculation agent and climate data engineer for parametric insurance.',
+            areaServed: 'Worldwide',
+            address: { '@type': 'PostalAddress', addressRegion: 'Hauts-de-France', addressCountry: 'FR' },
+            founder: { '@type': 'Person', name: 'Stéphane Karasiewicz' },
         },
-        {
-            "@type": "ProfessionalService",
-            "name": "Skaraz Data",
-            "url": "https://skarazdata.com",
-            "image": "https://skarazdata.com/og-image.png",
-            "description": "Constellation: production climate-data pipelines for parametric insurers. A new peril is a config change, not a rewrite. Discovery, Build, Retainer. Bridging climate science and DevOps.",
-            "provider": { "@type": "Person", "name": "Stéphane Karasiewicz" },
-            "areaServed": "Worldwide",
-            "serviceType": [
-                "Climate data engineering",
-                "Parametric insurance consulting",
-                "Production data pipelines",
-                "Satellite & reanalysis data integration"
-            ],
-            "address": {
-                "@type": "PostalAddress",
-                "addressRegion": "Hauts-de-France",
-                "addressCountry": "FR"
-            }
-        },
-        {
-            "@type": "FAQPage",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "What is a Constellation Discovery and how is it different from a regular consulting call?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "A Constellation Discovery is a fixed 2-week paid engagement (€6,000). I audit your existing climate scoring pipeline, map risks and duplication, and deliver a 10-15 page technical note with a scoped remediation plan. It’s the entry point for clients who want to commit budget seriously and avoid a fuzzy consulting call."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Do you write original climate models from scratch?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "No. I work with the climate scientists already on your team. I challenge their model choices through comparative studies and I industrialize the models they ship, turning prototypes into reliable, modular production pipelines."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Is there a guarantee on the code you deliver?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Yes, the Code Quality Guarantee. Any major bug in production on code I shipped, within 30 days of handover, I fix for free. No questions. Major bug = any malfunction preventing the pipeline from producing expected outputs, or producing reproducibly incorrect outputs."
-                    }
-                }
-            ]
-        }
-    ]
+    ],
 };
+
+const names = ['Calculation agent', 'Settlement services', 'Independent third party', 'Trigger verification', 'Claims verification data', 'Index administration'];
+
+const services = [
+    { n: '01', t: 'Trigger audit', d: 'A second opinion before you sign or renew: backtest, basis-risk read, data-source review, and a check that the code follows the policy wording.', href: '/trigger-audit', p: 'EUR 6,000 fixed · 2 weeks' },
+    { n: '02', t: 'Calculation agent', d: 'I compute the index from the named data, test it against the trigger, issue the payout report and keep the audit trail. Binding or verifying role.', href: '/calculation-agent', p: 'from EUR 6,000 / year' },
+    { n: '03', t: 'Pipelines', d: 'The same machinery built for your team: hosted by me, or built inside your stack and handed over with tests, docs and runbook.', href: '/pipelines', p: 'EUR 25,000 to 50,000 · 8 to 16 weeks' },
+    { n: '04', t: 'Climate data', d: 'Curated satellite and reanalysis series behind your index, kept current and checked. Sold with a calculation or pipeline contract.', href: '/data', p: 'EUR 2,000 to 4,000 / month' },
+];
 ---
 
-<BaseLayout
-    title="Skaraz Data · Constellation, production climate-data pipelines for parametric insurance"
-    description="Constellation: production climate-data pipelines for parametric insurers. A new peril is a config change, not a rewrite. Discovery, Build, Retainer."
-    ogDescription="Constellation: production climate-data pipelines for parametric insurers. Discovery, Build, Retainer."
-    ogType="website"
+<Site
+    title="Skaraz Data · Independent calculation agent for parametric insurance"
+    description="I compute, check and document the index behind parametric insurance payouts, from satellite and climate data. Independent: no product to sell, no risk on my books."
+    alt="/fr"
     jsonLd={jsonLd}
 >
-    <div class="page-light">
-    <!-- SECTION 1 — HERO -->
-    <section class="hero" aria-labelledby="hero-title">
-        <div class="hero__inner">
-            <div class="hero__content">
-                <div class="hero__badge">Available · 2-3 new engagements per quarter</div>
-                <h1 id="hero-title">
-                    Ship your next climate peril in 8 to 16 weeks, <em>without recruiting in-house.</em>
-                </h1>
-                <p class="hero__subtitle">
-                    Constellation is my framework for production climate-data pipelines: a new peril or country is added by config, not a six-month rebuild. I’m the senior data engineer parametric insurers call to run it, without recruiting a €120k/year hire.
-                </p>
-                <p class="hero__credibility">
-                    Ex-Raincoat · 10+ countries · 10+ years climate &amp; environmental data · PhD
-                </p>
-                <div class="hero__cta">
-                    <LinkedInDMButton variant="primary" />
-                    <a
-                        class="hero__cta-secondary"
-                        href="https://calendly.com/skaraz_data/15-minute-meeting"
-                        target="_blank"
-                        rel="noopener noreferrer"
-            data-umami-event="book-call-home"
-        >Book a Discovery Call <span aria-hidden="true">→</span></a>
+    <!-- HERO -->
+    <section class="hero panel on-panel">
+        <div class="wrap">
+            <div class="hero-top">
+                <div class="hero-copy">
+                    <p class="label label--trigger">Independent calculation agent · parametric insurance</p>
+                    <h1>The number that decides the payout, computed by someone with no stake in it.</h1>
+                </div>
+                <div class="hero-side">
+                    <p class="lede">I compute, check and document the index behind parametric payouts, from satellite and climate data. I carry no risk and sell no insurance product, so the calculation is the only thing I answer for.</p>
+                    <div class="ctas">
+                        <a class="btn" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer" data-umami-event="book-call-hero">Book a 15-minute call <span class="arrow" aria-hidden="true">→</span></a>
+                        <a class="btn btn--ghost" href="/showcase">See the calculations</a>
+                    </div>
                 </div>
             </div>
-            <div class="hero__visual">
-                <img
-                    src={`${base}portrait.jpg`}
-                    alt="Stéphane Karasiewicz"
-                    class="hero__portrait"
-                    loading="eager"
-                    fetchpriority="high"
-                    width="320"
-                    height="320"
-                />
-            </div>
-        </div>
-    </section>
 
-    <!-- SECTION 2 — TRUST BAR -->
-    <TrustLogos />
-
-    <!-- SECTION 3 — PROBLEM -->
-    <section class="problem" aria-labelledby="problem-title">
-        <div class="problem__inner">
-            <h2 id="problem-title">You’ve shipped one peril. The next three are 9 months out.</h2>
-            <div class="problem__body">
-                <p>Your data scientists prototyped climate models that work. Your DevOps team runs Kubernetes for the product. <strong>Nobody in the team bridges the two</strong>, and every new peril takes 6 months instead of 6 weeks.</p>
-                <p>This is what I see in most parametric insurtechs I talk to: climate scoring pipelines built fast, then bolted together. Code duplicated between perils. Datasets that quietly change calibration in the middle of the night. New geographies that look like a new project every time, not a configuration change.</p>
-                <p>The board refuses a new full-time hire at €120k+/year for what they perceive as a punctual need. But the next three deals depend on shipping that next peril before the next renewal cycle.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 4 — SOLUTION -->
-    <section class="solution" aria-labelledby="solution-title">
-        <div class="solution__inner">
-            <h2 id="solution-title">I close that gap.</h2>
-
-            <div class="solution__body">
-                <p>For nearly 2 years at Raincoat, I operated production climate pipelines across 10+ countries spanning LatAm, SEA, and Africa. I maintained drought and precipitation, built water balance from scratch to production, brought heat stress to a ready-to-deploy state, ran dev/ops solo at the end of the contract, and delivered a modular architecture roadmap for next-perils scaling.</p>
-                <p>Before that: 5+ years of satellite remote sensing at IFREMER, on top of a PhD in Marine Ecology (2014). 7 peer-reviewed publications. 2 CRAN R packages.</p>
-                <p><strong>I’m the senior who can sit between your climate scientists and your DevOps team</strong>: challenge model choices with comparative studies, ship production code that won’t wake your team at 3am, build the operational dashboards your team actually uses, and document everything so you can run new perils without me.</p>
-                <p>I build this on <strong>Constellation</strong>: a framework of small, single-job modules that already know each dataset’s traps, the IMERG sub-daily smoothing, the CHIRPS calibration drift, the ERA5-Land coastal artifacts. Checks encode those failures so a bad reading stops at a gate, not in a payout. A new peril or country is a configuration change, not a new project.</p>
-            </div>
-
-            <div class="solution__pillars">
-                <article class="pillar">
-                    <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M4 10a7.31 7.31 0 0 0 10 10Z"/>
-                        <path d="m9 15 3-3"/>
-                        <path d="M17 13a6 6 0 0 0-6-6"/>
-                        <path d="M21 13A10 10 0 0 0 11 3"/>
-                    </svg>
-                    <h3 class="pillar__title">Climate Science</h3>
-                    <p class="pillar__body">5+ years in satellite remote sensing. Production experience with CHIRPS, IMERG, ERA5-Land, Copernicus CDS, and WEkEO.</p>
-                </article>
-
-                <article class="pillar">
-                    <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect width="20" height="8" x="2" y="2" rx="2" ry="2"/>
-                        <rect width="20" height="8" x="2" y="14" rx="2" ry="2"/>
-                        <line x1="6" x2="6.01" y1="6" y2="6"/>
-                        <line x1="6" x2="6.01" y1="18" y2="18"/>
-                    </svg>
-                    <h3 class="pillar__title">DevOps</h3>
-                    <p class="pillar__body">Nearly 2 years operating production climate pipelines at Raincoat. Built water balance from scratch to production. Modular architecture roadmap delivered.</p>
-                </article>
-
-                <article class="pillar">
-                    <svg class="pillar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                    </svg>
-                    <h3 class="pillar__title">Scientific Dialogue</h3>
-                    <p class="pillar__body">PhD in Marine Ecology. 7 peer-reviewed papers. 2 CRAN packages. I challenge model choices through comparative studies.</p>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 5 — OFFER -->
-    <section class="offer" aria-labelledby="offer-title">
-        <div class="offer__inner">
-            <h2 id="offer-title">Three ways to work together</h2>
-
-            <div class="offer__grid">
-                <OfferTier
-                    number="1"
-                    title="Constellation Discovery"
-                    price="€6,000"
-                    duration="2 weeks"
-                    summary="Full audit of your existing pipeline, risk mapping, scoped remediation plan."
-                    bullets={[
-                        "10-15 page technical note",
-                        "Risk mapping of duplication, fragility, calibration drift",
-                        "Datasets & scientific methodology audit",
-                        "Production readiness assessment",
-                        "Scoped remediation plan with budget & timeline",
-                        "2 debrief calls",
-                    ]}
-                    ctaLabel="Book Discovery"
-                    ctaHref="https://calendly.com/skaraz_data/15-minute-meeting"
-                />
-
-                <OfferTier
-                    number="2"
-                    title="Constellation Build"
-                    price="€25-50k"
-                    duration="8 to 16 weeks"
-                    summary="Build from scratch or refactor toward modular architecture. Integrate with existing infra. Train your team to run it without me."
-                    bullets={[
-                        "Build new pipeline or refactor existing one",
-                        "Modular architecture, multi-peril, multi-geography",
-                        "Operational dashboards",
-                        "Scientific dataset review",
-                        "Documentation & team training",
-                        "4 follow-up sessions (months 1, 3, 6, 12)",
-                    ]}
-                    ctaLabel="Talk to me"
-                    ctaHref="https://calendly.com/skaraz_data/15-minute-meeting"
-                    featured={true}
-                />
-
-                <OfferTier
-                    number="3"
-                    title="Constellation Retainer"
-                    price="€2-4k/month"
-                    duration="6 to 12 months"
-                    summary="Ongoing support for evolutions, new perils, new geographies."
-                    bullets={[
-                        "2 to 4 days per month guaranteed",
-                        "Priority access for new perils & geographies",
-                        "Shared Slack with <72h response time",
-                        "Monthly strategic session (60 min)",
-                        "Quarterly architecture review",
-                        "On-demand work on next perils & geographies",
-                    ]}
-                    ctaLabel="Discuss retainer"
-                    ctaHref="https://calendly.com/skaraz_data/15-minute-meeting"
-                />
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 6 — GUARANTEE -->
-    <section class="guarantee" aria-labelledby="guarantee-title">
-        <div class="guarantee__inner">
-            <h2 id="guarantee-title">Code Quality Guarantee</h2>
-            <p class="guarantee__statement">
-                Any major bug in production on code I shipped, within 30 days of handover: I fix it for free. No questions.
-            </p>
-            <p class="guarantee__definition">
-                Major bug = any malfunction preventing the pipeline from producing expected outputs, or producing reproducibly incorrect outputs.
-            </p>
-        </div>
-    </section>
-
-    <!-- SECTION 7 — TESTIMONIALS -->
-    <section class="testimonials" aria-labelledby="testimonials-title">
-        <div class="testimonials__inner">
-            <h2 id="testimonials-title">What clients say</h2>
-
-            <div class="testimonials__grid">
-                <Testimonial
-                    quote="Steph is a seriously talented engineer with a rare combination of skills. He’s just as comfortable building scientific algorithms and doing deep data analysis as he is shipping polished frontend dashboards — and he does all of it at a high level. What stood out most was how independently he operated: you could hand him a complex project and trust him to run with it, communicate clearly along the way, and deliver something that genuinely moved the needle for the company. I’d recommend him to anyone in a heartbeat."
-                    highlight="rare combination of skills"
-                    name="Jan Paral"
-                    role="Head of R&D and Co-Founder"
-                    company="Raincoat LLC"
-                    logoSrc="/raincoat-logo.png"
-                    logoAlt="Raincoat LLC, Climate risk technology"
-                    featured={true}
-                />
-
-                <Testimonial
-                    quote="His coding skills are unparalleled, producing efficient and well-documented codes. His ability to translate our needs is exemplary, and he excels in proposing innovative solutions that go beyond the initial objectives. Stéphane embodies excellence and will be an invaluable asset to any organization."
-                    name="Kelig Mahé"
-                    role="Head of Unit, Fisheries Resources, Channel & North Sea"
-                    company="IFREMER"
-                    logoSrc="/ifremer-logo.png"
-                    logoAlt="IFREMER, French Institute for Ocean Science"
-                />
-
-                <Testimonial
-                    quote="I worked with Stéphane at the beginning of my PhD, and I am still grateful — without his recommendations I would work and troubleshoot much less efficiently. He always takes time to explain, and never loses his sense of humor even after the nth error message."
-                    name="Carolin Neven"
-                    role="Ph.D. Student"
-                    company="IFREMER"
-                    logoSrc="/ifremer-logo.png"
-                    logoAlt="IFREMER, French Institute for Ocean Science"
-                />
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 8 — FINAL CTA -->
-    <section class="final-cta" aria-labelledby="final-cta-title">
-        <div class="final-cta__inner">
-            <h2 id="final-cta-title">Ready to ship that next peril?</h2>
-            <p class="final-cta__intro">Two ways to start:</p>
-
-            <div class="final-cta__options">
-                <div class="final-cta__option">
-                    <h3>1. Get the free Reality Check PDF</h3>
-                    <p>5 lessons from industrializing pipelines across 10+ countries, plus the 12-point checklist I use on every mission. No call, no pitch, just useful content.</p>
-                    <LinkedInDMButton variant="primary" label="Send “reality” on LinkedIn →" />
+            <div class="hero-chart">
+                <div class="spec">
+                    <div><span class="label">Index</span><span>Degree Heating Weeks</span></div>
+                    <div><span class="label">Source</span><span>NOAA Coral Reef Watch, 5 km</span></div>
+                    <div><span class="label">Place</span><span>Saint-Leu, La Réunion</span></div>
+                    <div><span class="label">Backtest</span><span class="num">2009 to 2024</span></div>
                 </div>
-
-                <div class="final-cta__option">
-                    <h3>2. Book a Discovery Call</h3>
-                    <p>15 min, free, to see if a fixed Discovery mission (€6,000, 2 weeks) makes sense for your context.</p>
-                    <a
-                        class="final-cta__secondary"
-                        href="https://calendly.com/skaraz_data/15-minute-meeting"
-                        target="_blank"
-                        rel="noopener noreferrer"
-            data-umami-event="book-call-home"
-        >Book a Call <span aria-hidden="true">→</span></a>
-                </div>
+                <TriggerChart series={hero.series} variant="panel" height={300} />
+                <p class="poc-note small">Proof of concept on public data. Hover the chart to read any week. <a href={`/showcase/${hero.slug}`}>Read the full calculation report →</a></p>
             </div>
         </div>
     </section>
 
-    </div><!-- /.page-light -->
-</BaseLayout>
+    <!-- NAMES -->
+    <section class="names">
+        <div class="wrap names-row">
+            <p class="label">Buyers call this work</p>
+            <ul>{names.map(n => <li>{n}</li>)}</ul>
+        </div>
+    </section>
+
+    <!-- AUDIENCE -->
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Who it is for</p>
+                <h2>Pick the seat you sit in.</h2>
+            </div>
+            <div class="reveal"><Audience /></div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Four services, one machinery</p>
+                <h2>From a second opinion to running the calculation every season.</h2>
+                <p class="lede">Most clients start with an audit. The same checked pipeline then becomes the calculation, the hosted service or the handover.</p>
+            </div>
+            <ol class="ladder grid cols-4">
+                {services.map((s, i) => (
+                    <li class="reveal" style={`--i:${i}`}>
+                        <a class="rung" href={s.href}>
+                            <span class="num rn">{s.n}</span>
+                            <h3>{s.t}</h3>
+                            <p>{s.d}</p>
+                            <span class="price num">{s.p}</span>
+                        </a>
+                    </li>
+                ))}
+            </ol>
+        </div>
+    </section>
+
+    <!-- SHOWCASE -->
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Showcase</p>
+                <h2>Five calculations on public data, with their limits written down.</h2>
+                <p class="lede">Each one runs the full chain: data, checks, index, trigger, payout, audit trail. They are proofs of concept, not live products, and every report says where the method stops.</p>
+            </div>
+            <div class="grid cols-3 pocs">
+                {pocs.map((p, i) => <div class="reveal" style={`--i:${i}`}><PocCard poc={p} /></div>)}
+                <a class="map-card reveal" style="--i:5" href="/constellation/">
+                    <span class="label">Live map</span>
+                    <h3>Open all five on the interactive map</h3>
+                    <p class="muted small">Hazard rasters, payout choropleths and per-cell time series, in the browser.</p>
+                    <span class="link">Open the map <span class="arrow" aria-hidden="true">→</span></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- METHOD -->
+    <section class="section panel on-panel">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--trigger">Method</p>
+                <h2>Six steps, the same every time, all of it written down.</h2>
+                <p class="lede" style="color:var(--panel-muted)">No competitor publishes how a trigger is computed or audited. I do, because a calculation nobody can rerun is not independent.</p>
+            </div>
+            <PipelineFlow variant="panel" />
+            <p class="method-link"><a class="link" href="/method" style="color:var(--panel-index)">Read the full method <span class="arrow" aria-hidden="true">→</span></a></p>
+        </div>
+    </section>
+
+    <!-- PROOF -->
+    <section class="section">
+        <div class="wrap proof">
+            <div class="section-head reveal">
+                <p class="label label--index">Track record</p>
+                <h2>Two years inside a parametric insurer’s production pipelines.</h2>
+                <p class="lede">Embedded with Raincoat, a parametric insurtech, from February 2024 to January 2026. I ran the satellite and reanalysis data layer for every peril except hurricane wind.</p>
+            </div>
+            <div class="grid cols-4 stats">
+                <div class="metric reveal" style="--i:0"><span class="value">4</span><span class="note">perils in production when I left, up from 3. Water Balance shipped, Heat Stress ready.</span></div>
+                <div class="metric reveal" style="--i:1"><span class="value">3</span><span class="note">dashboards used daily by risk and underwriting: Precipitation, Water Balance, Drought.</span></div>
+                <div class="metric reveal" style="--i:2"><span class="value">10+</span><span class="note">countries, from the Caribbean and Colombia to most of South America and four in Africa.</span></div>
+                <div class="metric reveal" style="--i:3"><span class="value">15+</span><span class="note">years of satellite remote sensing, 7 peer-reviewed publications.</span></div>
+            </div>
+            <figure class="quote reveal">
+                <blockquote>“You could hand him a complex project and trust him to run with it, communicate clearly along the way, and deliver something that genuinely moved the needle for the company.”</blockquote>
+                <figcaption><strong>Jan Paral</strong> · Head of R&amp;D and Co-Founder, Raincoat</figcaption>
+            </figure>
+            <p><a class="link" href="/projects/case-study-raincoat">Read the Raincoat case study <span class="arrow" aria-hidden="true">→</span></a></p>
+        </div>
+    </section>
+
+    <!-- INDEPENDENCE -->
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Why independent matters</p>
+                <h2>Most triggers are computed by someone with a stake in the result.</h2>
+                <p class="lede">Carriers and platforms often calculate their own triggers. That is fine until a payout is disputed. A third party with nothing else to sell settles the argument with a number both sides can rerun.</p>
+            </div>
+            <div class="grid cols-3">
+                <div class="card reveal" style="--i:0"><p class="label label--trigger">No product</p><h3>I don’t write cover or sell a platform.</h3><p class="muted">The calculation is the deliverable. My income does not depend on whether a trigger fires.</p></div>
+                <div class="card reveal" style="--i:1"><p class="label label--trigger">No risk</p><h3>Nothing on my balance sheet moves with the index.</h3><p class="muted">No capacity, no premium share, no fee linked to the payout amount.</p></div>
+                <div class="card reveal" style="--i:2"><p class="label label--trigger">No lock-in</p><h3>You get the code, the hashes and the runbook.</h3><p class="muted">Any qualified analyst can rerun a calculation from what I hand over.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING PREVIEW -->
+    <section class="section">
+        <div class="wrap price-wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Pricing</p>
+                <h2>Published prices, so you can budget before the first call.</h2>
+            </div>
+            <div class="table-wrap reveal">
+                <table class="data">
+                    <thead><tr><th>Service</th><th>Price</th><th>Scope</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Trigger audit</strong></td><td class="num">EUR 6,000 fixed</td><td>2 weeks. Backtest, basis risk, data review, wording-to-code check.</td></tr>
+                        <tr><td><strong>Verifying agent</strong></td><td class="num">from EUR 6,000 / year</td><td>Shadow calculation that checks the binding agent’s result.</td></tr>
+                        <tr><td><strong>Binding calculation agent</strong></td><td class="num">from EUR 12,000 / year</td><td>Per programme. Monitoring, 2 event calculations, payout reports, audit trail. Onboarding from EUR 8,000.</td></tr>
+                        <tr><td><strong>Pipeline build</strong></td><td class="num">EUR 25,000 to 50,000</td><td>8 to 16 weeks. Hosted or handed over.</td></tr>
+                        <tr><td><strong>Data and upkeep</strong></td><td class="num">EUR 2,000 to 4,000 / month</td><td>Curated series, refresh, checks. 6 to 12 months.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><a class="link" href="/pricing">Full pricing and what each line includes <span class="arrow" aria-hidden="true">→</span></a></p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta panel on-panel">
+        <div class="wrap cta-row">
+            <div>
+                <h2>Have a trigger you want checked?</h2>
+                <p class="lede" style="color:var(--panel-muted)">Fifteen minutes is enough to tell whether an audit is worth it. If it isn’t, I’ll say so.</p>
+            </div>
+            <div class="ctas">
+                <a class="btn" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer" data-umami-event="book-call-footer-cta">Book a 15-minute call <span class="arrow" aria-hidden="true">→</span></a>
+                <a class="btn btn--ghost" href="mailto:skaraz.science@gmail.com">Email me</a>
+            </div>
+        </div>
+    </section>
+</Site>
 
 <style>
-    /* =========================================================
-       PAGE WRAPPER — interim light-theme container.
-       Will be removed in Étape 6 when global.css is rewritten.
-       ========================================================= */
-    .page-light {
-        background: #ffffff;
-        color: #0f1b2c;
+    .hero { padding-block: clamp(48px, 7vw, 96px) clamp(40px, 5vw, 64px); }
+    .hero-top { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: end; }
+    .hero-copy { display: grid; gap: 22px; }
+    .hero h1 { font-size: clamp(2.25rem, 1.2rem + 3.6vw, 3.875rem); max-width: 19ch; }
+    .hero-side { display: grid; gap: 26px; }
+    .hero .lede { color: var(--panel-muted); }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-chart { margin-top: clamp(40px, 6vw, 72px); padding: clamp(18px, 2.5vw, 28px); border: 1px solid var(--panel-line); border-radius: 10px; background: var(--panel-2); display: grid; gap: 18px; }
+    .spec { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--panel-line); }
+    .spec > div { display: grid; gap: 4px; min-width: 0; font-size: 0.9375rem; }
+    .poc-note { color: var(--panel-muted); }
+    .poc-note a { color: var(--panel-index); }
+    @media (max-width: 900px) { .hero-top { grid-template-columns: minmax(0, 1fr); } .spec { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+    /* Hero entrance: one orchestrated moment, then the chart draws itself. */
+    :global(.js) .hero-copy > *, :global(.js) .hero-side > * { animation: rise 700ms var(--ease-out) both; }
+    :global(.js) .hero-copy h1 { animation-delay: 60ms; }
+    :global(.js) .hero-side > :first-child { animation-delay: 140ms; }
+    :global(.js) .hero-side > :last-child { animation-delay: 220ms; }
+    :global(.js) .hero-chart { animation: rise 800ms var(--ease-out) 260ms both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+        :global(.js) .hero-copy > *, :global(.js) .hero-side > *, :global(.js) .hero-chart { animation: fade 300ms ease both; }
+        @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
     }
 
-    /* =========================================================
-       SECTION 1 — HERO
-       ========================================================= */
-    .hero {
-        background: #ffffff;
-        /* Override interim global.css rules that still apply:
-           min-height: 100vh + display:flex + align-items:center
-           force the hero to be 1 viewport tall and vertically center its
-           content. Will be cleaned up in Étape 6 (global.css refonte). */
-        min-height: auto;
-        display: block;
-        padding: 6rem 2rem 5rem;
-        position: relative;
-    }
-
-    .hero__inner {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        align-items: center;
-    }
-
-    @media (min-width: 960px) {
-        .hero__inner {
-            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-            gap: 4rem;
-        }
-    }
-
-    .hero__content {
-        min-width: 0;
-    }
-
-    .hero__badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.78rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #d85a30;
-        background: rgba(216, 90, 48, 0.08);
-        border: 1px solid rgba(216, 90, 48, 0.22);
-        padding: 0.4rem 0.95rem;
-        border-radius: 100px;
-        margin-bottom: 1.75rem;
-    }
-
-    .hero__badge::before {
-        content: '';
-        width: 6px;
-        height: 6px;
-        background: #d85a30;
-        border-radius: 50%;
-        animation: hero-pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes hero-pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.4; }
-    }
-
-    .hero h1 {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(2.4rem, 5vw, 3.8rem);
-        font-weight: 400;
-        line-height: 1.15;
-        letter-spacing: -0.02em;
-        color: #0f1b2c;
-        margin: 0 0 1.5rem;
-    }
-
-    .hero h1 em {
-        font-style: italic;
-        color: #d85a30;
-    }
-
-    .hero__subtitle {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #4a5a70;
-        max-width: 640px;
-        margin: 0 0 1rem;
-    }
-
-    .hero__credibility {
-        font-size: 0.9rem;
-        line-height: 1.5;
-        color: #7a8aa0;
-        margin: 0 0 2rem;
-    }
-
-    .hero__cta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.8rem;
-        align-items: center;
-    }
-
-    .hero__cta-secondary {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.9rem 1.5rem;
-        font-family: inherit;
-        font-size: 0.95rem;
-        font-weight: 500;
-        line-height: 1.3;
-        color: #0f1b2c;
-        background: transparent;
-        border: 1.5px solid rgba(15, 27, 44, 0.22);
-        border-radius: 8px;
-        text-decoration: none;
-        transition: background-color 0.2s, color 0.2s, transform 0.15s,
-            box-shadow 0.2s, border-color 0.2s;
-    }
-
-    .hero__cta-secondary:hover {
-        background: #0f1b2c;
-        color: #ffffff;
-        border-color: #0f1b2c;
-        transform: translateY(-1px);
-        box-shadow: 0 6px 18px rgba(15, 27, 44, 0.12);
-    }
-
-    .hero__visual {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        isolation: isolate;
-    }
-
-    /* Soft decorative halo behind the portrait — option (c) via radial-gradient */
-    .hero__visual::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 380px;
-        height: 380px;
-        transform: translate(-50%, -50%);
-        background: radial-gradient(
-            circle,
-            rgba(15, 27, 44, 0.06) 0%,
-            rgba(15, 27, 44, 0) 70%
-        );
-        border-radius: 50%;
-        z-index: -1;
-        pointer-events: none;
-    }
-
-    .hero__portrait {
-        width: 100%;
-        max-width: 320px;
-        aspect-ratio: 1 / 1;
-        border-radius: 50%;
-        object-fit: cover;
-        object-position: center top;
-        border: 4px solid #ffffff;
-        /* Ring coral 0.4 (option a) + drop shadow */
-        box-shadow:
-            0 0 0 1.5px rgba(216, 90, 48, 0.4),
-            0 20px 50px rgba(15, 27, 44, 0.1);
-    }
-
+    .names { border-bottom: 1px solid var(--line); background: var(--paper); }
+    .names-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-block: 22px; }
+    .names ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+    .names li { font: 600 0.9375rem/1.3 var(--display); color: var(--ink-2); }
+    .names li + li::before { content: "·"; margin-right: 22px; color: var(--line-strong); }
     @media (max-width: 640px) {
-        .hero {
-            padding: 3.5rem 1.25rem 3.5rem;
-        }
-        .hero__portrait {
-            max-width: 220px;
-        }
-        .hero__visual::before {
-            width: 280px;
-            height: 280px;
-        }
+        .names ul { gap: 8px; }
+        .names li { padding: 6px 10px; border: 1px solid var(--line); border-radius: 4px; font-size: 0.875rem; }
+        .names li + li::before { content: none; }
     }
 
-    /* =========================================================
-       SECTION 3 — PROBLEM
-       ========================================================= */
-    .problem {
-        background: #ffffff;
-        padding: 5.5rem 2rem;
+    .ladder { list-style: none; padding: 0; margin: 0; }
+    .ladder li { display: flex; }
+    .rung {
+        display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; width: 100%;
+        padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+        color: var(--ink); text-decoration: none;
+        transition: border-color 200ms ease, transform 160ms var(--ease-out);
     }
+    .rung:active { transform: scale(0.99); }
+    @media (hover: hover) and (pointer: fine) { .rung:hover { border-color: var(--ink); } }
+    .rn { font-size: 0.8125rem; color: var(--index); font-weight: 600; }
+    .rung p { color: var(--muted); font-size: 0.9375rem; }
+    .price { padding-top: 14px; border-top: 1px dashed var(--line-strong); font-size: 0.8125rem; font-weight: 500; color: var(--ink); }
 
-    .problem__inner {
-        max-width: 760px;
-        margin: 0 auto;
+    .pocs { align-items: stretch; }
+    .pocs > div { display: grid; }
+    .map-card {
+        display: grid; gap: 12px; align-content: start; padding: 22px; border-radius: var(--radius);
+        border: 1px dashed var(--line-strong); text-decoration: none; color: var(--ink);
+        background: repeating-linear-gradient(135deg, transparent 0 10px, var(--paper-2) 10px 11px);
+        transition: border-color 200ms ease;
     }
+    @media (hover: hover) and (pointer: fine) { .map-card:hover { border-color: var(--ink); } }
 
-    .problem h2 {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
-        font-weight: 400;
-        line-height: 1.2;
-        letter-spacing: -0.01em;
-        color: #0f1b2c;
-        margin: 0 0 2rem;
-    }
+    .method-link { margin-top: 40px; }
 
-    .problem__body p {
-        font-size: 1.05rem;
-        line-height: 1.7;
-        color: #4a5a70;
-        margin: 0 0 1.25rem;
-    }
+    .proof { display: grid; gap: 40px; }
+    .proof .section-head { margin-bottom: 0; }
+    .stats .value { font-size: clamp(2.5rem, 1.6rem + 2.4vw, 3.5rem); }
+    .quote { margin: 0; padding: clamp(24px, 3vw, 36px); border-radius: var(--radius); background: var(--paper-2); display: grid; gap: 16px; }
+    .quote blockquote { margin: 0; font: 500 var(--step-2)/1.35 var(--display); letter-spacing: -0.01em; max-width: 46ch; }
+    .quote figcaption { color: var(--muted); font-size: 0.9375rem; }
 
-    .problem__body p:last-child {
-        margin-bottom: 0;
-    }
+    .price-wrap { display: grid; gap: 24px; }
+    .price-wrap .section-head { margin-bottom: 0; }
 
-    .problem__body strong {
-        font-weight: 600;
-        color: #0f1b2c;
-    }
-
-    @media (max-width: 640px) {
-        .problem {
-            padding: 3.5rem 1.25rem;
-        }
-        .problem__body p {
-            font-size: 1rem;
-        }
-    }
-
-    /* =========================================================
-       SECTION 4 — SOLUTION
-       ========================================================= */
-    .solution {
-        background: #f7f8fa;
-        padding: 5.5rem 2rem;
-    }
-
-    .solution__inner {
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-
-    .solution h2 {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
-        font-weight: 400;
-        line-height: 1.2;
-        letter-spacing: -0.01em;
-        color: #0f1b2c;
-        margin: 0 0 2rem;
-    }
-
-    .solution__body {
-        max-width: 760px;
-    }
-
-    .solution__body p {
-        font-size: 1.05rem;
-        line-height: 1.7;
-        color: #4a5a70;
-        margin: 0 0 1.25rem;
-    }
-
-    .solution__body p:last-child {
-        margin-bottom: 0;
-    }
-
-    .solution__body strong {
-        font-weight: 600;
-        color: #0f1b2c;
-    }
-
-    .solution__pillars {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        margin-top: 3.5rem;
-    }
-
-    @media (min-width: 768px) {
-        .solution__pillars {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    .pillar {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.85rem;
-    }
-
-    .pillar__icon {
-        width: 44px;
-        height: 44px;
-        color: #d85a30;
-        flex: 0 0 auto;
-    }
-
-    .pillar__title {
-        font-family: 'DM Serif Display', serif;
-        font-size: 1.35rem;
-        font-weight: 400;
-        line-height: 1.25;
-        letter-spacing: -0.005em;
-        color: #0f1b2c;
-        margin: 0;
-    }
-
-    .pillar__body {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        color: #4a5a70;
-        margin: 0;
-    }
-
-    @media (max-width: 640px) {
-        .solution {
-            padding: 3.5rem 1.25rem;
-        }
-        .solution__body p {
-            font-size: 1rem;
-        }
-    }
-
-    /* =========================================================
-       SECTION 5 — OFFER
-       ========================================================= */
-    .offer {
-        background: #ffffff;
-        padding: 5.5rem 2rem;
-    }
-
-    .offer__inner {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .offer h2 {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
-        font-weight: 400;
-        line-height: 1.2;
-        letter-spacing: -0.01em;
-        color: #0f1b2c;
-        margin: 0 0 2.5rem;
-    }
-
-    .offer__grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        align-items: stretch;
-        /* Reserve room for the "Most popular" badge that overflows above the featured card */
-        padding-top: 0.75rem;
-    }
-
-    @media (min-width: 880px) {
-        .offer__grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    @media (max-width: 640px) {
-        .offer {
-            padding: 3.5rem 1.25rem;
-        }
-    }
-
-    /* =========================================================
-       SECTION 6 — GUARANTEE
-       ========================================================= */
-    .guarantee {
-        background: #f7f8fa;
-        padding: 5.5rem 2rem;
-    }
-
-    .guarantee__inner {
-        max-width: 720px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .guarantee h2 {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
-        font-weight: 400;
-        line-height: 1.2;
-        letter-spacing: -0.01em;
-        color: #0f1b2c;
-        margin: 0 0 1.75rem;
-    }
-
-    .guarantee__statement {
-        font-size: 1.2rem;
-        font-weight: 500;
-        line-height: 1.55;
-        color: #0f1b2c;
-        margin: 0 auto 1.5rem;
-        max-width: 620px;
-    }
-
-    .guarantee__definition {
-        font-size: 0.9rem;
-        line-height: 1.6;
-        color: #7a8aa0;
-        margin: 0 auto;
-        max-width: 580px;
-    }
-
-    @media (max-width: 640px) {
-        .guarantee {
-            padding: 3.5rem 1.25rem;
-        }
-        .guarantee__statement {
-            font-size: 1.1rem;
-        }
-    }
-
-    /* =========================================================
-       SECTION 7 — TESTIMONIALS
-       ========================================================= */
-    .testimonials {
-        background: #ffffff;
-        padding: 5.5rem 2rem;
-    }
-
-    .testimonials__inner {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .testimonials h2 {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
-        font-weight: 400;
-        line-height: 1.2;
-        letter-spacing: -0.01em;
-        color: #0f1b2c;
-        margin: 0 0 2.5rem;
-    }
-
-    .testimonials__grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        align-items: stretch;
-    }
-
-    @media (min-width: 880px) {
-        .testimonials__grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    @media (max-width: 640px) {
-        .testimonials {
-            padding: 3.5rem 1.25rem;
-        }
-    }
-
-    /* =========================================================
-       SECTION 8 — FINAL CTA
-       ========================================================= */
-    .final-cta {
-        background: #042c53;
-        color: #ffffff;
-        padding: 6rem 2rem;
-    }
-
-    .final-cta__inner {
-        max-width: 960px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .final-cta h2 {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 400;
-        line-height: 1.15;
-        letter-spacing: -0.02em;
-        color: #ffffff;
-        margin: 0 0 0.75rem;
-    }
-
-    .final-cta__intro {
-        font-size: 1.05rem;
-        line-height: 1.55;
-        color: rgba(255, 255, 255, 0.7);
-        margin: 0 0 3rem;
-    }
-
-    .final-cta__options {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        text-align: left;
-        max-width: 760px;
-        margin: 0 auto;
-    }
-
-    @media (min-width: 768px) {
-        .final-cta__options {
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-    }
-
-    .final-cta__option {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.85rem;
-    }
-
-    .final-cta__option h3 {
-        font-family: 'DM Serif Display', serif;
-        font-size: 1.35rem;
-        font-weight: 400;
-        line-height: 1.25;
-        letter-spacing: -0.005em;
-        color: #ffffff;
-        margin: 0;
-    }
-
-    .final-cta__option p {
-        font-size: 0.95rem;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.8);
-        margin: 0 0 0.5rem;
-    }
-
-    .final-cta__secondary {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.9rem 1.5rem;
-        font-family: inherit;
-        font-size: 0.95rem;
-        font-weight: 500;
-        line-height: 1.3;
-        color: #ffffff;
-        background: transparent;
-        border: 1.5px solid rgba(255, 255, 255, 0.4);
-        border-radius: 8px;
-        text-decoration: none;
-        transition: background-color 0.2s, color 0.2s, transform 0.15s,
-            box-shadow 0.2s, border-color 0.2s;
-    }
-
-    .final-cta__secondary:hover {
-        background: #ffffff;
-        color: #042c53;
-        border-color: #ffffff;
-        transform: translateY(-1px);
-        box-shadow: 0 6px 18px rgba(255, 255, 255, 0.12);
-    }
-
-    @media (max-width: 640px) {
-        .final-cta {
-            padding: 4rem 1.25rem;
-        }
-        .final-cta__intro {
-            margin-bottom: 2.25rem;
-        }
-    }
+    .cta { padding-block: clamp(56px, 8vw, 96px); }
+    .cta-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 32px; }
+    .cta-row > div:first-child { display: grid; gap: 14px; }
 </style>

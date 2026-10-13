@@ -1,957 +1,148 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-
-const base = import.meta.env.BASE_URL;
+import Site from '../../layouts/Site.astro';
 
 const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Climate Risk at Raincoat LLC · Case Study",
-    "description": "How I contributed to Raincoat's parametric insurance climate pipelines: data acquisition, new perils, dashboards, and a modular architecture roadmap.",
-    "url": "https://skarazdata.com/projects/case-study-raincoat",
-    "author": {
-        "@type": "Person",
-        "name": "Stéphane Karasiewicz",
-        "url": "https://skarazdata.com"
-    },
-    "publisher": {
-        "@type": "Organization",
-        "name": "Skaraz Data"
-    },
-    "datePublished": "2026-05-21",
-    "inLanguage": "en",
-    "about": {
-        "@type": "Thing",
-        "name": "Parametric insurance climate pipelines"
-    }
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Climate Risk at Raincoat LLC · Case Study',
+    description: "How I contributed to Raincoat's parametric insurance climate pipelines: data acquisition, new perils, dashboards, and a modular architecture roadmap.",
+    url: 'https://skarazdata.com/projects/case-study-raincoat',
+    author: { '@type': 'Person', name: 'Stéphane Karasiewicz', url: 'https://skarazdata.com' },
+    publisher: { '@type': 'Organization', name: 'Skaraz Data' },
+    datePublished: '2026-05-21',
+    inLanguage: 'en',
 };
+
+const changes = [
+    ['Perils in production', '3 (Precipitation, Hurricane Wind, Earthquake), Drought early-stage', '4 (+ Water Balance), Heat Stress pipeline ready'],
+    ['Dashboards I built', '0', '3 (Precipitation, Water Balance, Drought)'],
+    ['Coverage', 'Caribbean + Colombia', 'Most of South America + 4 African countries'],
+    ['Sales maps', 'Manual, on request', 'Country-level maps generated systematically'],
+];
+const stack = [
+    ['Climate data', 'CHIRPS · IMERG · ERA5-Land · Copernicus CDS · WEkEO · NetCDF · Xarray'],
+    ['Engineering', 'Python · Pandas · NumPy · scikit-learn · PostgreSQL · Docker · Kubernetes · CI/CD · GitHub Actions'],
+    ['Frontend', 'Plotly Dash'],
+    ['Methods', 'Time-series analysis · Calibration · Threshold modelling · Anomaly detection · Geospatial aggregation'],
+];
 ---
 
-<BaseLayout
-    title="Case Study · Climate Risk at Raincoat LLC | Skaraz Data"
-    description="How I contributed to Raincoat's parametric insurance climate pipelines over 2 years: data acquisition, new perils (Water Balance, Heat Stress), dashboards, and modular architecture roadmap. Embedded Senior Data Scientist."
-    ogType="article"
-    articleMeta={{
-        publishedTime: "2026-05-21",
-        author: "Stéphane Karasiewicz",
-        tags: ["climate", "parametric insurance", "data pipelines", "case study", "raincoat"],
-    }}
+<Site
+    title="Case study · climate pipelines at Raincoat · Skaraz Data"
+    description="Two years embedded at Raincoat, a parametric insurtech: satellite data acquisition, new perils (Water Balance, Heat Stress), dashboards, and a modular architecture roadmap."
     jsonLd={jsonLd}
 >
-    <div class="cs-page">
-
-        <!-- HERO -->
-        <section class="cs-hero" aria-labelledby="cs-title">
-            <div class="cs-hero__inner">
-                <a href={base} class="cs-backlink">&larr; Back to skarazdata.com</a>
-                <p class="cs-hero__label">Case Study</p>
-                <h1 id="cs-title" class="cs-hero__title">Climate Risk at Raincoat LLC</h1>
-                <p class="cs-hero__subtitle">
-                    Embedded Senior Data Scientist · Feb 2024 → Jan 2026
-                </p>
-            </div>
-        </section>
-
-        <!-- SECTION 1 — The Client -->
-        <section class="cs-section cs-section--alt" aria-labelledby="client-title">
-            <div class="cs-prose">
-                <h2 id="client-title">The Client</h2>
-                <p>
-                    Raincoat LLC is a US-based insurtech building parametric insurance products
-                    for natural catastrophe risks: policies that pay out automatically when
-                    predefined climate or weather thresholds are triggered. Their products cover
-                    droughts, hurricanes, earthquakes, and other perils across emerging markets
-                    in LatAm, the Caribbean, and beyond.
-                </p>
-                <p>
-                    When I joined in February 2024, the company had already shipped 3 perils
-                    to production: Precipitation, Hurricane Wind, and Earthquake, with Drought
-                    in early-stage development. The codebase was a monolithic block that had
-                    grown organically as the team shipped peril by peril. Coverage was
-                    concentrated in the Caribbean and Colombia.
-                </p>
-                <p>
-                    I spent the next 2 years embedded with their data and engineering teams,
-                    contributing to climate data acquisition, new peril development, and
-                    underwriter-facing dashboards.
-                </p>
-            </div>
-        </section>
-
-        <!-- SECTION 2 — The Brief -->
-        <section class="cs-section" aria-labelledby="brief-title">
-            <div class="cs-prose">
-                <h2 id="brief-title">The Brief</h2>
-                <p>Raincoat had product-market fit but was hitting two ceilings.</p>
-
-                <article class="cs-ceiling">
-                    <h3>Peril ceiling.</h3>
-                    <p>
-                        Sales conversations kept surfacing client needs that the existing
-                        4 perils didn't cover: drought intensity, agricultural water stress,
-                        heat-related risks. New perils took months to ship because the codebase
-                        had been built peril by peril, with each one in its own block.
-                    </p>
-                </article>
-
-                <article class="cs-ceiling">
-                    <h3>Geographic ceiling.</h3>
-                    <p>
-                        The team was extending coverage from the Caribbean and Colombia toward
-                        the rest of South America and into Africa. Adding a new country was
-                        already a config change. The real issue wasn't where the data came
-                        from, but how much of it the system was processing per client.
-                    </p>
-                </article>
-
-                <p>
-                    My role wasn't to refactor the system. It was to plug into the team as a
-                    senior climate data scientist, extend coverage where I could, ship new
-                    perils alongside the existing ones, and start surfacing what a more
-                    efficient architecture could look like.
-                </p>
-            </div>
-        </section>
-
-        <!-- SECTION 3 — What I Contributed -->
-        <section class="cs-section cs-section--alt" aria-labelledby="contributed-title">
-            <div class="cs-prose">
-                <h2 id="contributed-title">What I Contributed</h2>
-                <p>
-                    Over 2 years, I worked across data acquisition, pipeline development,
-                    dashboards, and validation. Some pieces I led, others were team-driven
-                    with my input on the climate side.
-                </p>
-
-                <article class="cs-contrib">
-                    <h3>Data acquisition + automation</h3>
-                    <p>
-                        I owned the satellite and reanalysis data acquisition layer for every
-                        peril except Hurricane Wind. That meant designing the ingestion logic
-                        for CHIRPS, ERA5-Land, IMERG, Copernicus CDS, and WEkEO sources,
-                        automating their refresh cycles, and ensuring outputs were compatible
-                        with downstream pipelines.
-                    </p>
-                    <p>
-                        Side benefit nobody asked for at first but ended up mattering: I
-                        generated output model data and country-level maps for the sales team,
-                        which they used in client conversations before contracts were signed.
-                        The gap between "our model says X" and "show me what that looks like
-                        for my country" was a real bottleneck. Closing it made deals close
-                        faster.
-                    </p>
-                </article>
-
-                <article class="cs-contrib">
-                    <h3>New perils</h3>
-                    <p>I implemented two new peril pipelines during my time.</p>
-                    <p>
-                        <strong>Water Balance.</strong> Built by adapting the existing
-                        Precipitation pipeline. The peril required different climate variables
-                        and thresholds but shared the same architectural skeleton. Shipped to
-                        production with CI/CD and Docker on Kubernetes.
-                    </p>
-                    <p>
-                        <strong>Heat Stress.</strong> Adapted an existing climate scientist's
-                        research script into a production-ready pipeline. The science was
-                        solid, but the script was research-grade: single-threaded, manual data
-                        inputs, no error handling. I rebuilt the data layer and model
-                        orchestration around it. The pipeline was ready at contract end but
-                        didn't reach production deployment during my tenure.
-                    </p>
-                </article>
-
-                <article class="cs-contrib">
-                    <h3>Dashboards</h3>
-                    <p>
-                        I built 3 Plotly Dash dashboards used daily by the risk and
-                        underwriting teams: Precipitation, Water Balance, and Drought.
-                        Dashboards weren't decorative. They were the interface between climate
-                        models and underwriting decisions, and a lot of the value the team
-                        delivered to clients flowed through them.
-                    </p>
-                </article>
-
-                <article class="cs-contrib">
-                    <h3>Maintenance + extension</h3>
-                    <p>
-                        Precipitation and Drought were already in production when I joined. I
-                        maintained both throughout my 2 years (calibration checks, geographic
-                        extensions, dataset updates) and added their dashboards. Drought went
-                        from early-stage at my arrival to a stable peril in production across
-                        all targeted countries by the time I left.
-                    </p>
-                </article>
-
-                <!-- KEY INSIGHT — the modular conversation -->
-                <aside class="cs-insight" aria-labelledby="insight-title">
-                    <p class="cs-insight__label">Key insight</p>
-                    <h3 id="insight-title" class="cs-insight__title">
-                        The modular conversation (the unfinished part)
-                    </h3>
-                    <p>
-                        The codebase had a hidden cost the team didn't always see. The
-                        architecture was monolithic per client × peril: each client got their
-                        own block of code that downloaded and processed its own data. As a
-                        result, 5 clients in Colombia meant 5× the CHIRPS downloads, 5× the
-                        same calibration runs, 5× the same compute spend on identical inputs.
-                    </p>
-                    <p>
-                        In conversations with the dev and science teams toward the end of my
-                        contract, I sketched what a different architecture could look like: a
-                        shared data pool per geography (download and compute the climate data
-                        layer once, store it, refresh on schedule), wrapped in reusable
-                        pipeline modules with standardized inputs and outputs. New clients in
-                        covered geographies would become near-free to onboard. New perils
-                        would share infrastructure instead of forking it. Storage would stop
-                        ballooning. Compute spend would scale with geographies, not with
-                        clients.
-                    </p>
-                    <p>
-                        I didn't implement that refactor; it would have been a multi-month
-                        engagement of its own, out of scope for my contract. But the
-                        conversations existed, and the team had a clearer view of where the
-                        operational savings would come from.
-                    </p>
-                </aside>
-            </div>
-        </section>
-
-        <!-- SECTION 4 — What Changed in 2 Years -->
-        <section class="cs-section" aria-labelledby="changed-title">
-            <div class="cs-prose">
-                <h2 id="changed-title">What Changed in 2 Years</h2>
-                <p>
-                    The team didn't double in size. The codebase wasn't refactored. But
-                    coverage expanded measurably.
-                </p>
-
-                <!-- DESKTOP TABLE -->
-                <table class="cs-changes" aria-label="Coverage before and after">
-                    <thead>
-                        <tr>
-                            <th scope="col">When I joined (Feb 2024)</th>
-                            <th scope="col">When I left (Jan 2026)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>3 perils in production (Precipitation, Hurricane Wind, Earthquake) + Drought early-stage</td>
-                            <td>4 perils in production (+ Water Balance), Heat Stress pipeline ready</td>
-                        </tr>
-                        <tr>
-                            <td>Dashboards I built: 0</td>
-                            <td>Dashboards I built: 3 (Precipitation, Water Balance, Drought)</td>
-                        </tr>
-                        <tr>
-                            <td>Caribbean + Colombia</td>
-                            <td>Most of South America + 4 African countries</td>
-                        </tr>
-                        <tr>
-                            <td>Manual sales maps on request</td>
-                            <td>Country-level maps generated systematically</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- MOBILE CARDS -->
-                <div class="cs-changes-cards" aria-hidden="true">
-                    <div class="cs-changes-card cs-changes-card--before">
-                        <p class="cs-changes-card__label">Before · Feb 2024</p>
-                        <ul>
-                            <li>3 perils in production (Precipitation, Hurricane Wind, Earthquake) + Drought early-stage</li>
-                            <li>Dashboards I built: 0</li>
-                            <li>Caribbean + Colombia</li>
-                            <li>Manual sales maps on request</li>
-                        </ul>
-                    </div>
-                    <div class="cs-changes-card cs-changes-card--after">
-                        <p class="cs-changes-card__label">After · Jan 2026</p>
-                        <ul>
-                            <li>4 perils in production (+ Water Balance), Heat Stress pipeline ready</li>
-                            <li>Dashboards I built: 3 (Precipitation, Water Balance, Drought)</li>
-                            <li>Most of South America + 4 African countries</li>
-                            <li>Country-level maps generated systematically</li>
-                        </ul>
-                    </div>
+    <section class="panel on-panel cs-head">
+        <div class="wrap">
+            <a class="back" href="/">← Home</a>
+            <div class="cs-grid">
+                <div class="cs-copy">
+                    <p class="label label--trigger">Case study · embedded senior data scientist · Feb 2024 to Jan 2026</p>
+                    <h1>Climate pipelines at Raincoat, a parametric insurtech.</h1>
                 </div>
-
-                <p class="cs-changes__note">
-                    <em>
-                        What didn't change: the team kept shipping reliably on the perils
-                        that were already in production. No regression on Hurricane Wind or
-                        Earthquake during the period.
-                    </em>
-                </p>
-            </div>
-        </section>
-
-        <!-- SECTION 5 — What I Took With Me -->
-        <section class="cs-section cs-section--alt" aria-labelledby="took-title">
-            <div class="cs-prose">
-                <h2 id="took-title">What I Took With Me</h2>
-                <p>
-                    Two years of climate pipelines for parametric insurance distilled into
-                    5 lessons: what works, what fails, and what I'd do differently next
-                    time. I wrote them up in a free PDF: 5 lessons + 12-point production
-                    readiness checklist.
-                </p>
-                <p>
-                    If you're running a parametric insurance product or a climate risk
-                    platform, that's probably the most concrete thing I can share with you
-                    publicly.
-                </p>
-
-                <a href={`${base}resources/reality-check`} class="cs-resource">
-                    <span class="cs-resource__icon" aria-hidden="true">📄</span>
-                    <span class="cs-resource__body">
-                        <span class="cs-resource__title">The Reality Check</span>
-                        <span class="cs-resource__sub">5 lessons + 12-point checklist · Free PDF</span>
-                    </span>
-                    <span class="cs-resource__arrow" aria-hidden="true">→</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- SECTION 6 — How We Worked -->
-        <section class="cs-section" aria-labelledby="how-title">
-            <div class="cs-prose">
-                <h2 id="how-title">How We Worked</h2>
-                <p>
-                    I operated as a fully embedded senior data scientist within Raincoat's
-                    remote team for nearly 2 years. The engagement model was time-and-materials
-                    with weekly check-ins, shared GitHub repositories, and direct Slack
-                    communication with the technical leadership and risk team.
-                </p>
-                <p>
-                    Work was organized project by project, with clear deliverables and direct
-                    communication between the dev and science teams. No fixed sprint cadence;
-                    the rhythm followed the work, not the calendar.
-                </p>
-                <p>
-                    Timezone overlap (EU mornings / US East Coast / LatAm afternoons) enabled
-                    real-time collaboration without blocking either side.
-                </p>
-            </div>
-        </section>
-
-        <!-- SECTION 7 — Tech Stack -->
-        <section class="cs-section cs-section--alt" aria-labelledby="stack-title">
-            <div class="cs-prose">
-                <h2 id="stack-title">Tech Stack</h2>
-                <dl class="cs-stack">
-                    <div class="cs-stack__row">
-                        <dt>Climate data</dt>
-                        <dd>CHIRPS · IMERG · ERA5-Land · Copernicus CDS · WEkEO · NetCDF · Xarray</dd>
-                    </div>
-                    <div class="cs-stack__row">
-                        <dt>Engineering</dt>
-                        <dd>Python · Pandas · NumPy · scikit-learn · PostgreSQL · Docker · Kubernetes · CI/CD · Git · GitHub Actions</dd>
-                    </div>
-                    <div class="cs-stack__row">
-                        <dt>Frontend</dt>
-                        <dd>Plotly Dash</dd>
-                    </div>
-                    <div class="cs-stack__row">
-                        <dt>Methods</dt>
-                        <dd>Time-series analysis · Calibration · Threshold modeling · Anomaly detection · Geospatial aggregation</dd>
-                    </div>
+                <dl class="fields cs-fields">
+                    <dt>Client</dt><dd>Raincoat LLC, parametric insurance for natural catastrophes</dd>
+                    <dt>Markets</dt><dd>LatAm, the Caribbean, and Africa</dd>
+                    <dt>Role</dt><dd>Satellite and reanalysis data layer, new perils, dashboards</dd>
+                    <dt>Length</dt><dd>2 years, remote</dd>
                 </dl>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SECTION 8 — Final CTA -->
-        <section class="cs-cta" aria-labelledby="cta-title">
-            <div class="cs-cta__inner">
-                <h2 id="cta-title">Have a Similar Challenge?</h2>
-                <p class="cs-cta__intro">
-                    I help parametric insurers and climate risk platforms ship production
-                    climate pipelines without recruiting in-house. If your team is hitting one
-                    of the ceilings Raincoat hit (adding geographies, adding perils, or
-                    modernizing a monolithic codebase), let's talk.
-                </p>
-                <div class="cs-cta__buttons">
-                    <a
-                        class="cs-cta__primary"
-                        data-umami-event="book-call-case-study"
-                        href="https://calendly.com/skaraz_data/15-minute-meeting"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >Book a 15-min Discovery Call <span aria-hidden="true">→</span></a>
-                    <a
-                        class="cs-cta__secondary"
-                        href="https://www.linkedin.com/in/stephane-karasiewicz/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >Or DM <em>"reality"</em> on LinkedIn for the free Reality Check PDF</a>
-                </div>
+    <section class="section">
+        <div class="wrap two">
+            <div class="prose">
+                <p class="label label--index">The client</p>
+                <p>Raincoat builds parametric insurance products for natural catastrophe risks: policies that pay out automatically when predefined climate or weather thresholds are triggered, across emerging markets in LatAm, the Caribbean and beyond.</p>
+                <p>When I joined in February 2024, the company had already shipped three perils to production: Precipitation, Hurricane Wind and Earthquake, with Drought in early development. The codebase had grown peril by peril, and coverage was concentrated in the Caribbean and Colombia.</p>
             </div>
-        </section>
+            <div class="prose">
+                <p class="label label--index">The brief</p>
+                <p><strong>Peril ceiling.</strong> Sales conversations kept surfacing needs the existing perils did not cover: drought intensity, agricultural water stress, heat. New perils took months, because each one lived in its own block of code.</p>
+                <p><strong>Geographic ceiling.</strong> The team was extending from the Caribbean and Colombia toward the rest of South America and Africa. Adding a country was a config change; the real cost was how much data the system processed per client.</p>
+                <p>My role was not to refactor the system. It was to plug in as a senior climate data scientist, extend coverage, ship new perils, and start showing what a more efficient architecture could look like.</p>
+            </div>
+        </div>
+    </section>
 
-    </div>
-</BaseLayout>
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal"><p class="label label--index">What I contributed</p><h2>Data acquisition, two new perils, three dashboards.</h2></div>
+            <div class="grid cols-2">
+                <div class="card reveal" style="--i:0"><p class="label label--trigger">Data acquisition</p><h3>Every peril except Hurricane Wind</h3><p class="muted">Ingestion logic for CHIRPS, ERA5-Land, IMERG, Copernicus CDS and WEkEO, with automated refresh cycles and outputs that downstream pipelines could rely on. I also generated country-level maps for the sales team, which they used before contracts were signed.</p></div>
+                <div class="card reveal" style="--i:1"><p class="label label--trigger">New perils</p><h3>Water Balance to production, Heat Stress ready</h3><p class="muted">Water Balance was adapted from the Precipitation pipeline and shipped with CI/CD and Docker on Kubernetes. Heat Stress turned a research script into a production-ready pipeline; it was ready at contract end but not deployed during my time.</p></div>
+                <div class="card reveal" style="--i:2"><p class="label label--trigger">Dashboards</p><h3>Three Plotly Dash tools used daily</h3><p class="muted">Precipitation, Water Balance and Drought, used every day by the risk and underwriting teams. They were the interface between climate models and underwriting decisions.</p></div>
+                <div class="card reveal" style="--i:3"><p class="label label--trigger">Maintenance</p><h3>Drought from early stage to stable</h3><p class="muted">I maintained Precipitation and Drought for two years: calibration checks, geographic extensions, dataset updates. Drought became a stable peril in production across all target countries.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal"><p class="label label--index">What changed in two years</p><h2>Same team size, measurably wider coverage.</h2></div>
+            <div class="table-wrap reveal">
+                <table class="data">
+                    <thead><tr><th></th><th>When I joined · Feb 2024</th><th>When I left · Jan 2026</th></tr></thead>
+                    <tbody>{changes.map(c => <tr><td><strong>{c[0]}</strong></td><td>{c[1]}</td><td>{c[2]}</td></tr>)}</tbody>
+                </table>
+            </div>
+            <p class="muted small note">What didn’t change: the perils already in production kept shipping reliably. No regression on Hurricane Wind or Earthquake during the period.</p>
+        </div>
+    </section>
+
+    <section class="section panel on-panel">
+        <div class="wrap insight">
+            <p class="label label--trigger">Key insight · the unfinished part</p>
+            <h2>Five clients in one country meant five times the same downloads.</h2>
+            <p class="lede" style="color:var(--panel-muted)">The architecture was monolithic per client and peril, so identical CHIRPS downloads and calibration runs were repeated for every client. Toward the end of my contract I sketched the alternative: a shared data pool per geography, computed once and refreshed on schedule, wrapped in reusable modules with standard inputs and outputs. New clients in covered geographies become near free to onboard, and compute scales with geographies, not clients.</p>
+            <p style="color:var(--panel-muted)">I did not implement that refactor; it would have been a multi-month engagement of its own, out of scope for my contract.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap two">
+            <div class="prose">
+                <p class="label label--index">How we worked</p>
+                <p>Fully embedded in Raincoat’s remote team, time and materials, with weekly check-ins, shared repositories and direct contact with technical leadership and the risk team. Work ran project by project. The overlap between European mornings and American afternoons allowed real-time work without blocking either side.</p>
+            </div>
+            <div>
+                <p class="label label--index">Stack</p>
+                <dl class="fields" style="margin-top:14px">{stack.map(s => <><dt>{s[0]}</dt><dd>{s[1]}</dd></>)}</dl>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap cta-row">
+            <div class="stack" style="--stack:0.8rem">
+                <h2>Hitting the same ceilings?</h2>
+                <p class="lede">Adding geographies, adding perils, or getting a trigger checked before it pays. Fifteen minutes is enough to see whether I can help.</p>
+            </div>
+            <div class="row">
+                <a class="btn" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer" data-umami-event="book-call-case-study">Book a 15-minute call <span class="arrow" aria-hidden="true">→</span></a>
+                <a class="btn btn--ghost" href="/resources/reality-check">Free Reality Check PDF</a>
+            </div>
+        </div>
+    </section>
+</Site>
 
 <style>
-    /* =========================================================
-       /projects/case-study-raincoat — page wrapper
-       Palette + rhythm mirrors /about and /resources/reality-check.
-       ========================================================= */
-    .cs-page {
-        background: #ffffff;
-        color: #0f1b2c;
-    }
-
-    /* =========================================================
-       HERO
-       ========================================================= */
-    .cs-hero {
-        background: #ffffff;
-        padding: 6rem 2rem 4.5rem;
-    }
-
-    .cs-hero__inner {
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-
-    .cs-backlink {
-        display: inline-block;
-        font-size: 0.92rem;
-        color: #4a5a70;
-        text-decoration: none;
-        margin-bottom: 2rem;
-        transition: color 0.2s;
-    }
-
-    .cs-backlink:hover {
-        color: #d85a30;
-    }
-
-    .cs-hero__label {
-        font-family: 'Outfit', sans-serif;
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #d85a30;
-        margin: 0 0 0.9rem;
-    }
-
-    .cs-hero__title {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(2.4rem, 5vw, 3.6rem);
-        font-weight: 400;
-        line-height: 1.15;
-        letter-spacing: -0.02em;
-        color: #042c53;
-        margin: 0 0 1rem;
-        max-width: 900px;
-    }
-
-    .cs-hero__subtitle {
-        font-size: 1.1rem;
-        line-height: 1.55;
-        color: #4a5a70;
-        margin: 0;
-        max-width: 720px;
-    }
-
-    @media (max-width: 640px) {
-        .cs-hero {
-            padding: 3.5rem 1.25rem 3rem;
-        }
-        .cs-backlink {
-            margin-bottom: 1.5rem;
-        }
-    }
-
-    /* =========================================================
-       SHARED SECTIONS
-       ========================================================= */
-    .cs-section {
-        background: #ffffff;
-        padding: 5.5rem 2rem;
-    }
-
-    .cs-section--alt {
-        background: #f7f8fa;
-    }
-
-    .cs-prose {
-        max-width: 720px;
-        margin: 0 auto;
-    }
-
-    .cs-section h2 {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(1.85rem, 3.6vw, 2.6rem);
-        font-weight: 400;
-        line-height: 1.2;
-        letter-spacing: -0.01em;
-        color: #042c53;
-        margin: 0 0 1.75rem;
-    }
-
-    .cs-prose > p {
-        font-size: 1.05rem;
-        line-height: 1.75;
-        color: #4a5a70;
-        margin: 0 0 1.25rem;
-    }
-
-    .cs-prose > p:last-child {
-        margin-bottom: 0;
-    }
-
-    .cs-prose strong {
-        color: #042c53;
-        font-weight: 600;
-    }
-
-    @media (max-width: 640px) {
-        .cs-section {
-            padding: 3.5rem 1.25rem;
-        }
-        .cs-prose > p {
-            font-size: 1rem;
-        }
-    }
-
-    /* =========================================================
-       SECTION 2 — The Brief (ceilings)
-       ========================================================= */
-    .cs-ceiling {
-        margin: 0 0 1.5rem;
-    }
-
-    .cs-ceiling h3 {
-        font-family: 'Outfit', sans-serif;
-        font-size: 1.1rem;
-        font-weight: 600;
-        line-height: 1.4;
-        color: #042c53;
-        margin: 0 0 0.5rem;
-    }
-
-    .cs-ceiling p {
-        font-size: 1.02rem;
-        line-height: 1.7;
-        color: #4a5a70;
-        margin: 0;
-    }
-
-    /* =========================================================
-       SECTION 3 — What I Contributed
-       ========================================================= */
-    .cs-contrib {
-        margin: 0 0 2.25rem;
-    }
-
-    .cs-contrib h3 {
-        font-family: 'Outfit', sans-serif;
-        font-size: 1.2rem;
-        font-weight: 700;
-        line-height: 1.35;
-        color: #042c53;
-        margin: 0 0 0.75rem;
-    }
-
-    .cs-contrib p {
-        font-size: 1.02rem;
-        line-height: 1.7;
-        color: #4a5a70;
-        margin: 0 0 0.9rem;
-    }
-
-    .cs-contrib p:last-child {
-        margin-bottom: 0;
-    }
-
-    .cs-contrib strong {
-        color: #042c53;
-        font-weight: 600;
-    }
-
-    /* KEY INSIGHT — the modular conversation block */
-    .cs-insight {
-        margin: 2.75rem 0 0;
-        padding: 2.25rem 2.25rem 2rem;
-        background: #FBF1ED;
-        border-left: 4px solid #d85a30;
-        border-radius: 0 8px 8px 0;
-    }
-
-    .cs-insight__label {
-        font-family: 'Outfit', sans-serif;
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #d85a30;
-        margin: 0 0 0.6rem;
-    }
-
-    .cs-insight__title {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(1.45rem, 2.6vw, 1.7rem);
-        font-weight: 400;
-        line-height: 1.25;
-        letter-spacing: -0.005em;
-        color: #042c53;
-        margin: 0 0 1.1rem;
-    }
-
-    .cs-insight p {
-        font-family: 'Outfit', sans-serif;
-        font-size: 1.04rem;
-        line-height: 1.7;
-        color: #042c53;
-        margin: 0 0 1rem;
-    }
-
-    .cs-insight p:last-child {
-        margin-bottom: 0;
-    }
-
-    @media (max-width: 640px) {
-        .cs-insight {
-            padding: 1.5rem 1.4rem 1.4rem;
-        }
-        .cs-insight p {
-            font-size: 0.98rem;
-        }
-    }
-
-    /* =========================================================
-       SECTION 4 — What Changed (table + mobile cards)
-       ========================================================= */
-    .cs-changes {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 1.25rem 0 1.5rem;
-        font-size: 1rem;
-        line-height: 1.6;
-        border: 1px solid rgba(216, 90, 48, 0.18);
-        border-radius: 6px;
-        overflow: hidden;
-    }
-
-    .cs-changes thead th {
-        background: #042c53;
-        color: #ffffff;
-        font-family: 'Outfit', sans-serif;
-        font-weight: 600;
-        font-size: 0.95rem;
-        text-align: left;
-        padding: 1rem 1.25rem;
-    }
-
-    .cs-changes tbody td {
-        padding: 1rem 1.25rem;
-        color: #4a5a70;
-        vertical-align: top;
-        border-top: 1px solid rgba(216, 90, 48, 0.14);
-    }
-
-    .cs-changes tbody td:first-child {
-        background: #f7f8fa;
-    }
-
-    .cs-changes tbody td:last-child {
-        background: #FBF1ED;
-        color: #042c53;
-    }
-
-    .cs-changes-cards {
-        display: none;
-    }
-
-    @media (max-width: 720px) {
-        .cs-changes {
-            display: none;
-        }
-        .cs-changes-cards {
-            display: block;
-            margin: 1.25rem 0 1.5rem;
-        }
-        .cs-changes-card {
-            padding: 1.25rem 1.4rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-        }
-        .cs-changes-card--before {
-            background: #f7f8fa;
-            border-left: 4px solid #b0bcc8;
-        }
-        .cs-changes-card--after {
-            background: #FBF1ED;
-            border-left: 4px solid #d85a30;
-        }
-        .cs-changes-card__label {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin: 0 0 0.75rem !important;
-        }
-        .cs-changes-card--before .cs-changes-card__label {
-            color: #7a8aa0;
-        }
-        .cs-changes-card--after .cs-changes-card__label {
-            color: #d85a30;
-        }
-        .cs-changes-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .cs-changes-card li {
-            position: relative;
-            padding: 0.35rem 0 0.35rem 1.1rem;
-            font-size: 0.97rem;
-            line-height: 1.55;
-        }
-        .cs-changes-card li::before {
-            content: '·';
-            position: absolute;
-            left: 0.25rem;
-            top: 0.25rem;
-            font-weight: 700;
-        }
-        .cs-changes-card--before li {
-            color: #4a5a70;
-        }
-        .cs-changes-card--after li {
-            color: #042c53;
-        }
-        .cs-changes-card--after li::before {
-            color: #d85a30;
-        }
-    }
-
-    .cs-changes__note {
-        font-size: 0.98rem !important;
-        line-height: 1.65 !important;
-        color: #7a8aa0 !important;
-        margin: 0 !important;
-    }
-
-    .cs-changes__note em {
-        font-style: italic;
-    }
-
-    /* =========================================================
-       SECTION 5 — Reality Check resource card
-       ========================================================= */
-    .cs-resource {
-        display: flex;
-        align-items: center;
-        gap: 1.25rem;
-        margin-top: 1.5rem;
-        padding: 1.5rem 1.75rem;
-        background: #FBF1ED;
-        border-left: 4px solid #d85a30;
-        border-radius: 0 8px 8px 0;
-        text-decoration: none;
-        color: inherit;
-        transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
-    }
-
-    .cs-resource:hover {
-        background: #f8e6dc;
-        transform: translateY(-1px);
-        box-shadow: 0 8px 24px rgba(216, 90, 48, 0.16);
-    }
-
-    .cs-resource__icon {
-        font-size: 1.75rem;
-        line-height: 1;
-        flex-shrink: 0;
-    }
-
-    .cs-resource__body {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-        flex: 1 1 auto;
-        min-width: 0;
-    }
-
-    .cs-resource__title {
-        font-family: 'DM Serif Display', serif;
-        font-size: 1.2rem;
-        line-height: 1.3;
-        color: #042c53;
-    }
-
-    .cs-resource__sub {
-        font-size: 0.92rem;
-        color: #7a8aa0;
-        line-height: 1.4;
-    }
-
-    .cs-resource__arrow {
-        font-size: 1.4rem;
-        color: #d85a30;
-        line-height: 1;
-        flex-shrink: 0;
-        transition: transform 0.2s;
-    }
-
-    .cs-resource:hover .cs-resource__arrow {
-        transform: translateX(3px);
-    }
-
-    @media (max-width: 640px) {
-        .cs-resource {
-            padding: 1.25rem 1.25rem;
-            gap: 0.9rem;
-        }
-        .cs-resource__title {
-            font-size: 1.05rem;
-        }
-        .cs-resource__icon {
-            font-size: 1.4rem;
-        }
-    }
-
-    /* =========================================================
-       SECTION 7 — Tech Stack
-       ========================================================= */
-    .cs-stack {
-        margin: 0;
-    }
-
-    .cs-stack__row {
-        padding: 0.85rem 0;
-        border-bottom: 1px solid rgba(15, 27, 44, 0.08);
-    }
-
-    .cs-stack__row:first-child {
-        padding-top: 0;
-    }
-
-    .cs-stack__row:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-    }
-
-    .cs-stack dt {
-        font-family: 'Outfit', sans-serif;
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: #042c53;
-        margin: 0 0 0.3rem;
-    }
-
-    .cs-stack dd {
-        font-size: 0.98rem;
-        line-height: 1.6;
-        color: #4a5a70;
-        margin: 0;
-    }
-
-    /* =========================================================
-       SECTION 8 — Final CTA (mirrors /about navy block)
-       ========================================================= */
-    .cs-cta {
-        background: #042c53;
-        color: #ffffff;
-        padding: 6rem 2rem;
-    }
-
-    .cs-cta__inner {
-        max-width: 720px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .cs-cta h2 {
-        font-family: 'DM Serif Display', serif;
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 400;
-        line-height: 1.15;
-        letter-spacing: -0.02em;
-        color: #ffffff;
-        margin: 0 0 1rem;
-    }
-
-    .cs-cta__intro {
-        font-size: 1.05rem;
-        line-height: 1.65;
-        color: rgba(255, 255, 255, 0.82);
-        margin: 0 auto 2.25rem;
-        max-width: 620px;
-    }
-
-    .cs-cta__buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.1rem;
-    }
-
-    .cs-cta__primary {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.9rem 1.75rem;
-        font-family: inherit;
-        font-size: 0.98rem;
-        font-weight: 500;
-        line-height: 1.3;
-        color: #ffffff;
-        background: #d85a30;
-        border: 1.5px solid #d85a30;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: background-color 0.2s, border-color 0.2s, transform 0.15s,
-            box-shadow 0.2s;
-        box-shadow: 0 1px 2px rgba(216, 90, 48, 0.18);
-    }
-
-    .cs-cta__primary:hover {
-        background: #b9491f;
-        border-color: #b9491f;
-        transform: translateY(-1px);
-        box-shadow: 0 6px 18px rgba(216, 90, 48, 0.32);
-    }
-
-    .cs-cta__primary:active {
-        transform: translateY(0);
-        box-shadow: 0 1px 2px rgba(216, 90, 48, 0.18);
-    }
-
-    .cs-cta__secondary {
-        font-size: 0.95rem;
-        color: rgba(255, 255, 255, 0.7);
-        text-decoration: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-        padding-bottom: 2px;
-        transition: color 0.2s, border-color 0.2s;
-    }
-
-    .cs-cta__secondary em {
-        font-style: italic;
-        color: #f2b6a0;
-    }
-
-    .cs-cta__secondary:hover {
-        color: #f2b6a0;
-        border-color: #d85a30;
-    }
-
-    .cs-cta__secondary:hover em {
-        color: #ffffff;
-    }
-
-    @media (max-width: 640px) {
-        .cs-cta {
-            padding: 4rem 1.25rem;
-        }
-        .cs-cta__secondary {
-            font-size: 0.9rem;
-        }
-    }
+    .cs-head { padding-block: 40px clamp(48px, 6vw, 80px); }
+    .back { display: inline-block; margin-bottom: 36px; color: var(--panel-muted); text-decoration: none; font-size: 0.875rem; }
+    .cs-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: end; }
+    .cs-copy { display: grid; gap: 18px; }
+    .cs-head h1 { font-size: clamp(2rem, 1.1rem + 2.8vw, 3.25rem); }
+    .cs-fields { border-top-color: var(--panel-line); }
+    .cs-fields dt, .cs-fields dd { border-bottom-color: var(--panel-line); }
+    .cs-fields dt { color: var(--panel-muted); }
+    .cs-fields dd { color: var(--panel-fg); }
+    .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 5vw, 64px); }
+    .two > * { min-width: 0; }
+    @media (max-width: 900px) { .cs-grid, .two { grid-template-columns: minmax(0, 1fr); } }
+    .card { display: grid; gap: 10px; align-content: start; }
+    .note { margin-top: 18px; }
+    .insight { display: grid; gap: 18px; max-width: 900px; }
+    .cta-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 28px; }
+    .row { display: flex; flex-wrap: wrap; gap: 12px; }
 </style>

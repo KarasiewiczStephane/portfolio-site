@@ -1,0 +1,116 @@
+---
+import Site from '../../layouts/Site.astro';
+import PageHead from '../../components/site/PageHead.astro';
+import PipelineFlow from '../../components/site/PipelineFlow.astro';
+import TriggerChart from '../../components/site/TriggerChart.astro';
+import { getPocs } from '../../lib/pocs';
+const mayotte = getPocs()[1];
+---
+
+<Site
+    title="Agent de calcul pour l’assurance paramétrique · Skaraz Data"
+    description="Agent de calcul indépendant pour l’assurance paramétrique : indice calculé à partir de données nommées, déclencheur testé, rapport de paiement, piste d’audit. Agent principal ou de vérification."
+    lang="fr"
+    alt="/calculation-agent"
+>
+    <PageHead
+        lang="fr"
+        label="Service · agent de calcul"
+        title="Je calcule l’indice, je teste le déclencheur et je signe le rapport de paiement."
+        lede="L’agent de calcul transforme des données nommées en décision de paiement. Les contrats parlent d’agent de calcul, de tiers indépendant, de services de règlement ou de vérification du déclencheur. C’est le même métier."
+    >
+        <a slot="cta" class="btn btn--ghost" href="/pricing">Voir les tarifs</a>
+    </PageHead>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Deux rôles</p>
+                <h2>Agent principal, ou celui qui le vérifie.</h2>
+            </div>
+            <div class="grid cols-2">
+                <div class="card role reveal" style="--i:0">
+                    <p class="label label--trigger">Agent principal</p>
+                    <h3>Mon résultat est celui sur lequel le contrat paie.</h3>
+                    <ul class="ticks">
+                        <li>Suivi pendant la saison de risque, avec la source de secours convenue à l’avance</li>
+                        <li>Calcul de l’événement et rapport de paiement dans le délai du contrat</li>
+                        <li>Deux calculs d’événement par an inclus</li>
+                        <li>Rapport de fin de saison et piste d’audit complète</li>
+                    </ul>
+                    <p class="price num">à partir de 12 000 € / an par programme · mise en place à partir de 8 000 €</p>
+                </div>
+                <div class="card role reveal" style="--i:1">
+                    <p class="label label--trigger">Agent de vérification ou de secours</p>
+                    <h3>Je refais le calcul et je vous dis s’il tient.</h3>
+                    <ul class="ticks">
+                        <li>Calcul parallèle à partir des mêmes données, codé indépendamment</li>
+                        <li>Rapprochement écrit si les deux résultats diffèrent</li>
+                        <li>Prêt à prendre le relais si le calculateur principal fait défaut</li>
+                        <li>Adapté aux bailleurs, réassureurs et comités de programme</li>
+                    </ul>
+                    <p class="price num">à partir de 6 000 € / an par programme</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Déroulé</p>
+                <h2>Les mêmes six étapes pour chaque programme.</h2>
+            </div>
+            <PipelineFlow lang="fr" />
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap two">
+            <div class="stack reveal" style="--stack:1.1rem">
+                <p class="label label--index">Ce que vous recevez après un événement</p>
+                <h2>Un rapport de paiement que chacun peut relancer.</h2>
+                <p class="lede">Une page par événement, avec ses preuves. Exemple ci-dessous avec le backtest de Mayotte.</p>
+                <dl class="fields">
+                    <dt>Programme</dt><dd>Récif barrière de Mayotte, couverture blanchissement (preuve de concept)</dd>
+                    <dt>Indice</dt><dd>Degree Heating Weeks, maximum par secteur sur la saison</dd>
+                    <dt>Source</dt><dd>NOAA Coral Reef Watch 5 km, CoralTemp</dd>
+                    <dt>Barème</dt><dd class="num">3,0 / 6,0 / 9,0 °C-semaines → 25 / 60 / 100 %</dd>
+                    <dt>Résultat</dt><dd>Barrière Est, 2024 : palier 3, plafond versé</dd>
+                    <dt>Backtest</dt><dd>2010, 2016 et 2024 détectés, les trois années de blanchissement documentées, sans faux positif sur 16 saisons</dd>
+                    <dt>Preuves</dt><dd>Empreintes des fichiers d’entrée, version du code, journal d’exécution</dd>
+                </dl>
+            </div>
+            <div class="reveal" style="--i:1">
+                <TriggerChart series={mayotte.series} height={320} showCaption={false} lang="fr" />
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Questions fréquentes</p>
+                <h2>Et si vous n’êtes pas disponible le jour du paiement ?</h2>
+            </div>
+            <div class="grid cols-2 faq">
+                <div class="reveal" style="--i:0"><h3>Continuité</h3><p class="muted">Vous disposez dès le premier jour du code, des empreintes des données et d’une procédure écrite. Tout analyste qualifié peut relancer un calcul. Pour un rôle d’agent principal, le dispositif de secours est fixé dans le contrat avant la saison.</p></div>
+                <div class="reveal" style="--i:1"><h3>Indépendance</h3><p class="muted">Je n’émets aucune couverture, ne porte aucune capacité de risque et ne touche aucune rémunération liée au montant payé. Si j’ai participé à la conception d’un produit, je le dis avant d’en devenir l’agent.</p></div>
+                <div class="reveal" style="--i:2"><h3>Droits sur les données</h3><p class="muted">Les sources publiques comme ERA5, CHIRPS ou NOAA autorisent cet usage. Pour les données commerciales, la licence est vérifiée avant le contrat, pas après l’événement.</p></div>
+                <div class="reveal" style="--i:3"><h3>Ce que ce n’est pas</h3><p class="muted">Ni une validation actuarielle, ni une tarification. Je calcule et documente l’indice ; la tarification reste chez vos actuaires et souscripteurs.</p></div>
+            </div>
+        </div>
+    </section>
+</Site>
+
+<style>
+    .role { display: grid; gap: 14px; align-content: start; }
+    .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .ticks li { position: relative; padding-left: 22px; color: var(--ink-2); }
+    .ticks li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 12px; height: 1.5px; background: var(--index); }
+    .price { padding-top: 14px; border-top: 1px dashed var(--line-strong); font-size: 0.875rem; font-weight: 500; }
+    .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 64px); align-items: center; }
+    .two > * { min-width: 0; }
+    @media (max-width: 900px) { .two { grid-template-columns: minmax(0, 1fr); } }
+    .faq > div { display: grid; gap: 10px; align-content: start; }
+</style>

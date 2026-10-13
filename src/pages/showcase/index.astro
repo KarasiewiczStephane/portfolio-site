@@ -1,0 +1,56 @@
+---
+import Site from '../../layouts/Site.astro';
+import PageHead from '../../components/site/PageHead.astro';
+import PocCard from '../../components/site/PocCard.astro';
+import { getPocs } from '../../lib/pocs';
+const pocs = getPocs();
+---
+
+<Site
+    title="Showcase · five parametric trigger calculations · Skaraz Data"
+    description="Five calculation-agent proofs of concept on public data: coral bleaching in La Réunion and Mayotte, Auckland pluvial flood, New Zealand cyclone wind, Bangladesh crop drought."
+>
+    <PageHead
+        label="Showcase"
+        title="Five calculations, run end to end on public data."
+        lede="Each one goes from raw data to a payout report, and each report says where its method stops. They are proofs of concept, not live products."
+    >
+        <a slot="cta" class="btn btn--ghost" href="/constellation/">Open the live map</a>
+    </PageHead>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="grid cols-3">
+                {pocs.map((p, i) => <div class="reveal cell" style={`--i:${i}`}><PocCard poc={p} /></div>)}
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">At a glance</p>
+                <h2>What each one shows, and where it stops.</h2>
+            </div>
+            <div class="table-wrap reveal">
+                <table class="data">
+                    <thead><tr><th>Calculation</th><th>Peril</th><th>Data</th><th>Backtest against losses</th></tr></thead>
+                    <tbody>
+                        {pocs.map(p => (
+                            <tr>
+                                <td><a class="link" href={`/showcase/${p.slug}`}>{p.place}</a></td>
+                                <td>{p.perilLabel}</td>
+                                <td>{p.source}</td>
+                                <td>{p.backtest.status === 'scored' ? <span class="chip">scored</span> : <span class="chip chip--plain">not scored</span>} <span class="muted small">{p.backtest.status === 'scored' ? p.metrics[0].value + ' hit rate' : 'no loss series'}</span></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</Site>
+
+<style>
+    .cell { display: grid; }
+</style>

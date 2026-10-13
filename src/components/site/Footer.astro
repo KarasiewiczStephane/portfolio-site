@@ -1,0 +1,64 @@
+---
+interface Props { lang?: 'en' | 'fr' }
+const { lang = 'en' } = Astro.props;
+const fr = lang === 'fr';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer panel">
+    <div class="wrap">
+        <div class="top">
+            <div class="pitch">
+                <p class="label">Skaraz Data</p>
+                <p class="big">{fr
+                    ? 'Agent de calcul indépendant et ingénieur données climat pour l’assurance paramétrique.'
+                    : 'Independent calculation agent and climate data engineer for parametric insurance.'}</p>
+                <p class="muted small">{fr ? 'Stéphane Karasiewicz · Hauts-de-France · missions à distance, FR et EN' : 'Stéphane Karasiewicz · Hauts-de-France, France · remote, in English and French'}</p>
+            </div>
+            <div class="cols">
+                <div>
+                    <p class="label">{fr ? 'Services' : 'Services'}</p>
+                    <a href={fr ? '/fr/agent-de-calcul' : '/calculation-agent'}>{fr ? 'Agent de calcul' : 'Calculation agent'}</a>
+                    <a href="/trigger-audit">{fr ? 'Audit de déclencheur' : 'Trigger audit'}</a>
+                    <a href="/pipelines">{fr ? 'Pipelines de données' : 'Data pipelines'}</a>
+                    <a href="/data">{fr ? 'Données climat' : 'Climate data'}</a>
+                    <a href="/pricing">{fr ? 'Tarifs' : 'Pricing'}</a>
+                </div>
+                <div>
+                    <p class="label">{fr ? 'Preuves' : 'Proof'}</p>
+                    <a href="/showcase">{fr ? 'Démonstrations' : 'Showcase'}</a>
+                    <a href="/method">{fr ? 'Méthode' : 'Method'}</a>
+                    <a href="/projects/case-study-raincoat">Raincoat</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/about">{fr ? 'À propos' : 'About'}</a>
+                </div>
+                <div>
+                    <p class="label">Contact</p>
+                    <a href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener" data-umami-event="book-call-footer">{fr ? 'Appel de 15 min' : '15-min call'}</a>
+                    <a href="mailto:skaraz.science@gmail.com">skaraz.science@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/stephane-karasiewicz" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://github.com/KarasiewiczStephane" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.researchgate.net/profile/Stephane_Karasiewicz" target="_blank" rel="noopener">ResearchGate</a>
+                </div>
+            </div>
+        </div>
+        <div class="base">
+            <span>© {year} Skaraz Data · Stéphane Karasiewicz · {fr ? 'Auto-entrepreneur, France' : 'Sole trader (auto-entrepreneur), France'}</span>
+            <span class="num">{fr ? 'Calculs reproductibles. Méthode publiée.' : 'Reproducible calculations. Published method.'}</span>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .site-footer { padding-block: 72px 32px; margin-top: 0; }
+    .top { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr); gap: 48px; }
+    .pitch { display: grid; gap: 14px; align-content: start; }
+    .big { font: 700 var(--step-2)/1.2 var(--display); letter-spacing: -0.015em; color: var(--panel-fg); max-width: 26ch; }
+    .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .cols > div { display: grid; gap: 10px; align-content: start; min-width: 0; }
+    .cols a { color: var(--panel-fg); text-decoration: none; font-size: 0.9375rem; overflow-wrap: anywhere; opacity: 0.86; transition: opacity 150ms ease; }
+    @media (hover: hover) and (pointer: fine) { .cols a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; } }
+    .base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--panel-line); color: var(--panel-muted); font-size: 0.8125rem; }
+    @media (max-width: 860px) { .top { grid-template-columns: minmax(0, 1fr); } }
+    @media (max-width: 560px) { .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
