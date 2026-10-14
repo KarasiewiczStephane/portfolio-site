@@ -49,16 +49,16 @@
   },
   "content_hashes": {
     "aggregation": "d55848ad63385d72",
-    "basis_risk": "8686874e200535b0",
-    "calibrated_thresholds": "bf366b375c0b558c",
-    "case": "60f8e7871138fee2",
+    "basis_risk": "3b0fc77ad26efc28",
+    "calibrated_thresholds": "3e71df433b9d5b87",
+    "case": "fc44e9d3df548ee1",
     "choropleth": "28a66f450d4175a5",
-    "district_timeseries": "d3d323c0be239656",
+    "district_timeseries": "3977243cc0ea016e",
     "hazard_index": "0990b356bb36b6cb",
     "intraseason": "c43370273dc6dd6b",
-    "payouts": "9be5ea20ae7c8da6",
+    "payouts": "bf011d4d00d93068",
     "raw_hazard": "1605332d422678fe",
-    "trigger_events": "ee05ccb3581edee3"
+    "trigger_events": "583faac154fde394"
   },
   "raster": {
     "hazard_index": {
@@ -130,7 +130,7 @@
       2024
     ],
     "limit_eur": 250000.0,
-    "total_payout_eur": 2175000.0,
+    "total_payout_eur": 1712500.0,
     "n_sectors_triggered": 2,
     "basis_risk": {
       "spatial": {
@@ -140,12 +140,11 @@
       },
       "prediction": {
         "n_years": 16,
-        "hit_rate": 1.0,
-        "false_positive_rate": 0.42857142857142855,
-        "basis_risk_gap": 0.195,
+        "hit_rate": 0.8333333333333334,
+        "false_positive_rate": 0.2,
+        "basis_risk_gap": 0.202,
         "years_paid": [
           2009,
-          2011,
           2014,
           2016,
           2017,
@@ -154,8 +153,12 @@
           2021
         ],
         "years_damaging": [
+          2014,
+          2015,
           2016,
-          2019
+          2017,
+          2019,
+          2021
         ]
       }
     }
