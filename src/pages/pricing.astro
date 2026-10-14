@@ -1,36 +1,38 @@
 ---
 import Site from '../layouts/Site.astro';
 import PageHead from '../components/site/PageHead.astro';
+import OfferTable from '../components/site/OfferTable.astro';
 
-const plans = [
-    { t: 'Trigger audit', p: 'EUR 6,000', u: 'fixed, 2 weeks', inc: ['Independent rebuild of the index', 'Backtest over the full record', 'Basis-risk and data-source findings', 'Wording-to-code check', 'Written report, code and walkthrough call'], href: '/trigger-audit', hl: true },
-    { t: 'Verifying agent', p: 'from EUR 6,000', u: 'per year, per programme', inc: ['Shadow calculation each event', 'Written reconciliation if results differ', 'Ready to take over as backup', 'Season-end note'], href: '/calculation-agent' },
-    { t: 'Binding calculation agent', p: 'from EUR 12,000', u: 'per year, per programme', inc: ['Monitoring through the risk season', 'Two event calculations included', 'Payout reports and audit trail', 'Season-end report', 'Onboarding from EUR 8,000, once'], href: '/calculation-agent' },
-];
-const more = [
-    ['Additional event calculation', 'EUR 1,500 to 3,000', 'Beyond the two included, depending on cells and data'],
-    ['Pipeline build', 'EUR 25,000 to 50,000', '8 to 16 weeks, hosted or handed over'],
-    ['Data and upkeep retainer', 'EUR 2,000 to 4,000 / month', '6 to 12 months, curated series, refresh and checks'],
-    ['Day rate (tenders, advisory)', 'EUR 1,000 / day', 'Remote, English or French'],
+const details = [
+    { t: 'Trigger audit, or design and feasibility', p: 'from EUR 6,000', u: 'fixed scope, about two weeks', inc: ['Independent rebuild of the index from the named data', 'Backtest over the full record, against documented losses where they exist', 'Basis-risk and data-source findings', 'Wording-to-code check', 'Written findings and a walkthrough call'], href: '/trigger-audit' },
+    { t: 'Onboarding: one index', p: 'from EUR 10,000', u: 'once, per index', inc: ['Index definition written for the policy wording', 'Pipeline with an input check and a content hash at each stage', 'Backtest and basis-risk read', 'Methodology report'], href: '/method' },
+    { t: 'Pipeline support and independent verification', p: 'from EUR 8,000', u: 'per year, per programme', inc: ['The pipeline runs on your servers', 'I maintain it', 'I check its results against the contract'], href: '/calculation-agent' },
+    { t: 'Calculation agent', p: 'from EUR 12,000', u: 'per year, per programme', inc: ['I run the calculation on my server', 'I issue the event report the payout follows', 'Two event calculations a year included', 'Available about six weeks after signature, set up per contract'], href: '/calculation-agent' },
 ];
 ---
 
 <Site
     title="Pricing · Skaraz Data"
-    description="Published prices for parametric trigger audits, calculation agent roles, pipeline builds and climate data retainers."
+    description="Published prices for an independent calculation agent: trigger audit from EUR 6,000, onboarding one index from EUR 10,000, pipeline support and independent verification from EUR 8,000 a year, calculation agent from EUR 12,000 a year."
 >
     <PageHead
         label="Pricing"
-        title="Published prices, so you can budget before we talk."
-        lede="Prices in euros. Final scope is fixed in writing before any work starts."
+        title="Published prices, so you can budget before the first call."
+        lede="Prices in euros, excluding VAT, shown as a starting point. The final scope and price are fixed in writing before any work starts."
     />
 
     <section class="section">
         <div class="wrap">
-            <div class="grid cols-3 plans">
-                {plans.map((pl, i) => (
-                    <div class:list={['plan', 'reveal', { hl: pl.hl }]} style={`--i:${i}`}>
-                        {pl.hl && <span class="chip chip--trigger badge">Where most clients start</span>}
+            <OfferTable />
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal"><p class="label label--index">What each line includes</p><h2>From the first audit to the run service.</h2></div>
+            <div class="grid cols-2 plans">
+                {details.map((pl, i) => (
+                    <div class="plan reveal" style={`--i:${i}`}>
                         <h3>{pl.t}</h3>
                         <p class="amount"><span class="num">{pl.p}</span><span class="muted small">{pl.u}</span></p>
                         <ul>{pl.inc.map(x => <li>{x}</li>)}</ul>
@@ -41,29 +43,29 @@ const more = [
         </div>
     </section>
 
-    <section class="section section--tint">
-        <div class="wrap">
-            <div class="section-head reveal"><p class="label label--index">Everything else</p><h2>Builds, data and day rate.</h2></div>
-            <div class="table-wrap reveal">
-                <table class="data">
-                    <thead><tr><th>Line</th><th>Price</th><th>Scope</th></tr></thead>
-                    <tbody>{more.map(r => <tr><td><strong>{r[0]}</strong></td><td class="num">{r[1]}</td><td>{r[2]}</td></tr>)}</tbody>
-                </table>
-            </div>
-            <p class="muted small fine">Fees never depend on whether a trigger fires or on the payout amount. Shipped code carries a 30-day guarantee.</p>
+    <section class="section">
+        <div class="wrap terms">
+            <div class="section-head reveal"><p class="label label--index">Terms</p><h2>How the money works.</h2></div>
+            <dl class="fields reveal">
+                <dt>Deposit</dt><dd>30 to 50% on signature for fixed-price work.</dd>
+                <dt>Exclusivity</dt><dd>Contracts are non-exclusive.</dd>
+                <dt>Payout link</dt><dd>No fee is linked to the payout amount or to whether a trigger fires.</dd>
+                <dt>Scope</dt><dd>Engineering and calculation, not actuarial sign-off.</dd>
+                <dt>Contracting party</dt><dd>Stéphane Karasiewicz EI, trading as Skaraz Data.</dd>
+            </dl>
+            <p><a class="btn" href="/scope" data-umami-event="scope-pricing">Scope an audit <span class="arrow" aria-hidden="true">→</span></a></p>
         </div>
     </section>
 </Site>
 
 <style>
     .plans { align-items: stretch; }
-    .plan { position: relative; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: 16px; padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
-    .plan.hl { border-color: var(--ink); box-shadow: 0 1px 0 var(--ink); }
-    .badge { justify-self: start; }
+    .plan { display: grid; grid-template-rows: auto auto 1fr auto; gap: 16px; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
     .amount { display: grid; gap: 4px; }
-    .amount .num { font: 600 2rem/1 var(--display); letter-spacing: -0.02em; }
+    .amount .num { font: 400 2rem/1 var(--mono); letter-spacing: -0.02em; }
     .plan ul { list-style: none; margin: 0; padding: 16px 0 0; border-top: 1px solid var(--line); display: grid; gap: 10px; align-content: start; }
-    .plan li { position: relative; padding-left: 22px; font-size: 0.9375rem; color: var(--ink-2); }
+    .plan li { position: relative; padding-left: 22px; font-size: 0.9375rem; }
     .plan li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 12px; height: 1.5px; background: var(--index); }
-    .fine { margin-top: 20px; }
+    .terms { display: grid; gap: 28px; max-width: 860px; }
+    .terms .section-head { margin-bottom: 0; }
 </style>

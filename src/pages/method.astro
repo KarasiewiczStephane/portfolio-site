@@ -11,7 +11,7 @@ import PipelineFlow from '../components/site/PipelineFlow.astro';
     <PageHead
         label="Method"
         title="How I compute a trigger, written down so you can check it."
-        lede="A calculation nobody can rerun is a matter of trust, not independence. This is the method behind every number on this site."
+        lede="A calculation nobody can rerun is a matter of trust, not independence. This is the open method behind every number on this site: each report shows its sources, dataset versions and hashes."
         cta={false}
     />
 
@@ -31,7 +31,7 @@ import PipelineFlow from '../components/site/PipelineFlow.astro';
                 <li class="reveal"><span class="num">1</span><div><h3>The wording is the specification.</h3><p class="muted">The code computes what the policy says. Where the wording is ambiguous, I write the ambiguity down and get it resolved before the season, not after an event.</p></div></li>
                 <li class="reveal"><span class="num">2</span><div><h3>One code path for backtest and live.</h3><p class="muted">The index that was backtested is the index that pays. No separate script for production.</p></div></li>
                 <li class="reveal"><span class="num">3</span><div><h3>Every input is checked and hashed.</h3><p class="muted">Coverage, units, gaps and known defects are tested before a value enters the index. The hash ties each figure to the exact file it came from.</p></div></li>
-                <li class="reveal"><span class="num">4</span><div><h3>Fallbacks are agreed in advance.</h3><p class="muted">If the primary source is late or broken, the replacement is already named in the contract.</p></div></li>
+                <li class="reveal"><span class="num">4</span><div><h3>Fallbacks are agreed in advance.</h3><p class="muted">If the primary source is late or broken, the replacement is already named in the contract. Dataset versions are named too: CHIRPS v2 production ends after December 2026, so rainfall indices built now use CHIRPS v3.</p></div></li>
                 <li class="reveal"><span class="num">5</span><div><h3>Thresholds live in the index’s own units.</h3><p class="muted">A tier is “the 1-in-10 event for this cell, as this instrument measures it”, never a claim about the atmosphere.</p></div></li>
                 <li class="reveal"><span class="num">6</span><div><h3>Limits are reported, not hidden.</h3><p class="muted">Where no loss series exists, payout against loss is reported as not scored. Nothing is estimated to fill the gap.</p></div></li>
                 <li class="reveal"><span class="num">7</span><div><h3>A rerun gives the same answer.</h3><p class="muted">Same inputs, same code version, same result. That is the test the audit trail exists to pass.</p></div></li>
@@ -53,6 +53,6 @@ import PipelineFlow from '../components/site/PipelineFlow.astro';
 <style>
     .rl { list-style: none; margin: 0; padding: 0; counter-reset: r; }
     .rl li { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; padding-block: 24px; border-top: 1px solid var(--line); }
-    .rl li > span { font: 600 1.5rem/1 var(--display); color: var(--trigger); }
+    .rl li > span { font: 400 1.5rem/1 var(--mono); color: var(--index); }
     .rl li div { display: grid; gap: 8px; max-width: 70ch; }
 </style>

@@ -45,6 +45,6 @@ For teams running flood model validation pipelines, the practical actions are co
 
 This is the second time in a decade that a Sentinel-1 outage has quietly degraded a piece of insurance infrastructure that nobody had on a risk register. The first was the Sentinel-1B failure itself. The lesson is not that satellite data is fragile. The lesson is that calibration data is infrastructure, and infrastructure outages have multi-year tails even after service is restored.
 
-The teams that treat the SAR record as a versioned, auditable input — with explicit coverage metrics over time — will catch this kind of degradation in real time. The teams that treat it as a black-box feed will discover it the next time a regulator asks why their 2023 model skill numbers look better than they should.
+The teams that treat the SAR record as a versioned, auditable input, with explicit coverage metrics over time, will catch this kind of degradation in real time. The teams that treat it as a black-box feed will discover it the next time a regulator asks why their 2023 model skill numbers look better than they should.
 
-At Skaraz Data, we build calibration and validation pipelines for flood and hazard models, including coverage-aware metrics that explicitly track satellite observation density alongside model skill. If your team is working through what the SAR gap means for your 2026 model release, let's talk.
+At Skaraz Data, I build calibration and validation pipelines for flood and hazard models, including coverage-aware metrics that explicitly track satellite observation density alongside model skill. If your team is working through what the SAR gap means for your 2026 model release, let's talk.

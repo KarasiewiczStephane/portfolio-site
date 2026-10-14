@@ -4,10 +4,14 @@ import TriggerChart from '../components/site/TriggerChart.astro';
 import PipelineFlow from '../components/site/PipelineFlow.astro';
 import Audience from '../components/site/Audience.astro';
 import PocCard from '../components/site/PocCard.astro';
-import { getPocs } from '../lib/pocs';
+import LivingMark from '../components/site/LivingMark.astro';
+import OfferTable from '../components/site/OfferTable.astro';
+import { getPocs, coralMark } from '../lib/pocs';
 
 const pocs = getPocs();
 const hero = pocs[0]; // La Réunion, Saint-Leu
+// Same seasons and cell size as the brochure and the design system example.
+const mark = coralMark('coral_reunion', 'La Réunion', 2.5, 2014, 2019);
 
 const jsonLd = {
     '@context': 'https://schema.org',
@@ -15,8 +19,9 @@ const jsonLd = {
         {
             '@type': 'ProfessionalService',
             name: 'Skaraz Data',
+            legalName: 'Stéphane Karasiewicz EI',
             url: 'https://skarazdata.com',
-            description: 'Independent calculation agent and climate data engineer for parametric insurance.',
+            description: 'Independent calculation agent for parametric insurance. Defines, builds and independently checks the index a parametric policy pays on.',
             areaServed: 'Worldwide',
             address: { '@type': 'PostalAddress', addressRegion: 'Hauts-de-France', addressCountry: 'FR' },
             founder: { '@type': 'Person', name: 'Stéphane Karasiewicz' },
@@ -24,37 +29,37 @@ const jsonLd = {
     ],
 };
 
-const names = ['Calculation agent', 'Settlement services', 'Independent third party', 'Trigger verification', 'Claims verification data', 'Index administration'];
+const names = ['Calculation agent', 'Settlement services', 'Independent third party', 'Trigger verification'];
 
-const services = [
-    { n: '01', t: 'Trigger audit', d: 'A second opinion before you sign or renew: backtest, basis-risk read, data-source review, and a check that the code follows the policy wording.', href: '/trigger-audit', p: 'EUR 6,000 fixed · 2 weeks' },
-    { n: '02', t: 'Calculation agent', d: 'I compute the index from the named data, test it against the trigger, issue the payout report and keep the audit trail. Binding or verifying role.', href: '/calculation-agent', p: 'from EUR 6,000 / year' },
-    { n: '03', t: 'Pipelines', d: 'The same machinery built for your team: hosted by me, or built inside your stack and handed over with tests, docs and runbook.', href: '/pipelines', p: 'EUR 25,000 to 50,000 · 8 to 16 weeks' },
-    { n: '04', t: 'Climate data', d: 'Curated satellite and reanalysis series behind your index, kept current and checked. Sold with a calculation or pipeline contract.', href: '/data', p: 'EUR 2,000 to 4,000 / month' },
+const steps = [
+    { n: '1', k: 'Define', t: 'An index you can write a policy on', d: 'Trigger, data source, fallback and calculation written so they fit the policy wording.' },
+    { n: '2', k: 'Build', t: 'A pipeline on public data', d: 'Input checks and a content hash at every stage, so the calculation can be rerun and checked.' },
+    { n: '3', k: 'Test', t: 'Backtest and basis risk', d: 'Against documented losses where they exist; where no loss record exists, I say so.' },
+    { n: '4', k: 'Calculate', t: 'The event report', d: 'Index value, tier, payout, sources, dataset versions and hashes, on time.' },
 ];
 ---
 
 <Site
     title="Skaraz Data · Independent calculation agent for parametric insurance"
-    description="I compute, check and document the index behind parametric insurance payouts, from satellite and climate data. Independent: no product to sell, no risk on my books."
+    description="Skaraz Data, independent calculation agent. I define, build and independently check the index a parametric policy pays on, from public satellite and reanalysis data. Prices published, from EUR 6,000."
     alt="/fr"
     jsonLd={jsonLd}
 >
     <!-- HERO -->
-    <section class="hero panel on-panel">
+    <section class="hero">
         <div class="wrap">
             <div class="hero-top">
                 <div class="hero-copy">
-                    <p class="label label--trigger">Independent calculation agent · parametric insurance</p>
-                    <h1>The number that decides the payout, computed by someone with no stake in it.</h1>
-                </div>
-                <div class="hero-side">
-                    <p class="lede">I compute, check and document the index behind parametric payouts, from satellite and climate data. I carry no risk and sell no insurance product, so the calculation is the only thing I answer for.</p>
+                    <p class="label">Skaraz Data · independent calculation agent</p>
+                    <h1>The index your policy pays on, <em>calculated</em> by someone with nothing to sell you.</h1>
+                    <p class="lede">I define, build and independently check the index a parametric policy pays on, from public satellite and reanalysis data. Every number traces to a dataset, a version and a hash.</p>
                     <div class="ctas">
-                        <a class="btn" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer" data-umami-event="book-call-hero">Book a 15-minute call <span class="arrow" aria-hidden="true">→</span></a>
+                        <a class="btn" href="/scope" data-umami-event="scope-hero">Start with your trigger <span class="arrow" aria-hidden="true">→</span></a>
                         <a class="btn btn--ghost" href="/showcase">See the calculations</a>
                     </div>
+                    <p class="principal small muted">Stéphane Karasiewicz, principal. Engineering and calculation, not actuarial sign-off.</p>
                 </div>
+                <LivingMark mark={mark} size={176} class="hero-mark" />
             </div>
 
             <div class="hero-chart">
@@ -65,7 +70,7 @@ const services = [
                     <div><span class="label">Backtest</span><span class="num">2009 to 2024</span></div>
                 </div>
                 <TriggerChart series={hero.series} variant="panel" height={300} />
-                <p class="poc-note small">Proof of concept on public data. Hover the chart to read any week. <a href={`/showcase/${hero.slug}`}>Read the full calculation report →</a></p>
+                <p class="poc-note small">Proof of concept on public data, not a live policy. Hover the chart to read any week. <a href={`/showcase/${hero.slug}`}>Read the full calculation report →</a></p>
             </div>
         </div>
     </section>
@@ -73,8 +78,43 @@ const services = [
     <!-- NAMES -->
     <section class="names">
         <div class="wrap names-row">
-            <p class="label">Buyers call this work</p>
+            <p class="label">Contracts call this role</p>
             <ul>{names.map(n => <li>{n}</li>)}</ul>
+        </div>
+    </section>
+
+    <!-- FOUR STEPS -->
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">What I do</p>
+                <h2>Define, build, test, calculate.</h2>
+            </div>
+            <ol class="steps grid cols-4">
+                {steps.map((s, i) => (
+                    <li class="reveal" style={`--i:${i}`}>
+                        <p class="label">{s.n} · {s.k}</p>
+                        <h3>{s.t}</h3>
+                        <p class="muted">{s.d}</p>
+                    </li>
+                ))}
+            </ol>
+        </div>
+    </section>
+
+    <!-- INDEPENDENCE -->
+    <section class="section section--tint">
+        <div class="wrap indep">
+            <div class="section-head reveal">
+                <p class="label label--index">Why independent</p>
+                <h2>Most triggers are calculated by the party that sells the product or carries the risk.</h2>
+            </div>
+            <ul class="indep-list reveal">
+                <li><strong>No risk carried.</strong> Skaraz Data is a calculation and engineering provider, never an insurer or an MGA.</li>
+                <li><strong>Nothing else to sell.</strong> No product, no data resale, no fee linked to the payout amount.</li>
+                <li><strong>Method on the table.</strong> Every report states its sources, versions and limits.</li>
+                <li><strong>Engineering and calculation,</strong> not actuarial sign-off.</li>
+            </ul>
         </div>
     </section>
 
@@ -89,26 +129,16 @@ const services = [
         </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- OFFER -->
     <section class="section section--tint">
-        <div class="wrap">
+        <div class="wrap price-wrap">
             <div class="section-head reveal">
-                <p class="label label--index">Four services, one machinery</p>
-                <h2>From a second opinion to running the calculation every season.</h2>
-                <p class="lede">Most clients start with an audit. The same checked pipeline then becomes the calculation, the hosted service or the handover.</p>
+                <p class="label label--index">Offer</p>
+                <h2>Published prices, so you can budget before the first call.</h2>
+                <p class="lede">Most work starts with a fixed-price audit or a short paid scoping. The run services follow once an index exists.</p>
             </div>
-            <ol class="ladder grid cols-4">
-                {services.map((s, i) => (
-                    <li class="reveal" style={`--i:${i}`}>
-                        <a class="rung" href={s.href}>
-                            <span class="num rn">{s.n}</span>
-                            <h3>{s.t}</h3>
-                            <p>{s.d}</p>
-                            <span class="price num">{s.p}</span>
-                        </a>
-                    </li>
-                ))}
-            </ol>
+            <div class="reveal"><OfferTable /></div>
+            <p><a class="link" href="/pricing">What each line includes <span class="arrow" aria-hidden="true">→</span></a></p>
         </div>
     </section>
 
@@ -117,8 +147,8 @@ const services = [
         <div class="wrap">
             <div class="section-head reveal">
                 <p class="label label--index">Showcase</p>
-                <h2>Five calculations on public data, with their limits written down.</h2>
-                <p class="lede">Each one runs the full chain: data, checks, index, trigger, payout, audit trail. They are proofs of concept, not live products, and every report says where the method stops.</p>
+                <h2>Five calculations on public data, limits named.</h2>
+                <p class="lede">Each one runs the full chain: data, checks, index, trigger, payout, audit trail. They are proofs of concept, not live policies, and every report says where the method stops.</p>
             </div>
             <div class="grid cols-3 pocs">
                 {pocs.map((p, i) => <div class="reveal" style={`--i:${i}`}><PocCard poc={p} /></div>)}
@@ -129,19 +159,32 @@ const services = [
                     <span class="link">Open the map <span class="arrow" aria-hidden="true">→</span></span>
                 </a>
             </div>
+            <p class="small muted note">Rainfall indices: CHIRPS v2 production ends after December 2026; new work uses CHIRPS v3.</p>
         </div>
     </section>
 
-    <!-- METHOD -->
-    <section class="section panel on-panel">
+    <!-- METHOD + CONTINUITY -->
+    <section class="section section--tint">
         <div class="wrap">
             <div class="section-head reveal">
-                <p class="label label--trigger">Method</p>
+                <p class="label label--index">Method</p>
                 <h2>Six steps, the same every time, all of it written down.</h2>
-                <p class="lede" style="color:var(--panel-muted)">No competitor publishes how a trigger is computed or audited. I do, because a calculation nobody can rerun is not independent.</p>
+                <p class="lede">The method is open: every report shows its sources, dataset versions and hashes, so a counterparty can check each step.</p>
             </div>
-            <PipelineFlow variant="panel" />
-            <p class="method-link"><a class="link" href="/method" style="color:var(--panel-index)">Read the full method <span class="arrow" aria-hidden="true">→</span></a></p>
+            <PipelineFlow />
+            <div class="continuity reveal">
+                <div>
+                    <p class="label">Continuity, as it stands today</p>
+                    <h3>What exists, and what is set up per contract.</h3>
+                </div>
+                <ul class="ticks">
+                    <li>A documented method, the same for every calculation.</li>
+                    <li>An input check and a content hash at each stage of the pipeline.</li>
+                    <li>Reports that can be rerun from their stated inputs and code version.</li>
+                    <li>Hosted calculation is set up per contract, about six weeks after signature.</li>
+                </ul>
+            </div>
+            <p class="method-link"><a class="link" href="/method">Read the full method <span class="arrow" aria-hidden="true">→</span></a></p>
         </div>
     </section>
 
@@ -149,15 +192,15 @@ const services = [
     <section class="section">
         <div class="wrap proof">
             <div class="section-head reveal">
-                <p class="label label--index">Track record</p>
-                <h2>Two years inside a parametric insurer’s production pipelines.</h2>
-                <p class="lede">Embedded with Raincoat, a parametric insurtech, from February 2024 to January 2026. I ran the satellite and reanalysis data layer for every peril except hurricane wind.</p>
+                <p class="label label--index">Who calculates</p>
+                <h2>Two years inside a parametric insurtech’s production pipelines.</h2>
+                <p class="lede">Senior data scientist at Raincoat, a parametric insurtech, from February 2024 to January 2026. I ran the satellite and reanalysis data layer for every peril except hurricane wind.</p>
             </div>
             <div class="grid cols-4 stats">
-                <div class="metric reveal" style="--i:0"><span class="value">4</span><span class="note">perils in production when I left, up from 3. Water Balance shipped, Heat Stress ready.</span></div>
-                <div class="metric reveal" style="--i:1"><span class="value">3</span><span class="note">dashboards used daily by risk and underwriting: Precipitation, Water Balance, Drought.</span></div>
-                <div class="metric reveal" style="--i:2"><span class="value">10+</span><span class="note">countries, from the Caribbean and Colombia to most of South America and four in Africa.</span></div>
-                <div class="metric reveal" style="--i:3"><span class="value">15+</span><span class="note">years of satellite remote sensing, 7 peer-reviewed publications.</span></div>
+                <div class="metric reveal" style="--i:0"><span class="value">4</span><span class="note">perils worked on: drought and precipitation in production, water balance taken to production, heat stress built.</span></div>
+                <div class="metric reveal" style="--i:1"><span class="value">3</span><span class="note">dashboards used by risk and underwriting: Precipitation, Water Balance, Drought.</span></div>
+                <div class="metric reveal" style="--i:2"><span class="value">10+</span><span class="note">countries across Latin America, South-East Asia and Africa.</span></div>
+                <div class="metric reveal" style="--i:3"><span class="value">15+</span><span class="note">years of satellite remote sensing, 7 peer-reviewed publications, PhD in marine ecology.</span></div>
             </div>
             <figure class="quote reveal">
                 <blockquote>“You could hand him a complex project and trust him to run with it, communicate clearly along the way, and deliver something that genuinely moved the needle for the company.”</blockquote>
@@ -167,55 +210,16 @@ const services = [
         </div>
     </section>
 
-    <!-- INDEPENDENCE -->
-    <section class="section section--tint">
-        <div class="wrap">
-            <div class="section-head reveal">
-                <p class="label label--index">Why independent matters</p>
-                <h2>Most triggers are computed by someone with a stake in the result.</h2>
-                <p class="lede">Carriers and platforms often calculate their own triggers. That is fine until a payout is disputed. A third party with nothing else to sell settles the argument with a number both sides can rerun.</p>
-            </div>
-            <div class="grid cols-3">
-                <div class="card reveal" style="--i:0"><p class="label label--trigger">No product</p><h3>I don’t write cover or sell a platform.</h3><p class="muted">The calculation is the deliverable. My income does not depend on whether a trigger fires.</p></div>
-                <div class="card reveal" style="--i:1"><p class="label label--trigger">No risk</p><h3>Nothing on my balance sheet moves with the index.</h3><p class="muted">No capacity, no premium share, no fee linked to the payout amount.</p></div>
-                <div class="card reveal" style="--i:2"><p class="label label--trigger">No lock-in</p><h3>You get the code, the hashes and the runbook.</h3><p class="muted">Any qualified analyst can rerun a calculation from what I hand over.</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRICING PREVIEW -->
-    <section class="section">
-        <div class="wrap price-wrap">
-            <div class="section-head reveal">
-                <p class="label label--index">Pricing</p>
-                <h2>Published prices, so you can budget before the first call.</h2>
-            </div>
-            <div class="table-wrap reveal">
-                <table class="data">
-                    <thead><tr><th>Service</th><th>Price</th><th>Scope</th></tr></thead>
-                    <tbody>
-                        <tr><td><strong>Trigger audit</strong></td><td class="num">EUR 6,000 fixed</td><td>2 weeks. Backtest, basis risk, data review, wording-to-code check.</td></tr>
-                        <tr><td><strong>Verifying agent</strong></td><td class="num">from EUR 6,000 / year</td><td>Shadow calculation that checks the binding agent’s result.</td></tr>
-                        <tr><td><strong>Binding calculation agent</strong></td><td class="num">from EUR 12,000 / year</td><td>Per programme. Monitoring, 2 event calculations, payout reports, audit trail. Onboarding from EUR 8,000.</td></tr>
-                        <tr><td><strong>Pipeline build</strong></td><td class="num">EUR 25,000 to 50,000</td><td>8 to 16 weeks. Hosted or handed over.</td></tr>
-                        <tr><td><strong>Data and upkeep</strong></td><td class="num">EUR 2,000 to 4,000 / month</td><td>Curated series, refresh, checks. 6 to 12 months.</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <p><a class="link" href="/pricing">Full pricing and what each line includes <span class="arrow" aria-hidden="true">→</span></a></p>
-        </div>
-    </section>
-
     <!-- CTA -->
-    <section class="cta panel on-panel">
+    <section class="cta">
         <div class="wrap cta-row">
             <div>
-                <h2>Have a trigger you want checked?</h2>
-                <p class="lede" style="color:var(--panel-muted)">Fifteen minutes is enough to tell whether an audit is worth it. If it isn’t, I’ll say so.</p>
+                <h2>Start with your trigger.</h2>
+                <p class="lede">Send the peril, region, data you use and your deadline. You get a fixed scope and price before any commitment.</p>
             </div>
             <div class="ctas">
-                <a class="btn" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer" data-umami-event="book-call-footer-cta">Book a 15-minute call <span class="arrow" aria-hidden="true">→</span></a>
-                <a class="btn btn--ghost" href="mailto:skaraz.science@gmail.com">Email me</a>
+                <a class="btn" href="/scope" data-umami-event="scope-footer-cta">Describe your trigger <span class="arrow" aria-hidden="true">→</span></a>
+                <a class="btn btn--ghost" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer" data-umami-event="book-call-footer-cta">Book a 15-minute call</a>
             </div>
         </div>
     </section>
@@ -223,79 +227,87 @@ const services = [
 
 <style>
     .hero { padding-block: clamp(48px, 7vw, 96px) clamp(40px, 5vw, 64px); }
-    .hero-top { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: end; }
-    .hero-copy { display: grid; gap: 22px; }
-    .hero h1 { font-size: clamp(2.25rem, 1.2rem + 3.6vw, 3.875rem); max-width: 19ch; }
-    .hero-side { display: grid; gap: 26px; }
-    .hero .lede { color: var(--panel-muted); }
+    .hero-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(28px, 6vw, 96px); align-items: start; }
+    .hero-copy { display: grid; gap: 24px; max-width: 760px; }
+    .hero h1 { max-width: 17ch; }
+    .hero h1 em { font-style: normal; color: var(--trigger); }
+    .hero .lede { max-width: 54ch; }
     .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-    .hero-chart { margin-top: clamp(40px, 6vw, 72px); padding: clamp(18px, 2.5vw, 28px); border: 1px solid var(--panel-line); border-radius: 10px; background: var(--panel-2); display: grid; gap: 18px; }
-    .spec { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--panel-line); }
+    .principal { margin-top: -4px; }
+    .hero-top :global(.hero-mark) { padding-top: 8px; }
+    .hero-chart { margin-top: clamp(40px, 6vw, 72px); padding: clamp(18px, 2.5vw, 28px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); display: grid; gap: 18px; }
+    .spec { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
     .spec > div { display: grid; gap: 4px; min-width: 0; font-size: 0.9375rem; }
-    .poc-note { color: var(--panel-muted); }
-    .poc-note a { color: var(--panel-index); }
-    @media (max-width: 900px) { .hero-top { grid-template-columns: minmax(0, 1fr); } .spec { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .poc-note { color: var(--muted); }
+    .poc-note a { color: var(--index); }
+    @media (max-width: 900px) {
+        .hero-top { grid-template-columns: minmax(0, 1fr); }
+        .spec { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
 
-    /* Hero entrance: one orchestrated moment, then the chart draws itself. */
-    :global(.js) .hero-copy > *, :global(.js) .hero-side > * { animation: rise 700ms var(--ease-out) both; }
+    :global(.js) .hero-copy > *, :global(.js) .hero-top > :global(.hero-mark) { animation: rise 700ms var(--ease-out) both; }
     :global(.js) .hero-copy h1 { animation-delay: 60ms; }
-    :global(.js) .hero-side > :first-child { animation-delay: 140ms; }
-    :global(.js) .hero-side > :last-child { animation-delay: 220ms; }
-    :global(.js) .hero-chart { animation: rise 800ms var(--ease-out) 260ms both; }
+    :global(.js) .hero-copy > :nth-child(3) { animation-delay: 120ms; }
+    :global(.js) .hero-copy > :nth-child(n+4) { animation-delay: 180ms; }
+    :global(.js) .hero-chart { animation: rise 800ms var(--ease-out) 240ms both; }
     @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
     @media (prefers-reduced-motion: reduce) {
-        :global(.js) .hero-copy > *, :global(.js) .hero-side > *, :global(.js) .hero-chart { animation: fade 300ms ease both; }
+        :global(.js) .hero-copy > *, :global(.js) .hero-top > :global(.hero-mark), :global(.js) .hero-chart { animation: fade 300ms ease both; }
         @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
     }
 
-    .names { border-bottom: 1px solid var(--line); background: var(--paper); }
-    .names-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-block: 22px; }
+    .names { border-block: 1px solid var(--line); }
+    .names-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-block: 20px; }
     .names ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
-    .names li { font: 600 0.9375rem/1.3 var(--display); color: var(--ink-2); }
-    .names li + li::before { content: "·"; margin-right: 22px; color: var(--line-strong); }
+    .names li { font-size: 0.9375rem; color: var(--ink); }
+    .names li + li::before { content: "·"; margin-right: 22px; color: var(--muted); }
     @media (max-width: 640px) {
         .names ul { gap: 8px; }
-        .names li { padding: 6px 10px; border: 1px solid var(--line); border-radius: 4px; font-size: 0.875rem; }
+        .names li { padding: 6px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: 0.875rem; }
         .names li + li::before { content: none; }
     }
 
-    .ladder { list-style: none; padding: 0; margin: 0; }
-    .ladder li { display: flex; }
-    .rung {
-        display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; width: 100%;
-        padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
-        color: var(--ink); text-decoration: none;
-        transition: border-color 200ms ease, transform 160ms var(--ease-out);
-    }
-    .rung:active { transform: scale(0.99); }
-    @media (hover: hover) and (pointer: fine) { .rung:hover { border-color: var(--ink); } }
-    .rn { font-size: 0.8125rem; color: var(--index); font-weight: 600; }
-    .rung p { color: var(--muted); font-size: 0.9375rem; }
-    .price { padding-top: 14px; border-top: 1px dashed var(--line-strong); font-size: 0.8125rem; font-weight: 500; color: var(--ink); }
+    .steps { list-style: none; margin: 0; padding: 0; }
+    .steps li { display: grid; gap: 10px; align-content: start; padding-top: 14px; border-top: 1px solid var(--ink); }
+    .steps h3 { font-size: 1.1875rem; }
 
-    .pocs { align-items: stretch; }
-    .pocs > div { display: grid; }
-    .map-card {
-        display: grid; gap: 12px; align-content: start; padding: 22px; border-radius: var(--radius);
-        border: 1px dashed var(--line-strong); text-decoration: none; color: var(--ink);
-        background: repeating-linear-gradient(135deg, transparent 0 10px, var(--paper-2) 10px 11px);
-        transition: border-color 200ms ease;
-    }
-    @media (hover: hover) and (pointer: fine) { .map-card:hover { border-color: var(--ink); } }
-
-    .method-link { margin-top: 40px; }
-
-    .proof { display: grid; gap: 40px; }
-    .proof .section-head { margin-bottom: 0; }
-    .stats .value { font-size: clamp(2.5rem, 1.6rem + 2.4vw, 3.5rem); }
-    .quote { margin: 0; padding: clamp(24px, 3vw, 36px); border-radius: var(--radius); background: var(--paper-2); display: grid; gap: 16px; }
-    .quote blockquote { margin: 0; font: 500 var(--step-2)/1.35 var(--display); letter-spacing: -0.01em; max-width: 46ch; }
-    .quote figcaption { color: var(--muted); font-size: 0.9375rem; }
+    .indep { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+    .indep .section-head { margin-bottom: 0; }
+    .indep-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .indep-list li { padding-block: 14px; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .indep-list strong { font-weight: 500; color: var(--ink); }
+    @media (max-width: 860px) { .indep { grid-template-columns: minmax(0, 1fr); } }
 
     .price-wrap { display: grid; gap: 24px; }
     .price-wrap .section-head { margin-bottom: 0; }
 
-    .cta { padding-block: clamp(56px, 8vw, 96px); }
+    .pocs { align-items: stretch; }
+    .pocs > div { display: grid; }
+    .note { margin-top: 16px; }
+    .map-card {
+        display: grid; gap: 12px; align-content: start; padding: 22px; border-radius: var(--radius);
+        border: 1px dashed var(--line-strong); text-decoration: none; color: var(--ink);
+        transition: border-color 200ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) { .map-card:hover { border-color: var(--ink); } }
+
+    .continuity { margin-top: clamp(40px, 6vw, 64px); padding: clamp(20px, 3vw, 32px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 32px; }
+    .continuity > div { display: grid; gap: 10px; align-content: start; }
+    .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .ticks li { position: relative; padding-left: 22px; }
+    .ticks li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 12px; height: 1.5px; background: var(--index); }
+    @media (max-width: 860px) { .continuity { grid-template-columns: minmax(0, 1fr); } }
+    .method-link { margin-top: 32px; }
+
+    .proof { display: grid; gap: 40px; }
+    .proof .section-head { margin-bottom: 0; }
+    .stats .value { font-size: clamp(2.5rem, 1.6rem + 2.4vw, 3.5rem); }
+    .quote { margin: 0; padding: clamp(24px, 3vw, 36px); border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); display: grid; gap: 16px; }
+    .quote blockquote { margin: 0; font: 400 var(--step-2)/1.4 var(--display); letter-spacing: -0.02em; max-width: 46ch; }
+    .quote figcaption { color: var(--muted); font-size: 0.9375rem; }
+    .quote strong { font-weight: 500; color: var(--ink); }
+
+    .cta { padding-block: clamp(56px, 8vw, 96px); border-top: 1px solid var(--line); }
     .cta-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 32px; }
     .cta-row > div:first-child { display: grid; gap: 14px; }
 </style>

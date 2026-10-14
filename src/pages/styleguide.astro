@@ -5,22 +5,24 @@ import TriggerChart from '../components/site/TriggerChart.astro';
 import PipelineFlow from '../components/site/PipelineFlow.astro';
 import Audience from '../components/site/Audience.astro';
 import PocCard from '../components/site/PocCard.astro';
+import LivingMark from '../components/site/LivingMark.astro';
+import Logo from '../components/Logo.astro';
 import { getPocs } from '../lib/pocs';
 const pocs = getPocs();
 
 const colours = [
-    ['--paper', 'Page background'], ['--paper-2', 'Tinted section'], ['--surface', 'Cards, tables'], ['--ink', 'Text, rules'],
-    ['--muted', 'Secondary text'], ['--line', 'Hairlines'], ['--index', 'The index line, links'], ['--trigger', 'Triggers and payouts only'],
-    ['--panel', 'Instrument panel'], ['--panel-index', 'Index on panel'], ['--panel-trigger', 'Trigger on panel'],
+    ['--ground', 'Page background'], ['--surface', 'Panels, cards, report sheets'], ['--line', 'Hairlines, non-paying bars'], ['--ink', 'Text, wordmark, button fill'],
+    ['--muted', 'Secondary text, captions, axes'], ['--index', 'Index, thresholds, links, focus'], ['--trigger', 'Triggers and payouts only'], ['--ink-on-trigger', 'Text on a trigger fill'],
 ];
 const templates = [
     ['Home', '/', 'Hero with live chart, audience switch, service ladder, showcase, method, proof, pricing'],
-    ['Service page', '/calculation-agent', 'Dark page head, two-option cards, method flow, sample report, FAQ'],
+    ['Service page', '/calculation-agent', 'Page head, two run services, method flow, sample report with living mark, FAQ'],
     ['Service page (short)', '/trigger-audit', 'Page head, four checks, example finding with chart, timeline'],
     ['Calculation report', '/showcase/mayotte-coral-bleaching', 'Generated from POC data: fields, metrics, chart, ladder, caveats, sources'],
     ['Index of reports', '/showcase', 'Card grid and comparison table'],
     ['Method', '/method', 'Flow and numbered rules'],
-    ['Pricing', '/pricing', 'Three plans and a price table'],
+    ['Pricing', '/pricing', 'Offer table, what each line includes, terms'],
+    ['Scope form', '/scope', 'Peril, region, data, deadline; composes a mailto with a copy fallback'],
     ['French home', '/fr', 'Same system, French copy'],
 ];
 ---
@@ -28,7 +30,7 @@ const templates = [
 <Site title="Design system · Skaraz Data" description="Tokens, components and page templates for skarazdata.com." noindex>
     <section class="ph panel on-panel">
         <div class="wrap">
-            <p class="label label--trigger">Internal · design system v2</p>
+            <p class="label">Internal · design system v1.1 (Night ocean, Daylight steel)</p>
             <h1>Templates and components</h1>
             <p class="lede" style="color:var(--panel-muted)">Everything the site is built from. A new calculation report appears automatically when a POC is added to <code>src/lib/pocs.ts</code>.</p>
         </div>
@@ -48,7 +50,7 @@ const templates = [
 
     <section class="section section--tint">
         <div class="wrap">
-            <div class="section-head"><p class="label label--index">Colour</p><h2>Paper, ink, one index colour, one trigger colour</h2><p class="muted">Amber is reserved for triggers, thresholds and payouts. Nothing decorative uses it.</p></div>
+            <div class="section-head"><p class="label label--index">Colour</p><h2>Ground, ink, one index colour, one trigger colour</h2><p class="muted">Amber is reserved for triggers, thresholds and payouts. Nothing decorative uses it.</p></div>
             <div class="swatches">
                 {colours.map(c => <div class="sw"><span class="chip-c" style={`background:var(${c[0]})`}></span><span class="num small">{c[0]}</span><span class="muted small">{c[1]}</span></div>)}
             </div>
@@ -57,11 +59,11 @@ const templates = [
 
     <section class="section">
         <div class="wrap type">
-            <div class="section-head"><p class="label label--index">Type</p><h2>Schibsted Grotesk, IBM Plex Sans, IBM Plex Mono</h2></div>
-            <p class="h1">Display 1 · The number that decides the payout</p>
-            <p class="h2">Display 2 · Six steps, the same every time</p>
-            <p class="h3">Heading 3 · Binding agent</p>
-            <p class="lede">Lede · I compute, check and document the index behind parametric payouts.</p>
+            <div class="section-head"><p class="label label--index">Type</p><h2>Switzer 400 and 500, IBM Plex Mono for data</h2></div>
+            <p class="h1">Display · The index your policy pays on</p>
+            <p class="h2">Heading · Event report, 2019</p>
+            <p class="h3">Title · La Réunion, west coast</p>
+            <p class="lede">Lead · Defined for the wording, built on public satellite data, checked against real losses.</p>
             <p>Body · Every figure traced to input hashes and code version. A rerun gives the same answer.</p>
             <p class="label">Label · mono, uppercase, tracked</p>
             <p class="num">Figures · 3.40 / 6.80 / 10.20 °C-weeks → 25 / 60 / 100%</p>
@@ -74,7 +76,6 @@ const templates = [
             <div class="row">
                 <a class="btn" href="#">Primary <span class="arrow" aria-hidden="true">→</span></a>
                 <a class="btn btn--ghost" href="#">Ghost</a>
-                <a class="btn btn--accent" href="#">Accent</a>
                 <a class="link" href="#">Text link <span class="arrow" aria-hidden="true">→</span></a>
                 <span class="chip">backtest scored</span>
                 <span class="chip chip--trigger">tier 3</span>
@@ -101,7 +102,7 @@ const templates = [
                     <div class="metric"><span class="label">Cells triggered</span><span class="value">73 / 269</span><span class="note">10 km hexagons</span></div>
                 </div>
             </div>
-            <div class="card" style="margin-top:28px"><p class="label label--trigger">Card</p><h3>One element that needs setting apart</h3><p class="muted">Cards are used by role, not everywhere.</p></div>
+            <div class="card" style="margin-top:28px"><p class="label">Card</p><h3>One element that needs setting apart</h3><p class="muted">Cards are used by role, not everywhere.</p></div>
         </div>
     </section>
 
@@ -117,6 +118,16 @@ const templates = [
     </section>
 
     <section class="section">
+        <div class="wrap">
+            <div class="section-head"><p class="label label--index">Logo and living mark</p><h2>Pixel Horizon, and a mark generated from each POC</h2></div>
+            <div class="row" style="align-items:flex-start;gap:48px">
+                <div style="width:240px"><Logo /></div>
+                <div style="width:72px"><Logo variant="mark" /></div>
+                {pocs.filter(p => p.mark).map(p => <LivingMark mark={p.mark!} size={120} />)}
+            </div>
+        </div>
+    </section>
+    <section class="section section--tint">
         <div class="wrap">
             <div class="section-head"><p class="label label--index">Method flow</p><h2>Six steps, light and dark</h2></div>
             <PipelineFlow />

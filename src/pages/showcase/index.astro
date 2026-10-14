@@ -8,12 +8,12 @@ const pocs = getPocs();
 
 <Site
     title="Showcase · five parametric trigger calculations · Skaraz Data"
-    description="Five calculation-agent proofs of concept on public data: coral bleaching in La Réunion and Mayotte, Auckland pluvial flood, New Zealand cyclone wind, Bangladesh crop drought."
+    description="Five proofs of concept on public data by an independent calculation agent: coral bleaching in La Réunion and Mayotte, Auckland pluvial flood, New Zealand cyclone wind, Bangladesh crop drought."
 >
     <PageHead
         label="Showcase"
         title="Five calculations, run end to end on public data."
-        lede="Each one goes from raw data to a payout report, and each report says where its method stops. They are proofs of concept, not live products."
+        lede="Each one goes from raw data to a payout report, and each report says where its method stops. They are proofs of concept on public data, not live policies."
     >
         <a slot="cta" class="btn btn--ghost" href="/constellation/">Open the live map</a>
     </PageHead>
@@ -47,10 +47,12 @@ const pocs = getPocs();
                     </tbody>
                 </table>
             </div>
+            <p class="muted small note">Rainfall indices: CHIRPS v2 production ends after December 2026; new work uses CHIRPS v3. The Bangladesh run uses CHIRPS v2 and would be re-backtested on v3 before any contract.</p>
         </div>
     </section>
 </Site>
 
 <style>
     .cell { display: grid; }
+    .note { margin-top: 16px; }
 </style>

@@ -9,7 +9,7 @@ const jsonLd = {
     mainEntity: {
         '@type': 'Person',
         name: 'Stéphane Karasiewicz',
-        jobTitle: 'Independent calculation agent and climate data engineer for parametric insurance',
+        jobTitle: 'Principal, Skaraz Data, independent calculation agent for parametric insurance',
         url: 'https://skarazdata.com',
         image: 'https://skarazdata.com/portrait.jpg',
         sameAs: [
@@ -25,7 +25,7 @@ const jsonLd = {
 const timeline = [
     { y: '2014 to 2017', t: 'PhD, marine ecology, Université de Lille', d: 'Phytoplankton dynamics under global change: multivariate statistics on noisy satellite data, calibration across regions, seasonal time series, and validation against ground truth.' },
     { y: '2018 to 2023', t: 'Marine remote sensing researcher, IFREMER', d: 'MODIS, Sentinel-2 and 3, reanalysis products and in-situ networks along the French coast and beyond. Two R packages published on CRAN, and six researchers mentored on reproducible workflows.' },
-    { y: 'Sep 2023', t: 'Skaraz Data', d: 'Freelance practice, registered in France.' },
+    { y: 'Sep 2023', t: 'Skaraz Data', d: 'Trading name of Stéphane Karasiewicz EI, registered in France (SIRET 979 870 821).' },
     { y: '2024 to 2026', t: 'Raincoat, parametric insurtech', d: 'Embedded senior data scientist for two years. Ran the satellite and reanalysis layer for every peril except hurricane wind, shipped Water Balance to production, built Heat Stress, and three daily-use dashboards.' },
     { y: '2026', t: 'Independent calculation agent', d: 'Five end-to-end trigger calculations on public data, published with their limits, and the service built around them.' },
 ];
@@ -39,7 +39,7 @@ const timeline = [
     <section class="panel on-panel ah">
         <div class="wrap ah-grid">
             <div class="ah-copy">
-                <p class="label label--trigger">About</p>
+                <p class="label">About · principal, Skaraz Data</p>
                 <h1>Stéphane Karasiewicz</h1>
                 <p class="lede">I spent fifteen years learning what satellite and climate data really say, and the last few making them run in production for parametric insurers. The calculation agent role is where both meet.</p>
                 <div class="facts">
@@ -84,7 +84,8 @@ const timeline = [
                 <figure class="reveal" style="--i:2"><blockquote>“He always takes time to explain, and never loses his sense of humor even after the nth error message.”</blockquote><figcaption><strong>Carolin Neven</strong><span class="muted">PhD student, IFREMER</span></figcaption></figure>
             </div>
             <div class="row">
-                <a class="btn" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer">Book a 15-minute call <span class="arrow" aria-hidden="true">→</span></a>
+                <a class="btn" href="/scope" data-umami-event="scope-about">Start with your trigger <span class="arrow" aria-hidden="true">→</span></a>
+                <a class="btn btn--ghost" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer">Book a 15-minute call</a>
                 <a class="btn btn--ghost" href="/cv">Read the CV</a>
             </div>
         </div>
@@ -95,7 +96,8 @@ const timeline = [
     .ah { padding-block: clamp(48px, 7vw, 96px); }
     .ah-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.7fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
     .ah-copy { display: grid; gap: 20px; }
-    .ah .lede { color: var(--panel-muted); }
+    .ah { border-bottom: 1px solid var(--line); }
+    .ah .lede { color: var(--muted); }
     .portrait { width: 100%; max-width: 320px; aspect-ratio: 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--panel-line); filter: grayscale(0.15); justify-self: end; }
     .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-top: 20px; border-top: 1px solid var(--panel-line); }
     .facts > div { display: grid; gap: 4px; min-width: 0; }
@@ -103,11 +105,12 @@ const timeline = [
     .tl { list-style: none; margin: 0; padding: 0; }
     .tl li { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 24px; padding-block: 24px; border-top: 1px solid var(--line); }
     .tl li div { display: grid; gap: 6px; }
-    .y { font-size: 0.875rem; color: var(--index); font-weight: 600; padding-top: 3px; }
+    .y { font-size: 0.875rem; color: var(--index); font-weight: 500; padding-top: 3px; }
     @media (max-width: 560px) { .tl li { grid-template-columns: minmax(0, 1fr); gap: 6px; } }
     .card { display: grid; gap: 10px; align-content: start; }
-    .quotes figure { margin: 0; display: grid; gap: 16px; align-content: start; padding-top: 18px; border-top: 2px solid var(--ink); }
-    .quotes blockquote { margin: 0; font: 500 1.125rem/1.45 var(--display); }
+    .quotes figure { margin: 0; display: grid; gap: 16px; align-content: start; padding-top: 18px; border-top: 1px solid var(--ink); }
+    .quotes blockquote { margin: 0; font: 400 1.1875rem/1.45 var(--display); letter-spacing: -0.01em; }
+    .quotes strong { font-weight: 500; }
     .quotes figcaption { display: grid; gap: 2px; font-size: 0.875rem; }
     .row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 48px; }
 </style>

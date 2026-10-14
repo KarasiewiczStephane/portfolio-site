@@ -6,11 +6,11 @@ import PipelineFlow from '../components/site/PipelineFlow.astro';
 
 <Site
     title="Climate data pipelines for parametric insurance · Skaraz Data"
-    description="Trigger and index pipelines built for parametric insurers: hosted by me, or built inside your stack and handed over with tests, docs and runbook."
+    description="Trigger and index pipelines for parametric insurance: built inside your stack and handed over with tests, docs and runbook, or run by Skaraz Data as calculation agent. Onboarding one index from EUR 10,000."
 >
     <PageHead
-        label="Service · pipelines · EUR 25,000 to 50,000"
-        title="Your trigger pipeline, hosted by me or built inside your team."
+        label="Service · pipelines · onboarding from EUR 10,000"
+        title="Your trigger pipeline, built inside your team or run by your calculation agent."
         lede="The machinery behind every calculation on this site, built for your perils and your countries. You choose where it runs and who owns it."
     />
 
@@ -18,14 +18,14 @@ import PipelineFlow from '../components/site/PipelineFlow.astro';
         <div class="wrap">
             <div class="grid cols-2">
                 <div class="card opt reveal" style="--i:0">
-                    <p class="label label--trigger">Option A · hosted</p>
-                    <h3>I run it, you receive the outputs.</h3>
-                    <p class="muted">Scheduled pulls, checks, index and payout tables delivered on your cadence. Pairs with the calculation agent role and the data retainer.</p>
+                    <p class="label">Option A · handed over</p>
+                    <h3>I build it in your stack, your team owns it.</h3>
+                    <p class="muted">Code in your repository, tests, documentation and a runbook. Pipeline support and independent verification can follow, from EUR 8,000 a year: I maintain it and check its results against the contract.</p>
                 </div>
                 <div class="card opt reveal" style="--i:1">
-                    <p class="label label--trigger">Option B · handed over</p>
-                    <h3>I build it in your stack, your team owns it.</h3>
-                    <p class="muted">Code in your repository, tests, documentation and a runbook. I stay on call for the first season if you want.</p>
+                    <p class="label">Option B · calculation agent</p>
+                    <h3>I run it on my server and issue the event report.</h3>
+                    <p class="muted">Scheduled pulls, checks, index and the event report the payout follows. From EUR 12,000 a year, available about six weeks after signature and set up per contract.</p>
                 </div>
             </div>
         </div>
@@ -48,10 +48,11 @@ import PipelineFlow from '../components/site/PipelineFlow.astro';
                 <p class="label label--index">Where this comes from</p>
                 <h2>Two years of production pipelines at a parametric insurtech.</h2>
                 <p class="lede">At Raincoat I owned the satellite and reanalysis acquisition layer (CHIRPS, ERA5-Land, IMERG, Copernicus CDS, WEkEO), shipped the Water Balance peril to production on Kubernetes, and built the Heat Stress pipeline.</p>
+                <p class="muted small">CHIRPS v2 production ends after December 2026; new rainfall pipelines use CHIRPS v3.</p>
             </div>
             <div class="grid cols-3">
-                <div class="metric reveal" style="--i:0"><span class="value num">8 to 16</span><span class="note">weeks for a build, scoped in the first call</span></div>
-                <div class="metric reveal" style="--i:1"><span class="value num">30 days</span><span class="note">guarantee on shipped code</span></div>
+                <div class="metric reveal" style="--i:0"><span class="value num">10,000</span><span class="note">EUR, from: onboarding one index (definition, pipeline, backtest, methodology report)</span></div>
+                <div class="metric reveal" style="--i:1"><span class="value num">2 to 3</span><span class="note">days of paid scoping to frame a larger or multi-peril build before quoting it</span></div>
                 <div class="metric reveal" style="--i:2"><span class="value">FR · EN</span><span class="note">documentation in either language</span></div>
             </div>
             <p class="more"><a class="link" href="/projects/case-study-raincoat">Read the Raincoat case study <span class="arrow" aria-hidden="true">→</span></a></p>

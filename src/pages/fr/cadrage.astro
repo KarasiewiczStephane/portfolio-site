@@ -1,0 +1,37 @@
+---
+import Site from '../../layouts/Site.astro';
+import ScopeForm from '../../components/site/ScopeForm.astro';
+---
+
+<Site
+    title="Commencez par votre déclencheur · cadrage · Skaraz Data"
+    description="Décrivez votre déclencheur paramétrique : péril, région, données utilisées et échéance. Vous recevez un périmètre et un prix fixes avant tout engagement. Audit de déclencheur à partir de 6 000 €."
+    lang="fr"
+    alt="/scope"
+>
+    <section class="section sc">
+        <div class="wrap sc-grid">
+            <div class="intro">
+                <p class="label">Cadrage · avant tout appel</p>
+                <h1>Commencez par votre déclencheur.</h1>
+                <p class="lede">Indiquez le péril, la région, les données utilisées et votre échéance. Vous recevez un périmètre et un prix fixes avant tout engagement.</p>
+                <dl class="fields">
+                    <dt>Première étape</dt><dd>Audit de déclencheur, ou conception et faisabilité, à partir de 6 000 €. Ou deux à trois jours de cadrage payant au tarif jour.</dd>
+                    <dt>Réponse</dt><dd>De Stéphane Karasiewicz, en français ou en anglais.</dd>
+                    <dt>Périmètre</dt><dd>Ingénierie et calcul, pas de validation actuarielle.</dd>
+                </dl>
+                <p class="small muted">Vous préférez en parler d’abord ? <a class="link" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer">Réserver un appel de 15 min</a></p>
+            </div>
+            <div class="form-col">
+                <ScopeForm lang="fr" />
+            </div>
+        </div>
+    </section>
+</Site>
+
+<style>
+    .sc-grid { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+    .intro { display: grid; gap: 22px; position: sticky; top: 100px; }
+    .intro h1 { font-size: clamp(2.25rem, 1.4rem + 2.6vw, 3.25rem); }
+    @media (max-width: 900px) { .sc-grid { grid-template-columns: minmax(0, 1fr); } .intro { position: static; } }
+</style>

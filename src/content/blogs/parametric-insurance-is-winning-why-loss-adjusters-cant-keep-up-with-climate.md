@@ -70,4 +70,4 @@ The trajectory is clear. As climate volatility increases, traditional loss adjus
 
 The winners in this space will not be the companies with the best marketing or the slickest app. They will be the ones with the most reliable data engineering, the deepest climate science expertise, and the ability to translate geospatial datasets into actuarially sound trigger designs.
 
-At Skaraz Data, we work at exactly this intersection: building the climate data pipelines, geospatial processing workflows, and analytical infrastructure that make parametric products possible. If your organization is exploring parametric solutions or needs to strengthen the data foundation behind your climate risk models, that is a conversation worth having.
+At Skaraz Data, I work at exactly this intersection: building the climate data pipelines, geospatial processing workflows, and analytical infrastructure that make parametric products possible. If your organization is exploring parametric solutions or needs to strengthen the data foundation behind your climate risk models, that is a conversation worth having.

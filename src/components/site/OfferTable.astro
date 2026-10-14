@@ -1,0 +1,69 @@
+---
+// The offer and its prices (D363 to D366). Wording and figures from the approved brochure
+// (resources/brochure/build.py). Prices are "from", excluding VAT.
+interface Props { lang?: 'en' | 'fr'; notes?: boolean }
+const { lang = 'en', notes = true } = Astro.props;
+const fr = lang === 'fr';
+const rows = fr
+    ? [
+        ['Audit de déclencheur, ou conception et faisabilité', 'Périmètre fixe, environ deux semaines. Indice, sources de données, backtest, risque de base, constats écrits.', 'à partir de 6 000 €', '/trigger-audit'],
+        ['Cadrage payant', 'Deux à trois jours pour cadrer un nouvel indice avant tout engagement.', 'au tarif jour', null],
+        ['Mise en place d’un indice', 'Définition rédigée pour le contrat, pipeline, backtest, rapport de méthode.', 'à partir de 10 000 €', null],
+        ['Maintenance et vérification indépendante', 'Votre pipeline, vos serveurs ; je le maintiens et vérifie les résultats au regard du contrat.', 'à partir de 8 000 € / an', '/fr/agent-de-calcul'],
+        ['Agent de calcul', 'J’exécute le calcul et j’émets le rapport d’événement qui déclenche l’indemnisation. Disponible environ six semaines après signature.', 'à partir de 12 000 € / an', '/fr/agent-de-calcul'],
+        ['Accompagnement mensuel', 'Suivi continu, défini par livrables.', 'à partir de 2 000 € / mois', null],
+        ['Tarif jour', 'Appels d’offres, sous-traitance, missions courtes.', '800 à 1 000 €', null],
+    ]
+    : [
+        ['Trigger audit, or design and feasibility', 'Fixed scope, about two weeks. Index, data sources, backtest, basis risk, written findings.', 'from EUR 6,000', '/trigger-audit'],
+        ['Paid scoping', 'Two to three days to frame a new index before committing to a build.', 'day rate', null],
+        ['Onboarding: one index', 'Index definition written for the wording, pipeline, backtest, methodology report.', 'from EUR 10,000', null],
+        ['Pipeline support and independent verification', 'Your pipeline, your servers; I maintain it and check results against the contract.', 'from EUR 8,000 / yr', '/calculation-agent'],
+        ['Calculation agent', 'I run the calculation and issue the event report the payout follows. Available about six weeks after signature.', 'from EUR 12,000 / yr', '/calculation-agent'],
+        ['Retainer', 'Ongoing support, scoped by deliverables.', 'from EUR 2,000 / month', null],
+        ['Day rate', 'Tenders, subcontracts, short missions.', 'EUR 800 to 1,000', null],
+    ];
+---
+
+<div class="offer">
+    <div class="table-wrap">
+        <table class="data">
+            <thead><tr><th>{fr ? 'Prestation' : 'Service'}</th><th class="r">{fr ? 'Prix HT' : 'Price, excl. VAT'}</th></tr></thead>
+            <tbody>
+                {rows.map(([t, d, p, href]) => (
+                    <tr>
+                        <td>
+                            {href ? <a class="svc" href={href}>{t}</a> : <span class="svc">{t}</span>}
+                            <span class="desc">{d}</span>
+                        </td>
+                        <td class="num r">{p}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
+    {notes && (
+        <p class="notes small muted">{fr
+            ? 'Prestations au forfait : acompte de 30 à 50 % à la signature. Contrats non exclusifs. Aucune rémunération liée au montant indemnisé. Ingénierie et calcul, pas de validation actuarielle.'
+            : 'Fixed-price work: 30 to 50% on signature. Contracts are non-exclusive. No fee linked to the payout amount. Engineering and calculation, not actuarial sign-off.'}</p>
+    )}
+</div>
+
+<style>
+    .offer { display: grid; gap: 14px; }
+    .offer table.data { min-width: 0; }
+    .svc { display: block; font-weight: 500; color: var(--ink); text-decoration: none; }
+    a.svc { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 4px; }
+    @media (hover: hover) and (pointer: fine) { a.svc:hover { color: var(--index); text-decoration-color: currentColor; } }
+    .desc { display: block; margin-top: 4px; color: var(--muted); font-size: 0.9375rem; max-width: 62ch; }
+    .r { text-align: right !important; white-space: nowrap; }
+    td.num { font-weight: 500; color: var(--ink); }
+    @media (max-width: 560px) {
+        .offer table.data, .offer tbody, .offer tr, .offer td { display: block; width: 100%; }
+        .offer thead { display: none; }
+        .offer tr { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+        .offer tr:last-child { border-bottom: 0; }
+        .offer td { padding: 0 !important; border: 0 !important; }
+        .offer td.r { text-align: left !important; margin-top: 8px; }
+    }
+</style>

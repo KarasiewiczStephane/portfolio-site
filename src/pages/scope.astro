@@ -1,0 +1,36 @@
+---
+import Site from '../layouts/Site.astro';
+import ScopeForm from '../components/site/ScopeForm.astro';
+---
+
+<Site
+    title="Start with your trigger · scope form · Skaraz Data"
+    description="Describe your parametric trigger: peril, region, data used and deadline. You get a fixed scope and price before any commitment. Trigger audit from EUR 6,000."
+    alt="/fr/cadrage"
+>
+    <section class="section sc">
+        <div class="wrap sc-grid">
+            <div class="intro">
+                <p class="label">Scope · before any call</p>
+                <h1>Start with your trigger.</h1>
+                <p class="lede">Send the peril, region, data you use and your deadline. You get a fixed scope and price before any commitment.</p>
+                <dl class="fields">
+                    <dt>Usual first step</dt><dd>Trigger audit, or design and feasibility, from EUR 6,000. Or two to three days of paid scoping at day rate.</dd>
+                    <dt>Reply</dt><dd>From Stéphane Karasiewicz, in English or French.</dd>
+                    <dt>Scope</dt><dd>Engineering and calculation, not actuarial sign-off.</dd>
+                </dl>
+                <p class="small muted">Prefer to talk first? <a class="link" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer">Book a 15-minute call</a></p>
+            </div>
+            <div class="form-col">
+                <ScopeForm />
+            </div>
+        </div>
+    </section>
+</Site>
+
+<style>
+    .sc-grid { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
+    .intro { display: grid; gap: 22px; position: sticky; top: 100px; }
+    .intro h1 { font-size: clamp(2.25rem, 1.4rem + 2.6vw, 3.25rem); }
+    @media (max-width: 900px) { .sc-grid { grid-template-columns: minmax(0, 1fr); } .intro { position: static; } }
+</style>

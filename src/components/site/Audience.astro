@@ -7,24 +7,24 @@ const tabs = fr
     ? [
         { id: 'insurers', t: 'Assureurs et MGA', h: 'Vous émettez une couverture paramétrique et le déclencheur doit être calculé, ou vérifié, par quelqu’un d’extérieur à l’opération.',
           need: ['Un indice calculé exactement comme la police le décrit', 'Un rapport de paiement que votre réassureur peut relire', 'Un backtest qui montre le risque de base avant la vente'],
-          start: { label: 'Commencer par un audit de déclencheur', href: '/trigger-audit', note: '2 semaines, prix fixe' } },
+          start: { label: 'Commencer par un audit de déclencheur', href: '/trigger-audit', note: 'environ deux semaines, à partir de 6 000 €' } },
         { id: 'programmes', t: 'Programmes et ONG', h: 'Vous financez ou pilotez un programme de transfert de risque et devez faire vérifier les déclencheurs et les paiements de façon indépendante, souvent en pays francophone.',
-          need: ['Un agent de vérification sans produit ni capacité à vendre', 'Des données satellite là où il n’y a pas de stations', 'Des rapports en français et en anglais'],
-          start: { label: 'Voir le rôle d’agent de calcul', href: '/fr/agent-de-calcul', note: 'agent principal ou agent de vérification' } },
+          need: ['Une vérification indépendante, sans produit ni capacité à vendre', 'Des données satellite là où il n’y a pas de stations', 'Des rapports en français et en anglais'],
+          start: { label: 'Voir le rôle d’agent de calcul', href: '/fr/agent-de-calcul', note: 'agent de calcul, ou maintenance et vérification indépendante' } },
         { id: 'brokers', t: 'Courtiers et réassureurs', h: 'Vous structurez ou placez des opérations paramétriques et voulez un second avis sur l’indice, le backtest et les données avant de signer.',
-          need: ['Un regard indépendant sur le risque de base', 'Une vérification que le code suit le texte de la police', 'Un agent de secours si le calculateur principal fait défaut'],
-          start: { label: 'Commencer par un audit de déclencheur', href: '/trigger-audit', note: '2 semaines, prix fixe' } },
+          need: ['Un regard indépendant sur le risque de base', 'Une vérification que le code suit le texte de la police', 'Un recalcul indépendant si le résultat du calculateur principal est contesté'],
+          start: { label: 'Commencer par un audit de déclencheur', href: '/trigger-audit', note: 'environ deux semaines, à partir de 6 000 €' } },
     ]
     : [
         { id: 'insurers', t: 'Insurers and MGAs', h: 'You write parametric cover and need the trigger computed, or checked, by someone outside the deal.',
           need: ['An index computed exactly as the policy wording defines it', 'A payout report your reinsurer can read and rerun', 'A backtest that shows basis risk before you sell'],
-          start: { label: 'Start with a trigger audit', href: '/trigger-audit', note: '2 weeks, fixed price' } },
+          start: { label: 'Start with a trigger audit', href: '/trigger-audit', note: 'about two weeks, from EUR 6,000' } },
         { id: 'programmes', t: 'Development programmes and NGOs', h: 'You fund or run a risk-transfer programme and need triggers and payouts verified independently, often in French-speaking countries.',
-          need: ['A verifying agent with no product and no risk capacity to sell', 'Satellite data where ground stations are thin', 'Reports in English and French'],
-          start: { label: 'See the calculation agent role', href: '/calculation-agent', note: 'binding or verifying agent' } },
+          need: ['An independent check from someone with no product and no risk capacity to sell', 'Satellite data where ground stations are thin', 'Reports in English and French'],
+          start: { label: 'See the calculation agent role', href: '/calculation-agent', note: 'calculation agent, or pipeline support and independent verification' } },
         { id: 'brokers', t: 'Brokers and reinsurers', h: 'You structure or place parametric deals and want a second opinion on the index, the backtest and the data before signing.',
-          need: ['An independent read on basis risk', 'A check that the code follows the policy wording', 'A backup agent if the primary calculator fails'],
-          start: { label: 'Start with a trigger audit', href: '/trigger-audit', note: '2 weeks, fixed price' } },
+          need: ['An independent read on basis risk', 'A check that the code follows the policy wording', 'An independent recalculation if the primary calculator’s result is disputed'],
+          start: { label: 'Start with a trigger audit', href: '/trigger-audit', note: 'about two weeks, from EUR 6,000' } },
     ];
 ---
 
@@ -58,16 +58,16 @@ const tabs = fr
     .tablist { position: relative; display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
     [role="tab"] {
         appearance: none; border: 0; background: none; cursor: pointer;
-        padding: 12px 14px 14px; font: 600 0.9375rem/1.2 var(--text); color: var(--muted);
+        padding: 12px 14px 14px; font: 500 0.9375rem/1.2 var(--text); color: var(--muted);
         transition: color 150ms ease;
     }
     [role="tab"][aria-selected="true"] { color: var(--ink); }
     @media (hover: hover) and (pointer: fine) { [role="tab"]:hover { color: var(--ink); } }
-    .ind { position: absolute; left: 0; top: 0; height: 2px; width: 0; background: var(--trigger); transition: transform 260ms var(--ease-out), width 260ms var(--ease-out); }
+    .ind { position: absolute; left: 0; top: 0; height: 2px; width: 0; background: var(--index); transition: transform 260ms var(--ease-out), width 260ms var(--ease-out); }
     .tpanel { display: grid; gap: 24px; }
     .tpanel:not([hidden]) { animation: in 260ms var(--ease-out); }
     @keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-    .h { font: 600 var(--step-2)/1.3 var(--display); letter-spacing: -0.01em; max-width: 34ch; color: var(--ink); }
+    .h { font: 400 var(--step-2)/1.35 var(--display); letter-spacing: -0.02em; max-width: 34ch; color: var(--ink); }
     .grid2 { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px; }
     .grid2 > div { display: grid; gap: 12px; align-content: start; min-width: 0; }
     ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }

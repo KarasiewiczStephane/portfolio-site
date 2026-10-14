@@ -1,6 +1,6 @@
 ---
-title: "Secondary perils are eating reinsurance — and parametric is winning the high-frequency layer."
-description: "Insured nat-cat losses have crossed $100B for five straight years. The headline number is one story. The composition shift underneath — secondary perils now driving the volatility — is the more interesting one. Here is what that means for the next reinsurance cycle."
+title: "Secondary perils are eating reinsurance, and parametric is winning the high-frequency layer."
+description: "Insured nat-cat losses have crossed $100B for five straight years. The headline number is one story. The composition shift underneath, secondary perils now driving the volatility, is the more interesting one. Here is what that means for the next reinsurance cycle."
 publishedDate: 2026-04-28
 author: "Stéphane Karasiewicz"
 tags: ["reinsurance", "climate risk", "parametric insurance", "secondary perils", "Swiss Re", "sigma", "cat models", "satellite data", "wildfire", "SCS", "flood"]
@@ -12,7 +12,7 @@ readingTimeMinutes: 6
 
 The Swiss Re sigma franchise has been telling the same story for several years, and the headline keeps overshadowing the part that matters.
 
-Insured natural catastrophe losses have crossed **USD 100 billion for the fifth straight year**. That is the number that gets quoted. The more useful line, buried a few pages in, is the breakdown by peril. Severe convective storms, wildfires, and floods — the so-called secondary perils — now drive most of the year-on-year volatility. Hurricanes and earthquakes still produce the largest single-event losses, but they no longer set the cycle.
+Insured natural catastrophe losses have crossed **USD 100 billion for the fifth straight year**. That is the number that gets quoted. The more useful line, buried a few pages in, is the breakdown by peril. Severe convective storms, wildfires, and floods, the so-called secondary perils, now drive most of the year-on-year volatility. Hurricanes and earthquakes still produce the largest single-event losses, but they no longer set the cycle.
 
 This shift has been visible in the data for at least a decade. What is new is that the market is starting to price for it.
 
@@ -27,7 +27,7 @@ For a reinsurer, that translates directly into capital implications:
 - **Primary perils** can be priced with relatively well-understood model uncertainty. Capital is allocated against modeled VaR with reasonable confidence in the tail.
 - **Secondary perils** carry model uncertainty that is itself uncertain. The 1-in-100 number from a vendor SCS model has a much wider confidence interval than the equivalent hurricane number, and that confidence interval is rarely reflected in the priced rate.
 
-When secondary perils were a small fraction of total losses, this was tolerable. At current volumes — secondary perils contributing **more than half** of insured cat losses in most recent years — it is not.
+When secondary perils were a small fraction of total losses, this was tolerable. At current volumes, secondary perils contributing **more than half** of insured cat losses in most recent years, it is not.
 
 ## Why traditional cat models are not adapting fast enough
 
@@ -43,7 +43,7 @@ The result is a structural lag between what the climate is doing and what the pr
 
 ## Why parametric is eating the high-frequency layer
 
-Parametric covers — products that pay out based on a measured trigger rather than an assessed loss — have existed for decades. What changed in the last five years is the cost and granularity of the trigger data.
+Parametric covers, products that pay out based on a measured trigger rather than an assessed loss, have existed for decades. What changed in the last five years is the cost and granularity of the trigger data.
 
 Three converging trends:
 
@@ -51,7 +51,7 @@ Three converging trends:
 2. **Compute and storage are cheap enough that running real-time trigger evaluation against streaming observation data is operationally trivial.** This was not true a decade ago.
 3. **Cedents are willing to accept basis risk in exchange for speed and certainty.** The traditional indemnity claim cycle is slow and expensive. A parametric trigger that pays in days, with a small but bounded basis risk, is increasingly preferred for the high-frequency layer.
 
-The combination is eating the part of the market that traditional cat models served worst: high-frequency, mid-severity secondary peril events where indemnity covers carry high LAE and modeled pricing has wide uncertainty bands. Parametric does not solve the modeling problem. It changes the question from "what will losses be" to "what will the trigger read" — and the trigger is observed, not modeled.
+The combination is eating the part of the market that traditional cat models served worst: high-frequency, mid-severity secondary peril events where indemnity covers carry high LAE and modeled pricing has wide uncertainty bands. Parametric does not solve the modeling problem. It changes the question from "what will losses be" to "what will the trigger read", and the trigger is observed, not modeled.
 
 ## What this means for the next cycle
 
@@ -67,4 +67,4 @@ For technical leaders in carriers and reinsurers, the practical implications:
 
 The next cycle will not be priced by historical loss tables. It will be priced by who has the best sensor data and the discipline to use it.
 
-At Skaraz Data, we build the geospatial and climate data pipelines that connect observational data — satellite, reanalysis, ground sensor — to underwriting and reserving decisions. From SCS hail swath reconstruction to wildfire burn-scar overlays and flood footprint matching, we help insurers and reinsurers build the data foundation that the next cycle will be priced on. If your team is rethinking its secondary peril stack, let's talk.
+At Skaraz Data, I build the geospatial and climate data pipelines that connect observational data (satellite, reanalysis, ground sensor) to underwriting and reserving decisions. From SCS hail swath reconstruction to wildfire burn-scar overlays and flood footprint matching, I help insurers and reinsurers build the data foundation that the next cycle will be priced on. If your team is rethinking its secondary peril stack, let's talk.

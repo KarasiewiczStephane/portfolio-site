@@ -2,19 +2,22 @@
 import Site from '../layouts/Site.astro';
 import PageHead from '../components/site/PageHead.astro';
 import TriggerChart from '../components/site/TriggerChart.astro';
+import LivingMark from '../components/site/LivingMark.astro';
 import { getPocs } from '../lib/pocs';
 const reunion = getPocs()[0];
 ---
 
 <Site
     title="Trigger audit for parametric insurance · Skaraz Data"
-    description="A two-week, fixed-price second opinion on a parametric trigger: backtest, basis risk, data sources, and a check that the code follows the policy wording. EUR 6,000."
+    description="A fixed-scope second opinion on a parametric trigger, about two weeks: backtest, basis risk, data sources, and a check that the code follows the policy wording. From EUR 6,000."
 >
     <PageHead
-        label="Service · trigger audit · EUR 6,000 fixed"
+        label="Service · trigger audit · from EUR 6,000"
         title="A second opinion on your trigger before you sign, renew or pay."
-        lede="Two weeks, a fixed price, and a written answer to one question: does this index pay when it should, and only then?"
-    />
+        lede="A fixed scope, about two weeks, and a written answer to one question: does this index pay when it should, and only then? The same format covers index design and feasibility for a new peril."
+    >
+        <a slot="cta" class="btn btn--ghost" href="/pricing">See prices</a>
+    </PageHead>
 
     <section class="section">
         <div class="wrap">
@@ -39,7 +42,7 @@ const reunion = getPocs()[0];
                 <p class="lede">Over 2009 to 2024 the Degree Heating Weeks index caught 5 of the 6 documented bleaching years and missed 2015. It also paid in 2009 and 2018, with no documented mass bleaching. That gap is basis risk, and an audit puts a number on it before money moves.</p>
                 <p><a class="link" href={`/showcase/${reunion.slug}`}>Read the La Réunion report <span class="arrow" aria-hidden="true">→</span></a></p>
             </div>
-            <div class="reveal" style="--i:1"><TriggerChart series={reunion.series} height={300} /></div>
+            <div class="reveal chart-col" style="--i:1"><TriggerChart series={reunion.series} height={300} />{reunion.mark && <LivingMark mark={reunion.mark} size={132} />}</div>
         </div>
     </section>
 
@@ -55,20 +58,23 @@ const reunion = getPocs()[0];
                 <li class="reveal" style="--i:2"><span class="num">Days 8 to 9</span><div><h3>Findings</h3><p class="muted">Basis-risk numbers, data issues and wording-to-code gaps, each ranked by what it would cost you.</p></div></li>
                 <li class="reveal" style="--i:3"><span class="num">Day 10</span><div><h3>Report and call</h3><p class="muted">A written report, the code I used, and a call to walk through it.</p></div></li>
             </ol>
-            <p class="muted small note">Shipped code carries a 30-day guarantee. If the audit finds the trigger is sound, the report says so plainly.</p>
+            <p class="muted small note">If the audit finds the trigger is sound, the report says so plainly. Fixed-price work: 30 to 50% on signature. Engineering and calculation, not actuarial sign-off.</p>
+            <p class="go"><a class="btn" href="/scope" data-umami-event="scope-audit">Scope an audit <span class="arrow" aria-hidden="true">→</span></a></p>
         </div>
     </section>
 </Site>
 
 <style>
-    .chk { color: var(--index); font-weight: 600; font-size: 0.8125rem; margin-bottom: 10px; }
+    .chk { color: var(--index); font-weight: 500; font-size: 0.8125rem; margin-bottom: 10px; }
     .card h3 { margin-bottom: 8px; }
-    .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 64px); align-items: center; }
+    .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
+    .chart-col { display: grid; gap: 32px; }
+    .go { margin-top: 28px; }
     .two > * { min-width: 0; }
     @media (max-width: 900px) { .two { grid-template-columns: minmax(0, 1fr); } }
     .timeline { list-style: none; margin: 0; padding: 0; display: grid; }
     .timeline li { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 24px; padding-block: 22px; border-top: 1px solid var(--line); }
-    .timeline li > span { font-size: 0.875rem; color: var(--index); font-weight: 600; padding-top: 3px; }
+    .timeline li > span { font-size: 0.875rem; color: var(--index); font-weight: 500; padding-top: 3px; }
     .timeline li div { display: grid; gap: 6px; }
     @media (max-width: 560px) { .timeline li { grid-template-columns: minmax(0, 1fr); gap: 6px; } }
     .note { margin-top: 24px; }

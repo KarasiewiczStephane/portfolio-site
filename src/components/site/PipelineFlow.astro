@@ -5,7 +5,7 @@ interface Props { lang?: 'en' | 'fr'; variant?: 'paper' | 'panel' }
 const { lang = 'en', variant = 'paper' } = Astro.props;
 const steps = lang === 'fr'
     ? [
-        { t: 'Données', d: 'Sources nommées dans le contrat (NOAA, ERA5, IMERG, CHIRPS, Sentinel). Collecte planifiée, source de secours écrite à l’avance.' },
+        { t: 'Données', d: 'Sources nommées dans le contrat (NOAA, ERA5, IMERG, Sentinel). Collecte planifiée, source de secours écrite à l’avance.' },
         { t: 'Contrôles', d: 'Chaque entrée vérifiée : couverture, unités, trous, défauts connus du jeu de données. Chaque fichier est haché.' },
         { t: 'Indice', d: 'L’indice exactement comme la police le définit. Le même code pour le backtest et pour le calcul réel.' },
         { t: 'Déclencheur', d: 'Comparaison au barème, cellule par cellule ou district par district.' },
@@ -13,7 +13,7 @@ const steps = lang === 'fr'
         { t: 'Piste d’audit', d: 'Chaque chiffre relié aux empreintes des entrées et à la version du code. Relancer donne le même résultat.' },
     ]
     : [
-        { t: 'Data in', d: 'Sources named in the contract (NOAA, ERA5, IMERG, CHIRPS, Sentinel). Pulled on schedule, with the fallback source agreed in advance.' },
+        { t: 'Data in', d: 'Sources named in the contract (NOAA, ERA5, IMERG, Sentinel). Pulled on schedule, with the fallback source agreed in advance.' },
         { t: 'Checks', d: 'Every input checked for coverage, units, gaps and known dataset defects. Every file hashed.' },
         { t: 'Index', d: 'The index exactly as the policy wording defines it. The same code runs the backtest and the live calculation.' },
         { t: 'Trigger', d: 'Tested against the payout ladder, cell by cell or district by district.' },
@@ -48,7 +48,7 @@ const steps = lang === 'fr'
         display: inline-grid; place-items: center; flex: none;
         width: 34px; height: 34px; border-radius: 50%;
         border: 1.5px solid var(--f-on); color: var(--f-on); background: var(--f-bg);
-        font-size: 0.75rem; font-weight: 600;
+        font-size: 0.75rem; font-weight: 500;
     }
     .rail { position: relative; flex: 1; height: 1.5px; background: var(--f-line); overflow: hidden; }
     .step:last-child .rail { visibility: hidden; }

@@ -67,4 +67,4 @@ If you are building or buying climate risk analytics, here is the practical take
 
 The insurance industry spent decades pricing climate risk with sparse, inconsistent, and spatially biased data. Reanalysis changes that equation fundamentally. The organizations that build robust pipelines from gridded climate data to actuarial-grade risk metrics will define the next era of climate-aware underwriting.
 
-At Skaraz Data, we build exactly these pipelines: from raw ERA5 and satellite data through to production-grade climate risk indicators tailored for insurance, agriculture, and ESG applications. If your team is navigating the shift from traditional loss data to climate-forward risk modeling, let's connect.
+At Skaraz Data, I build exactly these pipelines: from raw ERA5 and satellite data through to production-grade climate risk indicators tailored for insurance, agriculture, and ESG applications. If your team is navigating the shift from traditional loss data to climate-forward risk modeling, let's connect.

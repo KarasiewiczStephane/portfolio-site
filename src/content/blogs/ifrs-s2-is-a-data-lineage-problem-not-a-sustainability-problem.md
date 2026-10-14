@@ -1,6 +1,6 @@
 ---
 title: "IFRS S2 is a data lineage problem, not a sustainability problem."
-description: "IFRS S2 quietly became the hardest data engineering problem in finance. Listed firms now have to report Scope 1-3 emissions, physical risk exposure, and transition scenarios — auditable, comparable, restated each year. Most teams are sourcing this data from spreadsheets and PDFs that will not survive an audit trail."
+description: "IFRS S2 quietly became the hardest data engineering problem in finance. Listed firms now have to report Scope 1-3 emissions, physical risk exposure, and transition scenarios, auditable, comparable, restated each year. Most teams are sourcing this data from spreadsheets and PDFs that will not survive an audit trail."
 publishedDate: 2026-04-28
 author: "Stéphane Karasiewicz"
 tags: ["IFRS S2", "climate risk", "climate disclosure", "data engineering", "data lineage", "ISSB", "audit", "ESG", "regulatory reporting"]
@@ -28,7 +28,7 @@ A climate disclosure draws on at least five distinct data categories, each with 
 - **Scenario outputs.** Internally computed from model runs that may live on individual analysts' laptops, with parameter sets that are not always checked into anything resembling source control.
 - **Counterparty data.** For financed emissions and physical risk in lending books, banks need granular asset-level data on counterparties. This is the worst-quality category by a wide margin.
 
-The pattern across all five: the science is solvable, the lineage is not — at least not by the methods most teams currently use.
+The pattern across all five: the science is solvable, the lineage is not, at least not by the methods most teams currently use.
 
 ## What an auditor will actually ask
 
@@ -45,7 +45,7 @@ These are not novel questions. Auditors ask them every year about the rest of th
 
 The teams that will not be rewriting their disclosure pipelines in 2027 are the ones building the same primitives the rest of the finance function already relies on:
 
-1. **Versioned data sources.** Every input — hazard layer, emissions factor table, scenario output — committed to a content-addressable store with an immutable version identifier. DVC, lakeFS, or even a disciplined git-LFS setup all work. The detail matters less than the discipline.
+1. **Versioned data sources.** Every input (hazard layer, emissions factor table, scenario output) committed to a content-addressable store with an immutable version identifier. DVC, lakeFS, or even a disciplined git-LFS setup all work. The detail matters less than the discipline.
 2. **Explicit data contracts.** Each upstream source has a schema, a refresh cadence, and a documented owner. When a vendor changes their methodology, the change shows up as a contract violation, not as a silent shift in the reported numbers.
 3. **Reproducible computation.** The transformation from raw inputs to disclosed numbers is a single executable pipeline. Re-running it with the same inputs produces the same outputs, byte-for-byte. This is what makes restatement tractable.
 4. **Audit-grade logging.** Every disclosed number has a traceable lineage back to specific input versions, transformation code commits, and execution timestamps. This is the part that takes the longest to build and is the most painful to retrofit.
@@ -59,4 +59,4 @@ The function that already operates versioned data lakes, change-controlled pipel
 
 The companies getting this right in 2026 are the ones that quietly moved climate data ownership into the finance technology stack last year. The companies that will struggle in 2027 are the ones still treating it as an ESG project.
 
-At Skaraz Data, we build climate and physical risk data pipelines with the lineage, versioning, and audit trail that IFRS S2 actually requires. If your team is staring at the gap between what your sustainability function produces and what your auditor will accept, let's talk.
+At Skaraz Data, I build climate and physical risk data pipelines with the lineage, versioning, and audit trail that IFRS S2 actually requires. If your team is staring at the gap between what your sustainability function produces and what your auditor will accept, let's talk.
