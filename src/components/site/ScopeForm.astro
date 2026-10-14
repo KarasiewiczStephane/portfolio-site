@@ -44,7 +44,7 @@ const fields = [
 ---
 
 <form class="scope" action={`mailto:${to}`} method="post" enctype="text/plain" data-scope
-    data-to={to} data-subject={t.subject} data-lang={lang} data-copied={t.copied} data-copyfail={t.copyFail} data-copy={t.copy} data-err={t.err} novalidate>
+    data-to={to} data-subject={t.subject} data-lang={lang} data-copied={t.copied} data-copyfail={t.copyFail} data-copylabel={t.copy} data-err={t.err} novalidate>
     <div class="grid2">
         {fields.map(f => (
             <div class:list={['field', { wide: f.id === 'data' }]}>
@@ -159,7 +159,7 @@ const fields = [
         });
 
         copyBtn?.addEventListener('click', async () => {
-            const label = form.dataset.copy ?? '';
+            const label = form.dataset.copylabel ?? '';
             try {
                 await navigator.clipboard.writeText(outText.value);
                 copyBtn.textContent = form.dataset.copied ?? '';

@@ -220,13 +220,6 @@ const unit = series.unit;
         const hi = Math.max(...vals, ...tiers.map(t => t.threshold));
         const svg = plot.querySelector('svg')!;
         const defaultValue = rv.textContent;
-        // Documented events (e.g. bleaching years from the literature), as small ink dots on the baseline.
-const events = (series.events ?? []).map(label => {
-    const idx = series.dates.map((_, i) => i).filter(i => series.dates[i].startsWith(label));
-    if (!idx.length) return null;
-    const best = idx.reduce((a, b) => (series.direction === 'above' ? v[b] > v[a] : v[b] < v[a]) ? b : a, idx[0]);
-    return { x: X(t[best]), label };
-}).filter(Boolean) as { x: number; label: string }[];
 
 const fmt = (n: number) => Math.abs(n) >= 100 ? n.toFixed(0) : Math.abs(n) >= 10 ? n.toFixed(1) : n.toFixed(2);
 
