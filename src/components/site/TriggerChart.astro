@@ -1,7 +1,9 @@
 ---
 // Index-versus-trigger chart, rendered at build time from a real POC series.
 // Lines are SVG (non-scaling strokes); every label is HTML positioned in percent,
-// so text stays legible at any width. The line draws in once when it enters the
+// so text stays legible at any width. Colours follow the design system: the index series in
+// muted, thresholds as index lines, paid seasons as trigger dots, documented events as ink dots.
+// The line draws in once when it enters the
 // viewport; hovering reads out date, value and the tier reached.
 import type { Series } from '../../lib/pocs';
 
@@ -37,8 +39,9 @@ const zones = sorted.map((tier, i) => {
     const next = sorted[i + 1];
     const a = Y(tier.threshold);
     const b = next ? Y(next.threshold) : (series.direction === 'above' ? 0 : 100);
-    return { y: Math.min(a, b), h: Math.abs(a - b), o: (variant === 'panel' ? 0.05 : 0.08) + i * 0.05 };
+    return { y: Math.min(a, b), h: Math.abs(a - b), o: 0 };
 });
+void zones;
 
 // One marker per paid season: the extreme point inside that season.
 const markers = series.paid.map(p => {
@@ -69,6 +72,14 @@ if (spanDays > 500) {
     }
 }
 
+// Documented events (e.g. bleaching years from the literature), as small ink dots on the baseline.
+const events = (series.events ?? []).map(label => {
+    const idx = series.dates.map((_, i) => i).filter(i => series.dates[i].startsWith(label));
+    if (!idx.length) return null;
+    const best = idx.reduce((a, b) => (series.direction === 'above' ? v[b] > v[a] : v[b] < v[a]) ? b : a, idx[0]);
+    return { x: X(t[best]), label };
+}).filter(Boolean) as { x: number; label: string }[];
+
 const fmt = (n: number) => Math.abs(n) >= 100 ? n.toFixed(0) : Math.abs(n) >= 10 ? n.toFixed(1) : n.toFixed(2);
 const points = JSON.stringify(v.map((vi, i) => [r2(X(t[i])), vi, series.dates[i].slice(0, series.dates[i].length > 10 ? 16 : 10)]));
 const tiersJson = JSON.stringify(series.tiers);
@@ -86,7 +97,6 @@ const unit = series.unit;
     )}
     <div class="plot" style={`--h:${height}px`} data-plot>
         <svg viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
-            {zones.map(z => <rect x="0" y={r2(z.y)} width="1000" height={r2(z.h)} class="zone" style={`--zo:${z.o}`} />)}
             {sorted.map(tier => <line x1="0" x2="1000" y1={r2(Y(tier.threshold))} y2={r2(Y(tier.threshold))} class="tier" />)}
             <path d={pathD} class="line" pathLength="1" />
             <line class="guide" x1="0" x2="0" y1="0" y2="100" data-guide />
@@ -102,6 +112,7 @@ const unit = series.unit;
                 {!compact && <span class="mk-label num">{m.label}{m.tier ? ` · T${m.tier}` : ''}</span>}
             </span>
         ))}
+        {events.map(e => <span class="ev" style={`left:${r2(e.x)}%`} title={e.label}></span>)}
         <span class="cursor" data-cursor></span>
     </div>
     {!compact && (
@@ -109,31 +120,38 @@ const unit = series.unit;
             {ticks.map(tk => <span class="num" style={`left:${r2(tk.x)}%`}>{tk.label}</span>)}
         </div>
     )}
+    {!compact && (
+        <div class="legend" aria-hidden="true">
+            <span><i class="lg-line"></i>{fr ? 'indice' : 'index'}</span>
+            <span><i class="lg-thr"></i>{fr ? 'seuils' : 'thresholds'}</span>
+            {markers.length > 0 && <span><i class="lg-pay"></i>{fr ? 'saison payée' : 'season paid'}</span>}
+            {events.length > 0 && <span><i class="lg-ev"></i>{fr ? 'événement documenté' : 'documented event'}</span>}
+        </div>
+    )}
     {showCaption && !compact && <figcaption>{series.caption}</figcaption>}
 </figure>
 
 <style>
     .tchart {
-        --c-line: var(--index); --c-trig: var(--trigger); --c-fg: var(--ink); --c-muted: var(--muted); --c-grid: var(--line); --c-bg: var(--surface);
+        --c-line: var(--muted); --c-thr: var(--index); --c-trig: var(--trigger); --c-fg: var(--ink); --c-muted: var(--muted); --c-grid: var(--line); --c-bg: var(--surface);
         margin: 0; display: grid; gap: 10px; min-width: 0;
     }
-    .tchart--panel { --c-line: var(--panel-index); --c-trig: var(--panel-trigger); --c-fg: var(--panel-fg); --c-muted: var(--panel-muted); --c-grid: var(--panel-line); --c-bg: var(--panel); }
+    .tchart--panel { --c-bg: var(--panel-2); }
     .readout { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; min-height: 1.6em; font-size: 0.8125rem; color: var(--c-muted); }
     .r-label { font: 500 0.75rem/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; }
-    .r-value { color: var(--c-fg); font-weight: 600; }
-    .r-tier { color: var(--c-trig); font-weight: 600; }
+    .r-value { color: var(--c-fg); font-weight: 500; }
+    .r-tier { color: var(--c-trig); font-weight: 500; }
     .plot { position: relative; height: var(--h); border-bottom: 1px solid var(--c-grid); touch-action: pan-y; }
     .tchart--compact .plot { border-bottom: 0; }
     svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-    .zone { fill: var(--c-trig); opacity: var(--zo); }
-    .tier { stroke: var(--c-trig); stroke-width: 1.25; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; }
-    .line { fill: none; stroke: var(--c-line); stroke-width: 1.75; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+    .tier { stroke: var(--c-thr); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+    .line { fill: none; stroke: var(--c-line); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
     .tchart--compact .line { stroke-width: 1.5; }
     .guide { stroke: var(--c-fg); stroke-opacity: 0; stroke-width: 1; vector-effect: non-scaling-stroke; transition: stroke-opacity 150ms ease; }
     .tlabel {
         position: absolute; right: 0; transform: translateY(-100%);
-        padding: 0 0 3px; font-size: 0.6875rem; color: var(--c-trig); white-space: nowrap;
-        background: linear-gradient(to left, var(--c-bg) 60%, transparent); padding-left: 16px;
+        padding: 0 0 3px 8px; font-size: 0.75rem; color: var(--c-thr); white-space: nowrap;
+        background: var(--c-bg);
     }
     .mk { position: absolute; transform: translate(-50%, -50%); display: grid; place-items: center; pointer-events: none; }
     .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c-trig); box-shadow: 0 0 0 3px var(--c-bg); }
@@ -141,24 +159,31 @@ const unit = series.unit;
     @media (max-width: 600px) { .mk-label { display: none; } .tlabel { font-size: 0.625rem; } }
     .mk--r .mk-label { right: -4px; }
     .mk--l .mk-label { left: -4px; }
-    .mk-label { position: absolute; bottom: 12px; white-space: nowrap; font-size: 0.6875rem; font-weight: 600; color: var(--c-fg); background: var(--c-bg); padding: 1px 4px; border-radius: 3px; }
-    .cursor { position: absolute; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; border: 2px solid var(--c-line); background: var(--c-bg); opacity: 0; pointer-events: none; transition: opacity 120ms ease; }
+    .mk-label { position: absolute; bottom: 12px; white-space: nowrap; font-size: 0.75rem; font-weight: 500; color: var(--c-fg); background: var(--c-bg); padding: 1px 4px; border-radius: 3px; }
+    .cursor { position: absolute; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; border: 2px solid var(--c-fg); background: var(--c-bg); opacity: 0; pointer-events: none; transition: opacity 120ms ease; }
     .plot.is-hover .cursor { opacity: 1; }
     .plot.is-hover .guide { stroke-opacity: 0.35; }
-    .xaxis { position: relative; height: 18px; font-size: 0.6875rem; color: var(--c-muted); }
+    .xaxis { position: relative; height: 18px; font-size: 0.75rem; color: var(--c-muted); }
     .xaxis span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
     .xaxis span:first-child { transform: none; }
     .xaxis span:last-child { transform: translateX(-100%); }
-    figcaption { font-size: 0.8125rem; color: var(--c-muted); max-width: 72ch; }
+    figcaption { font-size: 0.875rem; color: var(--c-muted); max-width: 72ch; }
+    .ev { position: absolute; bottom: -4px; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: var(--c-fg); pointer-events: none; }
+    .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.8125rem; color: var(--c-muted); }
+    .legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .legend i { display: inline-block; flex: none; }
+    .lg-line { width: 18px; height: 1.5px; background: var(--c-line); }
+    .lg-thr { width: 18px; height: 1.5px; background: var(--c-thr); }
+    .lg-pay { width: 9px; height: 9px; border-radius: 50%; background: var(--c-trig); }
+    .lg-ev { width: 7px; height: 7px; border-radius: 50%; background: var(--c-fg); }
 
     /* Draw-in: only when JS is present; otherwise the chart is simply there. */
     /* Reveal left to right with clip-path: dash tricks break with non-scaling strokes. */
     :global(.js) .tchart .line { clip-path: inset(0 100% 0 0); }
     :global(.js) .tchart .mk { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
-    :global(.js) .tchart .zone, :global(.js) .tchart .tier, :global(.js) .tchart .tlabel { opacity: 0; }
+    :global(.js) .tchart .tier, :global(.js) .tchart .tlabel { opacity: 0; }
     :global(.js) .tchart.is-drawn .line { clip-path: inset(0 -1% 0 0); transition: clip-path 1800ms var(--ease-in-out); }
     :global(.js) .tchart.is-drawn .tier, :global(.js) .tchart.is-drawn .tlabel { opacity: 1; transition: opacity 500ms ease 200ms; }
-    :global(.js) .tchart.is-drawn .zone { opacity: var(--zo, 1); transition: opacity 600ms ease 300ms; }
     :global(.js) .tchart.is-drawn .mk { opacity: 1; transform: translate(-50%, -50%) scale(1); transition: opacity 300ms var(--ease-out), transform 400ms var(--ease-out); transition-delay: calc(1300ms + var(--d) * 70ms); }
     :global(.js) .tchart--compact.is-drawn .line { transition-duration: 1100ms; }
     @media (prefers-reduced-motion: reduce) {
@@ -195,7 +220,15 @@ const unit = series.unit;
         const hi = Math.max(...vals, ...tiers.map(t => t.threshold));
         const svg = plot.querySelector('svg')!;
         const defaultValue = rv.textContent;
-        const fmt = (n: number) => Math.abs(n) >= 100 ? n.toFixed(0) : Math.abs(n) >= 10 ? n.toFixed(1) : n.toFixed(2);
+        // Documented events (e.g. bleaching years from the literature), as small ink dots on the baseline.
+const events = (series.events ?? []).map(label => {
+    const idx = series.dates.map((_, i) => i).filter(i => series.dates[i].startsWith(label));
+    if (!idx.length) return null;
+    const best = idx.reduce((a, b) => (series.direction === 'above' ? v[b] > v[a] : v[b] < v[a]) ? b : a, idx[0]);
+    return { x: X(t[best]), label };
+}).filter(Boolean) as { x: number; label: string }[];
+
+const fmt = (n: number) => Math.abs(n) >= 100 ? n.toFixed(0) : Math.abs(n) >= 10 ? n.toFixed(1) : n.toFixed(2);
 
         const yPct = (v: number) => {
             // Same mapping as the server side: padded domain.

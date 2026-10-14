@@ -1,5 +1,5 @@
 ---
-// Layout for the v2 site (calculation agent positioning). Legacy pages keep BaseLayout.
+// Layout for the site (calculation agent positioning, design system v1.1). Legacy pages keep BaseLayout.
 import Header from '../components/site/Header.astro';
 import Footer from '../components/site/Footer.astro';
 import Analytics from '../components/Analytics.astro';
@@ -29,7 +29,13 @@ const canonical = new URL(Astro.url.pathname, 'https://skarazdata.com').href;
     <link rel="canonical" href={canonical}>
     {alt && <link rel="alternate" hreflang={lang === 'fr' ? 'en' : 'fr'} href={new URL(alt, 'https://skarazdata.com').href}>}
     {noindex && <meta name="robots" content="noindex">}
-    <meta name="theme-color" content="#0d1a22">
+    <meta name="theme-color" content="#0d1b24" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#eceff0" media="(prefers-color-scheme: light)">
+    <script is:inline>
+        // Theme before first paint: stored choice wins, else the OS preference (CSS handles that case).
+        try { var t = localStorage.getItem('sd-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+        document.documentElement.classList.add('js');
+    </script>
 
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
@@ -43,11 +49,12 @@ const canonical = new URL(Astro.url.pathname, 'https://skarazdata.com').href;
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="preload" href="/fonts/switzer-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Schibsted+Grotesk:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <Analytics />
 </head>
 <body>

@@ -1,4 +1,5 @@
 ---
+import Logo from '../Logo.astro';
 interface Props { lang?: 'en' | 'fr'; alt?: string }
 const { lang = 'en', alt } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -18,7 +19,9 @@ const nav = lang === 'fr'
         { href: '/pricing', label: 'Pricing' },
         { href: '/about', label: 'About' },
     ];
-const cta = lang === 'fr' ? 'Réserver un appel' : 'Book a call';
+const cta = lang === 'fr' ? 'Commencez par votre déclencheur' : 'Start with your trigger';
+const ctaHref = lang === 'fr' ? '/fr/cadrage' : '/scope';
+const themeLabel = lang === 'fr' ? 'Changer de thème (clair ou sombre)' : 'Switch theme (light or dark)';
 const home = lang === 'fr' ? '/fr' : '/';
 const switchHref = alt ?? (lang === 'fr' ? '/' : '/fr');
 const isActive = (href: string) => path === href || path.startsWith(href + '/');
@@ -27,25 +30,24 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
 <header class="site-header" data-header>
     <div class="wrap bar">
         <a href={home} class="brand" aria-label="Skaraz Data, home">
-            <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
-                <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M5 21 L10 18 L14 20 L18 12 L22 15 L27 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <line x1="5" y1="13.5" x2="27" y2="13.5" stroke="var(--trigger)" stroke-width="1.5" stroke-dasharray="2.5 2"/>
-            </svg>
-            <span class="word">Skaraz<span class="thin">Data</span></span>
+            <Logo class="brand-logo" title="Skaraz Data" />
         </a>
 
         <nav class="links" id="site-nav" aria-label={lang === 'fr' ? 'Navigation principale' : 'Main'}>
             {nav.map(n => (
                 <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>
             ))}
+            <a class="nav-cta" href={ctaHref}>{cta} <span aria-hidden="true">→</span></a>
         </nav>
 
         <div class="actions">
             <a class="lang" href={switchHref} hreflang={lang === 'fr' ? 'en' : 'fr'} lang={lang === 'fr' ? 'en' : 'fr'}>
                 <span class:list={[{ on: lang === 'en' }]}>EN</span><span aria-hidden="true">/</span><span class:list={[{ on: lang === 'fr' }]}>FR</span>
             </a>
-            <a class="btn cta" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer" data-umami-event="book-call-nav">{cta}</a>
+            <button class="theme" type="button" data-theme-toggle aria-label={themeLabel} title={themeLabel}>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+            </button>
+            <a class="btn cta" href={ctaHref} data-umami-event="scope-nav">{cta}</a>
             <button class="menu" type="button" aria-controls="site-nav" aria-expanded="false" data-menu>
                 <span class="sr">{lang === 'fr' ? 'Menu' : 'Menu'}</span>
                 <span class="bars" aria-hidden="true"><span></span><span></span></span>
@@ -65,35 +67,37 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
     }
     .site-header.is-scrolled { border-bottom-color: var(--line); }
     .bar { display: flex; align-items: center; gap: 28px; height: 68px; }
-    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
-    .mark { width: 30px; height: 30px; flex: none; }
-    .word { font: 800 1.125rem/1 var(--display); letter-spacing: -0.02em; }
-    .thin { font-weight: 500; margin-left: 4px; color: var(--muted); }
+    .brand { display: inline-flex; align-items: center; text-decoration: none; flex: none; padding-block: 6px; }
+    .brand :global(.brand-logo) { width: 156px; }
     .links { display: flex; gap: 4px; margin-left: auto; }
     .links a {
         position: relative; padding: 8px 12px; border-radius: 6px;
-        font-size: 0.9375rem; font-weight: 500; color: var(--ink-2); text-decoration: none;
+        font-size: 0.9375rem; font-weight: 400; color: var(--muted); text-decoration: none;
         transition: color 150ms ease, background-color 150ms ease;
     }
     .links a[aria-current="page"] { color: var(--ink); }
     .links a[aria-current="page"]::after {
         content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px;
-        background: var(--trigger); border-radius: 2px;
+        background: var(--index); border-radius: 2px;
     }
     @media (hover: hover) and (pointer: fine) { .links a:hover { color: var(--ink); background: var(--paper-2); } }
+    .nav-cta { display: none; }
     .actions { display: flex; align-items: center; gap: 12px; }
     .lang { display: inline-flex; gap: 4px; font: 500 0.8125rem/1 var(--mono); color: var(--muted); text-decoration: none; padding: 8px 6px; }
-    .lang .on { color: var(--ink); font-weight: 600; }
+    .lang .on { color: var(--ink); font-weight: 500; }
+    .theme { display: inline-grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; transition: color 150ms ease, border-color 150ms ease; }
+    .theme svg { width: 18px; height: 18px; }
+    @media (hover: hover) and (pointer: fine) { .theme:hover { color: var(--ink); border-color: var(--line-strong); } }
     .cta { min-height: 40px; padding: 10px 16px; font-size: 0.875rem; }
-    .menu { display: none; width: 44px; height: 44px; border: 1px solid var(--line-strong); border-radius: 6px; background: transparent; color: var(--ink); cursor: pointer; transition: transform 160ms var(--ease-out); }
+    .menu { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer; transition: transform 160ms var(--ease-out); }
     .menu:active { transform: scale(0.95); }
     .bars { display: grid; gap: 6px; justify-items: center; }
     .bars span { display: block; width: 18px; height: 1.5px; background: currentColor; transition: transform 200ms var(--ease-out); }
     .menu[aria-expanded="true"] .bars span:first-child { transform: translateY(3.75px) rotate(45deg); }
     .menu[aria-expanded="true"] .bars span:last-child { transform: translateY(-3.75px) rotate(-45deg); }
-    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
-    @media (max-width: 980px) {
+    @media (max-width: 1080px) {
+        .brand :global(.brand-logo) { width: 132px; }
         .menu { display: inline-grid; place-items: center; }
         .cta { display: none; }
         .actions { margin-left: auto; }
@@ -108,6 +112,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
         .links.open { clip-path: inset(0 0 0 0); opacity: 1; pointer-events: auto; }
         .links a { padding: 14px 4px; border-bottom: 1px solid var(--line); border-radius: 0; font-size: 1.0625rem; }
         .links a[aria-current="page"]::after { left: 4px; right: auto; width: 24px; bottom: 8px; }
+        .links .nav-cta { display: block; color: var(--index); border-bottom: 0; }
     }
     @media (prefers-reduced-motion: reduce) { .links { transition: opacity 150ms ease; } }
 </style>
@@ -126,6 +131,14 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
             btn?.setAttribute('aria-expanded', 'false');
             btn?.focus();
         }
+    });
+    document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const current = root.getAttribute('data-theme')
+            ?? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        const next = current === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('sd-theme', next); } catch (e) { /* storage blocked: theme lasts for this page only */ }
     });
     const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
     onScroll();

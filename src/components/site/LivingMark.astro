@@ -1,0 +1,37 @@
+---
+// The living mark (D369): a pixel bar chart generated at build time from a POC's own
+// index series by lib/livingMark.ts (port of brand/living_mark.py). Never hand-drawn,
+// always captioned with source, unit, cell size and threshold.
+import { livingMark } from '../../lib/livingMark';
+import type { Mark } from '../../lib/pocs';
+
+interface Props { mark: Mark; size?: number; lang?: 'en' | 'fr'; class?: string }
+const { mark, size = 168, lang = 'en', class: className = '' } = Astro.props;
+const fr = lang === 'fr';
+const geo = livingMark(mark.values, mark.cell, mark.threshold);
+const cappedNote = geo.capped.length
+    ? (fr
+        ? ` Colonnes plafonnées à 8 cellules : ${geo.capped.map(k => mark.labels[k]).join(', ')}.`
+        : ` Capped at 8 cells: ${geo.capped.map(k => mark.labels[k]).join(', ')}.`)
+    : '';
+const caption = (fr ? mark.captionFr : mark.caption) + cappedNote;
+const title = fr ? mark.titleFr : mark.title;
+---
+
+<figure class:list={['lmark', className]} style={`--lm:${size}px`}>
+    <svg viewBox="0 0 100 100" role="img" aria-label={title} xmlns="http://www.w3.org/2000/svg">
+        <title>{title}</title>
+        {geo.rects.map(r => <rect x={r.x} y={r.y} width={r.w} height={r.h} rx={r.rx} class={r.role} />)}
+        <rect x="0" y={Math.round((geo.lineY - 1.1) * 100) / 100} width="100" height="2.2" class="thr" />
+    </svg>
+    <figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+    .lmark { margin: 0; display: grid; gap: 10px; align-content: start; width: var(--lm); max-width: 100%; }
+    svg { width: var(--lm); height: var(--lm); max-width: 100%; display: block; }
+    .ink { fill: var(--ink); }
+    .trigger { fill: var(--trigger); }
+    .thr { fill: var(--index); }
+    figcaption { font-size: 0.8125rem; line-height: 1.4; color: var(--muted); }
+</style>
