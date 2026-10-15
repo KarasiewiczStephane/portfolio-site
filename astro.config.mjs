@@ -6,6 +6,8 @@ export default defineConfig({
   output: 'static',
   integrations: [
     sitemap({
+      // Redirect stubs are not pages.
+      filter: (page) => !page.includes('/resources/reality-check'),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
