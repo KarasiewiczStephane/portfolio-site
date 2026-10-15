@@ -67,7 +67,8 @@ async function main() {
         await waitForServer(previewUrl, STARTUP_TIMEOUT_MS);
         console.log('▸ Preview server ready, generating PDF...');
 
-        browser = await chromium.launch();
+        // PLAYWRIGHT_CHROMIUM_EXECUTABLE: use an already installed Chromium when Playwright cannot download its own (unsupported distro).
+        browser = await chromium.launch(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE } : {});
         const context = await browser.newContext();
         const page = await context.newPage();
         await page.goto(previewUrl, { waitUntil: 'networkidle' });

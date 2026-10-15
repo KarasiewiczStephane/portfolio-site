@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Logo from '../components/Logo.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -12,7 +13,7 @@ const jsonLd = {
             "name": "Stéphane Karasiewicz",
             "url": "https://skarazdata.com",
             "image": "https://skarazdata.com/portrait.jpg",
-            "jobTitle": "Constellation · Senior Data Engineer for Parametric Insurance",
+            "jobTitle": "Independent calculation agent for parametric insurance, principal of Skaraz Data",
             "description": "Principal of Skaraz Data, independent calculation agent: I define, build and independently check the index a parametric policy pays on, from public satellite and reanalysis data.",
             "email": "skaraz.science@gmail.com",
             "worksFor": { "@type": "Organization", "name": "Skaraz Data" },
@@ -35,8 +36,8 @@ const jsonLd = {
         {
             "@type": "CreativeWork",
             "@id": "https://skarazdata.com/cv",
-            "name": "CV · Stéphane Karasiewicz · Constellation",
-            "description": "Senior Data Engineer for Parametric Insurance. Nearly 2 years at Raincoat LLC, 5+ years satellite remote sensing at IFREMER. PhD Marine Ecology.",
+            "name": "CV · Stéphane Karasiewicz · Skaraz Data",
+            "description": "Independent calculation agent for parametric insurance. Raincoat (parametric insurtech) Feb 2024 to Jan 2026, satellite remote sensing at IFREMER 2018 to 2023. PhD Marine Ecology.",
             "url": "https://skarazdata.com/cv",
             "inLanguage": "en",
             "author": { "@id": "https://skarazdata.com/#person" },
@@ -47,8 +48,8 @@ const jsonLd = {
 ---
 
 <BaseLayout
-    title="CV · Stéphane Karasiewicz · Constellation"
-    description="Senior Data Engineer for Parametric Insurance. Nearly 2 years at Raincoat LLC, 5+ years satellite remote sensing at IFREMER. PhD Marine Ecology."
+    title="CV · Stéphane Karasiewicz · Skaraz Data"
+    description="Independent calculation agent for parametric insurance. Raincoat (parametric insurtech) Feb 2024 to Jan 2026, satellite remote sensing at IFREMER 2018 to 2023. PhD Marine Ecology."
     ogType="profile"
     jsonLd={jsonLd}
     hideChrome={true}
@@ -67,8 +68,9 @@ const jsonLd = {
             <!-- HEADER -->
             <header class="cv-header">
                 <div class="cv-header__text">
+                    <Logo class="cv-logo" title="Skaraz Data" />
                     <h1 class="cv-name">Stéphane Karasiewicz</h1>
-                    <p class="cv-title">Constellation · Senior Data Engineer for Parametric Insurance</p>
+                    <p class="cv-title">Independent calculation agent for parametric insurance · Principal, Skaraz Data</p>
                     <p class="cv-location">Hauts-de-France · Remote worldwide · 🇫🇷🇬🇧 native</p>
                     <p class="cv-contact">
                         <a href="https://skarazdata.com">skarazdata.com</a>
@@ -120,9 +122,9 @@ const jsonLd = {
                     </div>
                     <p class="cv-job__sub"><em>Parametric insurtech (Seed-stage, San Juan, Puerto Rico). Climate risk technology.</em></p>
                     <ul class="cv-bullets">
-                        <li>Worked on end-to-end ML pipelines for <strong>4 climate perils</strong> (drought and precipitation in production, water balance built to production, heat stress built but not shipped) across <strong>10+ countries</strong> in Latin America, the Caribbean and Africa</li>
+                        <li>Ran the satellite and reanalysis data layer for every peril except hurricane wind and earthquake, across <strong>10+ countries</strong> in Latin America, the Caribbean and Africa: precipitation and drought maintained in production, <strong>water balance</strong> built from scratch to production, <strong>heat stress</strong> built but not shipped</li>
                         <li>Engineered automated data management for <strong>2 TB+ satellite &amp; reanalysis data</strong> (CHIRPS, IMERG, ERA5-Land, Copernicus CDS, WEkEO)</li>
-                        <li>Built <strong>water balance</strong> pipeline from scratch to production; built <strong>heat stress</strong> pipeline to ready-to-deploy state; delivered a <strong>modular architecture roadmap</strong> as scoped technical handoff for next-perils scaling, transferred to the team at contract end</li>
+                        <li>Delivered a <strong>modular architecture roadmap</strong> as a scoped technical handoff for scaling to new perils, transferred to the team at contract end</li>
                         <li>Ran dev/ops solo for production pipelines at end of contract; built <strong>3 country-level operational dashboards</strong> (Precipitation, Water Balance, Drought)</li>
                         <li>Tools: Python, xarray, GDAL, Docker, PostgreSQL, scikit-learn</li>
                     </ul>
@@ -198,9 +200,9 @@ const jsonLd = {
 
             <!-- AVAILABILITY -->
             <aside class="cv-availability" aria-label="Availability">
-                <p class="cv-availability__title">Available · 2-3 new engagements per quarter</p>
+                <p class="cv-availability__title">Contact</p>
                 <p class="cv-availability__body">
-                    Best contact: LinkedIn DM with “reality” for the free Reality Check PDF.
+                    Best contact: <a href="mailto:skaraz.science@gmail.com">skaraz.science@gmail.com</a> or a LinkedIn message. To scope a trigger: <a href="https://skarazdata.com/scope">skarazdata.com/scope</a>
                 </p>
             </aside>
         </article>
@@ -209,14 +211,22 @@ const jsonLd = {
 
 <style>
     /* =========================================================
-       /cv — print-friendly resume. Palette hard-coded to mirror
-       index.astro (light/coral theme isn't in :root yet).
+       /cv: print-friendly resume in the Daylight steel theme of the
+       design system v1.1 (brand/DESIGN.md: light theme for PDFs).
+       Tokens are set on .cv-page so the inlined logo follows them.
        ========================================================= */
+    @font-face { font-family: "Switzer"; font-weight: 400; font-style: normal; font-display: swap; src: url("/fonts/switzer-400.woff2") format("woff2"); }
+    @font-face { font-family: "Switzer"; font-weight: 500; font-style: normal; font-display: swap; src: url("/fonts/switzer-500.woff2") format("woff2"); }
+    .cv-page { --ink: #14202a; --muted: #5a6670; --line: #cfd6da; --index: #0b5d73; --trigger: #b86e0e; }
+    .cv :global(.cv-logo) { width: 132px; margin: 0 0 0.9rem; }
+    .cv em { font-style: normal; }
+    .cv-availability__body a { color: #0b5d73; }
+    .cv-page, .cv-backlink, .cv-download { font-family: 'Switzer', system-ui, sans-serif; }
 
     /* Light page background overriding global.css dark theme. */
     .cv-page {
-        background: #ffffff;
-        color: #0f1b2c;
+        background: #eceff0;
+        color: #14202a;
         min-height: 100vh;
         padding: 2.5rem 1.5rem 4rem;
     }
@@ -233,22 +243,24 @@ const jsonLd = {
     .cv-backlink,
     .cv-download {
         font-size: 0.85rem;
-        color: #4a5a70;
+        color: #5a6670;
         text-decoration: none;
         transition: color 0.2s;
     }
 
     .cv-backlink:hover,
     .cv-download:hover {
-        color: #d85a30;
+        color: #0b5d73;
     }
 
     .cv {
         max-width: 800px;
         margin: 0 auto;
+        padding: 2rem 2.25rem;
+        border-radius: 6px;
         background: #ffffff;
-        color: #4a5a70;
-        font-family: 'Outfit', sans-serif;
+        color: #5a6670;
+        font-family: 'Switzer', system-ui, sans-serif;
         font-size: 0.85rem;
         line-height: 1.5;
     }
@@ -260,42 +272,42 @@ const jsonLd = {
         gap: 1.5rem;
         align-items: flex-start;
         padding-bottom: 1.25rem;
-        border-bottom: 1px solid rgba(15, 27, 44, 0.1);
+        border-bottom: 1px solid #cfd6da;
         margin-bottom: 1.25rem;
     }
 
     .cv-name {
-        font-family: 'DM Serif Display', serif;
+        font-family: 'Switzer', system-ui, sans-serif;
         font-size: 2.4rem;
         font-weight: 400;
         line-height: 1.1;
-        letter-spacing: -0.01em;
-        color: #042c53;
+        letter-spacing: -0.03em;
+        color: #14202a;
         margin: 0 0 0.4rem;
     }
 
     .cv-title {
         font-size: 0.95rem;
         font-weight: 500;
-        color: #042c53;
+        color: #14202a;
         margin: 0 0 0.5rem;
     }
 
     .cv-location {
         font-size: 0.82rem;
-        color: #4a5a70;
+        color: #5a6670;
         margin: 0 0 0.5rem;
     }
 
     .cv-contact {
         font-size: 0.82rem;
-        color: #4a5a70;
+        color: #5a6670;
         margin: 0;
         word-break: break-word;
     }
 
     .cv-contact a {
-        color: #d85a30;
+        color: #0b5d73;
         text-decoration: none;
     }
 
@@ -305,7 +317,7 @@ const jsonLd = {
 
     .cv-sep {
         margin: 0 0.35rem;
-        color: #b0bcc8;
+        color: #cfd6da;
     }
 
     .cv-header__photo img {
@@ -316,8 +328,8 @@ const jsonLd = {
         object-position: center top;
         border: 3px solid #ffffff;
         box-shadow:
-            0 0 0 1.5px rgba(216, 90, 48, 0.4),
-            0 8px 20px rgba(15, 27, 44, 0.08);
+            0 0 0 1.5px #cfd6da,
+            0 8px 20px #cfd6da;
         display: block;
     }
 
@@ -325,13 +337,12 @@ const jsonLd = {
     .cv-pitch {
         font-size: 0.95rem;
         line-height: 1.55;
-        color: #042c53;
-        font-style: italic;
-        margin: 0 0 1.5rem;
+        color: #14202a;
+                margin: 0 0 1.5rem;
         padding: 0;
     }
 
-    /* SECTIONS — override global.css `section { padding: 6rem 3rem }`. */
+    /* SECTIONS: override global.css `section { padding: 6rem 3rem }`. */
     .cv-section {
         padding: 0;
         margin: 0 0 1.25rem;
@@ -342,14 +353,14 @@ const jsonLd = {
     }
 
     .cv-section h2 {
-        font-family: 'DM Serif Display', serif;
+        font-family: 'Switzer', system-ui, sans-serif;
         font-size: 1.4rem;
         font-weight: 400;
         line-height: 1.2;
-        color: #042c53;
+        color: #14202a;
         margin: 0 0 0.65rem;
         padding-bottom: 0.2rem;
-        border-bottom: 1px solid rgba(15, 27, 44, 0.08);
+        border-bottom: 1px solid #cfd6da;
     }
 
     /* JOBS */
@@ -372,27 +383,27 @@ const jsonLd = {
     }
 
     .cv-job__head h3 {
-        font-family: 'Outfit', sans-serif;
+        font-family: 'Switzer', system-ui, sans-serif;
         font-size: 1.05rem;
-        font-weight: 600;
-        color: #042c53;
+        font-weight: 500;
+        color: #14202a;
         margin: 0;
         line-height: 1.3;
     }
 
     .cv-job__dates {
         font-size: 0.78rem;
-        color: #7a8aa0;
+        color: #5a6670;
         white-space: nowrap;
     }
 
     .cv-job__sub {
         font-size: 0.82rem;
-        color: #4a5a70;
+        color: #5a6670;
         margin: 0 0 0.4rem;
     }
 
-    /* BULLETS — chevron coral */
+    /* BULLETS: index-colour chevron */
     .cv-bullets {
         list-style: none;
         padding: 0;
@@ -405,7 +416,7 @@ const jsonLd = {
         margin-bottom: 0.25rem;
         font-size: 0.85rem;
         line-height: 1.5;
-        color: #4a5a70;
+        color: #14202a;
     }
 
     .cv-bullets li::before {
@@ -413,8 +424,8 @@ const jsonLd = {
         position: absolute;
         left: 0;
         top: -0.05em;
-        color: #d85a30;
-        font-weight: 700;
+        color: #0b5d73;
+        font-weight: 500;
         font-size: 1rem;
     }
 
@@ -423,7 +434,7 @@ const jsonLd = {
     }
 
     .cv-bullets a {
-        color: #d85a30;
+        color: #0b5d73;
         text-decoration: none;
     }
 
@@ -432,11 +443,11 @@ const jsonLd = {
     }
 
     .cv-bullets strong {
-        color: #042c53;
-        font-weight: 600;
+        color: #14202a;
+        font-weight: 500;
     }
 
-    /* TECH STACK — flat compact list */
+    /* TECH STACK: flat compact list */
     .cv-stack {
         list-style: none;
         padding: 0;
@@ -446,13 +457,13 @@ const jsonLd = {
     .cv-stack li {
         font-size: 0.85rem;
         line-height: 1.55;
-        color: #4a5a70;
+        color: #5a6670;
         margin-bottom: 0.15rem;
     }
 
     .cv-stack strong {
-        color: #042c53;
-        font-weight: 600;
+        color: #14202a;
+        font-weight: 500;
     }
 
     /* EDUCATION */
@@ -465,7 +476,7 @@ const jsonLd = {
     .cv-edu li {
         font-size: 0.85rem;
         line-height: 1.5;
-        color: #4a5a70;
+        color: #5a6670;
         margin-bottom: 0.4rem;
     }
 
@@ -474,21 +485,21 @@ const jsonLd = {
     }
 
     .cv-edu strong {
-        color: #042c53;
-        font-weight: 600;
+        color: #14202a;
+        font-weight: 500;
     }
 
     .cv-edu__sub {
         display: block;
         font-size: 0.78rem;
-        color: #7a8aa0;
+        color: #5a6670;
     }
 
     /* PUBLICATIONS subheads */
     .cv-subhead {
         font-size: 0.85rem;
-        font-weight: 600;
-        color: #042c53;
+        font-weight: 500;
+        color: #14202a;
         margin: 0.6rem 0 0.3rem;
     }
 
@@ -498,44 +509,43 @@ const jsonLd = {
 
     .cv-note {
         font-size: 0.78rem;
-        color: #7a8aa0;
-        font-style: italic;
-        margin: 0.5rem 0 0;
+        color: #5a6670;
+                margin: 0.5rem 0 0;
     }
 
     .cv-note a {
-        color: #d85a30;
+        color: #0b5d73;
         text-decoration: none;
     }
 
     /* LANGUAGES */
     .cv-langs {
         font-size: 0.85rem;
-        color: #4a5a70;
+        color: #5a6670;
         margin: 0;
     }
 
-    /* AVAILABILITY — discrete coral callout */
+    /* AVAILABILITY: discrete callout */
     .cv-availability {
         margin-top: 1.25rem;
         padding: 0.85rem 1rem;
-        background: rgba(216, 90, 48, 0.06);
-        border: 1px solid rgba(216, 90, 48, 0.22);
+        background: #f3f6f7;
+        border: 1px solid #cfd6da;
         border-radius: 6px;
         page-break-inside: avoid;
     }
 
     .cv-availability__title {
-        font-family: 'Outfit', sans-serif;
+        font-family: 'Switzer', system-ui, sans-serif;
         font-size: 0.95rem;
-        font-weight: 600;
-        color: #d85a30;
+        font-weight: 500;
+        color: #0b5d73;
         margin: 0 0 0.25rem;
     }
 
     .cv-availability__body {
         font-size: 0.82rem;
-        color: #4a5a70;
+        color: #5a6670;
         margin: 0;
     }
 
@@ -560,7 +570,7 @@ const jsonLd = {
     }
 
     /* =========================================================
-       PRINT — A4, no chrome, black underlined links
+       PRINT: A4, no chrome, black underlined links
        ========================================================= */
     @page {
         size: A4;
@@ -576,7 +586,7 @@ const jsonLd = {
 
         html, body {
             background: #ffffff !important;
-            color: #0f1b2c !important;
+            color: #14202a !important;
         }
 
         .cv-page {
@@ -588,15 +598,18 @@ const jsonLd = {
         .cv {
             max-width: 100% !important;
             margin: 0 !important;
+            padding: 0 !important;
             font-size: 8.5pt;
             line-height: 1.3;
-            color: #1a2433;
+            color: #14202a;
         }
 
         .cv-header {
             padding-bottom: 4pt;
             margin-bottom: 4pt;
         }
+
+        .cv :global(.cv-logo) { width: 96px; margin-bottom: 5pt; }
 
         .cv-name {
             font-size: 22pt;
@@ -685,14 +698,14 @@ const jsonLd = {
             width: 75px;
             height: 75px;
             border-width: 2px;
-            box-shadow: 0 0 0 1.5px rgba(216, 90, 48, 0.4);
+            box-shadow: 0 0 0 1.5px #cfd6da;
         }
 
         .cv-availability {
             margin-top: 4pt;
             padding: 4pt 7pt;
-            background: rgba(216, 90, 48, 0.06);
-            border: 1px solid rgba(216, 90, 48, 0.4);
+            background: #f3f6f7;
+            border: 1px solid #cfd6da;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
@@ -708,19 +721,19 @@ const jsonLd = {
 
         /* Links: black + underlined for paper readability. */
         a {
-            color: #0f1b2c !important;
+            color: #14202a !important;
             text-decoration: underline !important;
         }
 
         .cv-bullets li::before {
-            color: #d85a30 !important;
+            color: #0b5d73 !important;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
 
         /* Keep job blocks and the availability callout intact;
-           let sections flow so we don't waste page space.
-           Deliberately NOT setting page-break-after on h2/h3 — that rule
+           let sections flow so no page space is wasted.
+           Deliberately NOT setting page-break-after on h2/h3: that rule
            cascades and pushes headings + their content to the next page
            even when there's room on the current one. */
         .cv-job,

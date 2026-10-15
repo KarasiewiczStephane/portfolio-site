@@ -1,4 +1,4 @@
-/* Constellation dashboard — reads data/catalog.json (written by finalize_poc) and renders each
+/* Constellation dashboard: reads data/catalog.json (written by finalize_poc) and renders each
    POC: a georeferenced hazard raster, a per-stage frame scrubber, a district/sector score
    choropleth, a click-a-sector time series, and a backtest / basis-risk panel.
    Pure MapLibre GL + fetch; no build step. Served statically (see build.py).
@@ -21,10 +21,12 @@ const BASEMAPS = {
   dark: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
   light: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
 };
-let _theme = "dark";
+// Theme follows the site: <html data-theme> is set before first paint from the stored
+// "sd-theme" choice or the OS preference (index.html).
+let _theme = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
 const map = new maplibregl.Map({
   container: "map",
-  style: BASEMAPS.dark,
+  style: BASEMAPS[_theme],
   center: [30, 5],
   zoom: 1.6,
   hash: true, // #zoom/lat/lon shareable permalink
@@ -45,7 +47,7 @@ let _currentPoc = null;    // selected POC, for theme re-init
 /* ---- per-peril registry -------------------------------------------------
    ONE place that knows what a peril is called, measured in, and explained by.
    Previously this was a two-way `peril === "dhw" ? coral : crop` conditional
-   repeated at seven sites, which meant a THIRD peril did not get "no content" —
+   repeated at seven sites, which meant a THIRD peril did not get "no content" , 
    it silently inherited crop's. The NZ wind POC rendered "NDVI + rainfall",
    "observed bleaching years" and "no observed yield-loss series for Bangladesh".
    Wrong content that reads as authoritative is worse than missing content, so
@@ -87,7 +89,7 @@ const CORAL = {
     <div class="fstep">Trigger → Payout → backtest</div>`,
   seasonRow: (s) => `peak DHW <b>${s.peak_dhw}</b> → tier ${s.tier}, payout <b>${Math.round(s.payout_fraction * 100)}%</b>`,
   chartExplain: (dts) => `The line is the full-record weekly DHW; where a year's peak crosses the trigger it
-       pays that tier. Compare the pink bleaching bands against the crossings to read the basis risk
+       pays that tier. Compare the shaded bleaching bands against the crossings to read the basis risk
        (a miss = damage without a payout).`,
   backtestNote: "No observed bleaching series is wired for this POC yet.",
   severityCaveat: "DHW is an imperfect severity proxy for bleaching.",
@@ -153,7 +155,7 @@ const FLOOD = {
   // Four stages, because the whole point is that the pipeline is visible: the storm moving,
   // the trigger quantity building, the location's normal, and the departure from it.
   // Only three stages have frames, and their cadences differ on purpose. Rain rate is
-  // half-hourly (144 frames — the storm actually moving). Accumulation and anomaly are DAILY,
+  // half-hourly (144 frames: the storm actually moving). Accumulation and anomaly are DAILY,
   // because the 72 h total has to be sampled the same way as the climatology it is compared
   // against; a half-hourly rolling window finds a higher maximum than one constrained to day
   // boundaries, and mixing the two would inflate every anomaly by a sampling artefact.
@@ -166,7 +168,7 @@ const FLOOD = {
   how: `<b>IMERG rainfall → rolling accumulation per hex (the trigger) → tiered payout.</b> The trigger is an
          ABSOLUTE rainfall depth over a window, compared against thresholds derived from this location's own
          record. Each hex takes the wettest window it saw; the tier it reaches sets the payout.
-         ⚠ Pluvial flood only — rain falling faster than drainage carries it away, not rivers leaving their
+         ⚠ Pluvial flood only: rain falling faster than drainage carries it away, not rivers leaving their
          channels. ⚠ IMERG Final lags ~3.5 months; the Early run at ~4 h is the live path, not this.`,
   flow: `<div class="fstep in map" data-stage="raw_hazard">IMERG half-hourly rain rate (0.1°, GES DISC)</div>
     <div class="farrow">rolling accumulation over 6 / 24 / 72 h</div>
@@ -192,7 +194,7 @@ const PERILS = { dhw: CORAL, mhw: { ...CORAL, unit: "°C-weeks" }, crop_hybrid: 
 const perilOf = (p) => PERILS[p] || PERIL_FALLBACK;
 
 // Short dropdown labels so the selector never overflows the sidebar (full name kept as tooltip).
-const SHORT_LABEL = { coral_mayotte: "Mayotte — Coral DHW", coral_reunion: "La Réunion — Coral DHW", crop_bangladesh_full: "Bangladesh — Crop stress-index", wind_nz_2023: "New Zealand — Cyclone wind", flood_auckland_2023: "Auckland — Pluvial flood" };
+const SHORT_LABEL = { coral_mayotte: "Mayotte: coral DHW", coral_reunion: "La Réunion: coral DHW", crop_bangladesh_full: "Bangladesh: crop stress index", wind_nz_2023: "New Zealand: cyclone wind", flood_auckland_2023: "Auckland: pluvial flood" };
 
 // Legend as class intervals (the raster classes are evenly-spaced sample points; render the
 // bands BETWEEN them, top-down, with the unit): "≥ top", "a – b", …, "< second-lowest".
@@ -341,14 +343,14 @@ async function loadTracks(poc) {
     // of the gust ramp; dashed, because it is context rather than a measured surface.
     map.addLayer({ id: `trk-${poc}-case`, type: "line", source: `trk-${poc}`,
       layout: { "line-cap": "round", "line-join": "round" },
-      paint: { "line-color": "#0d1117", "line-width": 5, "line-opacity": 0.55 } });
+      paint: { "line-color": "#0d1b24", "line-width": 5, "line-opacity": 0.55 } });
     map.addLayer({ id: `trk-${poc}-lyr`, type: "line", source: `trk-${poc}`,
       layout: { "line-cap": "round", "line-join": "round" },
       paint: { "line-color": "#ffffff", "line-width": 2, "line-dasharray": [2, 1.4], "line-opacity": 0.9 } });
     map.addLayer({ id: `trk-${poc}-lbl`, type: "symbol", source: `trk-${poc}`,
       layout: { "symbol-placement": "line-center", "text-field": ["get", "name"],
                 "text-size": 11, "text-letter-spacing": 0.06, "text-offset": [0, -1.1] },
-      paint: { "text-color": "#ffffff", "text-halo-color": "#0d1117", "text-halo-width": 1.6 } });
+      paint: { "text-color": "#ffffff", "text-halo-color": "#0d1b24", "text-halo-width": 1.6 } });
 
     if (!_trkWired.has(poc)) {
       map.on("click", `trk-${poc}-lyr`, (ev) => {
@@ -389,12 +391,12 @@ async function loadStations(poc) {
   if (gj && gj.features.length && !map.getSource(`sta-${poc}`)) {
     map.addSource(`sta-${poc}`, { type: "geojson", data: gj });
     map.addLayer({ id: `sta-${poc}-lyr`, type: "circle", source: `sta-${poc}`,
-      paint: { "circle-radius": 6, "circle-color": "#ffffff", "circle-stroke-color": "#0d1117",
+      paint: { "circle-radius": 6, "circle-color": "#ffffff", "circle-stroke-color": "#0d1b24",
                "circle-stroke-width": 2, "circle-opacity": 0.95 } });
     map.addLayer({ id: `sta-${poc}-lbl`, type: "symbol", source: `sta-${poc}`,
       layout: { "text-field": ["get", "code"], "text-size": 10, "text-offset": [0, 1.3],
                 "text-letter-spacing": 0.08 },
-      paint: { "text-color": "#ffffff", "text-halo-color": "#0d1117", "text-halo-width": 1.6 } });
+      paint: { "text-color": "#ffffff", "text-halo-color": "#0d1b24", "text-halo-width": 1.6 } });
 
     if (!_staWired.has(poc)) {
       map.on("click", `sta-${poc}-lyr`, (ev) => {
@@ -413,7 +415,7 @@ async function loadStations(poc) {
               </div>
               <div class="pexplain">This is a model-to-station <b>gap</b>, not an ERA5 bias: it
               conflates model error with exposure difference. Aerodromes are sited flat and
-              sheltered, so the measured value is a <b>floor</b> on the regional peak — Auckland
+              sheltered, so the measured value is a <b>floor</b> on the regional peak: Auckland
               read 88.9 km/h during Gabrielle while exposed capes read 150–159.
               ${p.n_censored} of ${p.n_obs} observations reported no gust, which under the
               10 kt rule bounds rather than removes them.</div>`
@@ -441,7 +443,7 @@ async function loadChoropleth(poc) {
     map.addLayer({ id: `choro-${poc}-hit`, type: "fill", source: `choro-${poc}`,
       paint: { "fill-color": "#000000", "fill-opacity": 0.01 } });
     if (!_dts[poc]) _dts[poc] = await fetch(`${DATA}/${poc}/district_timeseries.json`, NOSTORE).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-    // bind click/hover once — map-level listeners survive setStyle (theme swap re-adds the layer)
+    // bind click/hover once: map-level listeners survive setStyle (theme swap re-adds the layer)
     if (!_choroWired.has(poc)) {
       map.on("click", `choro-${poc}-hit`, (ev) => openDistrictPopup(poc, ev.features[0].properties.name, ev.lngLat));
       map.on("mouseenter", `choro-${poc}-hit`, () => (map.getCanvas().style.cursor = "pointer"));
@@ -453,11 +455,22 @@ async function loadChoropleth(poc) {
   return meta;
 }
 
+// Chart colours come from the design tokens of the current theme (style.css), read when a
+// chart is drawn, so a popup opened after a theme switch matches it. Tokens are 6-digit hex,
+// so an alpha suffix can be appended ("${k.muted}33").
+function chartColors() {
+  const cs = getComputedStyle(document.documentElement);
+  const v = (n, f) => (cs.getPropertyValue(n).trim() || f);
+  return { ink: v("--ink", "#e6edf0"), muted: v("--muted", "#8fa3b0"), line: v("--line", "#1d3442"),
+           index: v("--index", "#3fa7bd"), trigger: v("--trigger", "#e8a33d") };
+}
+
 // Time-series chart. Single-season series get month ticks; a multi-year series gets year ticks
 // plus shaded bands on `markYears` (observed bleaching years) so trigger-crossings visibly line
-// up with real events — that overlay IS the basis-risk story.
+// up with real events: that overlay IS the basis-risk story.
 function buildChart(d, trigger, direction, markYears, markLabel) {
   const vals = d.values, n = vals.length;
+  const k = chartColors();
   if (!n) return "";
   const above = direction === "above";
   const W = 460, H = 220, padL = 34, padR = 14, padT = 14, padB = 26;
@@ -495,13 +508,13 @@ function buildChart(d, trigger, direction, markYears, markLabel) {
       const idx = d.dates.map((s, i) => (s.slice(0, 4) === String(yr) ? i : -1)).filter((i) => i >= 0);
       if (!idx.length) return;
       const x0 = X(idx[0]), x1 = X(idx[idx.length - 1]);
-      bands += `<rect x="${x0.toFixed(1)}" y="${padT}" width="${Math.max(x1 - x0, 2).toFixed(1)}" height="${H - padT - padB}" fill="#f7787022"/>
-        <text x="${((x0 + x1) / 2).toFixed(1)}" y="${padT + 8}" fill="#f778ba" font-size="8" text-anchor="middle">${markLabel || "event"} ${yr}</text>`;
+      bands += `<rect x="${x0.toFixed(1)}" y="${padT}" width="${Math.max(x1 - x0, 2).toFixed(1)}" height="${H - padT - padB}" fill="${k.ink}1a"/>
+        <text x="${((x0 + x1) / 2).toFixed(1)}" y="${padT + 8}" fill="${k.muted}" font-size="8" text-anchor="middle">${markLabel || "event"} ${yr}</text>`;
     });
   }
   // Split the series at real gaps in observation. The x-axis is INDEX-based, so a POC that
   // analyses two five-day cyclone windows a month apart was drawing them as one continuous
-  // line across a month nobody measured — and the only x label was a lone "Feb" sitting on
+  // line across a month nobody measured: and the only x label was a lone "Feb" sitting on
   // the join. Segment it, and say what each segment is.
   const ts = d.dates.map((x) => Date.parse(x));
   const deltas = [];
@@ -524,11 +537,11 @@ function buildChart(d, trigger, direction, markYears, markLabel) {
       const x0 = X(seg[0]), x1 = X(seg[seg.length - 1]);
       const a = d.dates[seg[0]], b = d.dates[seg[seg.length - 1]];
       const lbl = span(a, b);
-      ticks += `<text x="${((x0 + x1) / 2).toFixed(1)}" y="${H - 8}" fill="#8b949e" font-size="9" text-anchor="middle">${lbl}</text>`;
+      ticks += `<text x="${((x0 + x1) / 2).toFixed(1)}" y="${H - 8}" fill="${k.muted}" font-size="9" text-anchor="middle">${lbl}</text>`;
       if (k) {
         const gx = ((X(segs[k - 1][segs[k - 1].length - 1]) + x0) / 2).toFixed(1);
-        ticks += `<line x1="${gx}" y1="${padT}" x2="${gx}" y2="${H - padB}" stroke="#8b949e" stroke-width="0.6" stroke-dasharray="2 3"/>
-          <text x="${gx}" y="${padT + 8}" fill="#8b949e" font-size="7.5" text-anchor="middle">not observed</text>`;
+        ticks += `<line x1="${gx}" y1="${padT}" x2="${gx}" y2="${H - padB}" stroke="${k.muted}" stroke-width="0.6" stroke-dasharray="2 3"/>
+          <text x="${gx}" y="${padT + 8}" fill="${k.muted}" font-size="7.5" text-anchor="middle">not observed</text>`;
       }
     });
   } else {
@@ -540,23 +553,23 @@ function buildChart(d, trigger, direction, markYears, markLabel) {
       if (i === 0) return;
       const x = X(i).toFixed(1);
       const lbl = singleSeason ? MON[(+key || 1) - 1] : key;
-      ticks += `<line x1="${x}" y1="${padT}" x2="${x}" y2="${H - padB}" stroke="#30363d" stroke-width="0.5"/>
-        <text x="${x}" y="${H - 8}" fill="#8b949e" font-size="9" text-anchor="middle">${lbl}</text>`;
+      ticks += `<line x1="${x}" y1="${padT}" x2="${x}" y2="${H - padB}" stroke="${k.line}" stroke-width="0.5"/>
+        <text x="${x}" y="${H - 8}" fill="${k.muted}" font-size="9" text-anchor="middle">${lbl}</text>`;
     });
   }
   return `<svg width="100%" viewBox="0 0 ${W} ${H}" class="chart" preserveAspectRatio="xMidYMid meet">
     ${bands}${ticks}
-    ${excessPath ? `<path d="${excessPath}" fill="#4a7dff33"/>` : ""}
-    ${bandPath ? `<path d="${bandPath}" fill="#8b949e33"/>
-    <polyline points="${band.map((m, i) => `${X(i).toFixed(1)},${Y(m).toFixed(1)}`).join(" ")}" fill="none" stroke="#8b949e" stroke-width="1" stroke-dasharray="3 2"/>
-    <text x="${W - padR}" y="${(Y(band[n - 1]) - 4).toFixed(1)}" fill="#8b949e" font-size="8.5" text-anchor="end">normal for these dates</text>` : ""}
-    <line x1="${padL}" y1="${y0}" x2="${W - padR}" y2="${y0}" stroke="#484f58" stroke-width="0.5"/>
-    <text x="${padL - 4}" y="${y0 + 3}" fill="#8b949e" font-size="9" text-anchor="end">0</text>
-    <rect x="${padL}" y="${(above ? padT : yT).toFixed(1)}" width="${W - padL - padR}" height="${(above ? yT - padT : H - padB - yT).toFixed(1)}" fill="#f8514914"/>
-    <line x1="${padL}" y1="${yT}" x2="${W - padR}" y2="${yT}" stroke="#f85149" stroke-dasharray="4 3"/>
-    <text x="${padL - 4}" y="${yT + 3}" fill="#f85149" font-size="9" text-anchor="end">${trigger}</text>
-    <text x="${W - padR}" y="${yT - 4}" fill="#f85149" font-size="9" text-anchor="end">trigger (payout starts)</text>
-    ${segs.map((seg) => `<polyline points="${seg.map((i) => `${X(i).toFixed(1)},${Y(vals[i]).toFixed(1)}`).join(" ")}" fill="none" stroke="#58a6ff" stroke-width="1.3"/>`).join("")}
+    ${excessPath ? `<path d="${excessPath}" fill="${k.index}33"/>` : ""}
+    ${bandPath ? `<path d="${bandPath}" fill="${k.muted}33"/>
+    <polyline points="${band.map((m, i) => `${X(i).toFixed(1)},${Y(m).toFixed(1)}`).join(" ")}" fill="none" stroke="${k.muted}" stroke-width="1" stroke-dasharray="3 2"/>
+    <text x="${W - padR}" y="${(Y(band[n - 1]) - 4).toFixed(1)}" fill="${k.muted}" font-size="8.5" text-anchor="end">normal for these dates</text>` : ""}
+    <line x1="${padL}" y1="${y0}" x2="${W - padR}" y2="${y0}" stroke="${k.muted}" stroke-width="0.5"/>
+    <text x="${padL - 4}" y="${y0 + 3}" fill="${k.muted}" font-size="9" text-anchor="end">0</text>
+    <rect x="${padL}" y="${(above ? padT : yT).toFixed(1)}" width="${W - padL - padR}" height="${(above ? yT - padT : H - padB - yT).toFixed(1)}" fill="${k.trigger}14"/>
+    <line x1="${padL}" y1="${yT}" x2="${W - padR}" y2="${yT}" stroke="${k.trigger}" stroke-dasharray="4 3"/>
+    <text x="${padL - 4}" y="${yT + 3}" fill="${k.trigger}" font-size="9" text-anchor="end">${trigger}</text>
+    <text x="${W - padR}" y="${yT - 4}" fill="${k.trigger}" font-size="9" text-anchor="end">trigger (payout starts)</text>
+    ${segs.map((seg) => `<polyline points="${seg.map((i) => `${X(i).toFixed(1)},${Y(vals[i]).toFixed(1)}`).join(" ")}" fill="none" stroke="${k.index}" stroke-width="1.5"/>`).join("")}
   </svg>`;
 }
 
@@ -597,8 +610,8 @@ function openDistrictPopup(poc, name, lngLat) {
   const marks = _damaging[poc] || [];
   // Band legend only where the peril HAS observed events to shade. Wind has none, and
   // "pink bands = observed bleaching years" on a New Zealand map is another peril's caption.
-  const bandNote = (P.marksLabel && marks.length) ? ` Pink bands = ${P.marksLabel} years.` : "";
-  const chartCap = `<div class="pcap">Line = ${unit}, <b>${period}</b>. Dashed red = trigger.${bandNote} Every year's peak-vs-trigger is the basis risk.</div>`;
+  const bandNote = (P.marksLabel && marks.length) ? ` Shaded bands = ${P.marksLabel} years.` : "";
+  const chartCap = `<div class="pcap">Line = ${unit}, <b>${period}</b>. Dashed amber = trigger.${bandNote} Every year's peak-vs-trigger is the basis risk.</div>`;
   const explain = dts.payout_formula
     ? `<b>Trigger</b>: ${dts.trigger_label || trig}. <b>Payout</b>: ${dts.payout_formula}.` +
       (P.chartExplain ? ` ${P.chartExplain(dts)}` : "")
@@ -628,10 +641,10 @@ function paintChoropleth(poc, meta, year, on) {
   const prop = (meta.score_property || "score_{year}").replace("{year}", year);
   // Ramp stops key on `score` for the 1-10 perils and on `threshold` for perils whose index
   // is an absolute physical quantity. A gust in km/h must NOT be squashed into a 1-10 score
-  // just to fit the older shape — the number on the legend is the number on the map.
+  // just to fit the older shape: the number on the legend is the number on the map.
   // Stops must be STRICTLY ASCENDING. The old form prepended its own `0, "#30363d"`
   // no-data anchor, which collided with wind's first ramp stop (threshold 0, "below
-  // Cat 1") and made the whole expression invalid — MapLibre then painted nothing, so
+  // Cat 1") and made the whole expression invalid: MapLibre then painted nothing, so
   // every hex sat dark while the legend looked perfect. Coral and crop start at score 1
   // and never hit it.
   const stops = [];
@@ -648,11 +661,11 @@ function paintChoropleth(poc, meta, year, on) {
     map.setLayoutProperty(lyrId, "visibility", "visible");
   } else {
     map.addLayer({ id: lyrId, type: "fill", source: `choro-${poc}`,
-      paint: { "fill-color": fill, "fill-opacity": 0.75, "fill-outline-color": "#0d1117" } });
+      paint: { "fill-color": fill, "fill-opacity": 0.75, "fill-outline-color": "#0d1b24" } });
   }
 }
 // Every POC's raster and frame layers persist on the map once loaded, and setPixelVisible
-// only ever touched the ACTIVE one — so a previously-viewed POC kept painting underneath.
+// only ever touched the ACTIVE one: so a previously-viewed POC kept painting underneath.
 // Invisible until two POCs overlapped geographically: the flood and cyclone POCs cover the
 // same New Zealand box, and the wind gust raster showed through the flood hexes as a tan
 // wash. Coral and crop never revealed it because they are oceans apart.
@@ -699,7 +712,7 @@ async function openDetail(e) {
       <tr><th>Tier</th><th>Threshold</th><th>Payout</th></tr>
       ${ladder.map((t) => `<tr><td>${t.tier}</td><td>${t.threshold}</td><td>${t.payout_pct ?? Math.round((t.payout_fraction || 0) * 100)}%</td></tr>`).join("")}
     </table>
-    <p class="fine">Modeled payouts on an illustrative €${(summary.limit_eur || 0).toLocaleString()} limit — not a premium.</p></div>` : "";
+    <p class="fine">Modeled payouts on an illustrative €${(summary.limit_eur || 0).toLocaleString()} limit, not a premium.</p></div>` : "";
 
   document.getElementById("detailBody").innerHTML = `
     <h2>${e.display_name || e.poc_id}</h2>
@@ -713,7 +726,7 @@ async function openDetail(e) {
   wireControls(e);
 }
 
-// Backtest & basis-risk panel — the differentiated deliverable. Built from summary.json's
+// Backtest & basis-risk panel: the differentiated deliverable. Built from summary.json's
 // basis_risk block (no extra fetch); the 16-year outcome grid is classified from
 // years_paid vs years_damaging over the analysis span.
 function basisRiskPanel(poc, summary) {
@@ -733,8 +746,8 @@ function basisRiskPanel(poc, summary) {
     if (!tiles.length) return "";
     return `<div class="section"><h3>Basis risk</h3>
       <div class="tiles">${tiles.join("")}</div>
-      <p class="fine">Spatial basis risk = within-polygon heterogeneity of the index (mean std ${sp.mean_spatial_std != null ? sp.mean_spatial_std.toFixed(2) : "—"}, max ${sp.max_spatial_std != null ? sp.max_spatial_std.toFixed(2) : "—"} ${PB.spatialUnit}).</p>
-      <p class="fine"><b>Predictive backtest N/A</b> — ${PB.backtestNote}${pred.reason ? ` (${pred.reason})` : ""}. Provide an observed loss series and the hit-rate / false-positive / outcome grid switches on.</p>
+      <p class="fine">Spatial basis risk = within-polygon heterogeneity of the index (mean std ${sp.mean_spatial_std != null ? sp.mean_spatial_std.toFixed(2) : "n/a"}, max ${sp.max_spatial_std != null ? sp.max_spatial_std.toFixed(2) : "n/a"} ${PB.spatialUnit}).</p>
+      <p class="fine"><b>Predictive backtest N/A:</b> ${PB.backtestNote}${pred.reason ? ` (${pred.reason})` : ""}. Provide an observed loss series and the hit-rate / false-positive / outcome grid switches on.</p>
     </div>`;
   }
   const br = pred;
@@ -760,7 +773,7 @@ function basisRiskPanel(poc, summary) {
     if (cnt) {
       const rate = (sum / cnt) * 100;
       lossCostHtml = `<p class="fine">Technical loss-cost ≈ <b>${rate.toFixed(1)}%</b> of limit / yr
-        (mean modeled annual payout ÷ limit) — a pure loss-cost, not a quoted premium.</p>`;
+        (mean modeled annual payout ÷ limit), a pure loss-cost, not a quoted premium.</p>`;
     }
   }
 
@@ -770,11 +783,11 @@ function basisRiskPanel(poc, summary) {
     const cls = p && dg ? "tp" : p && !dg ? "fp" : !p && dg ? "miss" : "tn";
     grid += `<div class="yr ${cls}" title="${y}: ${p ? "paid" : "no payout"}, ${dg ? ev + " observed" : "no event"}">${String(y).slice(2)}</div>`;
   }
-  const pct = (x) => (x == null ? "—" : x <= 1 ? x.toFixed(2) : x.toFixed(2));
+  const pct = (x) => (x == null ? "n/a" : x <= 1 ? x.toFixed(2) : x.toFixed(2));
 
   // Narrative is DERIVED, never hardcoded. It used to be written for Mayotte (3 events, one
   // dry-fire) and rendered verbatim under La Réunion's tiles, where the truth is 2 events and
-  // six dry-fires — i.e. the prose contradicted the false-pos tile directly above it. On a
+  // six dry-fires: i.e. the prose contradicted the false-pos tile directly above it. On a
   // dashboard whose whole pitch is data integrity, that is the one bug you cannot ship.
   const nEvents = dmg.size;
   const nDry = [...paid].filter((y) => !dmg.has(y)).length;
@@ -783,7 +796,7 @@ function basisRiskPanel(poc, summary) {
   const plural = (n, one, many) => (n === 1 ? `one ${one}` : `${n} ${many}`);
 
   const caught = nEvents === 0
-    ? `No documented ${ev} years in the record — nothing to score`
+    ? `No documented ${ev} years in the record, nothing to score`
     : nMiss === 0
     ? `Caught every documented ${ev} year (hit rate ${pct(br.hit_rate)})`
     : `Caught ${nEvents - nMiss} of ${nEvents} documented ${ev} ${nEvents - nMiss === 1 ? "year" : "years"} (hit rate ${pct(br.hit_rate)}), ${plural(nMiss, "miss", "misses")}`;
@@ -801,7 +814,7 @@ function basisRiskPanel(poc, summary) {
       <span><i class="miss"></i>miss</span><span><i class="tn"></i>quiet</span>
     </div>
     <p class="fine">${caught}; ${dryPhrase}; the basis gap (${pct(br.basis_risk_gap)}) is the
-      payout-vs-severity mismatch an audit shrinks.</p>
+      payout-vs-severity mismatch an audit is meant to read and reduce.</p>
     <p class="fine caveat">Caveat: metrics rest on ${plural(nEvents, "event", "events")} over ${nYears} yrs,
       too few to calibrate on. ${PB.severityCaveat} Treat as directional,
       not calibrated.</p>
@@ -1000,8 +1013,7 @@ function selectLayer(pocId, refocus = true) {
 function toggleTheme() {
   _theme = _theme === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", _theme);
-  const btn = document.getElementById("themeToggle");
-  if (btn) btn.textContent = _theme === "light" ? "☾ Dark" : "☀ Light";
+  try { localStorage.setItem("sd-theme", _theme); } catch (err) { /* storage blocked: theme lasts for this page only */ }
   const cur = _currentPoc;
   rasterLayers.length = 0;
   // keep _choroWired: map-level layer click handlers survive setStyle, so re-binding would double them
@@ -1025,7 +1037,7 @@ async function populate() {
     catalog = await fetch(`${DATA}/catalog.json`, NOSTORE).then((r) => r.json());
   } catch (err) {
     document.getElementById("controls").insertAdjacentHTML("beforeend",
-      `<p style="color:#f85149">catalog.json not found — run <code>python dashboard/build.py</code></p>`);
+      `<p style="color:var(--trigger)">catalog.json not found; run <code>python dashboard/build.py</code></p>`);
     return;
   }
   const sel = document.getElementById("layerSelect");

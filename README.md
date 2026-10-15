@@ -19,8 +19,8 @@ Live at [skarazdata.com](https://skarazdata.com). Skaraz Data, independent calcu
 | Scope form (EN / FR) | `/scope`, `/fr/cadrage` |
 | About | `/about` |
 | Public CV (page + PDF download) | `/cv` |
-| Case study — Raincoat | `/projects/case-study-raincoat` |
-| Reality Check (lead magnet, page + PDF) | `/resources/reality-check` |
+| Case study: Raincoat | `/projects/case-study-raincoat` |
+| Reality Check (retired, D365): redirect to `/scope` | `/resources/reality-check` |
 | Blog | `/blog` |
 
 ## Develop
@@ -30,14 +30,13 @@ npm install
 npm run dev          # localhost:4321
 npm run build        # dist/
 npm run cv:pdf       # regenerate the CV PDF via Playwright
-npm run reality:pdf  # regenerate the Reality Check PDF via Playwright
 ```
 
 ## Source of truth for copy
 
 The canonical positioning + page copy lives in
 `Freelance/crm/context/positioning/`
-(`about.md`, `case-study-raincoat.md`, `reality-check.md`).
+(`about.md`, `case-study-raincoat.md`).
 Edit there, then port to the Astro pages.
 
 ## History
