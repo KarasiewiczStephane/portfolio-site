@@ -1,0 +1,174 @@
+---
+// Scope form (D363). Static site: nothing is sent to a server. On submit the fields are
+// composed into an email (mailto:) and shown as plain text with a copy button, so the
+// visitor can paste it anywhere if no mail client opens. Without JS the browser falls back
+// to a plain mailto form post.
+interface Props { lang?: 'en' | 'fr' }
+const { lang = 'en' } = Astro.props;
+const fr = lang === 'fr';
+const to = 'skaraz.science@gmail.com';
+const t = fr
+    ? {
+        peril: 'Péril', perilHint: 'Par exemple : sécheresse, inondation, vent cyclonique, stress thermique marin, feux de forêt',
+        region: 'Région', regionHint: 'Pays, région ou zone couverte',
+        data: 'Données utilisées', dataHint: 'Sources actuelles ou envisagées (CHIRPS, ERA5, IMERG, Sentinel, stations...). Laissez vide si rien n’est encore choisi.',
+        deadline: 'Échéance', deadlineHint: 'Date de lancement, réunion investisseurs, renouvellement...',
+        org: 'Organisation', name: 'Nom', email: 'E-mail', message: 'Message', messageHint: 'Ce que vous attendez : audit d’un déclencheur existant, conception d’un nouvel indice, vérification, calcul.',
+        submit: 'Préparer l’e-mail', required: 'obligatoire', optional: 'facultatif',
+        outTitle: 'Votre demande', outNote: 'Votre messagerie devrait s’ouvrir avec ce texte. Sinon, copiez-le et envoyez-le à',
+        copy: 'Copier le texte', copied: 'Copié', copyFail: 'Copie impossible : sélectionnez le texte',
+        subject: 'Cadrage', err: 'Merci de remplir les champs obligatoires.',
+        privacy: 'Rien n’est envoyé par ce site : le formulaire prépare un e-mail que vous envoyez vous-même.',
+    }
+    : {
+        peril: 'Peril', perilHint: 'For example: drought, flood, cyclone wind, marine heat stress, wildfire',
+        region: 'Region', regionHint: 'Country, region or area covered',
+        data: 'Data used', dataHint: 'Current or planned sources (CHIRPS, ERA5, IMERG, Sentinel, stations...). Leave empty if nothing is chosen yet.',
+        deadline: 'Deadline', deadlineHint: 'Launch date, investor or capacity meeting, renewal...',
+        org: 'Organisation', name: 'Name', email: 'Email', message: 'Message', messageHint: 'What you need: an audit of an existing trigger, a new index designed, verification, calculation.',
+        submit: 'Compose the email', required: 'required', optional: 'optional',
+        outTitle: 'Your request', outNote: 'Your email app should open with this text. If it does not, copy it and send it to',
+        copy: 'Copy the text', copied: 'Copied', copyFail: 'Copy blocked: select the text instead',
+        subject: 'Scope', err: 'Please fill in the required fields.',
+        privacy: 'Nothing is sent by this site: the form composes an email that you send yourself.',
+    };
+const fields = [
+    { id: 'peril', label: t.peril, hint: t.perilHint, req: true, type: 'text' },
+    { id: 'region', label: t.region, hint: t.regionHint, req: true, type: 'text' },
+    { id: 'data', label: t.data, hint: t.dataHint, req: false, type: 'text' },
+    { id: 'deadline', label: t.deadline, hint: t.deadlineHint, req: false, type: 'text' },
+    { id: 'organisation', label: t.org, req: true, type: 'text', ac: 'organization' },
+    { id: 'name', label: t.name, req: true, type: 'text', ac: 'name' },
+    { id: 'email', label: t.email, req: true, type: 'email', ac: 'email' },
+];
+---
+
+<form class="scope" action={`mailto:${to}`} method="post" enctype="text/plain" data-scope
+    data-to={to} data-subject={t.subject} data-lang={lang} data-copied={t.copied} data-copyfail={t.copyFail} data-copylabel={t.copy} data-err={t.err} novalidate>
+    <div class="grid2">
+        {fields.map(f => (
+            <div class:list={['field', { wide: f.id === 'data' }]}>
+                <label for={`f-${f.id}`}>{f.label} <span class="req">{f.req ? t.required : t.optional}</span></label>
+                <input id={`f-${f.id}`} name={f.id} type={f.type} required={f.req} autocomplete={f.ac ?? 'off'} aria-describedby={f.hint ? `h-${f.id}` : undefined} />
+                {f.hint && <p class="hint" id={`h-${f.id}`}>{f.hint}</p>}
+            </div>
+        ))}
+        <div class="field wide">
+            <label for="f-message">{t.message} <span class="req">{t.optional}</span></label>
+            <textarea id="f-message" name="message" rows="5" aria-describedby="h-message"></textarea>
+            <p class="hint" id="h-message">{t.messageHint}</p>
+        </div>
+    </div>
+    <p class="err" role="alert" data-err-out hidden></p>
+    <div class="actions">
+        <button class="btn" type="submit" data-umami-event="scope-submit">{t.submit} <span class="arrow" aria-hidden="true">→</span></button>
+        <p class="small muted">{t.privacy}</p>
+    </div>
+</form>
+
+<section class="out" data-out hidden aria-live="polite">
+    <p class="label">{t.outTitle}</p>
+    <p class="small muted">{t.outNote} <a href={`mailto:${to}`}>{to}</a>.</p>
+    <textarea readonly rows="12" data-out-text aria-label={t.outTitle}></textarea>
+    <div class="out-actions">
+        <button class="btn btn--ghost" type="button" data-copy>{t.copy}</button>
+        <a class="link" data-mailto href={`mailto:${to}`}>{fr ? 'Ouvrir dans la messagerie' : 'Open in your email app'} <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+</section>
+
+<style>
+    .scope { display: grid; gap: 24px; }
+    .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; }
+    .field { display: grid; gap: 8px; align-content: start; min-width: 0; }
+    .field.wide { grid-column: 1 / -1; }
+    label { font-weight: 500; font-size: 0.9375rem; }
+    .req { font: 400 0.75rem/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-left: 6px; }
+    input, textarea {
+        width: 100%; min-height: 46px; padding: 11px 14px;
+        font: 400 1rem/1.4 var(--text); color: var(--ink);
+        background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius);
+        transition: border-color 150ms ease;
+    }
+    textarea { resize: vertical; }
+    input:focus-visible, textarea:focus-visible { outline: 2px solid var(--index); outline-offset: 1px; border-color: var(--index); }
+    input[aria-invalid="true"] { border-color: var(--ink); border-width: 2px; }
+    .hint { font-size: 0.875rem; color: var(--muted); }
+    .err { color: var(--ink); font-weight: 500; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+    .actions p { max-width: 46ch; }
+    .out { margin-top: 32px; padding: clamp(18px, 2.5vw, 28px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); display: grid; gap: 12px; }
+    .out textarea { font: 400 0.875rem/1.5 var(--mono); background: var(--ground); }
+    .out-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+    @media (max-width: 640px) { .grid2 { grid-template-columns: minmax(0, 1fr); } }
+</style>
+
+<script>
+    const form = document.querySelector<HTMLFormElement>('[data-scope]');
+    const out = document.querySelector<HTMLElement>('[data-out]');
+    const outText = document.querySelector<HTMLTextAreaElement>('[data-out-text]');
+    const copyBtn = document.querySelector<HTMLButtonElement>('[data-copy]');
+    const mailLink = document.querySelector<HTMLAnchorElement>('[data-mailto]');
+    const errOut = document.querySelector<HTMLElement>('[data-err-out]');
+
+    if (form && out && outText) {
+        const fr = form.dataset.lang === 'fr';
+        const labels: Record<string, string> = {};
+        form.querySelectorAll('label').forEach(l => {
+            const id = l.getAttribute('for')?.replace('f-', '');
+            if (id) labels[id] = (l.firstChild?.textContent ?? id).trim();
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const missing = Array.from(form.querySelectorAll<HTMLInputElement>('input[required]'))
+                .filter(i => !i.value.trim() || (i.type === 'email' && !i.checkValidity()));
+            form.querySelectorAll('input').forEach(i => i.removeAttribute('aria-invalid'));
+            if (missing.length) {
+                missing.forEach(i => i.setAttribute('aria-invalid', 'true'));
+                if (errOut) { errOut.textContent = form.dataset.err ?? ''; errOut.hidden = false; }
+                missing[0].focus();
+                return;
+            }
+            if (errOut) errOut.hidden = true;
+
+            const data = new FormData(form);
+            const get = (k: string) => String(data.get(k) ?? '').trim();
+            const order = ['peril', 'region', 'data', 'deadline', 'organisation', 'name', 'email'];
+            const lines = order.map(k => `${labels[k]}: ${get(k) || '-'}`);
+            const msg = get('message');
+            const body = [
+                fr ? 'Bonjour,' : 'Hello,',
+                '',
+                fr ? 'Voici le cadrage de mon besoin :' : 'Here is the scope of what I need:',
+                '',
+                ...lines,
+                '',
+                `${labels['message']}:`,
+                msg || '-',
+                '',
+                get('name'),
+            ].join('\n');
+            const subject = `${form.dataset.subject}: ${get('peril')}, ${get('region')} (${get('organisation')})`;
+            const href = `mailto:${form.dataset.to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            outText.value = `${fr ? 'Objet' : 'Subject'}: ${subject}\n\n${body}`;
+            if (mailLink) mailLink.href = href;
+            out.hidden = false;
+            out.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+            window.location.href = href;
+        });
+
+        copyBtn?.addEventListener('click', async () => {
+            const label = form.dataset.copylabel ?? '';
+            try {
+                await navigator.clipboard.writeText(outText.value);
+                copyBtn.textContent = form.dataset.copied ?? '';
+            } catch {
+                outText.focus();
+                outText.select();
+                copyBtn.textContent = form.dataset.copyfail ?? '';
+            }
+            setTimeout(() => { copyBtn.textContent = label; }, 2200);
+        });
+    }
+</script>

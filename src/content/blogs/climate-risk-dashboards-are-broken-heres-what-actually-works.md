@@ -57,4 +57,4 @@ Building dashboards that account for these dynamics requires moving beyond simpl
 
 If your climate risk dashboard cannot answer the question "which three assets need action this week, and what specifically should we do?" then it is a reporting tool, not a decision tool. The difference matters when the stakes are measured in billions.
 
-At Skaraz Data, we build climate risk pipelines and decision-grade dashboards for organizations that need their data infrastructure to perform under pressure, not just in demos. If your team is hitting the limits of what your current platform can deliver, that is a conversation worth having.
+At Skaraz Data, I build climate risk pipelines and decision-grade dashboards for organizations that need their data infrastructure to perform under pressure, not just in demos. If your team is hitting the limits of what your current platform can deliver, that is a conversation worth having.

@@ -1,0 +1,119 @@
+---
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/site/PageHead.astro';
+import PipelineFlow from '../components/site/PipelineFlow.astro';
+import TriggerChart from '../components/site/TriggerChart.astro';
+import LivingMark from '../components/site/LivingMark.astro';
+import { getPocs } from '../lib/pocs';
+const mayotte = getPocs()[1];
+---
+
+<Site
+    title="Calculation agent for parametric insurance · Skaraz Data"
+    description="Skaraz Data, independent calculation agent: the index computed from named data, the trigger tested, the event report issued, the audit trail kept. Calculation agent from EUR 12,000 a year; pipeline support and independent verification from EUR 8,000 a year."
+    alt="/fr/agent-de-calcul"
+>
+    <PageHead
+        label="Service · calculation agent"
+        title="The index computed, the trigger tested, the event report issued."
+        lede="The calculation agent is the party named in the contract that turns named data into the number the payout follows. Contracts also call it the independent third party, settlement services or trigger verification. It is the same job."
+    >
+        <a slot="cta" class="btn btn--ghost" href="/pricing">See prices</a>
+    </PageHead>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Two run services</p>
+                <h2>I run the calculation, or I check the one you run.</h2>
+                <p class="lede">Both follow an onboarding that defines and backtests the index (from EUR 10,000). Most clients start with a fixed-price audit.</p>
+            </div>
+            <div class="grid cols-2">
+                <div class="card role reveal" style="--i:0">
+                    <p class="label">Calculation agent</p>
+                    <h3>I run the calculation and issue the event report the payout follows.</h3>
+                    <ul class="ticks">
+                        <li>The calculation runs on my server, from the data sources named in the contract</li>
+                        <li>Event report with index value, tier, payout, sources, dataset versions and hashes</li>
+                        <li>Two event calculations a year included</li>
+                        <li>Available about six weeks after signature, set up per contract</li>
+                    </ul>
+                    <p class="price num">from EUR 12,000 / year per programme</p>
+                </div>
+                <div class="card role reveal" style="--i:1">
+                    <p class="label">Pipeline support and independent verification</p>
+                    <h3>Your pipeline, your servers; I maintain it and check its results.</h3>
+                    <ul class="ticks">
+                        <li>The pipeline runs at your side</li>
+                        <li>I maintain it and check its results against the contract</li>
+                        <li>A written note when a result does not match the wording</li>
+                        <li>Suited to carriers, reinsurers, donors and programme boards</li>
+                    </ul>
+                    <p class="price num">from EUR 8,000 / year per programme</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">How it runs</p>
+                <h2>The same six steps for every programme.</h2>
+            </div>
+            <PipelineFlow />
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap two">
+            <div class="stack reveal" style="--stack:1.1rem">
+                <p class="label label--index">What an event report contains</p>
+                <h2>A report anyone can rerun.</h2>
+                <p class="lede">One report per event, with the evidence behind it. Below is the shape of it, filled with the Mayotte backtest, a proof of concept on public data.</p>
+                <dl class="fields">
+                    <dt>Programme</dt><dd>Mayotte barrier reef, bleaching cover (proof of concept)</dd>
+                    <dt>Index</dt><dd>Degree Heating Weeks, sector maximum over the season</dd>
+                    <dt>Source</dt><dd>NOAA Coral Reef Watch 5 km, CoralTemp</dd>
+                    <dt>Ladder</dt><dd class="num">3.0 / 6.0 / 9.0 °C-weeks → 25 / 60 / 100%</dd>
+                    <dt>Result</dt><dd>Eastern barrier, 2024: tier 3, full limit</dd>
+                    <dt>Backtest</dt><dd>Caught 2010, 2016 and 2024, the three documented bleaching years, with no false positives over 16 seasons</dd>
+                    <dt>Evidence</dt><dd>Input file hashes, code version, run log</dd>
+                </dl>
+                <p><a class="link" href={`/showcase/${mayotte.slug}`}>Open the full Mayotte report <span class="arrow" aria-hidden="true">→</span></a></p>
+            </div>
+            <div class="reveal chart-col" style="--i:1">
+                <TriggerChart series={mayotte.series} height={320} />
+                {mayotte.mark && <LivingMark mark={mayotte.mark} size={132} />}
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Questions buyers ask</p>
+                <h2>What happens if you are not available on payout day?</h2>
+            </div>
+            <div class="grid cols-2 faq">
+                <div class="reveal" style="--i:0"><h3>Continuity</h3><p class="muted">What exists today: a documented method, an input check and a content hash at each stage, and reports that can be rerun from their stated inputs and code version. The hosted calculation, its run schedule and its continuity arrangements are set up per contract, before the season starts.</p></div>
+                <div class="reveal" style="--i:1"><h3>Independence</h3><p class="muted">I write no cover, hold no risk capacity and take no fee linked to the payout amount. If I have worked on a product’s design, I say so before taking the agent role on it.</p></div>
+                <div class="reveal" style="--i:2"><h3>Data rights</h3><p class="muted">Public sources such as ERA5, CHIRPS and NOAA allow this use. CHIRPS v2 production ends after December 2026, so new rainfall work uses CHIRPS v3. Commercial data, such as some SAR imagery, needs its licence checked for payout use. I do that before the contract, not after the event.</p></div>
+                <div class="reveal" style="--i:3"><h3>What it is not</h3><p class="muted">Engineering and calculation, not actuarial sign-off and not pricing. I compute and document the index; pricing stays with your actuaries and underwriters.</p></div>
+            </div>
+        </div>
+    </section>
+</Site>
+
+<style>
+    .role { display: grid; gap: 14px; align-content: start; }
+    .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .ticks li { position: relative; padding-left: 22px; }
+    .ticks li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 12px; height: 1.5px; background: var(--index); }
+    .price { padding-top: 14px; border-top: 1px solid var(--line); font-size: 0.9375rem; font-weight: 500; }
+    .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
+    .two > * { min-width: 0; }
+    .chart-col { display: grid; gap: 32px; }
+    @media (max-width: 900px) { .two { grid-template-columns: minmax(0, 1fr); } }
+    .faq > div { display: grid; gap: 10px; align-content: start; }
+</style>

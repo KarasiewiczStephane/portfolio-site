@@ -1,0 +1,71 @@
+---
+import Logo from '../Logo.astro';
+interface Props { lang?: 'en' | 'fr' }
+const { lang = 'en' } = Astro.props;
+const fr = lang === 'fr';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+    <div class="wrap">
+        <div class="top">
+            <div class="pitch">
+                <Logo class="f-logo" />
+                <p class="big">{fr
+                    ? 'Agent de calcul indépendant pour l’assurance paramétrique.'
+                    : 'Independent calculation agent for parametric insurance.'}</p>
+                <p class="muted small">{fr
+                    ? 'Stéphane Karasiewicz, principal · Hauts-de-France · à distance, en français et en anglais'
+                    : 'Stéphane Karasiewicz, principal · Hauts-de-France, France · remote, in English and French'}</p>
+            </div>
+            <div class="cols">
+                <div>
+                    <p class="label">{fr ? 'Services' : 'Services'}</p>
+                    <a href={fr ? '/fr/agent-de-calcul' : '/calculation-agent'}>{fr ? 'Agent de calcul' : 'Calculation agent'}</a>
+                    <a href="/trigger-audit">{fr ? 'Audit de déclencheur' : 'Trigger audit'}</a>
+                    <a href="/pipelines">{fr ? 'Pipelines de données' : 'Data pipelines'}</a>
+                    <a href="/data">{fr ? 'Données climat' : 'Climate data'}</a>
+                    <a href="/pricing">{fr ? 'Tarifs' : 'Pricing'}</a>
+                </div>
+                <div>
+                    <p class="label">{fr ? 'Preuves' : 'Proof'}</p>
+                    <a href="/showcase">{fr ? 'Démonstrations' : 'Showcase'}</a>
+                    <a href="/method">{fr ? 'Méthode' : 'Method'}</a>
+                    <a href="/projects/case-study-raincoat">Raincoat</a>
+                    <a href="/blog">Blog</a>
+                    <a href="/about">{fr ? 'À propos' : 'About'}</a>
+                </div>
+                <div>
+                    <p class="label">Contact</p>
+                    <a href={fr ? '/fr/cadrage' : '/scope'} data-umami-event="scope-footer">{fr ? 'Décrire votre déclencheur' : 'Describe your trigger'}</a>
+                    <a href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener" data-umami-event="book-call-footer">{fr ? 'Appel de 15 min' : '15-minute call'}</a>
+                    <a href="mailto:skaraz.science@gmail.com">skaraz.science@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/stephane-karasiewicz" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://github.com/KarasiewiczStephane" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.researchgate.net/profile/Stephane_Karasiewicz" target="_blank" rel="noopener">ResearchGate</a>
+                </div>
+            </div>
+        </div>
+        <div class="base">
+            <span>{fr
+                ? 'Stéphane Karasiewicz EI, nom commercial Skaraz Data · SIRET 979 870 821'
+                : 'Stéphane Karasiewicz EI, trading as Skaraz Data · SIRET 979 870 821'}</span>
+            <span>© {year} · {fr ? 'Ingénierie et calcul, pas de validation actuarielle.' : 'Engineering and calculation, not actuarial sign-off.'}</span>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .site-footer { padding-block: 72px 32px; border-top: 1px solid var(--line); background: var(--ground); }
+    .top { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr); gap: 48px; }
+    .pitch { display: grid; gap: 16px; align-content: start; }
+    .pitch :global(.f-logo) { width: 168px; }
+    .big { font: 400 var(--step-2)/1.3 var(--display); letter-spacing: -0.02em; color: var(--ink); max-width: 26ch; }
+    .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .cols > div { display: grid; gap: 10px; align-content: start; min-width: 0; }
+    .cols a { color: var(--ink); text-decoration: none; font-size: 0.9375rem; overflow-wrap: anywhere; }
+    @media (hover: hover) and (pointer: fine) { .cols a:hover { color: var(--index); text-decoration: underline; text-underline-offset: 4px; } }
+    .base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.875rem; }
+    @media (max-width: 860px) { .top { grid-template-columns: minmax(0, 1fr); } }
+    @media (max-width: 560px) { .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

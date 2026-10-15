@@ -1,0 +1,41 @@
+---
+// Page header shared by inner pages.
+interface Props { label: string; title: string; lede?: string; cta?: boolean; lang?: 'en' | 'fr' }
+const { label, title, lede, cta = true, lang = 'en' } = Astro.props;
+const fr = lang === 'fr';
+---
+
+<section class="ph panel on-panel">
+    <div class="wrap ph-grid">
+        <div class="ph-copy">
+            <p class="label">{label}</p>
+            <h1>{title}</h1>
+        </div>
+        <div class="ph-side">
+            {lede && <p class="lede">{lede}</p>}
+            {cta && (
+                <div class="ctas">
+                    <a class="btn" href={fr ? '/fr/cadrage' : '/scope'} data-umami-event="scope-pagehead">{fr ? 'Commencez par votre déclencheur' : 'Start with your trigger'} <span class="arrow" aria-hidden="true">→</span></a>
+                    <slot name="cta" />
+                </div>
+            )}
+        </div>
+    </div>
+    <slot />
+</section>
+
+<style>
+    .ph { padding-block: clamp(48px, 7vw, 96px); border-bottom: 1px solid var(--line); }
+    .ph-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: end; }
+    .ph-copy { display: grid; gap: 20px; }
+    .ph h1 { font-size: clamp(2.125rem, 1.2rem + 3vw, 3.5rem); max-width: 20ch; }
+    .ph-side { display: grid; gap: 24px; }
+    .ph .lede { color: var(--muted); }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 860px) { .ph-grid { grid-template-columns: minmax(0, 1fr); } }
+    :global(.js) .ph-copy > *, :global(.js) .ph-side > * { animation: ph-rise 650ms var(--ease-out) both; }
+    :global(.js) .ph-copy h1 { animation-delay: 50ms; }
+    :global(.js) .ph-side > * { animation-delay: 130ms; }
+    @keyframes ph-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { :global(.js) .ph-copy > *, :global(.js) .ph-side > * { animation: none; } }
+</style>

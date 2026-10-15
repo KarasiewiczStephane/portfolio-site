@@ -73,4 +73,4 @@ The convergence is clear. SAR satellite constellations are reaching the revisit 
 
 Insurers and reinsurers who build satellite-derived flood intelligence into their risk pipelines now will have a compounding advantage: better pricing accuracy, faster claims resolution, and the ability to underwrite in markets where traditional data is insufficient.
 
-At Skaraz Data, we build the geospatial data pipelines and risk analytics that connect satellite observations to insurance decision-making. From SAR flood footprint processing to portfolio exposure dashboards, we help insurers turn raw Earth observation data into actionable risk intelligence. If your team is evaluating how to integrate satellite flood data into your workflow, let's talk.
+At Skaraz Data, I build the geospatial data pipelines and risk analytics that connect satellite observations to insurance decision-making. From SAR flood footprint processing to portfolio exposure dashboards, I help insurers turn raw Earth observation data into actionable risk intelligence. If your team is evaluating how to integrate satellite flood data into your workflow, let's talk.

@@ -23,7 +23,7 @@ interface Props {
 
 const {
     title,
-    description = "Senior data engineering for parametric insurance. Industrializing climate scoring pipelines. Ex-Raincoat. 10+ years in climate and environmental data.",
+    description = "Skaraz Data, independent calculation agent for parametric insurance. Stéphane Karasiewicz, principal.",
     ogDescription,
     ogImage = "https://skarazdata.com/og-image.png",
     ogUrl = Astro.url.href,
@@ -76,6 +76,8 @@ const canonicalUrl = new URL(Astro.url.pathname, "https://skarazdata.com").href;
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

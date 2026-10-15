@@ -1,0 +1,225 @@
+---
+import Site from '../../layouts/Site.astro';
+import TriggerChart from '../../components/site/TriggerChart.astro';
+import PipelineFlow from '../../components/site/PipelineFlow.astro';
+import Audience from '../../components/site/Audience.astro';
+import PocCard from '../../components/site/PocCard.astro';
+import LivingMark from '../../components/site/LivingMark.astro';
+import OfferTable from '../../components/site/OfferTable.astro';
+import { getPocs, coralMark } from '../../lib/pocs';
+
+const pocs = getPocs();
+const hero = pocs[0];
+const mark = coralMark('coral_reunion', 'La Réunion', 2.5, 2014, 2019);
+
+const steps = [
+    { n: '1', k: 'Définir', t: 'Un indice qu’on peut écrire dans un contrat', d: 'Déclencheur, source, solution de repli et calcul rédigés pour coller au libellé du contrat.' },
+    { n: '2', k: 'Construire', t: 'Un pipeline sur données publiques', d: 'Contrôles d’entrée et empreinte à chaque étape : le calcul peut être relancé et vérifié.' },
+    { n: '3', k: 'Tester', t: 'Backtest et risque de base', d: 'Face aux pertes documentées quand elles existent ; sinon, je le dis.' },
+    { n: '4', k: 'Calculer', t: 'Le rapport d’événement', d: 'Valeur de l’indice, palier, indemnité, sources, versions et empreintes, dans les délais.' },
+];
+---
+
+<Site
+    title="Skaraz Data · Agent de calcul indépendant pour l’assurance paramétrique"
+    description="Skaraz Data, agent de calcul indépendant. Je définis, construis et vérifie de façon indépendante l’indice d’un contrat paramétrique, à partir de données satellitaires et de réanalyses publiques. Tarifs publiés, à partir de 6 000 €."
+    lang="fr"
+    alt="/"
+>
+    <section class="hero">
+        <div class="wrap">
+            <div class="hero-top">
+                <div class="hero-copy">
+                    <p class="label">Skaraz Data · agent de calcul indépendant</p>
+                    <h1>L’indice qui déclenche votre contrat, <em>calculé</em> par quelqu’un qui n’a rien d’autre à vous vendre.</h1>
+                    <p class="lede">Je définis, construis et vérifie de façon indépendante l’indice d’un contrat paramétrique, à partir de données satellitaires et de réanalyses publiques. Chaque chiffre renvoie à une source, une version et une empreinte.</p>
+                    <div class="ctas">
+                        <a class="btn" href="/fr/cadrage" data-umami-event="scope-hero-fr">Commencez par votre déclencheur <span class="arrow" aria-hidden="true">→</span></a>
+                        <a class="btn btn--ghost" href="/showcase">Voir les calculs</a>
+                    </div>
+                    <p class="principal small muted">Stéphane Karasiewicz, principal. Ingénierie et calcul, pas de validation actuarielle.</p>
+                </div>
+                <LivingMark mark={mark} size={176} lang="fr" class="hero-mark" />
+            </div>
+            <div class="hero-chart">
+                <div class="spec">
+                    <div><span class="label">Indice</span><span>Degree Heating Weeks</span></div>
+                    <div><span class="label">Source</span><span>NOAA Coral Reef Watch, 5 km</span></div>
+                    <div><span class="label">Lieu</span><span>Saint-Leu, La Réunion</span></div>
+                    <div><span class="label">Backtest</span><span class="num">2009 à 2024</span></div>
+                </div>
+                <TriggerChart series={hero.series} variant="panel" height={300} showCaption={false} lang="fr" />
+                <p class="poc-note small">Saint-Leu, La Réunion. Degree Heating Weeks hebdomadaires, 2009 à 2024. Barème 3,4 / 6,8 / 10,2 °C-semaines, paiement 25 / 60 / 100 %. Preuve de concept sur données publiques, pas un contrat en cours. <a href={`/showcase/${hero.slug}`}>Lire le rapport complet (en anglais) →</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Ce que je fais</p>
+                <h2>Définir, construire, tester, calculer.</h2>
+            </div>
+            <ol class="steps grid cols-4">
+                {steps.map((s, i) => (
+                    <li class="reveal" style={`--i:${i}`}>
+                        <p class="label">{s.n} · {s.k}</p>
+                        <h3>{s.t}</h3>
+                        <p class="muted">{s.d}</p>
+                    </li>
+                ))}
+            </ol>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap indep">
+            <div class="section-head reveal">
+                <p class="label label--index">Pourquoi indépendant</p>
+                <h2>La plupart des déclencheurs sont calculés par celui qui vend le produit ou porte le risque.</h2>
+            </div>
+            <ul class="indep-list reveal">
+                <li><strong>Aucun risque porté.</strong> Skaraz Data est un prestataire de calcul et d’ingénierie, jamais un assureur ni un MGA.</li>
+                <li><strong>Rien d’autre à vendre.</strong> Ni produit, ni revente de données, ni rémunération liée au montant indemnisé.</li>
+                <li><strong>Méthode transparente.</strong> Chaque rapport indique ses sources, ses versions et ses limites.</li>
+                <li><strong>Ingénierie et calcul,</strong> pas de validation actuarielle.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Pour qui</p>
+                <h2>Choisissez votre place.</h2>
+            </div>
+            <div class="reveal"><Audience lang="fr" /></div>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap price-wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Offre</p>
+                <h2>Des prix publiés, pour budgéter avant le premier appel.</h2>
+                <p class="lede">La plupart des missions commencent par un audit au forfait ou un court cadrage payant. Les services récurrents viennent une fois l’indice en place.</p>
+            </div>
+            <div class="reveal"><OfferTable lang="fr" /></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Démonstrations</p>
+                <h2>Cinq calculs sur données publiques, limites affichées.</h2>
+                <p class="lede">Chacun parcourt toute la chaîne : données, contrôles, indice, déclencheur, paiement, piste d’audit. Ce sont des preuves de concept, pas des contrats en cours. Rapports détaillés en anglais.</p>
+            </div>
+            <div class="grid cols-3 pocs">
+                {pocs.map((p, i) => <div class="reveal" style={`--i:${i}`}><PocCard poc={p} lang="fr" /></div>)}
+            </div>
+            <p class="small muted note">Indices de pluie : la production de CHIRPS v2 s’arrête après décembre 2026 ; les nouveaux travaux utilisent CHIRPS v3.</p>
+        </div>
+    </section>
+
+    <section class="section section--tint">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="label label--index">Méthode</p>
+                <h2>Six étapes, toujours les mêmes, toutes écrites.</h2>
+                <p class="lede">La méthode est ouverte : chaque rapport indique ses sources, les versions des jeux de données et leurs empreintes, pour que chaque étape puisse être vérifiée.</p>
+            </div>
+            <PipelineFlow lang="fr" />
+            <div class="continuity reveal">
+                <div>
+                    <p class="label">Continuité, telle qu’elle existe aujourd’hui</p>
+                    <h3>Ce qui existe, et ce qui se met en place par contrat.</h3>
+                </div>
+                <ul class="ticks">
+                    <li>Une méthode documentée, la même pour chaque calcul.</li>
+                    <li>Un contrôle d’entrée et une empreinte à chaque étape du pipeline.</li>
+                    <li>Des rapports qui peuvent être relancés à partir de leurs entrées et de la version du code.</li>
+                    <li>Le calcul hébergé se met en place par contrat, environ six semaines après signature.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="wrap proof">
+            <div class="section-head reveal">
+                <p class="label label--index">Qui calcule</p>
+                <h2>Deux ans dans les pipelines de production d’une insurtech paramétrique.</h2>
+                <p class="lede">Data scientist senior chez Raincoat, insurtech paramétrique, de février 2024 à janvier 2026. J’y ai tenu la couche de données satellite et de réanalyse de tous les périls sauf le vent cyclonique et le séisme.</p>
+            </div>
+            <div class="grid cols-4 stats">
+                <div class="metric reveal" style="--i:0"><span class="value">4</span><span class="note">périls : sécheresse et précipitations en production, bilan hydrique mis en production, stress thermique construit (non déployé).</span></div>
+                <div class="metric reveal" style="--i:1"><span class="value">3</span><span class="note">tableaux de bord utilisés par les équipes risque et souscription.</span></div>
+                <div class="metric reveal" style="--i:2"><span class="value">10+</span><span class="note">pays d’Amérique latine, des Caraïbes et d’Afrique.</span></div>
+                <div class="metric reveal" style="--i:3"><span class="value">15+</span><span class="note">années de télédétection satellitaire, 7 publications à comité de lecture, docteur en écologie marine.</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="wrap cta-row">
+            <div>
+                <h2>Commencez par votre déclencheur.</h2>
+                <p class="lede">Indiquez le péril, la région, les données utilisées et votre échéance. Vous recevez un périmètre et un prix fixes avant tout engagement.</p>
+            </div>
+            <div class="ctas">
+                <a class="btn" href="/fr/cadrage" data-umami-event="scope-footer-cta-fr">Décrire votre déclencheur <span class="arrow" aria-hidden="true">→</span></a>
+                <a class="btn btn--ghost" href="https://calendly.com/skaraz_data/15-minute-meeting" target="_blank" rel="noopener noreferrer">Réserver un appel de 15 min</a>
+            </div>
+        </div>
+    </section>
+</Site>
+
+<style>
+    .hero { padding-block: clamp(48px, 7vw, 96px) clamp(40px, 5vw, 64px); }
+    .hero-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(28px, 6vw, 96px); align-items: start; }
+    .hero-copy { display: grid; gap: 24px; max-width: 800px; }
+    .hero h1 { max-width: 19ch; }
+    .hero h1 em { font-style: normal; color: var(--trigger); }
+    .hero .lede { max-width: 56ch; }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    .principal { margin-top: -4px; }
+    .hero-top :global(.hero-mark) { padding-top: 8px; }
+    .hero-chart { margin-top: clamp(40px, 6vw, 72px); padding: clamp(18px, 2.5vw, 28px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); display: grid; gap: 18px; }
+    .spec { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+    .spec > div { display: grid; gap: 4px; min-width: 0; font-size: 0.9375rem; }
+    .poc-note { color: var(--muted); }
+    .poc-note a { color: var(--index); }
+    @media (max-width: 900px) { .hero-top { grid-template-columns: minmax(0, 1fr); } .spec { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    :global(.js) .hero-copy > *, :global(.js) .hero-top > :global(.hero-mark) { animation: rise 700ms var(--ease-out) both; }
+    :global(.js) .hero-chart { animation: rise 800ms var(--ease-out) 240ms both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { :global(.js) .hero-copy > *, :global(.js) .hero-top > :global(.hero-mark), :global(.js) .hero-chart { animation: none; } }
+
+    .steps { list-style: none; margin: 0; padding: 0; }
+    .steps li { display: grid; gap: 10px; align-content: start; padding-top: 14px; border-top: 1px solid var(--ink); }
+    .steps h3 { font-size: 1.1875rem; }
+    .indep { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+    .indep .section-head { margin-bottom: 0; }
+    .indep-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .indep-list li { padding-block: 14px; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .indep-list strong { font-weight: 500; color: var(--ink); }
+    @media (max-width: 860px) { .indep { grid-template-columns: minmax(0, 1fr); } }
+    .price-wrap { display: grid; gap: 24px; }
+    .price-wrap .section-head { margin-bottom: 0; }
+    .pocs { align-items: stretch; }
+    .pocs > div { display: grid; }
+    .note { margin-top: 16px; }
+    .continuity { margin-top: clamp(40px, 6vw, 64px); padding: clamp(20px, 3vw, 32px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 32px; }
+    .continuity > div { display: grid; gap: 10px; align-content: start; }
+    .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .ticks li { position: relative; padding-left: 22px; }
+    .ticks li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 12px; height: 1.5px; background: var(--index); }
+    @media (max-width: 860px) { .continuity { grid-template-columns: minmax(0, 1fr); } }
+    .proof { display: grid; gap: 40px; }
+    .proof .section-head { margin-bottom: 0; }
+    .stats .value { font-size: clamp(2.5rem, 1.6rem + 2.4vw, 3.5rem); }
+    .cta { padding-block: clamp(56px, 8vw, 96px); border-top: 1px solid var(--line); }
+    .cta-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 32px; }
+    .cta-row > div:first-child { display: grid; gap: 14px; }
+</style>

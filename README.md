@@ -1,7 +1,7 @@
 # skarazdata.com — Astro site
 
-Live at [skarazdata.com](https://skarazdata.com). Climate Pipeline Partner funnel
-for Skaraz Data (Stéphane Karasiewicz · Senior Data Engineer for Parametric Insurance).
+Live at [skarazdata.com](https://skarazdata.com). Skaraz Data, independent calculation agent
+(Stéphane Karasiewicz, principal). Design system v1.1: `src/styles/site.css` mirrors `skaraz-data/brand/tokens.json`.
 
 ## Stack
 
@@ -15,7 +15,8 @@ for Skaraz Data (Stéphane Karasiewicz · Senior Data Engineer for Parametric In
 
 | Page | Route |
 |---|---|
-| Homepage — Climate Pipeline Partner | `/` |
+| Homepage (calculation agent) | `/` |
+| Scope form (EN / FR) | `/scope`, `/fr/cadrage` |
 | About | `/about` |
 | Public CV (page + PDF download) | `/cv` |
 | Case study — Raincoat | `/projects/case-study-raincoat` |

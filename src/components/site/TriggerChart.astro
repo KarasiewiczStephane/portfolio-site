@@ -1,0 +1,254 @@
+---
+// Index-versus-trigger chart, rendered at build time from a real POC series.
+// Lines are SVG (non-scaling strokes); every label is HTML positioned in percent,
+// so text stays legible at any width. Colours follow the design system: the index series in
+// muted, thresholds as index lines, paid seasons as trigger dots, documented events as ink dots.
+// The line draws in once when it enters the
+// viewport; hovering reads out date, value and the tier reached.
+import type { Series } from '../../lib/pocs';
+
+interface Props {
+    series: Series;
+    variant?: 'paper' | 'panel';
+    height?: number;
+    compact?: boolean;
+    showCaption?: boolean;
+    lang?: 'en' | 'fr';
+}
+const { series, variant = 'paper', height = 340, compact = false, showCaption = true, lang = 'en' } = Astro.props;
+const fr = lang === 'fr';
+
+const t = series.dates.map(d => Date.parse(d.replace(' ', 'T') + (d.length > 10 ? 'Z' : 'T00:00:00Z')));
+const v = series.values;
+const t0 = t[0], t1 = t[t.length - 1];
+const thr = series.tiers.map(x => x.threshold);
+let lo = Math.min(...v, ...thr), hi = Math.max(...v, ...thr);
+const pad = (hi - lo) * 0.08;
+lo -= pad; hi += pad;
+if (series.direction === 'above' && Math.min(...v) >= 0 && lo < 0) lo = 0;
+
+const X = (ti: number) => ((ti - t0) / (t1 - t0)) * 100;
+const Y = (vi: number) => (1 - (vi - lo) / (hi - lo)) * 100;
+const r2 = (n: number) => Math.round(n * 100) / 100;
+
+const pathD = v.map((vi, i) => `${i ? 'L' : 'M'}${r2(X(t[i]) * 10)} ${r2(Y(vi))}`).join(' ');
+
+// Zones between consecutive tiers, shaded more strongly as payout rises.
+const sorted = [...series.tiers].sort((a, b) => series.direction === 'above' ? a.threshold - b.threshold : b.threshold - a.threshold);
+const zones = sorted.map((tier, i) => {
+    const next = sorted[i + 1];
+    const a = Y(tier.threshold);
+    const b = next ? Y(next.threshold) : (series.direction === 'above' ? 0 : 100);
+    return { y: Math.min(a, b), h: Math.abs(a - b), o: 0 };
+});
+void zones;
+
+// One marker per paid season: the extreme point inside that season.
+const markers = series.paid.map(p => {
+    const all = v.map((_, i) => i);
+    let idx = /^\d{4}$/.test(p.label) ? all.filter(i => series.dates[i].startsWith(p.label)) : all;
+    if (!idx.length) idx = all;
+    const best = idx.reduce((a, b) => (series.direction === 'above' ? v[b] > v[a] : v[b] < v[a]) ? b : a, idx[0]);
+    return { x: X(t[best]), y: Y(v[best]), label: p.label, tier: p.tier };
+});
+
+// X ticks: years for multi-year series, days for event series.
+const spanDays = (t1 - t0) / 864e5;
+const ticks: { x: number; label: string }[] = [];
+if (spanDays > 500) {
+    const y0 = new Date(t0).getUTCFullYear(), y1 = new Date(t1).getUTCFullYear();
+    const step = (y1 - y0) > 10 ? 3 : 1;
+    for (let y = y0 + (y0 === new Date(t0).getUTCFullYear() && new Date(t0).getUTCMonth() > 0 ? 1 : 0); y <= y1; y += step) {
+        const x = X(Date.UTC(y, 0, 1));
+        if (x >= 0 && x <= 100) ticks.push({ x, label: String(y) });
+    }
+} else {
+    const months = fr ? ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'] : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const n = compact ? 3 : 6;
+    for (let k = 0; k <= n; k++) {
+        const ti = t0 + ((t1 - t0) * k) / n;
+        const d = new Date(ti);
+        ticks.push({ x: X(ti), label: `${d.getUTCDate()} ${months[d.getUTCMonth()]}` });
+    }
+}
+
+// Documented events (e.g. bleaching years from the literature), as small ink dots on the baseline.
+const events = (series.events ?? []).map(label => {
+    const idx = series.dates.map((_, i) => i).filter(i => series.dates[i].startsWith(label));
+    if (!idx.length) return null;
+    const best = idx.reduce((a, b) => (series.direction === 'above' ? v[b] > v[a] : v[b] < v[a]) ? b : a, idx[0]);
+    return { x: X(t[best]), label };
+}).filter(Boolean) as { x: number; label: string }[];
+
+const fmt = (n: number) => Math.abs(n) >= 100 ? n.toFixed(0) : Math.abs(n) >= 10 ? n.toFixed(1) : n.toFixed(2);
+const points = JSON.stringify(v.map((vi, i) => [r2(X(t[i])), vi, series.dates[i].slice(0, series.dates[i].length > 10 ? 16 : 10)]));
+const tiersJson = JSON.stringify(series.tiers);
+const peak = series.direction === 'above' ? Math.max(...v) : Math.min(...v);
+const unit = series.unit;
+---
+
+<figure class:list={['tchart', `tchart--${variant}`, { 'tchart--compact': compact }]} data-tchart data-points={points} data-tiers={tiersJson} data-dir={series.direction} data-unit={unit} data-lang={lang}>
+    {!compact && (
+        <div class="readout" aria-live="polite">
+            <span class="r-label">{series.district}</span>
+            <span class="r-value num" data-r-value>{fr ? 'extrême' : 'peak'} {fmt(peak)} {unit}</span>
+            <span class="r-tier num" data-r-tier></span>
+        </div>
+    )}
+    <div class="plot" style={`--h:${height}px`} data-plot>
+        <svg viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
+            {sorted.map(tier => <line x1="0" x2="1000" y1={r2(Y(tier.threshold))} y2={r2(Y(tier.threshold))} class="tier" />)}
+            <path d={pathD} class="line" pathLength="1" />
+            <line class="guide" x1="0" x2="0" y1="0" y2="100" data-guide />
+        </svg>
+        {!compact && sorted.map((tier, i) => (
+            <span class="tlabel num" style={`top:${r2(Y(tier.threshold))}%`}>
+                {tier.label ? `${tier.label} · ` : `T${i + 1} · `}{fmt(tier.threshold)}{tier.payout ? ` → ${tier.payout}%` : ''}
+            </span>
+        ))}
+        {markers.map((m, i) => (
+            <span class:list={['mk', { 'mk--r': m.x > 85, 'mk--l': m.x < 12 }]} style={`left:${r2(m.x)}%;top:${r2(m.y)}%;--d:${i}`}>
+                <span class="dot"></span>
+                {!compact && <span class="mk-label num">{m.label}{m.tier ? ` · T${m.tier}` : ''}</span>}
+            </span>
+        ))}
+        {events.map(e => <span class="ev" style={`left:${r2(e.x)}%`} title={e.label}></span>)}
+        <span class="cursor" data-cursor></span>
+    </div>
+    {!compact && (
+        <div class="xaxis" aria-hidden="true">
+            {ticks.map(tk => <span class="num" style={`left:${r2(tk.x)}%`}>{tk.label}</span>)}
+        </div>
+    )}
+    {!compact && (
+        <div class="legend" aria-hidden="true">
+            <span><i class="lg-line"></i>{fr ? 'indice' : 'index'}</span>
+            <span><i class="lg-thr"></i>{fr ? 'seuils' : 'thresholds'}</span>
+            {markers.length > 0 && <span><i class="lg-pay"></i>{fr ? 'saison payée' : 'season paid'}</span>}
+            {events.length > 0 && <span><i class="lg-ev"></i>{fr ? 'événement documenté' : 'documented event'}</span>}
+        </div>
+    )}
+    {showCaption && !compact && <figcaption>{series.caption}</figcaption>}
+</figure>
+
+<style>
+    .tchart {
+        --c-line: var(--muted); --c-thr: var(--index); --c-trig: var(--trigger); --c-fg: var(--ink); --c-muted: var(--muted); --c-grid: var(--line); --c-bg: var(--surface);
+        margin: 0; display: grid; gap: 10px; min-width: 0;
+    }
+    .tchart--panel { --c-bg: var(--panel-2); }
+    .readout { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; min-height: 1.6em; font-size: 0.8125rem; color: var(--c-muted); }
+    .r-label { font: 500 0.75rem/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; }
+    .r-value { color: var(--c-fg); font-weight: 500; }
+    .r-tier { color: var(--c-trig); font-weight: 500; }
+    .plot { position: relative; height: var(--h); border-bottom: 1px solid var(--c-grid); touch-action: pan-y; }
+    .tchart--compact .plot { border-bottom: 0; }
+    svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .tier { stroke: var(--c-thr); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+    .line { fill: none; stroke: var(--c-line); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+    .tchart--compact .line { stroke-width: 1.5; }
+    .guide { stroke: var(--c-fg); stroke-opacity: 0; stroke-width: 1; vector-effect: non-scaling-stroke; transition: stroke-opacity 150ms ease; }
+    .tlabel {
+        position: absolute; right: 0; transform: translateY(-100%);
+        padding: 0 0 3px 8px; font-size: 0.75rem; color: var(--c-thr); white-space: nowrap;
+        background: var(--c-bg);
+    }
+    .mk { position: absolute; transform: translate(-50%, -50%); display: grid; place-items: center; pointer-events: none; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c-trig); box-shadow: 0 0 0 3px var(--c-bg); }
+    .tchart--compact .dot { width: 6px; height: 6px; box-shadow: 0 0 0 2px var(--c-bg); }
+    @media (max-width: 600px) { .mk-label { display: none; } .tlabel { font-size: 0.625rem; } }
+    .mk--r .mk-label { right: -4px; }
+    .mk--l .mk-label { left: -4px; }
+    .mk-label { position: absolute; bottom: 12px; white-space: nowrap; font-size: 0.75rem; font-weight: 500; color: var(--c-fg); background: var(--c-bg); padding: 1px 4px; border-radius: 3px; }
+    .cursor { position: absolute; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; border: 2px solid var(--c-fg); background: var(--c-bg); opacity: 0; pointer-events: none; transition: opacity 120ms ease; }
+    .plot.is-hover .cursor { opacity: 1; }
+    .plot.is-hover .guide { stroke-opacity: 0.35; }
+    .xaxis { position: relative; height: 18px; font-size: 0.75rem; color: var(--c-muted); }
+    .xaxis span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+    .xaxis span:first-child { transform: none; }
+    .xaxis span:last-child { transform: translateX(-100%); }
+    figcaption { font-size: 0.875rem; color: var(--c-muted); max-width: 72ch; }
+    .ev { position: absolute; bottom: -4px; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: var(--c-fg); pointer-events: none; }
+    .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.8125rem; color: var(--c-muted); }
+    .legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .legend i { display: inline-block; flex: none; }
+    .lg-line { width: 18px; height: 1.5px; background: var(--c-line); }
+    .lg-thr { width: 18px; height: 1.5px; background: var(--c-thr); }
+    .lg-pay { width: 9px; height: 9px; border-radius: 50%; background: var(--c-trig); }
+    .lg-ev { width: 7px; height: 7px; border-radius: 50%; background: var(--c-fg); }
+
+    /* Draw-in: only when JS is present; otherwise the chart is simply there. */
+    /* Reveal left to right with clip-path: dash tricks break with non-scaling strokes. */
+    :global(.js) .tchart .line { clip-path: inset(0 100% 0 0); }
+    :global(.js) .tchart .mk { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+    :global(.js) .tchart .tier, :global(.js) .tchart .tlabel { opacity: 0; }
+    :global(.js) .tchart.is-drawn .line { clip-path: inset(0 -1% 0 0); transition: clip-path 1800ms var(--ease-in-out); }
+    :global(.js) .tchart.is-drawn .tier, :global(.js) .tchart.is-drawn .tlabel { opacity: 1; transition: opacity 500ms ease 200ms; }
+    :global(.js) .tchart.is-drawn .mk { opacity: 1; transform: translate(-50%, -50%) scale(1); transition: opacity 300ms var(--ease-out), transform 400ms var(--ease-out); transition-delay: calc(1300ms + var(--d) * 70ms); }
+    :global(.js) .tchart--compact.is-drawn .line { transition-duration: 1100ms; }
+    @media (prefers-reduced-motion: reduce) {
+        :global(.js) .tchart .line { clip-path: none; }
+        :global(.js) .tchart .mk { transform: translate(-50%, -50%); }
+        :global(.js) .tchart.is-drawn .line { transition: none; }
+        :global(.js) .tchart.is-drawn .mk { transition: opacity 200ms ease; transition-delay: 0ms; }
+    }
+</style>
+
+<script>
+    type Pt = [number, number, string];
+    const charts = document.querySelectorAll<HTMLElement>('[data-tchart]');
+
+    const io = new IntersectionObserver((entries) => {
+        for (const e of entries) if (e.isIntersecting) { e.target.classList.add('is-drawn'); io.unobserve(e.target); }
+    }, { threshold: 0.25 });
+    charts.forEach(c => io.observe(c));
+
+    charts.forEach(chart => {
+        const plot = chart.querySelector<HTMLElement>('[data-plot]');
+        const guide = chart.querySelector<SVGLineElement>('[data-guide]');
+        const cursor = chart.querySelector<HTMLElement>('[data-cursor]');
+        const rv = chart.querySelector<HTMLElement>('[data-r-value]');
+        const rt = chart.querySelector<HTMLElement>('[data-r-tier]');
+        if (!plot || !rv) return;
+        const pts: Pt[] = JSON.parse(chart.dataset.points || '[]');
+        const tiers: { threshold: number; payout: number }[] = JSON.parse(chart.dataset.tiers || '[]');
+        const above = chart.dataset.dir !== 'below';
+        const unit = chart.dataset.unit || '';
+        const fr = chart.dataset.lang === 'fr';
+        const vals = pts.map(p => p[1]);
+        const lo = Math.min(...vals, ...tiers.map(t => t.threshold));
+        const hi = Math.max(...vals, ...tiers.map(t => t.threshold));
+        const svg = plot.querySelector('svg')!;
+        const defaultValue = rv.textContent;
+
+const fmt = (n: number) => Math.abs(n) >= 100 ? n.toFixed(0) : Math.abs(n) >= 10 ? n.toFixed(1) : n.toFixed(2);
+
+        const yPct = (v: number) => {
+            // Same mapping as the server side: padded domain.
+            const pad = (hi - lo) * 0.08;
+            let l = lo - pad; const h = hi + pad;
+            if (above && Math.min(...vals) >= 0 && l < 0) l = 0;
+            return (1 - (v - l) / (h - l)) * 100;
+        };
+
+        const show = (clientX: number) => {
+            const r = plot.getBoundingClientRect();
+            const xp = Math.max(0, Math.min(100, ((clientX - r.left) / r.width) * 100));
+            let best = 0, bd = Infinity;
+            for (let i = 0; i < pts.length; i++) { const d = Math.abs(pts[i][0] - xp); if (d < bd) { bd = d; best = i; } }
+            const [x, v, date] = pts[best];
+            plot.classList.add('is-hover');
+            guide?.setAttribute('x1', String(x * 10)); guide?.setAttribute('x2', String(x * 10));
+            if (cursor) { cursor.style.left = x + '%'; cursor.style.top = yPct(v) + '%'; }
+            rv.textContent = `${date} · ${fmt(v)} ${unit}`;
+            const reached = tiers.map((t, i) => ({ ...t, i })).filter(t => above ? v >= t.threshold : v <= t.threshold);
+            const top = reached[reached.length - 1];
+            if (rt) rt.textContent = top ? (top.payout ? `${fr ? 'palier' : 'tier'} ${top.i + 1} · ${fr ? 'paie' : 'pays'} ${top.payout}%` : (fr ? 'sous le seuil' : 'below trigger')) : '';
+        };
+        const hide = () => { plot.classList.remove('is-hover'); rv.textContent = defaultValue; if (rt) rt.textContent = ''; };
+        plot.addEventListener('pointermove', e => show(e.clientX));
+        plot.addEventListener('pointerdown', e => show(e.clientX));
+        plot.addEventListener('pointerleave', hide);
+        void svg;
+    });
+</script>

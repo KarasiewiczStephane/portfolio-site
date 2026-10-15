@@ -1,0 +1,112 @@
+---
+// "Who are you?" switch. Accessible tabs; the indicator slides, the panel crossfades.
+interface Props { lang?: 'en' | 'fr' }
+const { lang = 'en' } = Astro.props;
+const fr = lang === 'fr';
+const tabs = fr
+    ? [
+        { id: 'insurers', t: 'Assureurs et MGA', h: 'Vous émettez une couverture paramétrique et le déclencheur doit être calculé, ou vérifié, par quelqu’un d’extérieur à l’opération.',
+          need: ['Un indice calculé exactement comme la police le décrit', 'Un rapport de paiement que votre réassureur peut relire', 'Un backtest qui montre le risque de base avant la vente'],
+          start: { label: 'Commencer par un audit de déclencheur', href: '/trigger-audit', note: 'environ deux semaines, à partir de 6 000 €' } },
+        { id: 'programmes', t: 'Programmes et ONG', h: 'Vous financez ou pilotez un programme de transfert de risque et devez faire vérifier les déclencheurs et les paiements de façon indépendante, souvent en pays francophone.',
+          need: ['Une vérification indépendante, sans produit ni capacité à vendre', 'Des données satellite là où il n’y a pas de stations', 'Des rapports en français et en anglais'],
+          start: { label: 'Voir le rôle d’agent de calcul', href: '/fr/agent-de-calcul', note: 'agent de calcul, ou maintenance et vérification indépendante' } },
+        { id: 'brokers', t: 'Courtiers et réassureurs', h: 'Vous structurez ou placez des opérations paramétriques et voulez un second avis sur l’indice, le backtest et les données avant de signer.',
+          need: ['Un regard indépendant sur le risque de base', 'Une vérification que le code suit le texte de la police', 'Un recalcul indépendant si le résultat du calculateur principal est contesté'],
+          start: { label: 'Commencer par un audit de déclencheur', href: '/trigger-audit', note: 'environ deux semaines, à partir de 6 000 €' } },
+    ]
+    : [
+        { id: 'insurers', t: 'Insurers and MGAs', h: 'You write parametric cover and need the trigger computed, or checked, by someone outside the deal.',
+          need: ['An index computed exactly as the policy wording defines it', 'A payout report your reinsurer can read and rerun', 'A backtest that shows basis risk before you sell'],
+          start: { label: 'Start with a trigger audit', href: '/trigger-audit', note: 'about two weeks, from EUR 6,000' } },
+        { id: 'programmes', t: 'Development programmes and NGOs', h: 'You fund or run a risk-transfer programme and need triggers and payouts verified independently, often in French-speaking countries.',
+          need: ['An independent check from someone with no product and no risk capacity to sell', 'Satellite data where ground stations are thin', 'Reports in English and French'],
+          start: { label: 'See the calculation agent role', href: '/calculation-agent', note: 'calculation agent, or pipeline support and independent verification' } },
+        { id: 'brokers', t: 'Brokers and reinsurers', h: 'You structure or place parametric deals and want a second opinion on the index, the backtest and the data before signing.',
+          need: ['An independent read on basis risk', 'A check that the code follows the policy wording', 'An independent recalculation if the primary calculator’s result is disputed'],
+          start: { label: 'Start with a trigger audit', href: '/trigger-audit', note: 'about two weeks, from EUR 6,000' } },
+    ];
+---
+
+<div class="aud" data-aud>
+    <div class="tablist" role="tablist" aria-label={fr ? 'Votre profil' : 'Who you are'}>
+        {tabs.map((tab, i) => (
+            <button role="tab" type="button" id={`tab-${tab.id}`} aria-controls={`panel-${tab.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{tab.t}</button>
+        ))}
+        <span class="ind" aria-hidden="true" data-ind></span>
+    </div>
+    {tabs.map((tab, i) => (
+        <div class="tpanel" role="tabpanel" id={`panel-${tab.id}`} aria-labelledby={`tab-${tab.id}`} hidden={i !== 0}>
+            <p class="h">{tab.h}</p>
+            <div class="grid2">
+                <div>
+                    <p class="label">{fr ? 'Ce dont vous avez besoin' : 'What you need'}</p>
+                    <ul>{tab.need.map(n => <li>{n}</li>)}</ul>
+                </div>
+                <div class="start">
+                    <p class="label">{fr ? 'Par où commencer' : 'Where to start'}</p>
+                    <a class="link" href={tab.start.href}>{tab.start.label} <span class="arrow" aria-hidden="true">→</span></a>
+                    <p class="muted small">{tab.start.note}</p>
+                </div>
+            </div>
+        </div>
+    ))}
+</div>
+
+<style>
+    .aud { display: grid; gap: 28px; }
+    .tablist { position: relative; display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+    [role="tab"] {
+        appearance: none; border: 0; background: none; cursor: pointer;
+        padding: 12px 14px 14px; font: 500 0.9375rem/1.2 var(--text); color: var(--muted);
+        transition: color 150ms ease;
+    }
+    [role="tab"][aria-selected="true"] { color: var(--ink); }
+    @media (hover: hover) and (pointer: fine) { [role="tab"]:hover { color: var(--ink); } }
+    .ind { position: absolute; left: 0; top: 0; height: 2px; width: 0; background: var(--index); transition: transform 260ms var(--ease-out), width 260ms var(--ease-out); }
+    .tpanel { display: grid; gap: 24px; }
+    .tpanel:not([hidden]) { animation: in 260ms var(--ease-out); }
+    @keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .h { font: 400 var(--step-2)/1.35 var(--display); letter-spacing: -0.02em; max-width: 34ch; color: var(--ink); }
+    .grid2 { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px; }
+    .grid2 > div { display: grid; gap: 12px; align-content: start; min-width: 0; }
+    ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    li { padding-left: 22px; position: relative; color: var(--ink-2); }
+    li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 12px; height: 1.5px; background: var(--index); }
+    .start { padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    @media (max-width: 720px) { .grid2 { grid-template-columns: minmax(0, 1fr); } [role="tab"] { padding: 10px 10px 12px; font-size: 0.875rem; } }
+    @media (prefers-reduced-motion: reduce) { .tpanel:not([hidden]) { animation: none; } .ind { transition: none; } }
+</style>
+
+<script>
+    document.querySelectorAll<HTMLElement>('[data-aud]').forEach(root => {
+        const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+        const ind = root.querySelector<HTMLElement>('[data-ind]');
+        const place = (t: HTMLElement) => {
+            if (!ind) return;
+            ind.style.width = t.offsetWidth + 'px';
+            ind.style.transform = `translate(${t.offsetLeft}px, ${t.offsetTop + t.offsetHeight - 1}px)`;
+        };
+        const select = (t: HTMLButtonElement, focus = false) => {
+            tabs.forEach(x => {
+                const on = x === t;
+                x.setAttribute('aria-selected', String(on));
+                x.tabIndex = on ? 0 : -1;
+                const p = document.getElementById(x.getAttribute('aria-controls')!);
+                if (p) p.hidden = !on;
+            });
+            place(t);
+            if (focus) t.focus();
+        };
+        tabs.forEach((t, i) => {
+            t.addEventListener('click', () => select(t));
+            t.addEventListener('keydown', e => {
+                if (e.key === 'ArrowRight') select(tabs[(i + 1) % tabs.length], true);
+                if (e.key === 'ArrowLeft') select(tabs[(i - 1 + tabs.length) % tabs.length], true);
+            });
+        });
+        const current = tabs.find(t => t.getAttribute('aria-selected') === 'true') ?? tabs[0];
+        place(current);
+        window.addEventListener('resize', () => place(tabs.find(t => t.getAttribute('aria-selected') === 'true') ?? tabs[0]));
+    });
+</script>
