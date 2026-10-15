@@ -3,31 +3,63 @@
   <head>
     <meta http-equiv="Cache-Control" content="no-store" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Constellation — Parametric Index Explorer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Constellation: parametric index explorer | Skaraz Data</title>
+    <meta name="description" content="Five parametric index proofs of concept on public satellite and reanalysis data, shown stage by stage on a map: hazard, index, trigger, payout and backtest, with the limits of each named." />
+    <meta property="og:title" content="Constellation: parametric index explorer" />
+    <meta property="og:description" content="Five parametric index proofs of concept on public data, stage by stage, limits named." />
+    <meta property="og:image" content="https://skarazdata.com/og-image.png" />
+    <meta property="og:url" content="https://skarazdata.com/constellation/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#0d1b24" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eceff0" media="(prefers-color-scheme: light)" />
+    <link rel="canonical" href="https://skarazdata.com/constellation/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <script>
+      // Same theme rule as the rest of skarazdata.com: a stored choice ("sd-theme") wins,
+      // otherwise the OS preference. Set before first paint so the panels never flash.
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem("sd-theme"); } catch (e) {}
+        if (t !== "light" && t !== "dark") t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
+    <link rel="preload" href="/fonts/switzer-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://basemaps.cartocdn.com" crossorigin />
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-    <link rel="stylesheet" href="./style.css?v=0e18eb2c04" />
+    <link rel="stylesheet" href="./style.css?v=v3a" />
   </head>
   <body>
     <div id="map"></div>
 
     <aside id="controls" class="panel">
-      <button id="themeToggle" class="btn theme" type="button" title="Switch light / dark">☀ Light</button>
-      <h1>Constellation</h1>
-      <p class="sub">Parametric index POCs — each stage of the chain, per site.</p>
+      <div class="brandbar">
+        <a class="brand" href="/" aria-label="Skaraz Data, home"><svg class="sd-logo" viewBox="0 0 650 100" role="img" aria-label="Skaraz Data" xmlns="http://www.w3.org/2000/svg"><rect x="34.22" y="0.89" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="45.33" y="0.89" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="56.44" y="0.89" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="12.00" y="12.00" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="23.11" y="12.00" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="34.22" y="12.00" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="45.33" y="12.00" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="56.44" y="12.00" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="67.56" y="12.00" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="78.67" y="12.00" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="12.00" y="23.11" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="23.11" y="23.11" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="34.22" y="23.11" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="45.33" y="23.11" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="56.44" y="23.11" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="67.56" y="23.11" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="78.67" y="23.11" width="9.33" height="9.33" rx="1.33" class="lg-t"/><rect x="0.89" y="34.22" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="12.00" y="34.22" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="23.11" y="34.22" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="34.22" y="34.22" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="45.33" y="34.22" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="56.44" y="34.22" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="67.56" y="34.22" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="78.67" y="34.22" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="89.78" y="34.22" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="0.89" y="45.33" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="12.00" y="45.33" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="23.11" y="45.33" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="34.22" y="45.33" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="45.33" y="45.33" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="56.44" y="45.33" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="67.56" y="45.33" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="78.67" y="45.33" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="89.78" y="45.33" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="0.89" y="56.44" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="12.00" y="56.44" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="23.11" y="56.44" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="34.22" y="56.44" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="45.33" y="56.44" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="56.44" y="56.44" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="67.56" y="56.44" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="78.67" y="56.44" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="89.78" y="56.44" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="12.00" y="67.56" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="23.11" y="67.56" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="34.22" y="67.56" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="45.33" y="67.56" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="56.44" y="67.56" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="67.56" y="67.56" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="78.67" y="67.56" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="12.00" y="78.67" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="23.11" y="78.67" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="34.22" y="78.67" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="45.33" y="78.67" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="56.44" y="78.67" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="67.56" y="78.67" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="78.67" y="78.67" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="34.22" y="89.78" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="45.33" y="89.78" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="56.44" y="89.78" width="9.33" height="9.33" rx="1.33" class="lg-i"/><rect x="0" y="32.23" width="100" height="2.2" class="lg-x"/><g transform="translate(128 -24) scale(1.0)"><path class="lg-i" d="M15.0 60.699999999999996Q15.0 63.9 17.55 65.7Q20.1 67.5 23.85 68.1Q27.6 68.7 32.05 69.65Q36.5 70.6 40.25 71.8Q44.0 73.0 46.55 76.25Q49.1 79.5 49.1 84.6Q49.1 92.1 42.95 96.69999999999999Q36.800000000000004 101.3 27.1 101.3Q17.2 101.3 10.9 96.6Q4.6000000000000005 91.9 3.1 82.6H13.8Q14.600000000000001 87.6 18.150000000000002 90.3Q21.700000000000003 93.0 27.400000000000002 93.0Q32.7 93.0 35.550000000000004 90.9Q38.400000000000006 88.8 38.400000000000006 85.3Q38.400000000000006 82.2 35.900000000000006 80.4Q33.4 78.6 29.7 78.05Q26.0 77.5 21.6 76.55Q17.2 75.6 13.5 74.35Q9.8 73.1 7.300000000000001 69.75Q4.800000000000001 66.4 4.800000000000001 61.3Q4.800000000000001 54.599999999999994 10.0 49.949999999999996Q15.200000000000001 45.3 24.8 45.3Q34.2 45.3 40.1 49.9Q46.0 54.5 47.2 64.1H36.5Q34.9 53.8 24.3 53.8Q20.0 53.8 17.5 55.699999999999996Q15.0 57.599999999999994 15.0 60.699999999999996Z M56.800000000000004 100.0V28.0H67.5V69.3L88.70000000000002 46.699999999999996H101.5L78.5 70.4L102.9 100.0H89.60000000000001L67.5 73.4V100.0Z M118.80000000000001 64.1H108.10000000000001Q109.4 55.199999999999996 115.35000000000001 50.25Q121.30000000000001 45.3 131.2 45.3Q141.8 45.3 147.35000000000002 50.949999999999996Q152.9 56.599999999999994 152.9 66.19999999999999V87.0Q152.9 95.6 154.7 100.0H143.5Q142.5 97.4 142.3 92.2Q139.1 96.7 134.35 99.0Q129.6 101.3 124.5 101.3Q116.2 101.3 111.25 97.4Q106.3 93.5 106.3 86.0Q106.3 74.6 118.30000000000001 70.6Q127.0 67.69999999999999 142.2 67.5V66.3Q142.2 54.3 130.4 54.3Q120.4 54.3 118.80000000000001 64.1ZM117.10000000000001 85.6Q117.10000000000001 89.0 119.65 90.95Q122.2 92.9 126.5 92.9Q133.1 92.9 137.64999999999998 88.30000000000001Q142.2 83.7 142.2 77.2V74.8Q127.9 74.9 122.5 77.7Q117.10000000000001 80.5 117.10000000000001 85.6Z M164.3 100.0V46.699999999999996H175.0V54.599999999999994Q180.10000000000002 45.3 190.20000000000002 45.3Q193.70000000000002 45.3 195.3 46.699999999999996V56.099999999999994Q193.10000000000002 55.4 189.60000000000002 55.4Q182.20000000000002 55.4 178.60000000000002 59.5Q175.0 63.6 175.0 70.9V100.0Z M210.70000000000002 64.1H200.00000000000003Q201.3 55.199999999999996 207.25 50.25Q213.20000000000002 45.3 223.10000000000002 45.3Q233.70000000000002 45.3 239.25 50.949999999999996Q244.8 56.599999999999994 244.8 66.19999999999999V87.0Q244.8 95.6 246.60000000000002 100.0H235.40000000000003Q234.40000000000003 97.4 234.20000000000002 92.2Q231.00000000000003 96.7 226.25000000000003 99.0Q221.50000000000003 101.3 216.40000000000003 101.3Q208.10000000000002 101.3 203.15000000000003 97.4Q198.20000000000002 93.5 198.20000000000002 86.0Q198.20000000000002 74.6 210.20000000000002 70.6Q218.90000000000003 67.69999999999999 234.10000000000002 67.5V66.3Q234.10000000000002 54.3 222.3 54.3Q212.3 54.3 210.70000000000002 64.1ZM209.00000000000003 85.6Q209.00000000000003 89.0 211.55 90.95Q214.10000000000002 92.9 218.40000000000003 92.9Q225.00000000000003 92.9 229.55 88.30000000000001Q234.10000000000002 83.7 234.10000000000002 77.2V74.8Q219.8 74.9 214.40000000000003 77.7Q209.00000000000003 80.5 209.00000000000003 85.6Z M252.70000000000002 100.0V91.7L283.1 55.0H253.9V46.699999999999996H295.8V55.0L265.40000000000003 91.7H297.5V100.0Z M342.6 101.3Q332.0 101.3 326.0 93.9Q320.0 86.5 320.0 73.4Q320.0 60.0 326.05 52.65Q332.1 45.3 342.6 45.3Q352.0 45.3 357.1 52.699999999999996V28.0H367.8V100.0H357.1V93.5Q351.8 101.3 342.6 101.3ZM344.0 92.3Q350.40000000000003 92.3 353.75 87.44999999999999Q357.1 82.6 357.1 73.4Q357.1 64.3 353.65000000000003 59.3Q350.20000000000005 54.3 344.0 54.3Q337.6 54.3 334.25 59.24999999999999Q330.90000000000003 64.19999999999999 330.90000000000003 73.4Q330.90000000000003 82.5 334.35 87.4Q337.8 92.3 344.0 92.3Z M388.80000000000007 64.1H378.1Q379.40000000000003 55.199999999999996 385.35 50.25Q391.30000000000007 45.3 401.20000000000005 45.3Q411.80000000000007 45.3 417.35 50.949999999999996Q422.90000000000003 56.599999999999994 422.90000000000003 66.19999999999999V87.0Q422.90000000000003 95.6 424.70000000000005 100.0H413.50000000000006Q412.50000000000006 97.4 412.30000000000007 92.2Q409.1 96.7 404.35 99.0Q399.6 101.3 394.50000000000006 101.3Q386.20000000000005 101.3 381.25000000000006 97.4Q376.30000000000007 93.5 376.30000000000007 86.0Q376.30000000000007 74.6 388.30000000000007 70.6Q397.00000000000006 67.69999999999999 412.20000000000005 67.5V66.3Q412.20000000000005 54.3 400.40000000000003 54.3Q390.40000000000003 54.3 388.80000000000007 64.1ZM387.1 85.6Q387.1 89.0 389.65000000000003 90.95Q392.20000000000005 92.9 396.50000000000006 92.9Q403.1 92.9 407.65000000000003 88.30000000000001Q412.20000000000005 83.7 412.20000000000005 77.2V74.8Q397.90000000000003 74.9 392.5 77.7Q387.1 80.5 387.1 85.6Z M435.7 84.1V55.0H428.5V46.699999999999996H435.7V34.39999999999999H446.40000000000003V46.699999999999996H457.90000000000003V55.0H446.40000000000003V83.5Q446.40000000000003 88.3 448.3 90.4Q450.2 92.5 455.6 92.5H457.7V100.3Q455.7 101.3 451.0 101.3Q435.7 101.3 435.7 84.1Z M474.00000000000006 64.1H463.3Q464.6 55.199999999999996 470.55000000000007 50.25Q476.50000000000006 45.3 486.40000000000003 45.3Q497.00000000000006 45.3 502.55000000000007 50.949999999999996Q508.1 56.599999999999994 508.1 66.19999999999999V87.0Q508.1 95.6 509.90000000000003 100.0H498.70000000000005Q497.70000000000005 97.4 497.50000000000006 92.2Q494.3 96.7 489.55 99.0Q484.8 101.3 479.70000000000005 101.3Q471.40000000000003 101.3 466.45000000000005 97.4Q461.50000000000006 93.5 461.50000000000006 86.0Q461.50000000000006 74.6 473.50000000000006 70.6Q482.20000000000005 67.69999999999999 497.40000000000003 67.5V66.3Q497.40000000000003 54.3 485.6 54.3Q475.6 54.3 474.00000000000006 64.1ZM472.3 85.6Q472.3 89.0 474.85 90.95Q477.40000000000003 92.9 481.70000000000005 92.9Q488.3 92.9 492.85 88.30000000000001Q497.40000000000003 83.7 497.40000000000003 77.2V74.8Q483.1 74.9 477.70000000000005 77.7Q472.3 80.5 472.3 85.6Z"/></g></svg></a>
+        <button id="themeToggle" class="themeBtn" type="button" aria-label="Switch theme (light or dark)" title="Switch theme (light or dark)">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+        </button>
+      </div>
+      <p class="kicker">Constellation</p>
+      <h1>Five proofs of concept on public data</h1>
+      <p class="sub">Each stage of the chain, per site: hazard, index, trigger, payout, backtest. Backtests, not live policies; each case study names its limits.</p>
 
       <div class="fld">
-        <span class="flbl">Layer</span>
+        <span class="flbl">Proof of concept</span>
         <div class="row">
-          <select id="layerSelect" title="Choose which POC to explore"></select>
-          <button id="focusBtn" class="btn" type="button" title="Zoom the map to this POC's extent">Focus</button>
+          <select id="layerSelect" title="Choose which proof of concept to explore"></select>
+          <button id="focusBtn" class="btn" type="button" title="Zoom the map to this proof of concept">Focus</button>
         </div>
       </div>
 
       <button id="sourcesBtn" class="btn wide hidden" type="button"
               title="Open the case study, data sources and how the trigger works">
-        <span>ⓘ Case study, sources &amp; method</span><span>▸</span>
+        <span>Case study, sources and limits</span><span aria-hidden="true">→</span>
       </button>
 
       <div id="scrubSec" class="fld hidden">
@@ -46,7 +78,7 @@
       <div id="scoreSec" class="fld hidden">
         <span class="flbl">District / sector score</span>
         <label class="toggle" title="Show the aggregated per-polygon index on the map">
-          <input id="scoreOn" type="checkbox" /> <span id="scoreLabel">show 1–10 stress score</span> · <span id="scoreYear" class="hint"></span>
+          <input id="scoreOn" type="checkbox" /> <span id="scoreLabel">show 1-10 stress score</span> · <span id="scoreYear" class="hint"></span>
         </label>
       </div>
 
@@ -54,21 +86,27 @@
         <h2>Legend <span id="legendUnit" class="unit"></span></h2>
         <div id="legendRamp"></div>
       </div>
+
+      <nav class="panelLinks" aria-label="Site">
+        <a href="/showcase">Calculation reports</a>
+        <a href="/calculation-agent">Calculation agent</a>
+        <a href="/scope">Start with your trigger</a>
+      </nav>
     </aside>
 
     <aside id="detail" class="panel detail hidden">
-      <button id="closeDetail" class="close" type="button">×</button>
+      <button id="closeDetail" class="close" type="button" aria-label="Close">×</button>
       <div id="detailBody"></div>
     </aside>
 
     <div id="modal" class="modal hidden">
       <div class="modalCard">
-        <button id="modalClose" class="close" type="button">×</button>
+        <button id="modalClose" class="close" type="button" aria-label="Close">×</button>
         <div id="modalBody"></div>
       </div>
     </div>
 
     <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-    <script src="./app.js?v=c73085b3ee"></script>
+    <script src="./app.js?v=v3a"></script>
   </body>
 </html>
